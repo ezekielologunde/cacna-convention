@@ -1,0 +1,19 @@
+{
+  "Nav": {
+    "home": "Home",
+    "about": "About",
+    "schedule": "Schedule",
+    "register": "Register",
+    "registerCta": "Register Now",
+    "live": "Live",
+    "give": "Give",
+    "planYourVisit": "Plan Your Visit",
+    "gallery": "Gallery",
+    "archive": "Archive",
+    "contact": "Contact"
+  },
+  "Home": {
+    "title": "CACNA Convention",
+    "subtitle": "Christ Apostolic Church North America — join us for our national convention."
+  }
+}
