@@ -1,13 +1,15 @@
-# CACNA Convention 2026 — Website & PWA Design Spec
+# CACNA Convention — Website & PWA Design Spec
 
 **Date:** 2026-07-16
 **Status:** Approved for implementation planning
 
 ## 1. Overview
 
-This project is a full rebuild of the official website and registration platform for the **CACNA Convention 2026** — the national convention of Christ Apostolic Church North America (CACNA), a week-long gathering (July 13–18, 2026, at CAC Village, Blue Ridge Summit, PA) drawing member churches from across North America. Theme: *"The Bible: God's Message to Man."*
+This project is a full rebuild of the official website and registration platform for the national convention of Christ Apostolic Church North America (CACNA) — a week-long, multi-church gathering drawing member churches from across North America.
 
-This site **becomes the official platform**, replacing the registration/payment flow currently run on the existing WordPress site (`cacnaconvention.org`). It launches as an installable, bilingual (English/Yoruba) Progressive Web App, with a native app-store wrapper (via Capacitor) planned as a later phase once the PWA is stable.
+**Timing correction (found during content crawl):** this spec was originally scoped against the 2026 convention (July 13–18, 2026, CAC Village, Blue Ridge Summit, PA; theme *"The Bible: God's Message to Man"*), but the live site now shows *"Online Registration Has Ended — Registration is now available only at the Convention Ground,"* and today's date falls inside that same July 13–18 window. **The 2026 convention is already underway** — this build cannot land in time to power 2026 registration. The platform now targets the **2027 convention** as its first live edition. 2026 (and any earlier years' data we have) becomes archived/historical content — see §5a.
+
+This site **becomes the official platform** for the 2027 convention onward, replacing the registration/payment flow currently run on the existing WordPress site (`cacnaconvention.org`). It launches as an installable, bilingual (English/Yoruba) Progressive Web App, with a native app-store wrapper (via Capacitor) planned as a later phase once the PWA is stable.
 
 A sister project for a member church, `cac-salvation-center`, already runs the same core stack (Next.js + Supabase + Vercel) and is the primary source of reusable architecture patterns referenced throughout this spec.
 
@@ -40,7 +42,16 @@ Real content was crawled from the current `cacnaconvention.org` and seeds the ne
 - **History**: CAC North America began as a house fellowship in 1976 (Rev. Goke Oyedeji, Brooklyn, NY); today spans 16 DCCs/Zones across the US and Canada.
 - **Rules & Etiquette**: dress code, conduct, ID-tag, punctuality, and food-ticket rules carried over from the current site.
 
-These are seed/reference data for the initial build; exact current-year figures should be re-confirmed with organizers before launch.
+These are seed/reference data for the initial build. Given the 2027 retargeting (§1), **none of the dated figures (pricing tiers, deadlines, schedule) should ship as live 2027 content** — they seed the *shape* of the data model and become the first archived edition (2026) once real 2027 figures are confirmed by organizers.
+
+## 5a. Convention editions & archive
+
+Every edition of the convention (2025, 2026, 2027, ...) is a first-class record — a `convention_editions` table (year, dates, theme, venue, status: `upcoming` | `current` | `past`) that Schedule, Registration, and Gallery all scope to. This does two things:
+
+- The live site (Home, Schedule, Register, Live) always queries the `upcoming`/`current` edition — no hardcoded year anywhere in the UI.
+- A new **Archive** page (footer nav, alongside Plan Your Visit / Gallery / Contact) lists all `past` editions as a "past conventions" / news-style history: each year gets its schedule, gallery photos, and program PDF, sourced from `docs/source-content/` for 2025/2026 seed data and from the admin dashboard for everything after launch.
+
+When an edition's end date passes, an admin action (not an automated cron) flips it from `current` to `past`, which moves it from the live pages into the Archive — the same underlying data, just recategorized, rather than deleted or hand-copied into a separate "news" system.
 
 ## 5. Information architecture
 
@@ -55,7 +66,8 @@ These are seed/reference data for the initial build; exact current-year figures 
 
 **Footer / secondary pages** (real pages, lower nav priority):
 - Plan Your Visit *(combines Hotel & Travel + Rules & Etiquette)*
-- Gallery
+- Gallery *(current/upcoming edition's photos)*
+- Archive *(past conventions — schedule, gallery, and program PDF per year; see §5a)*
 - Contact
 
 Registration is promoted throughout the site, not confined to the nav:
@@ -83,7 +95,7 @@ Full language toggle via `next-intl`, with locale-prefixed routing (`/en`, `/yo`
 
 Reuses `cac-salvation-center`'s proven pattern almost verbatim:
 - Supabase Auth (email/password) gated by an `admin_profiles` allowlist table, enforced once at a protected route-group layout (`app/admin/(protected)/layout.tsx`) so every admin page inherits protection.
-- Sections: **Registrations** (list, search, filter by category/church group, export), **Giving/Payments** overview, **Schedule editor** (days, sessions, minister-placeholder names), **Gallery** upload.
+- Sections: **Registrations** (list, search, filter by category/church group, export), **Giving/Payments** overview, **Schedule editor** (days, sessions, minister-placeholder names), **Gallery** upload, **Editions** (create the next year's edition, edit its dates/theme/venue, and flip its status between `upcoming`/`current`/`past` — the action that moves an edition into the Archive, per §5a).
 - Leadership, Committee, and Rules & Etiquette content is NOT admin-editable in this phase (see Non-goals) — it's maintained as code content.
 
 ## 9. Technical architecture
@@ -113,5 +125,7 @@ The `impeccable` skill (copied into this repo from the `preppa` project's `.clau
 
 ## 11. Open items to confirm with organizers before launch
 
-- Exact current-year pricing/deadlines should be re-confirmed against `cacnaconvention.org` closer to launch, in case they've changed since this spec was written.
+- Real 2027 dates, venue, theme, and pricing tiers — nothing dated in this spec should ship as live content; it's all seed/template data from the 2026 edition (see §1, §4).
 - Whether the existing WordPress site's registration is formally retired/redirected once this platform goes live, or run in parallel for a transition period.
+- The "CACNA Superintendent" page has almost no real content on the current site (just a photo, no bio) — needs a real content ask to organizers rather than migration.
+- Gallery photos have no structured captions/metadata on the current site — new gallery content should be sourced fresh via the admin upload feature rather than migrated as-is (see `docs/source-content/2026-cacnaconvention-org-content.md`).
