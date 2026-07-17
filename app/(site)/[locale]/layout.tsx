@@ -4,6 +4,7 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { PrimaryNav } from "@/components/navigation/PrimaryNav";
+import { FooterNav } from "@/components/navigation/FooterNav";
 import { geistSans, geistMono } from "@/lib/fonts";
 import "../../globals.css";
 
@@ -37,6 +38,7 @@ export default async function LocaleRootLayout({
         <NextIntlClientProvider locale={locale}>
           <PrimaryNav />
           {children}
+          <FooterNav />
         </NextIntlClientProvider>
       </body>
     </html>
