@@ -1,0 +1,19 @@
+{
+  "Nav": {
+    "home": "Ilé",
+    "about": "Nípa Wa",
+    "schedule": "Ìtòlẹ́sẹ̀",
+    "register": "Forúkọsílẹ̀",
+    "registerCta": "Forúkọsílẹ̀ Nísisìyí",
+    "live": "Ìtànkálẹ̀ Ààyè",
+    "give": "Ẹ̀bùn",
+    "planYourVisit": "Ṣe Ètò Ìbẹ̀wò Rẹ",
+    "gallery": "Àwòrán",
+    "archive": "Àkójọpọ̀ Àtijọ́",
+    "contact": "Kàn Sí Wa"
+  },
+  "Home": {
+    "title": "Àpéjọ CACNA",
+    "subtitle": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà — ẹ dara pọ̀ mọ́ wa fún àpéjọ orílẹ̀-èdè wa."
+  }
+}
