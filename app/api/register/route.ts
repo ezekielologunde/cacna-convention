@@ -29,8 +29,21 @@ export async function POST(request: Request) {
   // Any `price_cents` (or similar) the client sent in the request body is
   // read nowhere below and is discarded entirely — the amount charged and
   // the amount stored always come from `priceForCategory`.
+  //
+  // Child (1–19) is always Free per the design spec's fixed business rule —
+  // unlike Adult/Young Adult, it is not admin-configurable via
+  // `pricing_tiers`, so it never goes through that lookup at all.
   const pricedRegistrants: { full_name: string; category: RegistrantCategory; price_cents: number }[] = [];
   for (const registrant of body.registrants) {
+    if (registrant.category === "child") {
+      pricedRegistrants.push({
+        full_name: registrant.fullName,
+        category: registrant.category,
+        price_cents: 0,
+      });
+      continue;
+    }
+
     const price = priceForCategory(tiers, registrant.category);
     if (price === null) {
       return NextResponse.json(
@@ -80,10 +93,26 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Failed to create registrants" }, { status: 500 });
   }
 
+  // If every registrant is free (e.g. a child-only registration), there is
+  // nothing for Stripe to charge — and Stripe Checkout rejects sessions
+  // below its minimum (a $0 total among them), so skip Stripe entirely and
+  // mark the registration paid directly.
+  if (totalAmountCents === 0) {
+    await supabase.from("registrations").update({ status: "paid" }).eq("id", registration.id);
+    return NextResponse.json({
+      checkoutUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/register/confirmation?registration=${registration.id}`,
+    });
+  }
+
   const stripe = getStripeClient();
+  // $0 line items (free child registrants mixed in with paid ones) aren't
+  // sent to Stripe at all — only registrants with an actual price become
+  // checkout line items.
+  const payableRegistrants = pricedRegistrants.filter((r) => r.price_cents > 0);
+
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
-    line_items: pricedRegistrants.map((r) => ({
+    line_items: payableRegistrants.map((r) => ({
       price_data: {
         currency: "usd",
         unit_amount: r.price_cents,

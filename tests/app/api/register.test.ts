@@ -50,6 +50,21 @@ beforeEach(() => {
   checkoutSessionsCreateMock.mockReset();
 });
 
+function validRequestInit(overrides: Record<string, unknown> = {}) {
+  return {
+    method: "POST",
+    body: JSON.stringify({
+      registrationType: "individual",
+      churchName: null,
+      contactName: "Jane Doe",
+      contactEmail: "jane@example.com",
+      contactPhone: "",
+      registrants: [{ fullName: "Jane Doe", category: "adult" }],
+      ...overrides,
+    }),
+  };
+}
+
 describe("POST /api/register", () => {
   it("re-prices every registrant server-side and never trusts a client-supplied price", async () => {
     getActiveEditionMock.mockResolvedValue({ id: "edition-1", year: 2027 });
@@ -143,5 +158,91 @@ describe("POST /api/register", () => {
 
     const response = await POST(request);
     expect(response.status).toBe(400);
+  });
+
+  describe("free child registrants (Finding 1)", () => {
+    it("skips Stripe entirely for a child-only registration and returns a confirmation URL with status paid", async () => {
+      getActiveEditionMock.mockResolvedValue({ id: "edition-1", year: 2027 });
+      // Deliberately no "child" tier — proves child pricing never queries pricing_tiers.
+      getActivePricingMock.mockResolvedValue([{ category: "adult", price_cents: 12500 }]);
+      insertRegistrationMock.mockReturnValue({
+        select: () => ({
+          single: () => Promise.resolve({ data: { id: "reg-child-1" }, error: null }),
+        }),
+      });
+      insertRegistrantsMock.mockResolvedValue({ error: null });
+
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request(
+        "http://localhost/api/register",
+        validRequestInit({ registrants: [{ fullName: "Kid One", category: "child" }] })
+      );
+
+      const response = await POST(request);
+      const body = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(body).toEqual({
+        checkoutUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/register/confirmation?registration=reg-child-1`,
+      });
+
+      // Stripe must never be called for a $0 total.
+      expect(checkoutSessionsCreateMock).not.toHaveBeenCalled();
+
+      // The registration is marked paid directly.
+      expect(updateRegistrationMock).toHaveBeenCalledWith({ status: "paid" });
+
+      const insertedRegistrants = insertRegistrantsMock.mock.calls[0][0];
+      expect(insertedRegistrants).toEqual([
+        expect.objectContaining({ full_name: "Kid One", category: "child", price_cents: 0 }),
+      ]);
+    });
+
+    it("only creates a Stripe line item for the paying adult in a mixed adult+child registration, but still stores the child's $0 price", async () => {
+      getActiveEditionMock.mockResolvedValue({ id: "edition-1", year: 2027 });
+      getActivePricingMock.mockResolvedValue([{ category: "adult", price_cents: 12500 }]);
+      insertRegistrationMock.mockReturnValue({
+        select: () => ({
+          single: () => Promise.resolve({ data: { id: "reg-mixed-1" }, error: null }),
+        }),
+      });
+      insertRegistrantsMock.mockResolvedValue({ error: null });
+      checkoutSessionsCreateMock.mockResolvedValue({
+        id: "cs_test_mixed",
+        url: "https://checkout.stripe.com/pay/cs_test_mixed",
+      });
+
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request(
+        "http://localhost/api/register",
+        validRequestInit({
+          registrants: [
+            { fullName: "Adult One", category: "adult" },
+            { fullName: "Kid One", category: "child" },
+          ],
+        })
+      );
+
+      const response = await POST(request);
+      const body = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(body).toEqual({ checkoutUrl: "https://checkout.stripe.com/pay/cs_test_mixed" });
+
+      const createArgs = checkoutSessionsCreateMock.mock.calls[0][0];
+      expect(createArgs.line_items).toHaveLength(1);
+      expect(createArgs.line_items[0]).toEqual(
+        expect.objectContaining({
+          price_data: expect.objectContaining({ unit_amount: 12500 }),
+          quantity: 1,
+        })
+      );
+
+      const insertedRegistrants = insertRegistrantsMock.mock.calls[0][0];
+      expect(insertedRegistrants).toEqual([
+        expect.objectContaining({ full_name: "Adult One", category: "adult", price_cents: 12500 }),
+        expect.objectContaining({ full_name: "Kid One", category: "child", price_cents: 0 }),
+      ]);
+    });
   });
 });
