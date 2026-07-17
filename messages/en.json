@@ -15,5 +15,11 @@
   "Home": {
     "title": "CACNA Convention",
     "subtitle": "Christ Apostolic Church North America — join us for our national convention."
+  },
+  "About": {
+    "ourStory": "Our Story",
+    "leadership": "Leadership",
+    "committee": "Committee",
+    "founded": "Founded in {year} by {founder} in {location}."
   }
 }

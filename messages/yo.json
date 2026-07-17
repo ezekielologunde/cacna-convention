@@ -15,5 +15,11 @@
   "Home": {
     "title": "Àpéjọ CACNA",
     "subtitle": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà — ẹ dara pọ̀ mọ́ wa fún àpéjọ orílẹ̀-èdè wa."
+  },
+  "About": {
+    "ourStory": "Ìtàn Wa",
+    "leadership": "Aṣíwájú",
+    "committee": "Ìgbìmọ̀",
+    "founded": "A dá sílẹ̀ ní ọdún {year} láti ọwọ́ {founder} ní {location}."
   }
 }
