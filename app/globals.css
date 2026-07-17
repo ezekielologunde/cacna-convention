@@ -30,7 +30,16 @@
   --color-brand: var(--color-red);
   --color-brand-contrast: #ffffff;
 
-  --flame: linear-gradient(100deg, var(--color-orange), var(--color-red), var(--color-maroon));
+  /*
+   * --flame always carries white button/label text (see PrimaryNav,
+   * RegistrationForm, PromoBanner, ScheduleDay). Its first stop is a
+   * darkened orange (#c2481a, not --color-orange's #f15f22) because
+   * white-on-#f15f22 only reaches ~3.3:1 contrast — below the 4.5:1 WCAG AA
+   * minimum for normal text. #c2481a reaches ~4.96:1 while staying visibly
+   * orange. --color-orange itself is untouched since it's only ever used
+   * decoratively (e.g. the hero kicker dot), where contrast doesn't apply.
+   */
+  --flame: linear-gradient(100deg, #c2481a, var(--color-red), var(--color-maroon));
   --flame-hero: linear-gradient(150deg, var(--color-red) 0%, var(--color-maroon) 55%, var(--color-maroon-deep) 100%);
 }
 
@@ -63,4 +72,15 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display), var(--font-sans), sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

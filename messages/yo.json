@@ -76,6 +76,14 @@
     "title": "Àwòrán",
     "comingSoon": "A óò fi àwòrán àpéjọ síta níbí."
   },
+  "Give": {
+    "title": "Ẹ̀bùn",
+    "comingSoon": "Ẹ̀bùn orí-ayélujára kò tíì ṣetán — ẹ ṣàyẹ̀wò padà láìpẹ́."
+  },
+  "Live": {
+    "title": "Ìtànkálẹ̀ Ààyè",
+    "comingSoon": "A óò fi ìtànkálẹ̀ ààyè síta níbí nígbà àpéjọ."
+  },
   "Register": {
     "title": "Forúkọsílẹ̀",
     "individualTab": "Ẹnìkọ̀ọ̀kan",
@@ -92,6 +100,8 @@
     "contactEmail": "Ímeèlì",
     "contactPhone": "Fóònù",
     "submit": "Tẹ̀síwájú sí Ìsanwó",
+    "submitting": "Ń fi ránṣẹ́…",
+    "submitError": "Ìforúkọsílẹ̀ kùnà. Jọ̀wọ́ tún gbìyànjú tàbí kàn sí wa.",
     "notOpenYet": "Ìforúkọsílẹ̀ fún àpéjọ ọdún 2027 yóò ṣí ní oṣù January ọdún 2027 — ṣàyẹ̀wò padà nígbà náà."
   },
   "PromoBanner": {

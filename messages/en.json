@@ -76,6 +76,14 @@
     "title": "Gallery",
     "comingSoon": "Photos from the convention will be posted here."
   },
+  "Give": {
+    "title": "Give",
+    "comingSoon": "Online giving isn't set up yet — check back soon."
+  },
+  "Live": {
+    "title": "Live",
+    "comingSoon": "The livestream will be posted here during the convention."
+  },
   "Register": {
     "title": "Register",
     "individualTab": "Individual",
@@ -92,6 +100,8 @@
     "contactEmail": "Email",
     "contactPhone": "Phone",
     "submit": "Continue to Payment",
+    "submitting": "Submitting…",
+    "submitError": "Registration failed. Please try again or contact us.",
     "notOpenYet": "Registration for the 2027 convention opens in January 2027 — check back then."
   },
   "PromoBanner": {

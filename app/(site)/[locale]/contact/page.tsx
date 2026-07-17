@@ -52,10 +52,16 @@ export default async function ContactPage({
             </p>
             <p className="mt-1.5 text-sm text-[var(--color-muted)]">{contact.org}</p>
             <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-semibold">
-              <a href={`tel:${contact.phone}`} className="text-[var(--color-maroon)] tabular-nums">
+              <a
+                href={`tel:${contact.phone}`}
+                className="inline-flex min-h-11 items-center text-[var(--color-maroon)] tabular-nums"
+              >
                 {contact.phone}
               </a>
-              <a href={`mailto:${contact.email}`} className="text-[var(--color-maroon)]">
+              <a
+                href={`mailto:${contact.email}`}
+                className="inline-flex min-h-11 items-center text-[var(--color-maroon)]"
+              >
                 {contact.email}
               </a>
             </div>

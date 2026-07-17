@@ -19,9 +19,13 @@ type RegistrantRow = { fullName: string; category: RegistrantCategory };
 export function RegistrationForm({
   mode,
   onSubmit,
+  isSubmitting = false,
+  errorMessage = null,
 }: {
   mode: "individual" | "group";
   onSubmit: (payload: RegistrationPayload) => void;
+  isSubmitting?: boolean;
+  errorMessage?: string | null;
 }) {
   const t = useTranslations("Register");
   const [churchName, setChurchName] = useState("");
@@ -59,7 +63,7 @@ export function RegistrationForm({
   }
 
   const inputClass =
-    "rounded-xl border border-[var(--color-border)] px-3.5 py-2.5 text-[var(--color-fg)] outline-none transition-colors focus:border-[var(--color-maroon)]";
+    "rounded-xl border border-[var(--color-border)] px-3.5 py-2.5 text-[var(--color-fg)] outline-none transition-colors focus:border-[var(--color-maroon)] focus-visible:ring-2 focus-visible:ring-[var(--color-maroon)] focus-visible:ring-offset-1";
   const labelClass = "flex flex-col gap-1.5 text-sm font-semibold text-[var(--color-fg)]";
 
   return (
@@ -71,6 +75,7 @@ export function RegistrationForm({
             value={churchName}
             onChange={(e) => setChurchName(e.target.value)}
             required
+            autoComplete="organization"
             className={inputClass}
           />
         </label>
@@ -87,6 +92,7 @@ export function RegistrationForm({
               value={registrant.fullName}
               onChange={(e) => updateRegistrant(index, { fullName: e.target.value })}
               required
+              autoComplete="name"
               className={inputClass}
             />
           </label>
@@ -108,7 +114,7 @@ export function RegistrationForm({
             <button
               type="button"
               onClick={() => removeRegistrant(index)}
-              className="self-start text-sm font-semibold text-[var(--color-maroon)] underline"
+              className="inline-flex min-h-11 items-center self-start text-sm font-semibold text-[var(--color-maroon)] underline"
             >
               {t("removeRegistrant")}
             </button>
@@ -120,7 +126,7 @@ export function RegistrationForm({
         <button
           type="button"
           onClick={addRegistrant}
-          className="self-start rounded-full border border-[var(--color-border)] px-4 py-2 text-sm font-semibold text-[var(--color-fg)] transition-colors hover:border-[var(--color-maroon)]"
+          className="inline-flex min-h-11 items-center self-start rounded-full border border-[var(--color-border)] px-4 text-sm font-semibold text-[var(--color-fg)] transition-colors hover:border-[var(--color-maroon)]"
         >
           {t("addRegistrant")}
         </button>
@@ -132,6 +138,7 @@ export function RegistrationForm({
           value={contactName}
           onChange={(e) => setContactName(e.target.value)}
           required
+          autoComplete="name"
           className={inputClass}
         />
       </label>
@@ -142,23 +149,33 @@ export function RegistrationForm({
           value={contactEmail}
           onChange={(e) => setContactEmail(e.target.value)}
           required
+          autoComplete="email"
           className={inputClass}
         />
       </label>
       <label className={labelClass}>
         {t("contactPhone")}
         <input
+          type="tel"
           value={contactPhone}
           onChange={(e) => setContactPhone(e.target.value)}
+          autoComplete="tel"
           className={inputClass}
         />
       </label>
+      {errorMessage ? (
+        <p role="alert" className="text-sm font-semibold text-[var(--color-maroon)]">
+          {errorMessage}
+        </p>
+      ) : null}
+
       <button
         type="submit"
-        className="rounded-full px-5 py-3 font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5"
+        disabled={isSubmitting}
+        className="rounded-full px-5 py-3 font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5 disabled:opacity-60 disabled:hover:translate-y-0"
         style={{ background: "var(--flame)" }}
       >
-        {t("submit")}
+        {isSubmitting ? t("submitting") : t("submit")}
       </button>
     </form>
   );

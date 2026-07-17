@@ -28,7 +28,7 @@ export function AboutTabs({
   ];
 
   const tabClass = (active: boolean) =>
-    `px-4 py-2.5 text-sm font-semibold transition-colors ${
+    `inline-flex min-h-11 items-center px-4 text-sm font-semibold transition-colors ${
       active
         ? "border-b-2 border-[var(--color-maroon)] text-[var(--color-maroon)]"
         : "border-b-2 border-transparent text-[var(--color-muted)] hover:text-[var(--color-fg)]"
@@ -40,8 +40,10 @@ export function AboutTabs({
         {tabs.map((tabItem) => (
           <button
             key={tabItem.id}
+            id={`about-tab-${tabItem.id}`}
             role="tab"
             aria-selected={tab === tabItem.id}
+            aria-controls={`about-panel-${tabItem.id}`}
             onClick={() => setTab(tabItem.id)}
             className={tabClass(tab === tabItem.id)}
           >
@@ -51,7 +53,12 @@ export function AboutTabs({
       </div>
 
       {tab === "story" ? (
-        <div className="mt-8 max-w-[68ch]">
+        <div
+          id="about-panel-story"
+          role="tabpanel"
+          aria-labelledby="about-tab-story"
+          className="mt-8 max-w-[68ch]"
+        >
           <p className="text-lg text-[var(--color-fg)]">
             {t("founded", {
               year: history.foundingYear,
@@ -66,7 +73,12 @@ export function AboutTabs({
       ) : null}
 
       {tab === "leadership" ? (
-        <ul className="mt-8 flex flex-col gap-4">
+        <ul
+          id="about-panel-leadership"
+          role="tabpanel"
+          aria-labelledby="about-tab-leadership"
+          className="mt-8 flex flex-col gap-4"
+        >
           {leadership.map((member) => (
             <li
               key={member.name}
@@ -89,7 +101,12 @@ export function AboutTabs({
       ) : null}
 
       {tab === "committee" ? (
-        <ul className="mt-8 flex flex-col gap-4">
+        <ul
+          id="about-panel-committee"
+          role="tabpanel"
+          aria-labelledby="about-tab-committee"
+          className="mt-8 flex flex-col gap-4"
+        >
           {committee.map((member) => (
             <li
               key={member.name}
@@ -112,7 +129,7 @@ export function AboutTabs({
               </div>
               <a
                 href={`tel:${member.phone.replace(/[^0-9+]/g, "")}`}
-                className="text-sm font-semibold tabular-nums text-[var(--color-maroon)]"
+                className="inline-flex min-h-11 items-center text-sm font-semibold tabular-nums text-[var(--color-maroon)]"
               >
                 {member.phone}
               </a>

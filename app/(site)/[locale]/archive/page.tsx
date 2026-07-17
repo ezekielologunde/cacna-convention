@@ -17,6 +17,17 @@ export default async function ArchivePage({
     .eq("status", "past")
     .order("year", { ascending: false });
 
+  // Anchored at noon UTC (not `new Date(dateStr)` at midnight) so a
+  // negative-offset timezone reading this at render time can't roll the
+  // date back a day — same reasoning as ScheduleDay's weekday label.
+  const dateFormatter = new Intl.DateTimeFormat(locale === "yo" ? "yo-NG" : "en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+  const formatDate = (dateStr: string) => dateFormatter.format(new Date(`${dateStr}T12:00:00Z`));
+
   return (
     <div className="mx-auto max-w-3xl px-6 py-12">
       <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
@@ -36,7 +47,7 @@ export default async function ArchivePage({
                 {edition.year} — {edition.theme}
               </h2>
               <p className="mt-1 text-sm text-[var(--color-muted)] tabular-nums">
-                {edition.starts_on} – {edition.ends_on}
+                {formatDate(edition.starts_on)} – {formatDate(edition.ends_on)}
               </p>
             </li>
           ))}

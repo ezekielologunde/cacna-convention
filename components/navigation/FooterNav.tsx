@@ -6,12 +6,14 @@ import { useLocale, useTranslations } from "next-intl";
 
 const ATTEND_ITEMS = [
   { key: "register", href: "/register" },
-  { key: "planYourVisit", href: "/plan-your-visit" },
+  { key: "about", href: "/about" },
   { key: "schedule", href: "/schedule" },
+  { key: "planYourVisit", href: "/plan-your-visit" },
 ] as const;
 
 const CONNECT_ITEMS = [
   { key: "give", href: "/give" },
+  { key: "live", href: "/live" },
   { key: "archive", href: "/archive" },
   { key: "gallery", href: "/gallery" },
 ] as const;
