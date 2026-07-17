@@ -9,7 +9,10 @@ export async function getActivePricingForEdition(
   editionId: string,
   onDate: Date = new Date()
 ): Promise<PricingTier[]> {
-  const iso = onDate.toISOString().slice(0, 10);
+  // Use America/New_York (the convention's timezone) rather than UTC so that
+  // pricing-tier cutovers align with the convention's actual local calendar
+  // date, regardless of the timezone the server process happens to run in.
+  const iso = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York" }).format(onDate);
 
   const { data, error } = await supabase
     .from("pricing_tiers")
