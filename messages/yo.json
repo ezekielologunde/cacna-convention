@@ -67,5 +67,13 @@
     "contactPhone": "Fóònù",
     "submit": "Tẹ̀síwájú sí Ìsanwó",
     "notOpenYet": "Ìforúkọsílẹ̀ fún àpéjọ tí ń bọ̀ kò tíì ṣí — ṣàyẹ̀wò padà láìpẹ́."
+  },
+  "PromoBanner": {
+    "beforeIncrease": "Owó Àgbà jẹ́ ${price} títí di {date} — forúkọsílẹ̀ nísisìyí kí ó tó lọ sókè.",
+    "cta": "Forúkọsílẹ̀ Nísisìyí"
+  },
+  "RegisterConfirmation": {
+    "title": "A dúpẹ́ pé o ti forúkọsílẹ̀!",
+    "body": "A ti gba ìforúkọsílẹ̀ rẹ. Ímeèlì ìjẹ́rìísí ń bọ̀ wá."
   }
 }

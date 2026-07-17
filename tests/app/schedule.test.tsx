@@ -56,8 +56,24 @@ function mockEditionQuery(resolvedValue: {
   const limitMock = vi.fn(() => ({ maybeSingle: maybeSingleMock }));
   const orderMock = vi.fn(() => ({ limit: limitMock }));
   const inMock = vi.fn(() => ({ order: orderMock }));
+
+  // The page also runs `getActivePricingForEdition` (via the PromoBanner
+  // wiring) when an edition exists:
+  //   .from("pricing_tiers").select("*").eq(...).lte(...).gte(...).order(...)
+  // Resolve it to an empty tier list — the banner-props tests below don't
+  // exercise pricing, only that the schedule itself still renders correctly.
+  const pricingOrderMock = vi.fn().mockResolvedValue({ data: [], error: null });
+  const pricingGteMock = vi.fn(() => ({ order: pricingOrderMock }));
+  const pricingLteMock = vi.fn(() => ({ gte: pricingGteMock }));
+  const pricingEqMock = vi.fn(() => ({ lte: pricingLteMock }));
+
   createClientMock.mockResolvedValue({
-    from: () => ({ select: () => ({ in: inMock }) }),
+    from: (table: string) => {
+      if (table === "pricing_tiers") {
+        return { select: () => ({ eq: pricingEqMock }) };
+      }
+      return { select: () => ({ in: inMock }) };
+    },
   });
   return { inMock, orderMock, limitMock, maybeSingleMock };
 }

@@ -67,5 +67,13 @@
     "contactPhone": "Phone",
     "submit": "Continue to Payment",
     "notOpenYet": "Registration for the next convention isn't open yet — check back soon."
+  },
+  "PromoBanner": {
+    "beforeIncrease": "Adult rate is ${price} through {date} — register now before it goes up.",
+    "cta": "Register Now"
+  },
+  "RegisterConfirmation": {
+    "title": "Thank you for registering!",
+    "body": "We've received your registration. A confirmation email is on its way."
   }
 }

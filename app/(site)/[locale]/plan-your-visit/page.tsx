@@ -1,4 +1,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { createClient } from "@/lib/supabase/server";
+import { getActiveEdition } from "@/lib/editions";
+import { getActivePricingForEdition } from "@/lib/pricing";
+import { PromoBanner } from "@/components/register/PromoBanner";
 import { hotels, hotelGroupCode } from "@/lib/content/hotels";
 import { rules } from "@/lib/content/rules";
 
@@ -11,8 +15,24 @@ export default async function PlanYourVisitPage({
   setRequestLocale(locale);
   const t = await getTranslations("PlanYourVisit");
 
+  const supabase = await createClient();
+  const edition = await getActiveEdition(supabase);
+
+  let nextDeadline: string | null = null;
+  let priceBeforeIncrease: number | null = null;
+
+  if (edition) {
+    const tiers = await getActivePricingForEdition(supabase, edition.id);
+    const adultTier = tiers.find((tier) => tier.category === "adult");
+    if (adultTier) {
+      nextDeadline = adultTier.ends_on;
+      priceBeforeIncrease = adultTier.price_cents;
+    }
+  }
+
   return (
     <div className="px-6 py-12">
+      <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
       <h1 className="text-3xl font-semibold">{t("title")}</h1>
 
       <section className="mt-8">
