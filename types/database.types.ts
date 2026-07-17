@@ -42,5 +42,9 @@ export type Database = {
         Update: Partial<Database["public"]["Tables"]["admin_profiles"]["Insert"]>;
       };
     };
+    Views: {};
+    Functions: {};
+    Enums: {};
+    CompositeTypes: {};
   };
 };
