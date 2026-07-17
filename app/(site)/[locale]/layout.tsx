@@ -1,10 +1,18 @@
+import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { PrimaryNav } from "@/components/navigation/PrimaryNav";
+import { geistSans, geistMono } from "@/lib/fonts";
+import "../../globals.css";
 
-export default async function LocaleLayout({
+export const metadata: Metadata = {
+  title: "CACNA Convention",
+  description: "Christ Apostolic Church North America Convention",
+};
+
+export default async function LocaleRootLayout({
   children,
   params,
 }: {
@@ -24,10 +32,14 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <NextIntlClientProvider locale={locale}>
-      <PrimaryNav />
-      {children}
-    </NextIntlClientProvider>
+    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className="min-h-full flex flex-col">
+        <NextIntlClientProvider locale={locale}>
+          <PrimaryNav />
+          {children}
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
 

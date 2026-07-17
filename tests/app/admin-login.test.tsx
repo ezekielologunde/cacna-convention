@@ -23,7 +23,7 @@ describe("AdminLoginPage", () => {
     signInWithPasswordMock.mockResolvedValue({
       error: { message: "Invalid login credentials" },
     });
-    const { default: AdminLoginPage } = await import("../../app/admin/login/page");
+    const { default: AdminLoginPage } = await import("../../app/(admin)/admin/login/page");
 
     render(<AdminLoginPage />);
 
@@ -43,7 +43,7 @@ describe("AdminLoginPage", () => {
 
   it("navigates to /admin on successful sign-in", async () => {
     signInWithPasswordMock.mockResolvedValue({ error: null });
-    const { default: AdminLoginPage } = await import("../../app/admin/login/page");
+    const { default: AdminLoginPage } = await import("../../app/(admin)/admin/login/page");
 
     render(<AdminLoginPage />);
 
