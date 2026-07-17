@@ -1,12 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { NextRequest, NextResponse } from "next/server";
 
-const getUserMock = vi.fn(async () => ({ data: { user: null } }));
-const createServerClientMock = vi.fn(() => ({
-  auth: { getUser: getUserMock },
-}));
-vi.mock("@supabase/ssr", () => ({
-  createServerClient: createServerClientMock,
+const updateSessionMock = vi.fn(async () => NextResponse.next());
+vi.mock("@/lib/supabase/middleware", () => ({
+  updateSession: updateSessionMock,
 }));
 
 const intlMiddlewareMock = vi.fn(() => NextResponse.next());
@@ -16,10 +13,7 @@ vi.mock("next-intl/middleware", () => ({
 }));
 
 beforeEach(() => {
-  process.env.NEXT_PUBLIC_SUPABASE_URL = "https://example.supabase.co";
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = "anon-key";
-  createServerClientMock.mockClear();
-  getUserMock.mockClear();
+  updateSessionMock.mockClear();
   intlMiddlewareMock.mockClear();
 });
 
@@ -30,12 +24,7 @@ describe("middleware", () => {
 
     await middleware(request);
 
-    expect(createServerClientMock).toHaveBeenCalledWith(
-      "https://example.supabase.co",
-      "anon-key",
-      expect.objectContaining({ cookies: expect.any(Object) })
-    );
-    expect(getUserMock).toHaveBeenCalled();
+    expect(updateSessionMock).toHaveBeenCalledWith(request);
     expect(intlMiddlewareMock).not.toHaveBeenCalled();
   });
 
@@ -45,7 +34,7 @@ describe("middleware", () => {
 
     await middleware(request);
 
-    expect(createServerClientMock).toHaveBeenCalled();
+    expect(updateSessionMock).toHaveBeenCalledWith(request);
     expect(intlMiddlewareMock).not.toHaveBeenCalled();
   });
 
@@ -56,7 +45,7 @@ describe("middleware", () => {
     await middleware(request);
 
     expect(intlMiddlewareMock).toHaveBeenCalledWith(request);
-    expect(createServerClientMock).not.toHaveBeenCalled();
+    expect(updateSessionMock).not.toHaveBeenCalled();
   });
 
   it("routes the root path through the next-intl middleware branch", async () => {
@@ -66,6 +55,6 @@ describe("middleware", () => {
     await middleware(request);
 
     expect(intlMiddlewareMock).toHaveBeenCalledWith(request);
-    expect(createServerClientMock).not.toHaveBeenCalled();
+    expect(updateSessionMock).not.toHaveBeenCalled();
   });
 });
