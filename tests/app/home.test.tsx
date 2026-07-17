@@ -64,7 +64,7 @@ describe("HomePage", () => {
 
     expect(
       screen.getByText(
-        "Registration for the next convention hasn't opened yet — pricing and dates will be posted here as soon as they're confirmed."
+        "Registration for 2027 opens in January — pricing and exact dates will be posted here as soon as they're confirmed."
       )
     ).toBeInTheDocument();
   });
