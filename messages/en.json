@@ -96,6 +96,7 @@
   },
   "Register": {
     "title": "Register",
+    "guidelinesHeading": "Registration Guidelines",
     "individualTab": "Individual",
     "groupTab": "Church / Group",
     "churchName": "Church name",
