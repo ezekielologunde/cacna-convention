@@ -54,11 +54,7 @@ export default async function Home({
           }}
         />
         <div className="relative mx-auto max-w-3xl">
-          <span className="inline-flex items-center gap-2 text-sm font-bold tracking-wide text-[var(--color-gold-light)] uppercase">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-orange)]" aria-hidden="true" />
-            {t("kicker")}
-          </span>
-          <h1 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">
+          <h1 className="font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">
             {t("title")}
           </h1>
           <p className="mx-auto mt-5 max-w-[48ch] text-lg text-white/85">{t("subtitle")}</p>
