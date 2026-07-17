@@ -7,6 +7,7 @@ import { leadership } from "../../lib/content/leadership";
 import { committee } from "../../lib/content/committee";
 import { superintendents } from "../../lib/content/superintendents";
 import { history } from "../../lib/content/history";
+import { aboutConvention } from "../../lib/content/about-convention";
 
 describe("AboutTabs", () => {
   it("shows Our Story by default and switches tabs on click", () => {
@@ -16,12 +17,18 @@ describe("AboutTabs", () => {
           leadership={leadership}
           committee={committee}
           superintendents={superintendents}
+          aboutConvention={aboutConvention}
           history={history}
         />
       </NextIntlClientProvider>
     );
 
     expect(screen.getByText(history.founder, { exact: false })).toBeInTheDocument();
+    expect(screen.getByText(aboutConvention.missionStatement)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Biblically Based" })).toBeInTheDocument();
+    expect(screen.getByText(aboutConvention.biblicallyBased[0])).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Kingdom Focused" })).toBeInTheDocument();
+    expect(screen.getByText(aboutConvention.kingdomFocused[0])).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("tab", { name: "Leadership" }));
     expect(screen.getByText(leadership[0].name)).toBeInTheDocument();

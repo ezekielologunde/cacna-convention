@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import type { LeadershipMember } from "@/lib/content/leadership";
 import type { CommitteeMember } from "@/lib/content/committee";
 import type { Superintendent } from "@/lib/content/superintendents";
+import type { AboutConvention } from "@/lib/content/about-convention";
 import type { history as History } from "@/lib/content/history";
 
 type Tab = "story" | "leadership" | "committee" | "superintendents";
@@ -14,11 +15,13 @@ export function AboutTabs({
   leadership,
   committee,
   superintendents,
+  aboutConvention,
   history,
 }: {
   leadership: LeadershipMember[];
   committee: CommitteeMember[];
   superintendents: Superintendent[];
+  aboutConvention: AboutConvention;
   history: typeof History;
 }) {
   const t = useTranslations("About");
@@ -73,6 +76,43 @@ export function AboutTabs({
           <p className="mt-4 text-[var(--color-muted)]">
             {t("todayReach", { count: history.zoneCount })}
           </p>
+
+          <h3 className="mt-6 font-display text-lg text-[var(--color-fg)]">
+            {t("missionHeading")}
+          </h3>
+          <p className="mt-2 text-[var(--color-muted)]">{aboutConvention.missionStatement}</p>
+
+          <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-maroon)] uppercase">
+            {t("biblicallyBasedHeading")}
+          </h3>
+          <ul className="mt-2 flex flex-col gap-1.5 text-[var(--color-muted)]">
+            {aboutConvention.biblicallyBased.map((point) => (
+              <li key={point} className="flex gap-2.5">
+                <span
+                  aria-hidden="true"
+                  className="mt-2 h-1.5 w-1.5 flex-none rounded-full"
+                  style={{ background: "var(--color-maroon)" }}
+                />
+                {point}
+              </li>
+            ))}
+          </ul>
+
+          <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-maroon)] uppercase">
+            {t("kingdomFocusedHeading")}
+          </h3>
+          <ul className="mt-2 flex flex-col gap-1.5 text-[var(--color-muted)]">
+            {aboutConvention.kingdomFocused.map((point) => (
+              <li key={point} className="flex gap-2.5">
+                <span
+                  aria-hidden="true"
+                  className="mt-2 h-1.5 w-1.5 flex-none rounded-full"
+                  style={{ background: "var(--color-maroon)" }}
+                />
+                {point}
+              </li>
+            ))}
+          </ul>
         </div>
       ) : null}
 

@@ -45,6 +45,9 @@
     "leadership": "Leadership",
     "committee": "Committee",
     "superintendents": "Superintendents",
+    "missionHeading": "Our Mission",
+    "biblicallyBasedHeading": "Biblically Based",
+    "kingdomFocusedHeading": "Kingdom Focused",
     "founded": "Founded in {year} by {founder} in {location}.",
     "todayReach": "Today, CAC North America spans {count} DCCs and Zones across the United States and Canada."
   },

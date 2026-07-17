@@ -7,6 +7,7 @@ import { PromoBanner } from "@/components/register/PromoBanner";
 import { leadership } from "@/lib/content/leadership";
 import { committee } from "@/lib/content/committee";
 import { superintendents } from "@/lib/content/superintendents";
+import { aboutConvention } from "@/lib/content/about-convention";
 import { history } from "@/lib/content/history";
 
 export default async function AboutPage({
@@ -43,6 +44,7 @@ export default async function AboutPage({
         leadership={leadership}
         committee={committee}
         superintendents={superintendents}
+        aboutConvention={aboutConvention}
         history={history}
       />
     </>
