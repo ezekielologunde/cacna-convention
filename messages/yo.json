@@ -26,5 +26,11 @@
     "title": "Iṣètò",
     "guestMinister": "Aṣíwájú Àlejò",
     "noEdition": "A óò fi ìtòlẹ́sẹ̀ payẹ̀wò síta nígbà tí àpéjọ bá súnmọ́."
+  },
+  "PlanYourVisit": {
+    "title": "Ṣe Ètò Ìbẹ̀wò Rẹ",
+    "hotelsHeading": "Àwọn Hotẹ́ẹ̀lì",
+    "rulesHeading": "Òfin àti Ìwà",
+    "groupCode": "Kóòdù ẹgbẹ́: {code}"
   }
 }

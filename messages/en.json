@@ -26,5 +26,11 @@
     "title": "Schedule",
     "guestMinister": "Guest Minister",
     "noEdition": "Schedule details will be posted closer to the convention."
+  },
+  "PlanYourVisit": {
+    "title": "Plan Your Visit",
+    "hotelsHeading": "Hotels",
+    "rulesHeading": "Rules & Etiquette",
+    "groupCode": "Group code: {code}"
   }
 }
