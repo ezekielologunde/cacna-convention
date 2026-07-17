@@ -5,17 +5,20 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import type { LeadershipMember } from "@/lib/content/leadership";
 import type { CommitteeMember } from "@/lib/content/committee";
+import type { Superintendent } from "@/lib/content/superintendents";
 import type { history as History } from "@/lib/content/history";
 
-type Tab = "story" | "leadership" | "committee";
+type Tab = "story" | "leadership" | "committee" | "superintendents";
 
 export function AboutTabs({
   leadership,
   committee,
+  superintendents,
   history,
 }: {
   leadership: LeadershipMember[];
   committee: CommitteeMember[];
+  superintendents: Superintendent[];
   history: typeof History;
 }) {
   const t = useTranslations("About");
@@ -25,6 +28,7 @@ export function AboutTabs({
     { id: "story", label: t("ourStory") },
     { id: "leadership", label: t("leadership") },
     { id: "committee", label: t("committee") },
+    { id: "superintendents", label: t("superintendents") },
   ];
 
   const tabClass = (active: boolean) =>
@@ -133,6 +137,25 @@ export function AboutTabs({
               >
                 {member.phone}
               </a>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+
+      {tab === "superintendents" ? (
+        <ul
+          id="about-panel-superintendents"
+          role="tabpanel"
+          aria-labelledby="about-tab-superintendents"
+          className="mt-8 flex flex-col gap-4"
+        >
+          {superintendents.map((person) => (
+            <li
+              key={person.name}
+              className="rounded-2xl border border-[var(--color-border)] p-5"
+            >
+              <p className="font-semibold text-[var(--color-fg)]">{person.name}</p>
+              <p className="mt-1 text-sm text-[var(--color-muted)]">{person.title}</p>
             </li>
           ))}
         </ul>

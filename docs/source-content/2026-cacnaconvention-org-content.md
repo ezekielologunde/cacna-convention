@@ -106,7 +106,9 @@ Current site also has a generic "Send Message" contact form (fields not inspecte
 
 ## CACNA Superintendent page
 
-Thin content on the live site — page title only, one section header ("C.A.C. North America Regional DCC/Zonal Superintendents"), and one photo whose filename references "Tunde Lawal" but with no surrounding bio text. **Needs a real content ask to organizers** — not enough here to seed a proper page. Flagged as an open item.
+The live page itself is thin (title + one section header + a single embedded image, no surrounding HTML text), but the image is real content: page 16 of the printed convention program ("CAC Latunde Region Superintendents"), listing 23 named superintendents with their DCC/Zone and additional roles. Filename references "Tunde Lawal" (a WordPress upload-batch artifact, not a person on the page).
+
+**Update (2026-07-17):** transcribed in full from the flyer image and added as a 4th "Superintendents" tab on the About page (`lib/content/superintendents.ts`), text-only — no individual headshots exist for these 23 people beyond the one composite flyer image, so it follows the Contact page's existing photo-less list pattern rather than cropping faces out of a group photo. One likely transcription typo on the source flyer ("Dalla North Zone") normalized to "Dallas North Zone".
 
 ## Gallery
 

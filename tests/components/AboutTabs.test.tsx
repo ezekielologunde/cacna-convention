@@ -5,13 +5,19 @@ import { AboutTabs } from "../../components/about/AboutTabs";
 import messages from "../../messages/en.json";
 import { leadership } from "../../lib/content/leadership";
 import { committee } from "../../lib/content/committee";
+import { superintendents } from "../../lib/content/superintendents";
 import { history } from "../../lib/content/history";
 
 describe("AboutTabs", () => {
-  it("shows Our Story by default and switches to Leadership on click", () => {
+  it("shows Our Story by default and switches tabs on click", () => {
     render(
       <NextIntlClientProvider locale="en" messages={messages}>
-        <AboutTabs leadership={leadership} committee={committee} history={history} />
+        <AboutTabs
+          leadership={leadership}
+          committee={committee}
+          superintendents={superintendents}
+          history={history}
+        />
       </NextIntlClientProvider>
     );
 
@@ -22,5 +28,9 @@ describe("AboutTabs", () => {
 
     fireEvent.click(screen.getByRole("tab", { name: "Committee" }));
     expect(screen.getByText(committee[0].name)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("tab", { name: "Superintendents" }));
+    expect(screen.getByText(superintendents[0].name)).toBeInTheDocument();
+    expect(screen.getAllByText(superintendents[0].name)).toHaveLength(1);
   });
 });
