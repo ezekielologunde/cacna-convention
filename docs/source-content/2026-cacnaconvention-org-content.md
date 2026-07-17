@@ -34,6 +34,58 @@ Full designed program (multi-page PDF, includes additional ads/sponsor pages) is
 
 Food free for all ages throughout the convention. Payment currently via Zelle or credit/debit card.
 
+## Leadership (from the CACNA Leadership page)
+
+| Name | Title |
+|---|---|
+| Pastor Timothy Agbeja, Ph.D. | Latunde Regional Superintendent, CACNA Chairman, CACNA Coordinating Council Chancellor, CACNA Bible Institute Superintendent, Washington DCC |
+| Pastor David Adenodi, Ph.D. | Chairman, CACNA Convention Member, CACNA Coordinating Council Provost, CACNA Bible Institute Superintendent, V.O.C -USA, DCC |
+| Pastor Joseph Olawale | Latunde Regional Secretary, CACNA Member, CACNA Coordinating Council Registrar, CACNA Bible Institute Superintendent, Texas DCC |
+| Pastor Timothy Adelani | Latunde Regional Treasurer, CACNA Member, CACNA Coordinating Council Superintendent, Manhattan NY DCC |
+| Pastor John Oluwatimilehin, Ph.D. | Chairman, CAC Village Management Council Member, CACNA Coordinating Council Superintendent, Bethel DCC |
+
+## Convention Committee (from the Convention Committee page — distinct from the Contacts table below, which is the site's separate "Contact us" page)
+
+| Role | Name | Organization | Phone |
+|---|---|---|---|
+| Chairman | David Adenodi | C.A.C Vineyard of Comfort | 301-440-7033 |
+| Secretary | Pastor Timothy Famojuro | C.A.C. FITA, Brooklyn, NY | 917-709-1892 |
+| PRO | Pastor Yomi Ademuwagun | CAC Agape Fellowship MD | 443-583-9416 |
+
+Note: "Pastor Joseph Olawale" appears twice in the source site under two different roles that are NOT the same contact — as a Latunde Regional Secretary in the Leadership table above, and as the separate "General inquiries" contact in the Contacts table below (different phone/email/org in each case: this is how the live site itself presents it, across two different pages). Also note "C.A.C Vineyard of Comfort" (no period after "C.A.C") is how the Committee page spells it; the Contact page's address block for the same organization spells it "C.A.C. Vineyard of Comfort" (with period) — the live site is inconsistent about this itself.
+
+## Hotel Lodging (from the Hotel Lodging page — group code "Christ Apostolic Church CACNA")
+
+| Hotel | City | Phone | Rate/night | Booking |
+|---|---|---|---|---|
+| Comfort Inn Greencastle | Chambersburg, PA | 717-798-3578 | $139 | Online booking available |
+| La Quinta | Chambersburg, PA | 717-446-0770 | $139 | Call hotel directly |
+| Super 8 By Wyndham I-81 | Chambersburg, PA | 717-263-6655 | $75 | Call hotel directly |
+| Holiday Inn Express | Chambersburg, PA | 717-709-9009 | $141 | Online booking available |
+| Holiday Inn Express | Gettysburg, PA | 717-420-2686 | $189 | Online booking available |
+| Sleep Inn & Suites | Gettysburg, PA | 717-398-2670 | $129 | Call hotel directly |
+| Aspire Hotel | Gettysburg, PA | 717-321-3311 | $139 | Online booking available |
+| Hampton Inn | Gettysburg, PA | 717-338-9121 | $205 | Call hotel directly |
+| Eisenhower Hotel & Conference Center | Gettysburg, PA | 717-334-2755 | $139 | Online booking available |
+| Hampton Inn | Hagerstown, MD | 240-420-1970 | $139 | Online booking available |
+
+All hotels list complimentary breakfast and WiFi. Hotels are approximately 30 minutes from the CAC Village venue. Budget option via Hotwire from ~$40/night. For assistance: Pastor Isaac Abiara, 972-415-3171.
+
+## Rules & Etiquette (from the Rules & Etiquette page)
+
+- Let all things be done decently and in order (1 Cor. 14:40) — exemplify Christian conduct in hotels and convention spaces.
+- Dress appropriately, presenting yourselves as vessels unto honor (1 Thess. 4:4).
+- Avoid unnecessary or ungodly conversation — "Suffer not thy mouth to cause thy flesh to sin" (Ecc. 5:6).
+- Keep children supervised; avoid lingering in hallways or lobbies.
+- Follow all directions from the convention committee, ushers, and security personnel.
+- Take notes during sessions for later review.
+- Show respect for attendees and leaders while building relationships with other participants.
+- Address concerns respectfully — "Do everything without complaining or arguing" (Phil. 2:14).
+- Identification (ID tags) must be worn at all times; required for convention hall entry.
+- Arrive at least 10 minutes before each session begins.
+- Maintain clean surroundings throughout the convention.
+- Food tickets are non-replaceable if lost — keep them secure.
+
 ## Travel
 
 **Air**: Baltimore-Washington International (BWI) is the recommended airport, ~77 miles / ~1h25m drive to CAC Village. Eight alternative regional airports within 50 miles are listed, including Harrisburg International (50mi), Hagerstown Regional (14mi), Frederick Municipal (22mi).
