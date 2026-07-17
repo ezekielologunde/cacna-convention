@@ -17,7 +17,7 @@ const CONTACTS = [
   },
   {
     name: "Pastor Joseph Olawale",
-    role: "General inquiries",
+    role: null,
     phone: "305-469-0346",
     email: "cacna@hotmail.com",
     org: "Christ Apostolic Church DFW Metroplex, Sanctuary of Power and Praise, 612 E. 2nd Street, Irving, TX 75060",
@@ -39,7 +39,9 @@ export default async function ContactPage({
       <ul className="mt-8 flex flex-col gap-6">
         {CONTACTS.map((contact) => (
           <li key={contact.email}>
-            <p className="font-medium">{contact.name} — {contact.role}</p>
+            <p className="font-medium">
+              {contact.name} — {contact.role === null ? t("generalInquiries") : contact.role}
+            </p>
             <p className="text-sm text-[var(--color-muted)]">{contact.phone} · {contact.email}</p>
             <p className="text-sm text-[var(--color-muted)]">{contact.org}</p>
           </li>
