@@ -129,4 +129,15 @@ The live page itself is thin (title + one section header + a single embedded ima
 
 The church's own real logo, icon, and people photos are now used verbatim on the live site — these are the organization's actual identity, not a generic template to avoid. What the design spec's "informed by, not copied from" guidance still applies to is the old WordPress *theme/layout* (colors, type, page structure), which the new site does not replicate.
 
+## Homepage welcome message, About mission/pillars, Registration Guidelines, full Rules & Etiquette (2026-07-17)
+
+Four additional pieces of real content brought over this pass, all verified against the live site directly:
+
+- **Homepage welcome message** — the "Calvary greetings..." / "People of God..." paragraphs from the source homepage, now `lib/content/welcome.ts`, rendered as a new "Welcome to CACNA Convention" section.
+- **About CACNA Convention mission + pillars** — the source site's dedicated `/cacna-convention/` page (distinct from the org's founding-history content already on the About page), now `lib/content/about-convention.ts`, appended to the About page's "Our Story" tab.
+- **Registration Guidelines** — the 5-item list + "food is free" note from the source homepage, now `lib/content/registration-guidelines.ts`, rendered on the Register page below the form.
+- **Full Rules & Etiquette** — superseded the earlier 8-item paraphrase with the complete transcription from the printed convention program's dedicated Rules & Etiquette page (page 31): 12 "Remember" items + 11 "Rules" items + chairman attribution, now the restructured `lib/content/rules.ts`.
+
+The source homepage's date/location banner and "Registration Guidelines" heading are written for the 2026 convention (per this doc's existing "2026 convention is already underway" note) — the homepage kicker adapts this to `2027 · CAC Village, USA` (year + location only, no fabricated specific dates, since no 2027 `convention_editions` row exists yet).
+
 Not brought over: the ~40 uncaptioned 2025 gallery photos (still meant to be sourced fresh via the admin gallery-upload feature) and the CACNA Superintendent page's single uncaptioned "Tunde Lawal" photo (still needs a real content ask to organizers before it's usable).
