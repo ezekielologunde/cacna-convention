@@ -14,7 +14,9 @@
   },
   "Home": {
     "title": "CACNA Convention",
-    "subtitle": "Christ Apostolic Church North America — join us for our national convention."
+    "subtitle": "Christ Apostolic Church North America — join us for our national convention.",
+    "learnMore": "Learn More",
+    "viewSchedule": "View Schedule"
   },
   "About": {
     "ourStory": "Our Story",
