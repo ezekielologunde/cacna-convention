@@ -25,14 +25,24 @@ export async function POST(request: Request) {
         .from("registrations")
         .update({ status: "paid", stripe_payment_intent_id: session.payment_intent })
         .eq("id", registrationId);
+    } else {
+      console.error("Stripe checkout.session.completed event missing metadata.registration_id", {
+        sessionId: session.id,
+      });
     }
   }
 
+  // registration_id here relies on Stripe automatically copying the Checkout Session's
+  // top-level `metadata` (set in app/api/register/route.ts) onto the resulting PaymentIntent.
   if (event.type === "payment_intent.payment_failed") {
     const paymentIntent = event.data.object as { id: string; metadata?: { registration_id?: string } };
     const registrationId = paymentIntent.metadata?.registration_id;
     if (registrationId) {
       await supabase.from("registrations").update({ status: "failed" }).eq("id", registrationId);
+    } else {
+      console.error("Stripe payment_intent.payment_failed event missing metadata.registration_id", {
+        paymentIntentId: paymentIntent.id,
+      });
     }
   }
 
