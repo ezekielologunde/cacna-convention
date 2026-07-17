@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import messages from "../../messages/en.json";
 import { hotels } from "../../lib/content/hotels";
 import { rules } from "../../lib/content/rules";
+import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
 
 // `next-intl/server`'s real (react-server) implementation of
 // `getTranslations`/`setRequestLocale` needs an actual Next.js RSC request
@@ -16,21 +17,7 @@ import { rules } from "../../lib/content/rules";
 // react-server build at build/runtime. Mock the module here so the page's
 // translation calls resolve against the real `en.json` copy instead of the
 // stub.
-vi.mock("next-intl/server", () => ({
-  setRequestLocale: () => {},
-  getTranslations: async (namespace: string) => {
-    const strings = (messages as Record<string, Record<string, string>>)[namespace];
-    return (key: string, values?: Record<string, string | number>) => {
-      let value = strings[key];
-      if (values) {
-        for (const [placeholder, replacement] of Object.entries(values)) {
-          value = value.replace(`{${placeholder}}`, String(replacement));
-        }
-      }
-      return value;
-    };
-  },
-}));
+vi.mock("next-intl/server", () => createNextIntlServerMock(messages));
 
 describe("PlanYourVisitPage", () => {
   it("renders hotel names and rules", async () => {

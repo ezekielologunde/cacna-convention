@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getScheduleForEdition } from "@/lib/schedule";
+import { getActiveEdition } from "@/lib/editions";
 import { ScheduleDay } from "@/components/schedule/ScheduleDay";
 
 export default async function SchedulePage({
@@ -13,13 +14,7 @@ export default async function SchedulePage({
   const t = await getTranslations("Schedule");
 
   const supabase = await createClient();
-  const { data: edition } = await supabase
-    .from("convention_editions")
-    .select("id")
-    .in("status", ["current", "upcoming"])
-    .order("year", { ascending: true })
-    .limit(1)
-    .maybeSingle();
+  const edition = await getActiveEdition(supabase);
 
   if (!edition) {
     return (

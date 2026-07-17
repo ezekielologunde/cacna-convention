@@ -41,10 +41,13 @@ vi.mock("next-intl/server", () => ({
   },
 }));
 
-// Mocks the `convention_editions` query chain the page runs before ever
-// touching `getScheduleForEdition`:
-//   .from("convention_editions").select("id").in("status", [...])
+// Mocks the `convention_editions` query chain the page runs (via
+// `getActiveEdition`) before ever touching `getScheduleForEdition`:
+//   .from("convention_editions").select("id, year").in("status", [...])
 //     .order("year", ...).limit(1).maybeSingle()
+// `select()` and `order()` don't assert on their arguments below, so this
+// mock shape works regardless of the exact select list `getActiveEdition`
+// requests; only the `id` field the page actually reads is included here.
 function mockEditionQuery(resolvedValue: {
   data: { id: string } | null;
   error: null;
