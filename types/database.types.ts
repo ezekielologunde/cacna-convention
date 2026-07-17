@@ -73,6 +73,30 @@ export type Database = {
         Update: Partial<Database["public"]["Tables"]["schedule_sessions"]["Insert"]>;
         Relationships: [];
       };
+      pricing_tiers: {
+        Row: {
+          id: string;
+          edition_id: string;
+          category: "adult" | "young_adult" | "child";
+          price_cents: number;
+          starts_on: string;
+          ends_on: string;
+          sort_order: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          edition_id: string;
+          category: "adult" | "young_adult" | "child";
+          price_cents: number;
+          starts_on: string;
+          ends_on: string;
+          sort_order?: number;
+          created_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["pricing_tiers"]["Insert"]>;
+        Relationships: [];
+      };
     };
     Views: {};
     Functions: {};
