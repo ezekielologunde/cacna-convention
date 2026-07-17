@@ -32,5 +32,10 @@
     "hotelsHeading": "Hotels",
     "rulesHeading": "Rules & Etiquette",
     "groupCode": "Group code: {code}"
+  },
+  "Archive": {
+    "title": "Past Conventions",
+    "sessionCount": "{count} sessions",
+    "empty": "No past conventions yet."
   }
 }

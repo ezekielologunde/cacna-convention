@@ -32,5 +32,10 @@
     "hotelsHeading": "Àwọn Hotẹ́ẹ̀lì",
     "rulesHeading": "Òfin àti Ìwà",
     "groupCode": "Kóòdù ẹgbẹ́: {code}"
+  },
+  "Archive": {
+    "title": "Àwọn Àpéjọ Àtijọ́",
+    "sessionCount": "Ìpàdé {count}",
+    "empty": "Kò tíì sí àpéjọ àtijọ́ kankan."
   }
 }
