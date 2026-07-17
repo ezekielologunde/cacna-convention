@@ -38,10 +38,19 @@ export default async function SchedulePage({
     byDay.set(session.day_date, existing);
   }
 
+  // `Map` iterates keys in first-insertion order, not sorted order, so this
+  // only lands in chronological order by coincidence of `getScheduleForEdition`'s
+  // own `ORDER BY day_date` clause. Sort explicitly here so the page's own
+  // grouping logic guarantees day order rather than silently depending on
+  // the query never changing.
+  const orderedDays = Array.from(byDay.entries()).sort(([a], [b]) =>
+    a.localeCompare(b)
+  );
+
   return (
     <div className="px-6 py-12">
       <h1 className="text-3xl font-semibold">{t("title")}</h1>
-      {Array.from(byDay.entries()).map(([dayDate, daySessions]) => (
+      {orderedDays.map(([dayDate, daySessions]) => (
         <ScheduleDay key={dayDate} dayDate={dayDate} sessions={daySessions} />
       ))}
     </div>

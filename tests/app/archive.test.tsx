@@ -72,5 +72,11 @@ describe("ArchivePage", () => {
         selector: "h2",
       })
     ).toBeInTheDocument();
+
+    // Guards against a regression that silently flips the status filter
+    // (e.g. "past" -> "current"), which the canned mock data above would
+    // not otherwise catch since it resolves regardless of what `.eq()` was
+    // called with.
+    expect(eqMock).toHaveBeenCalledWith("status", "past");
   });
 });
