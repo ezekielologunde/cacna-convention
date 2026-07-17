@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveEdition } from "@/lib/editions";
 import { getActivePricingForEdition } from "@/lib/pricing";
 import { PromoBanner } from "@/components/register/PromoBanner";
+import { welcomeMessage } from "@/lib/content/welcome";
 
 export default async function Home({
   params,
@@ -54,7 +55,10 @@ export default async function Home({
           }}
         />
         <div className="relative mx-auto max-w-3xl">
-          <h1 className="font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">
+          <p className="text-sm font-semibold tracking-wide text-[var(--color-gold-light)] uppercase">
+            {t("kicker")}
+          </p>
+          <h1 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">
             {t("title")}
           </h1>
           <p className="mx-auto mt-5 max-w-[48ch] text-lg text-white/85">{t("subtitle")}</p>
@@ -73,6 +77,30 @@ export default async function Home({
               {t("viewSchedule")}
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Welcome */}
+      <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">
+            {t("welcomeHeading")}
+          </h2>
+          {welcomeMessage.paragraphs.map((paragraph, index) => (
+            <p key={index} className="mt-4 text-[var(--color-muted)]">
+              {paragraph}
+            </p>
+          ))}
+          <p className="mt-4 text-[var(--color-muted)]">
+            {welcomeMessage.closingLead}{" "}
+            <Link
+              href={`/${locale}/contact`}
+              className="font-semibold text-[var(--color-maroon)] underline"
+            >
+              {t("contactLinkText")}
+            </Link>
+            .
+          </p>
         </div>
       </section>
 

@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import messages from "../../messages/en.json";
 import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
+import { welcomeMessage } from "../../lib/content/welcome";
 
 // `next-intl/server`'s real (react-server) implementation of
 // `getTranslations`/`setRequestLocale` needs an actual Next.js RSC request
@@ -67,5 +68,19 @@ describe("HomePage", () => {
         "Registration for 2027 opens in January — pricing and exact dates will be posted here as soon as they're confirmed."
       )
     ).toBeInTheDocument();
+  });
+
+  it("renders the kicker and welcome message", async () => {
+    mockNoActiveEdition();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByText("2027 · CAC Village, USA")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Welcome to CACNA Convention" })).toBeInTheDocument();
+    expect(screen.getByText(welcomeMessage.paragraphs[0])).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "contact us" })).toHaveAttribute("href", "/en/contact");
   });
 });
