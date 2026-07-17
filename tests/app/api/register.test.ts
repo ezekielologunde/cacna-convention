@@ -14,18 +14,22 @@ vi.mock("@/lib/pricing", () => ({
 
 const insertRegistrationMock = vi.fn();
 const updateRegistrationMock = vi.fn(() => ({ eq: vi.fn().mockResolvedValue({ error: null }) }));
+const deleteRegistrationMock = vi.fn(() => ({ eq: vi.fn().mockResolvedValue({ error: null }) }));
 const insertRegistrantsMock = vi.fn();
+const deleteRegistrantsMock = vi.fn(() => ({ eq: vi.fn().mockResolvedValue({ error: null }) }));
 const createServiceClientMock = vi.fn(() => ({
   from: (table: string) => {
     if (table === "registrations") {
       return {
         insert: insertRegistrationMock,
         update: updateRegistrationMock,
+        delete: deleteRegistrationMock,
       };
     }
     if (table === "registrants") {
       return {
         insert: insertRegistrantsMock,
+        delete: deleteRegistrantsMock,
       };
     }
     throw new Error(`unexpected table ${table}`);
@@ -48,6 +52,13 @@ beforeEach(() => {
   insertRegistrationMock.mockReset();
   insertRegistrantsMock.mockReset();
   checkoutSessionsCreateMock.mockReset();
+
+  // Reset call history for cleanup-path assertions but keep working defaults
+  // (mockReset() would otherwise wipe the return value too).
+  deleteRegistrationMock.mockReset();
+  deleteRegistrationMock.mockReturnValue({ eq: vi.fn().mockResolvedValue({ error: null }) });
+  deleteRegistrantsMock.mockReset();
+  deleteRegistrantsMock.mockReturnValue({ eq: vi.fn().mockResolvedValue({ error: null }) });
 });
 
 function validRequestInit(overrides: Record<string, unknown> = {}) {
@@ -243,6 +254,103 @@ describe("POST /api/register", () => {
         expect.objectContaining({ full_name: "Adult One", category: "adult", price_cents: 12500 }),
         expect.objectContaining({ full_name: "Kid One", category: "child", price_cents: 0 }),
       ]);
+    });
+  });
+
+  describe("input validation (Finding 2)", () => {
+    it("returns 400 and touches no database when registrants is an empty array", async () => {
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request(
+        "http://localhost/api/register",
+        validRequestInit({ registrants: [] })
+      );
+
+      const response = await POST(request);
+      expect(response.status).toBe(400);
+
+      expect(getActiveEditionMock).not.toHaveBeenCalled();
+      expect(insertRegistrationMock).not.toHaveBeenCalled();
+      expect(insertRegistrantsMock).not.toHaveBeenCalled();
+    });
+
+    it("returns 400 when a registrant's category is not one of the valid literals", async () => {
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request(
+        "http://localhost/api/register",
+        validRequestInit({ registrants: [{ fullName: "Jane Doe", category: "senior" }] })
+      );
+
+      const response = await POST(request);
+      expect(response.status).toBe(400);
+      expect(getActiveEditionMock).not.toHaveBeenCalled();
+    });
+
+    it("returns 400 when contactEmail is missing", async () => {
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request(
+        "http://localhost/api/register",
+        validRequestInit({ contactEmail: "" })
+      );
+
+      const response = await POST(request);
+      expect(response.status).toBe(400);
+      expect(getActiveEditionMock).not.toHaveBeenCalled();
+    });
+
+    it("returns 400 (not an unhandled 500) when the request body is malformed JSON", async () => {
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request("http://localhost/api/register", {
+        method: "POST",
+        body: "{not valid json",
+      });
+
+      const response = await POST(request);
+      expect(response.status).toBe(400);
+      expect(getActiveEditionMock).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("cleanup on partial failure (Finding 2)", () => {
+    it("deletes the registration row if the registrants insert fails", async () => {
+      getActiveEditionMock.mockResolvedValue({ id: "edition-1", year: 2027 });
+      getActivePricingMock.mockResolvedValue([{ category: "adult", price_cents: 12500 }]);
+      insertRegistrationMock.mockReturnValue({
+        select: () => ({
+          single: () => Promise.resolve({ data: { id: "reg-fail-1" }, error: null }),
+        }),
+      });
+      insertRegistrantsMock.mockResolvedValue({ error: { message: "insert failed" } });
+
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request("http://localhost/api/register", validRequestInit());
+
+      const response = await POST(request);
+      expect(response.status).toBe(500);
+
+      // Only the registration row needs cleanup — the registrants insert itself failed.
+      expect(deleteRegistrantsMock).not.toHaveBeenCalled();
+      expect(deleteRegistrationMock).toHaveBeenCalledTimes(1);
+    });
+
+    it("deletes both the registrants and registration rows if Stripe session creation throws", async () => {
+      getActiveEditionMock.mockResolvedValue({ id: "edition-1", year: 2027 });
+      getActivePricingMock.mockResolvedValue([{ category: "adult", price_cents: 12500 }]);
+      insertRegistrationMock.mockReturnValue({
+        select: () => ({
+          single: () => Promise.resolve({ data: { id: "reg-fail-2" }, error: null }),
+        }),
+      });
+      insertRegistrantsMock.mockResolvedValue({ error: null });
+      checkoutSessionsCreateMock.mockRejectedValue(new Error("Stripe is down"));
+
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request("http://localhost/api/register", validRequestInit());
+
+      const response = await POST(request);
+      expect(response.status).toBe(500);
+
+      expect(deleteRegistrantsMock).toHaveBeenCalledTimes(1);
+      expect(deleteRegistrationMock).toHaveBeenCalledTimes(1);
     });
   });
 });

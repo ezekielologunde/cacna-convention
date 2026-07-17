@@ -13,8 +13,97 @@ type RegisterRequestBody = {
   registrants: { fullName: string; category: RegistrantCategory }[];
 };
 
+const VALID_CATEGORIES: RegistrantCategory[] = ["adult", "young_adult", "child"];
+const VALID_REGISTRATION_TYPES: RegisterRequestBody["registrationType"][] = ["individual", "group"];
+
+// Plain, explicit checks rather than a schema library — the set of rules is
+// small and fixed, and matches this route's existing (unvalidated) style.
+function validateRequestBody(body: unknown): string | null {
+  if (!body || typeof body !== "object") {
+    return "Request body must be a JSON object";
+  }
+
+  const b = body as Partial<RegisterRequestBody>;
+
+  if (typeof b.registrationType !== "string" || !VALID_REGISTRATION_TYPES.includes(b.registrationType)) {
+    return "registrationType must be 'individual' or 'group'";
+  }
+
+  if (typeof b.contactName !== "string" || b.contactName.trim() === "") {
+    return "contactName is required";
+  }
+
+  if (typeof b.contactEmail !== "string" || b.contactEmail.trim() === "") {
+    return "contactEmail is required";
+  }
+
+  if (!Array.isArray(b.registrants) || b.registrants.length === 0) {
+    return "registrants must be a non-empty array";
+  }
+
+  for (const registrant of b.registrants) {
+    if (!registrant || typeof registrant !== "object") {
+      return "Each registrant must be an object";
+    }
+
+    const r = registrant as Partial<{ fullName: string; category: RegistrantCategory }>;
+
+    if (typeof r.fullName !== "string" || r.fullName.trim() === "") {
+      return "Each registrant must have a non-empty fullName";
+    }
+
+    if (typeof r.category !== "string" || !VALID_CATEGORIES.includes(r.category as RegistrantCategory)) {
+      return `Invalid registrant category: ${String(r.category)}`;
+    }
+  }
+
+  return null;
+}
+
+// Best-effort rollback for partial failures: a later step failed after an
+// earlier insert already succeeded, so remove what was already written
+// rather than leaving an orphaned registrations/registrants row behind. A
+// cleanup failure is logged but never masks the original error being
+// returned to the caller.
+async function cleanupPartialRegistration(
+  supabase: ReturnType<typeof createServiceClient>,
+  registrationId: string,
+  options: { deleteRegistrants: boolean }
+): Promise<void> {
+  try {
+    if (options.deleteRegistrants) {
+      const { error } = await supabase.from("registrants").delete().eq("registration_id", registrationId);
+      if (error) {
+        console.error("Failed to clean up registrants after a partial registration failure", {
+          registrationId,
+          error,
+        });
+      }
+    }
+
+    const { error } = await supabase.from("registrations").delete().eq("id", registrationId);
+    if (error) {
+      console.error("Failed to clean up registration after a partial failure", { registrationId, error });
+    }
+  } catch (cleanupError) {
+    console.error("Cleanup after a partial registration failure threw", { registrationId, cleanupError });
+  }
+}
+
 export async function POST(request: Request) {
-  const body = (await request.json()) as RegisterRequestBody;
+  let rawBody: unknown;
+  try {
+    rawBody = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
+
+  const validationError = validateRequestBody(rawBody);
+  if (validationError) {
+    return NextResponse.json({ error: validationError }, { status: 400 });
+  }
+
+  const body = rawBody as RegisterRequestBody;
   const supabase = createServiceClient();
 
   const edition = await getActiveEdition(supabase);
@@ -90,6 +179,7 @@ export async function POST(request: Request) {
     );
 
   if (registrantsError) {
+    await cleanupPartialRegistration(supabase, registration.id, { deleteRegistrants: false });
     return NextResponse.json({ error: "Failed to create registrants" }, { status: 500 });
   }
 
@@ -110,26 +200,31 @@ export async function POST(request: Request) {
   // checkout line items.
   const payableRegistrants = pricedRegistrants.filter((r) => r.price_cents > 0);
 
-  const session = await stripe.checkout.sessions.create({
-    mode: "payment",
-    line_items: payableRegistrants.map((r) => ({
-      price_data: {
-        currency: "usd",
-        unit_amount: r.price_cents,
-        product_data: { name: `CACNA Convention registration — ${r.full_name} (${r.category})` },
-      },
-      quantity: 1,
-    })),
-    customer_email: body.contactEmail,
-    success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/register/confirmation?registration=${registration.id}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/register`,
-    metadata: { registration_id: registration.id },
-  });
+  try {
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items: payableRegistrants.map((r) => ({
+        price_data: {
+          currency: "usd",
+          unit_amount: r.price_cents,
+          product_data: { name: `CACNA Convention registration — ${r.full_name} (${r.category})` },
+        },
+        quantity: 1,
+      })),
+      customer_email: body.contactEmail,
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/register/confirmation?registration=${registration.id}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/register`,
+      metadata: { registration_id: registration.id },
+    });
 
-  await supabase
-    .from("registrations")
-    .update({ stripe_checkout_session_id: session.id })
-    .eq("id", registration.id);
+    await supabase
+      .from("registrations")
+      .update({ stripe_checkout_session_id: session.id })
+      .eq("id", registration.id);
 
-  return NextResponse.json({ checkoutUrl: session.url });
+    return NextResponse.json({ checkoutUrl: session.url });
+  } catch {
+    await cleanupPartialRegistration(supabase, registration.id, { deleteRegistrants: true });
+    return NextResponse.json({ error: "Failed to create checkout session" }, { status: 500 });
+  }
 }
