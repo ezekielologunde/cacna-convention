@@ -110,7 +110,9 @@ Thin content on the live site — page title only, one section header ("C.A.C. N
 
 ## Gallery
 
-~40 photos from the 2025 convention (July 17–19, 2025) in a single uncaptioned grid, plus a separate "2025 Children Department" album. No structured captions/metadata exist to migrate — new gallery content should be sourced fresh from organizers (via the admin gallery-upload feature) rather than migrated as-is.
+~40 photos from the 2025 convention (July 17–19, 2025) in a single uncaptioned grid, plus a separate "2025 Children Department" album (20 photos). No structured captions/metadata exist on the source site for either album.
+
+**Update (2026-07-17):** migrated verbatim anyway rather than waiting for a fresh admin-upload sourcing pass. 41 full-resolution photos (`public/photos/gallery/`, filenames preserved from the source site's WhatsApp-export naming) and 20 Children's Department photos (`public/photos/gallery-children/`), listed in `lib/content/gallery.ts` and rendered on `/gallery` as two uncaptioned grids (matching how the source site itself presents them — no per-photo alt text beyond the section name, since no per-photo description exists to give). An admin gallery-upload feature to replace/supplement these with curated, captioned photos remains a reasonable future enhancement.
 
 ## Brand assets captured (`assets/`)
 

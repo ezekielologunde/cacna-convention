@@ -1,4 +1,6 @@
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { mainGalleryPhotos, childrenGalleryPhotos } from "@/lib/content/gallery";
 
 export default async function GalleryPage({
   params,
@@ -10,22 +12,49 @@ export default async function GalleryPage({
   const t = await getTranslations("Gallery");
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-12 text-center">
-      <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
-      <div className="mt-8 rounded-3xl border border-dashed border-[var(--color-border)] p-12">
-        <span
-          aria-hidden="true"
-          className="mx-auto flex h-12 w-12 items-center justify-center rounded-full"
-          style={{ background: "var(--flame)" }}
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" />
-            <circle cx="9" cy="9" r="2" />
-            <path d="M21 15l-5-5L5 21" />
-          </svg>
-        </span>
-        <p className="mx-auto mt-4 max-w-[42ch] text-[var(--color-muted)]">{t("comingSoon")}</p>
-      </div>
+    <div className="mx-auto max-w-5xl px-6 py-12">
+      <h1 className="text-center font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
+      <p className="mx-auto mt-3 max-w-[52ch] text-center text-[var(--color-muted)]">{t("intro")}</p>
+
+      <section className="mt-10">
+        <h2 className="font-display text-xl text-[var(--color-fg)]">{t("conventionHeading")}</h2>
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+          {mainGalleryPhotos.map((src) => (
+            <div
+              key={src}
+              className="relative aspect-square overflow-hidden rounded-xl bg-[var(--color-surface)]"
+            >
+              <Image
+                src={src}
+                alt={t("conventionHeading")}
+                fill
+                sizes="(min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="font-display text-xl text-[var(--color-fg)]">{t("childrenHeading")}</h2>
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+          {childrenGalleryPhotos.map((src) => (
+            <div
+              key={src}
+              className="relative aspect-square overflow-hidden rounded-xl bg-[var(--color-surface)]"
+            >
+              <Image
+                src={src}
+                alt={t("childrenHeading")}
+                fill
+                sizes="(min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
