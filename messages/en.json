@@ -42,6 +42,8 @@
   },
   "Contact": {
     "title": "Contact",
+    "chairman": "Convention Chairman",
+    "secretary": "Convention Secretary",
     "generalInquiries": "General inquiries"
   },
   "Gallery": {

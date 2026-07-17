@@ -1,23 +1,31 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-const CONTACTS = [
+type ContactRoleKey = "chairman" | "secretary" | "generalInquiries";
+
+const CONTACTS: Array<{
+  name: string;
+  roleKey: ContactRoleKey;
+  phone: string;
+  email: string;
+  org: string;
+}> = [
   {
     name: "Pastor David Adenodi",
-    role: "Convention Chairman",
+    roleKey: "chairman",
     phone: "301-440-7033",
     email: "cacnaconvention@gmail.com",
     org: "C.A.C. Vineyard of Comfort, 6408 Princess Garden Parkway, Lanham, MD 20706",
   },
   {
     name: "Pastor Timothy Famojuro",
-    role: "Convention Secretary",
+    roleKey: "secretary",
     phone: "917-709-1892",
     email: "ftimothy54@aol.com",
     org: "C.A.C. FITA, Brooklyn, NY",
   },
   {
     name: "Pastor Joseph Olawale",
-    role: null,
+    roleKey: "generalInquiries",
     phone: "305-469-0346",
     email: "cacna@hotmail.com",
     org: "Christ Apostolic Church DFW Metroplex, Sanctuary of Power and Praise, 612 E. 2nd Street, Irving, TX 75060",
@@ -40,7 +48,7 @@ export default async function ContactPage({
         {CONTACTS.map((contact) => (
           <li key={contact.email}>
             <p className="font-medium">
-              {contact.name} — {contact.role === null ? t("generalInquiries") : contact.role}
+              {contact.name} — {t(contact.roleKey)}
             </p>
             <p className="text-sm text-[var(--color-muted)]">{contact.phone} · {contact.email}</p>
             <p className="text-sm text-[var(--color-muted)]">{contact.org}</p>
