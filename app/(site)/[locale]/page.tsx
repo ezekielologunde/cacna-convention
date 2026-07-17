@@ -114,6 +114,17 @@ export default async function Home({
         </div>
       </section>
 
+      {/* Gallery teaser */}
+      <section className="px-6 pb-16 text-center">
+        <h2 className="font-display text-xl text-[var(--color-fg)]">{t("galleryHeading")}</h2>
+        <Link
+          href={`/${locale}/gallery`}
+          className="mt-4 inline-block rounded-full border border-[var(--color-border)] px-6 py-3 font-semibold text-[var(--color-fg)] transition-colors hover:border-[var(--color-maroon)]"
+        >
+          {t("galleryCta")}
+        </Link>
+      </section>
+
       {/* Registration */}
       <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
         <div className="mx-auto max-w-3xl rounded-3xl border border-[var(--color-border)] bg-white p-8 text-center sm:p-10">

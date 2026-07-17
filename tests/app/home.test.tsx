@@ -83,4 +83,15 @@ describe("HomePage", () => {
     expect(screen.getByText(welcomeMessage.paragraphs[0])).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "contact us" })).toHaveAttribute("href", "/en/contact");
   });
+
+  it("renders a Gallery CTA linking to the gallery page", async () => {
+    mockNoActiveEdition();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("link", { name: "View Gallery" })).toHaveAttribute("href", "/en/gallery");
+  });
 });
