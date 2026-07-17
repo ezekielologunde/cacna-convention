@@ -21,5 +21,10 @@
     "leadership": "Leadership",
     "committee": "Committee",
     "founded": "Founded in {year} by {founder} in {location}."
+  },
+  "Schedule": {
+    "title": "Schedule",
+    "guestMinister": "Guest Minister",
+    "noEdition": "Schedule details will be posted closer to the convention."
   }
 }

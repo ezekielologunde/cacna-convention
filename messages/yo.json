@@ -21,5 +21,10 @@
     "leadership": "Aṣíwájú",
     "committee": "Ìgbìmọ̀",
     "founded": "A dá sílẹ̀ ní ọdún {year} láti ọwọ́ {founder} ní {location}."
+  },
+  "Schedule": {
+    "title": "Iṣètò",
+    "guestMinister": "Aṣíwájú Àlejò",
+    "noEdition": "A óò fi ìtòlẹ́sẹ̀ payẹ̀wò síta nígbà tí àpéjọ bá súnmọ́."
   }
 }
