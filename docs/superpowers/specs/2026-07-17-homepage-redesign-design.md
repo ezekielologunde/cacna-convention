@@ -18,6 +18,7 @@ A PDF the user tried to attach for this work was corrupted in transit (truncated
 2. Add a "View Gallery" CTA on the homepage linking to the existing Gallery page.
 3. Enrich the About page's "Our Story" tab with the convention's mission statement and Biblically Based / Kingdom Focused pillars.
 4. Move the Registration Guidelines onto the Register page.
+5. Replace the abbreviated Rules & Etiquette list on Plan Your Visit with the full transcription from the printed convention program (page 31, "Convention and Conference Rules & Etiquette").
 
 ## Non-goals
 
@@ -58,15 +59,33 @@ Rendered directly below the existing founding/reach paragraphs in the same `abou
 
 Add a "Registration Guidelines" section listing the 5 rules from the source homepage, plus the "food is free for all ages" note. Exact placement (above vs. below the form, always visible vs. per registration mode) is an implementation-time call — keep it visually secondary to the form itself (the form is the primary task on this page).
 
+## Rules & Etiquette changes (`lib/content/rules.ts`, `app/(site)/[locale]/plan-your-visit/page.tsx`)
+
+`lib/content/rules.ts` currently holds an 8-item paraphrase (itself a summary from an earlier, shorter crawl). Replace it with the full transcription from the printed convention program's dedicated Rules & Etiquette page (page 31), which has two labeled sections and a chairman attribution the current data has none of:
+
+- **Remember** (12 items) — orderly conduct (1 Cor. 14:40), being a good Christian example (Phil. 2:15), hallway/lobby conduct, noise, no cooking in hotel rooms, dress code (1 Thess. 4:4; Heb. 12:14-17), speech (Ecc. 5:6; 5:3-4), obedience to committee/ushers/protocol/security/hospitality/marketing/medical/registration staff, note-taking, respect for attendees/leaders, fellowship, and raising concerns respectfully (Phil. 2:14)
+- **Rules** (11 items) — ID tag requirement, 10-minute early arrival, keeping surroundings clean, parking rules (including not parking near youth/children/kitchen areas), no eating in halls, no water packs in hotel rooms, toilet/sanitary rules, no littering, trash disposal, and daily morning prayer sessions
+- Signed: "Pastor David Olusegun Adenodi (Ph.D), Chairman, CACNA Conventions & Conferences"
+
+Restructure `rules.ts` to carry this shape (two labeled groups + attribution) instead of a flat `string[]`, and update the Plan Your Visit page's Rules & Etiquette section to render both groups with headings, plus the attribution line.
+
 ## Content/translation additions
 
-New message keys needed in both `messages/en.json` and `messages/yo.json` (Yoruba translations to be written, not just English placeholders — this project enforces bilingual parity via `tests/i18n/messages.test.ts`):
+**Correction from first draft:** every existing "real content" file in this project (`lib/content/leadership.ts`, `committee.ts`, `hotels.ts`, `rules.ts`, `gallery.ts`, `superintendents.ts`, `history.ts`) is English-only, sourced verbatim from the English source site — none of it goes through next-intl. Only the short UI chrome *around* that content (section headings, tab labels, button text) is translated via `messages/en.json` + `messages/yo.json`. The new long-form content added by this spec follows the same split:
 
+**New English-only content files** (`lib/content/`, no Yoruba needed):
+- `about-convention.ts` — mission statement + Biblically Based / Kingdom Focused points
+- `welcome.ts` (or extend an existing file) — the homepage welcome/greeting message body
+- `rules.ts` — restructured to hold the full Remember/Rules transcription + attribution (still English-only, consistent with its current state)
+- Registration Guidelines body text (new file, or extend an existing one)
+
+**New translated UI-chrome keys** (both `messages/en.json` and `messages/yo.json`, real Yoruba — not placeholders, per `tests/i18n/messages.test.ts` parity):
 - `Home.kicker` (re-added — was removed in the last session's cleanup pass, now needed again with different content: location/date instead of the org name)
-- `Home.welcomeHeading`, `Home.welcomeBody`
-- `Home.galleryTeaserHeading` (or similar), `Home.galleryTeaserCta`
-- `About.missionStatement`, `About.biblicallyBasedHeading` + 3 point keys (or a single body key — implementation-time call on whether points need individual keys for potential future reordering, or can be one translated block), `About.kingdomFocusedHeading` + its points
-- `Register.guidelinesHeading` + the 5 guideline keys + the free-food note
+- `Home.welcomeHeading` ("Welcome to CACNA Convention")
+- `Home.galleryTeaserHeading`, `Home.galleryTeaserCta`
+- `About.missionHeading` (or similar), `About.biblicallyBasedHeading`, `About.kingdomFocusedHeading`
+- `Register.guidelinesHeading`
+- `PlanYourVisit.rememberHeading`, `PlanYourVisit.rulesHeading` (rulesHeading already exists), attribution label if needed
 
 ## Testing
 
