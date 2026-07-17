@@ -3,17 +3,23 @@ import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import enMessages from "../../messages/en.json";
 import yoMessages from "../../messages/yo.json";
-
-const allMessages: Record<string, Record<string, Record<string, string>>> = {
-  en: enMessages,
-  yo: yoMessages,
-};
+import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
 
 // Tracks the locale most recently passed to `setRequestLocale`, mirroring
 // how the real next-intl server APIs thread the active request locale from
 // `setRequestLocale` through to `getTranslations`. This lets a single mock
 // serve both the `en` and `yo` renders exercised below instead of being
 // hardcoded to one messages file.
+//
+// `createNextIntlServerMock` (shared with the other page tests) only binds
+// to a single messages object at creation time, so it can't dispatch on
+// locale by itself. This builds one mock per locale with the shared helper
+// (reusing its namespace-resolution/interpolation logic instead of
+// hand-rolling it again) and forwards to whichever one is active.
+const mockServersByLocale: Record<string, ReturnType<typeof createNextIntlServerMock>> = {
+  en: createNextIntlServerMock(enMessages),
+  yo: createNextIntlServerMock(yoMessages),
+};
 let mockActiveLocale = "en";
 
 // `next-intl/server`'s real (react-server) implementation of
@@ -32,18 +38,8 @@ vi.mock("next-intl/server", () => ({
   setRequestLocale: (locale: string) => {
     mockActiveLocale = locale;
   },
-  getTranslations: async (namespace: string) => {
-    const strings = allMessages[mockActiveLocale][namespace];
-    return (key: string, values?: Record<string, string | number>) => {
-      let value = strings[key];
-      if (values) {
-        for (const [placeholder, replacement] of Object.entries(values)) {
-          value = value.replace(`{${placeholder}}`, String(replacement));
-        }
-      }
-      return value;
-    };
-  },
+  getTranslations: (namespace: string) =>
+    mockServersByLocale[mockActiveLocale].getTranslations(namespace),
 }));
 
 describe("ContactPage", () => {

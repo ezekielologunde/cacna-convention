@@ -1,7 +1,10 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getScheduleForEdition } from "@/lib/schedule";
+import { getActiveEdition } from "@/lib/editions";
+import { getActivePricingForEdition } from "@/lib/pricing";
 import { ScheduleDay } from "@/components/schedule/ScheduleDay";
+import { PromoBanner } from "@/components/register/PromoBanner";
 
 export default async function SchedulePage({
   params,
@@ -13,17 +16,24 @@ export default async function SchedulePage({
   const t = await getTranslations("Schedule");
 
   const supabase = await createClient();
-  const { data: edition } = await supabase
-    .from("convention_editions")
-    .select("id")
-    .in("status", ["current", "upcoming"])
-    .order("year", { ascending: true })
-    .limit(1)
-    .maybeSingle();
+  const edition = await getActiveEdition(supabase);
+
+  let nextDeadline: string | null = null;
+  let priceBeforeIncrease: number | null = null;
+
+  if (edition) {
+    const tiers = await getActivePricingForEdition(supabase, edition.id);
+    const adultTier = tiers.find((tier) => tier.category === "adult");
+    if (adultTier) {
+      nextDeadline = adultTier.ends_on;
+      priceBeforeIncrease = adultTier.price_cents;
+    }
+  }
 
   if (!edition) {
     return (
       <div className="px-6 py-12">
+        <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
         <h1 className="text-3xl font-semibold">{t("title")}</h1>
         <p className="mt-4 text-[var(--color-muted)]">{t("noEdition")}</p>
       </div>
@@ -49,6 +59,7 @@ export default async function SchedulePage({
 
   return (
     <div className="px-6 py-12">
+      <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
       <h1 className="text-3xl font-semibold">{t("title")}</h1>
       {orderedDays.map(([dayDate, daySessions]) => (
         <ScheduleDay key={dayDate} dayDate={dayDate} sessions={daySessions} />

@@ -49,5 +49,31 @@
   "Gallery": {
     "title": "Àwòrán",
     "comingSoon": "A óò fi àwòrán àpéjọ síta níbí."
+  },
+  "Register": {
+    "title": "Forúkọsílẹ̀",
+    "individualTab": "Ẹnìkọ̀ọ̀kan",
+    "groupTab": "Ìjọ / Ẹgbẹ́",
+    "churchName": "Orúkọ Ìjọ",
+    "addRegistrant": "Ṣafikun Olùforúkọsílẹ̀ mìíràn",
+    "removeRegistrant": "Yọ Kúrò",
+    "fullName": "Orúkọ Kíkún",
+    "category": "Ẹ̀ka",
+    "categoryAdult": "Àgbà (30+)",
+    "categoryYoungAdult": "Ọ̀dọ́mọdé Àgbà (20-29)",
+    "categoryChild": "Ọmọdé (1-19) — Ọ̀fẹ́",
+    "contactName": "Orúkọ Olùbánisọ̀rọ̀",
+    "contactEmail": "Ímeèlì",
+    "contactPhone": "Fóònù",
+    "submit": "Tẹ̀síwájú sí Ìsanwó",
+    "notOpenYet": "Ìforúkọsílẹ̀ fún àpéjọ tí ń bọ̀ kò tíì ṣí — ṣàyẹ̀wò padà láìpẹ́."
+  },
+  "PromoBanner": {
+    "beforeIncrease": "Owó Àgbà jẹ́ ${price} títí di {date} — forúkọsílẹ̀ nísisìyí kí ó tó lọ sókè.",
+    "cta": "Forúkọsílẹ̀ Nísisìyí"
+  },
+  "RegisterConfirmation": {
+    "title": "A dúpẹ́ pé o ti forúkọsílẹ̀!",
+    "body": "A ti gba ìforúkọsílẹ̀ rẹ. Ímeèlì ìjẹ́rìísí ń bọ̀ wá."
   }
 }

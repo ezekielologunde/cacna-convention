@@ -41,10 +41,13 @@ vi.mock("next-intl/server", () => ({
   },
 }));
 
-// Mocks the `convention_editions` query chain the page runs before ever
-// touching `getScheduleForEdition`:
-//   .from("convention_editions").select("id").in("status", [...])
+// Mocks the `convention_editions` query chain the page runs (via
+// `getActiveEdition`) before ever touching `getScheduleForEdition`:
+//   .from("convention_editions").select("id, year").in("status", [...])
 //     .order("year", ...).limit(1).maybeSingle()
+// `select()` and `order()` don't assert on their arguments below, so this
+// mock shape works regardless of the exact select list `getActiveEdition`
+// requests; only the `id` field the page actually reads is included here.
 function mockEditionQuery(resolvedValue: {
   data: { id: string } | null;
   error: null;
@@ -53,8 +56,24 @@ function mockEditionQuery(resolvedValue: {
   const limitMock = vi.fn(() => ({ maybeSingle: maybeSingleMock }));
   const orderMock = vi.fn(() => ({ limit: limitMock }));
   const inMock = vi.fn(() => ({ order: orderMock }));
+
+  // The page also runs `getActivePricingForEdition` (via the PromoBanner
+  // wiring) when an edition exists:
+  //   .from("pricing_tiers").select("*").eq(...).lte(...).gte(...).order(...)
+  // Resolve it to an empty tier list — the banner-props tests below don't
+  // exercise pricing, only that the schedule itself still renders correctly.
+  const pricingOrderMock = vi.fn().mockResolvedValue({ data: [], error: null });
+  const pricingGteMock = vi.fn(() => ({ order: pricingOrderMock }));
+  const pricingLteMock = vi.fn(() => ({ gte: pricingGteMock }));
+  const pricingEqMock = vi.fn(() => ({ lte: pricingLteMock }));
+
   createClientMock.mockResolvedValue({
-    from: () => ({ select: () => ({ in: inMock }) }),
+    from: (table: string) => {
+      if (table === "pricing_tiers") {
+        return { select: () => ({ eq: pricingEqMock }) };
+      }
+      return { select: () => ({ in: inMock }) };
+    },
   });
   return { inMock, orderMock, limitMock, maybeSingleMock };
 }
