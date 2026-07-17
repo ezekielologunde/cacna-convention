@@ -49,5 +49,20 @@
   "Gallery": {
     "title": "Gallery",
     "comingSoon": "Photos from the convention will be posted here."
+  },
+  "Register": {
+    "title": "Register",
+    "individualTab": "Individual",
+    "groupTab": "Church / Group",
+    "fullName": "Full name",
+    "category": "Category",
+    "categoryAdult": "Adult (30+)",
+    "categoryYoungAdult": "Young Adult (20-29)",
+    "categoryChild": "Child (1-19) — Free",
+    "contactName": "Contact name",
+    "contactEmail": "Email",
+    "contactPhone": "Phone",
+    "submit": "Continue to Payment",
+    "notOpenYet": "Registration for the next convention isn't open yet — check back soon."
   }
 }
