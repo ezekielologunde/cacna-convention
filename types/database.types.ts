@@ -43,6 +43,36 @@ export type Database = {
         Update: Partial<Database["public"]["Tables"]["admin_profiles"]["Insert"]>;
         Relationships: [];
       };
+      schedule_sessions: {
+        Row: {
+          id: string;
+          edition_id: string;
+          day_date: string;
+          starts_at: string;
+          ends_at: string;
+          title: string;
+          minister_name: string | null;
+          minister_title: string | null;
+          track: string;
+          sort_order: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          edition_id: string;
+          day_date: string;
+          starts_at: string;
+          ends_at: string;
+          title: string;
+          minister_name?: string | null;
+          minister_title?: string | null;
+          track?: string;
+          sort_order?: number;
+          created_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["schedule_sessions"]["Insert"]>;
+        Relationships: [];
+      };
     };
     Views: {};
     Functions: {};

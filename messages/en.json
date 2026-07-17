@@ -14,6 +14,40 @@
   },
   "Home": {
     "title": "CACNA Convention",
-    "subtitle": "Christ Apostolic Church North America — join us for our national convention."
+    "subtitle": "Christ Apostolic Church North America — join us for our national convention.",
+    "learnMore": "Learn More",
+    "viewSchedule": "View Schedule"
+  },
+  "About": {
+    "ourStory": "Our Story",
+    "leadership": "Leadership",
+    "committee": "Committee",
+    "founded": "Founded in {year} by {founder} in {location}."
+  },
+  "Schedule": {
+    "title": "Schedule",
+    "guestMinister": "Guest Minister",
+    "noEdition": "Schedule details will be posted closer to the convention."
+  },
+  "PlanYourVisit": {
+    "title": "Plan Your Visit",
+    "hotelsHeading": "Hotels",
+    "rulesHeading": "Rules & Etiquette",
+    "groupCode": "Group code: {code}"
+  },
+  "Archive": {
+    "title": "Past Conventions",
+    "sessionCount": "{count} sessions",
+    "empty": "No past conventions yet."
+  },
+  "Contact": {
+    "title": "Contact",
+    "chairman": "Convention Chairman",
+    "secretary": "Convention Secretary",
+    "generalInquiries": "General inquiries"
+  },
+  "Gallery": {
+    "title": "Gallery",
+    "comingSoon": "Photos from the convention will be posted here."
   }
 }

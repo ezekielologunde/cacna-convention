@@ -14,6 +14,40 @@
   },
   "Home": {
     "title": "Àpéjọ CACNA",
-    "subtitle": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà — ẹ dara pọ̀ mọ́ wa fún àpéjọ orílẹ̀-èdè wa."
+    "subtitle": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà — ẹ dara pọ̀ mọ́ wa fún àpéjọ orílẹ̀-èdè wa.",
+    "learnMore": "Kọ́ Ẹ̀kọ́ Síi",
+    "viewSchedule": "Wo Ìtòlẹ́sẹ̀"
+  },
+  "About": {
+    "ourStory": "Ìtàn Wa",
+    "leadership": "Aṣíwájú",
+    "committee": "Ìgbìmọ̀",
+    "founded": "A dá sílẹ̀ ní ọdún {year} láti ọwọ́ {founder} ní {location}."
+  },
+  "Schedule": {
+    "title": "Iṣètò",
+    "guestMinister": "Aṣíwájú Àlejò",
+    "noEdition": "A óò fi ìtòlẹ́sẹ̀ payẹ̀wò síta nígbà tí àpéjọ bá súnmọ́."
+  },
+  "PlanYourVisit": {
+    "title": "Ṣe Ètò Ìbẹ̀wò Rẹ",
+    "hotelsHeading": "Àwọn Hotẹ́ẹ̀lì",
+    "rulesHeading": "Òfin àti Ìwà",
+    "groupCode": "Kóòdù ẹgbẹ́: {code}"
+  },
+  "Archive": {
+    "title": "Àwọn Àpéjọ Àtijọ́",
+    "sessionCount": "Ìpàdé {count}",
+    "empty": "Kò tíì sí àpéjọ àtijọ́ kankan."
+  },
+  "Contact": {
+    "title": "Kàn Sí Wa",
+    "chairman": "Alága Àpéjọ",
+    "secretary": "Akọ̀wé Àpéjọ",
+    "generalInquiries": "Ìbéèrè gbogbogbò"
+  },
+  "Gallery": {
+    "title": "Àwòrán",
+    "comingSoon": "A óò fi àwòrán àpéjọ síta níbí."
   }
 }
