@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -24,10 +25,13 @@ export function PrimaryNav() {
         href={`/${locale}`}
         className="flex items-center gap-2.5 font-display text-lg tracking-tight text-[var(--color-fg)]"
       >
-        <span
-          aria-hidden="true"
-          className="h-7 w-7 flex-none rounded-full"
-          style={{ background: "var(--flame)" }}
+        <Image
+          src="/brand/icon.png"
+          alt=""
+          width={32}
+          height={32}
+          className="h-8 w-8 flex-none rounded-full"
+          priority
         />
         CACNA
       </Link>

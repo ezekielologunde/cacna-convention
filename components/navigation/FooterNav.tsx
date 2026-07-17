@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -29,11 +30,7 @@ export function FooterNav() {
       <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
         <div>
           <div className="flex items-center gap-2.5 font-display text-lg">
-            <span
-              aria-hidden="true"
-              className="h-6 w-6 flex-none rounded-full"
-              style={{ background: "var(--flame)" }}
-            />
+            <Image src="/brand/icon.png" alt="" width={28} height={28} className="h-7 w-7 flex-none rounded-full" />
             CACNA Convention
           </div>
           <p className="mt-3 max-w-[32ch] text-sm text-white/75">{tFooter("blurb")}</p>

@@ -14,17 +14,20 @@ describe("static content data", () => {
 
   it("leadership's first and last entries match the transcribed source exactly", () => {
     // Values transcribed from docs/source-content/2026-cacnaconvention-org-content.md's
-    // Leadership table — a wrong name/title here should fail this test.
-    expect(leadership[0]).toEqual({
+    // Leadership table — a wrong name/title here should fail this test. `photo`
+    // is checked separately (non-empty path) rather than pinned to an exact
+    // string, since it points at a scraped asset rather than transcribed text.
+    expect(leadership[0]).toMatchObject({
       name: "Pastor Timothy Agbeja, Ph.D.",
       title:
         "Latunde Regional Superintendent, CACNA Chairman, CACNA Coordinating Council Chancellor, CACNA Bible Institute Superintendent, Washington DCC",
     });
-    expect(leadership[leadership.length - 1]).toEqual({
+    expect(leadership[leadership.length - 1]).toMatchObject({
       name: "Pastor John Oluwatimilehin, Ph.D.",
       title:
         "Chairman, CAC Village Management Council Member, CACNA Coordinating Council Superintendent, Bethel DCC",
     });
+    leadership.forEach((member) => expect(member.photo).toMatch(/^\/photos\/people\/.+/));
   });
 
   it("committee has the 3 named roles", () => {
@@ -35,27 +38,33 @@ describe("static content data", () => {
     // Values transcribed from the doc's Convention Committee table. Note
     // "C.A.C Vineyard of Comfort" has no trailing period (matches the Committee
     // page, unlike the Contacts page's "C.A.C." spelling) — this is intentional,
-    // not a typo to "fix".
-    expect(committee).toEqual([
+    // not a typo to "fix". `photo` is checked separately (non-empty path)
+    // rather than pinned to an exact string, since it points at a scraped
+    // asset rather than transcribed text.
+    expect(committee.map((c) => ({ ...c, photo: undefined }))).toEqual([
       {
         role: "Chairman",
         name: "David Adenodi",
         organization: "C.A.C Vineyard of Comfort",
         phone: "301-440-7033",
+        photo: undefined,
       },
       {
         role: "Secretary",
         name: "Pastor Timothy Famojuro",
         organization: "C.A.C. FITA, Brooklyn, NY",
         phone: "917-709-1892",
+        photo: undefined,
       },
       {
         role: "PRO",
         name: "Pastor Yomi Ademuwagun",
         organization: "CAC Agape Fellowship MD",
         phone: "443-583-9416",
+        photo: undefined,
       },
     ]);
+    committee.forEach((member) => expect(member.photo).toMatch(/^\/photos\/people\/.+/));
   });
 
   it("hotels covers all three cities", () => {

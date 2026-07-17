@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import type { LeadershipMember } from "@/lib/content/leadership";
 import type { CommitteeMember } from "@/lib/content/committee";
@@ -67,9 +68,21 @@ export function AboutTabs({
       {tab === "leadership" ? (
         <ul className="mt-8 flex flex-col gap-4">
           {leadership.map((member) => (
-            <li key={member.name} className="rounded-2xl border border-[var(--color-border)] p-5">
-              <p className="font-semibold text-[var(--color-fg)]">{member.name}</p>
-              <p className="mt-1 text-sm text-[var(--color-muted)]">{member.title}</p>
+            <li
+              key={member.name}
+              className="flex items-center gap-4 rounded-2xl border border-[var(--color-border)] p-5"
+            >
+              <Image
+                src={member.photo}
+                alt=""
+                width={56}
+                height={56}
+                className="h-14 w-14 flex-none rounded-full object-cover"
+              />
+              <div>
+                <p className="font-semibold text-[var(--color-fg)]">{member.name}</p>
+                <p className="mt-1 text-sm text-[var(--color-muted)]">{member.title}</p>
+              </div>
             </li>
           ))}
         </ul>
@@ -80,13 +93,22 @@ export function AboutTabs({
           {committee.map((member) => (
             <li
               key={member.name}
-              className="flex flex-col justify-between gap-1 rounded-2xl border border-[var(--color-border)] p-5 sm:flex-row sm:items-center"
+              className="flex flex-col justify-between gap-4 rounded-2xl border border-[var(--color-border)] p-5 sm:flex-row sm:items-center"
             >
-              <div>
-                <p className="font-semibold text-[var(--color-fg)]">{member.name}</p>
-                <p className="mt-1 text-sm text-[var(--color-muted)]">
-                  {member.role} — {member.organization}
-                </p>
+              <div className="flex items-center gap-4">
+                <Image
+                  src={member.photo}
+                  alt=""
+                  width={56}
+                  height={56}
+                  className="h-14 w-14 flex-none rounded-full object-cover"
+                />
+                <div>
+                  <p className="font-semibold text-[var(--color-fg)]">{member.name}</p>
+                  <p className="mt-1 text-sm text-[var(--color-muted)]">
+                    {member.role} — {member.organization}
+                  </p>
+                </div>
               </div>
               <a
                 href={`tel:${member.phone.replace(/[^0-9+]/g, "")}`}

@@ -115,9 +115,14 @@ Thin content on the live site — page title only, one section header ("C.A.C. N
 ## Brand assets captured (`assets/`)
 
 - `cacna-logo.png` — full lockup: circular emblem (Christ Apostolic Church, shepherd-and-sheep illustration, "One Fold, One Shepherd — John 10:16") + "CACNA [year] Annual Convention" wordmark in red/purple
-- `cacna-icon.png` — the circular emblem alone (site favicon source)
+- `cacna-icon.png` — the circular emblem alone. Used verbatim as the site's `app/icon.png` / manifest icon / nav+footer mark (`public/brand/icon.png`).
+- `logo-transparent.png` — the circular emblem, background removed (WordPress's `2025_Logo-removebg-preview.png`). Used verbatim as `public/brand/icon.png`'s source.
 - `2026-schedule.jpg` — full schedule graphic (transcribed above)
 - `2026-convention-program.pdf` — full multi-page printed program
-- `committee-david-adenodi.jpg` — committee chairman headshot
+- `committee-david-adenodi.jpg` — committee chairman headshot (superseded by the higher-res `people/david-adenodi.jpg` below)
+- `hero-2025-convention.jpg` — real 2025 convention floor photo (WordPress's homepage hero background, `IMG-20250719-WA0034.jpg`). Used verbatim as the homepage hero background (`public/photos/hero-convention.jpg`), under a maroon/flame gradient overlay for text contrast.
+- `people/` — real headshots for all 5 Leadership members and all 3 Committee members, scraped from the live `cacna-leadership` and `convention-committee` pages (`agbeja.png`, `david-adenodi.jpg`, `olawale.png`, `adelani.png`, `oluwatimilehin.jpg`, `famojuro.jpg`, `ademuwagun.jpg`). Used verbatim on the About page's Leadership/Committee tabs (`public/photos/people/`).
 
-These are reference/mood-board material for the "propose a look" branding phase, not assets to reuse verbatim — the new site is getting its own visual identity per the design spec, informed by but not copied from this WordPress theme.
+The church's own real logo, icon, and people photos are now used verbatim on the live site — these are the organization's actual identity, not a generic template to avoid. What the design spec's "informed by, not copied from" guidance still applies to is the old WordPress *theme/layout* (colors, type, page structure), which the new site does not replicate.
+
+Not brought over: the ~40 uncaptioned 2025 gallery photos (still meant to be sourced fresh via the admin gallery-upload feature) and the CACNA Superintendent page's single uncaptioned "Tunde Lawal" photo (still needs a real content ask to organizers before it's usable).

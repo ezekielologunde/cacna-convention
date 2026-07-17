@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
@@ -35,10 +36,23 @@ export default async function Home({
       {edition && <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />}
 
       {/* Hero */}
-      <section
-        className="relative overflow-hidden px-6 py-20 text-center text-white sm:py-28"
-        style={{ background: "var(--flame-hero)" }}
-      >
+      <section className="relative overflow-hidden px-6 py-20 text-center text-white sm:py-28">
+        <Image
+          src="/photos/hero-convention.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(107,16,16,0.88), rgba(158,27,27,0.8) 45%, rgba(20,10,8,0.75))",
+          }}
+        />
         <div className="relative mx-auto max-w-3xl">
           <span className="inline-flex items-center gap-2 text-sm font-bold tracking-wide text-[var(--color-gold-light)] uppercase">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-orange)]" aria-hidden="true" />
