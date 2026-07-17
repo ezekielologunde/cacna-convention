@@ -27,6 +27,7 @@ export type Database = {
           updated_at?: string;
         };
         Update: Partial<Database["public"]["Tables"]["convention_editions"]["Insert"]>;
+        Relationships: [];
       };
       admin_profiles: {
         Row: {
@@ -40,6 +41,7 @@ export type Database = {
           created_at?: string;
         };
         Update: Partial<Database["public"]["Tables"]["admin_profiles"]["Insert"]>;
+        Relationships: [];
       };
     };
     Views: {};
