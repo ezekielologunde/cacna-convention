@@ -24,5 +24,5 @@ export default async function RegisterPage({
     );
   }
 
-  return <RegisterPageClient editionId={edition.id} />;
+  return <RegisterPageClient />;
 }

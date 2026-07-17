@@ -4,13 +4,26 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { RegistrationForm, type RegistrationPayload } from "./RegistrationForm";
 
-export function RegisterPageClient({ editionId }: { editionId: string }) {
+export function RegisterPageClient() {
   const t = useTranslations("Register");
   const [mode, setMode] = useState<"individual" | "group">("individual");
 
-  function handleSubmit(payload: RegistrationPayload) {
-    // Task 6 replaces this with a real POST to /api/register using editionId.
-    console.log("submit", editionId, payload);
+  async function handleSubmit(payload: RegistrationPayload) {
+    const response = await fetch("/api/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      // A real error-message UI is a reasonable future enhancement; for now,
+      // surface the failure clearly rather than silently doing nothing.
+      alert("Registration failed. Please try again or contact us.");
+      return;
+    }
+
+    const { checkoutUrl } = await response.json();
+    window.location.href = checkoutUrl;
   }
 
   return (
