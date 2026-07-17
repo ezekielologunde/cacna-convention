@@ -10,7 +10,11 @@ const withSerwist = withSerwistInit({
 });
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    // Vercel's Image Optimization quota is exhausted on this plan, which turns every
+    // next/image request into a 402. Serve raw files instead of failing to render.
+    unoptimized: true,
+  },
 };
 
 export default withSerwist(withNextIntl(nextConfig));
