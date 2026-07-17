@@ -56,6 +56,8 @@ describe("PlanYourVisitPage", () => {
     render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
 
     expect(screen.getByText(hotels[0].name)).toBeInTheDocument();
-    expect(screen.getByText(rules[0])).toBeInTheDocument();
+    expect(screen.getByText(rules.remember[0])).toBeInTheDocument();
+    expect(screen.getByText(rules.rules[0])).toBeInTheDocument();
+    expect(screen.getByText(rules.attribution.name)).toBeInTheDocument();
   });
 });

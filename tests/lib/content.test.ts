@@ -92,17 +92,32 @@ describe("static content data", () => {
     });
   });
 
-  it("rules is a non-empty list of strings", () => {
-    expect(rules.length).toBeGreaterThan(0);
-    rules.forEach((r) => expect(typeof r).toBe("string"));
+  it("rules has remember, rules, and attribution sections", () => {
+    expect(rules).toHaveProperty("remember");
+    expect(rules).toHaveProperty("rules");
+    expect(rules).toHaveProperty("attribution");
+    expect(Array.isArray(rules.remember)).toBe(true);
+    expect(Array.isArray(rules.rules)).toBe(true);
+    expect(rules.remember.length).toBeGreaterThan(0);
+    expect(rules.rules.length).toBeGreaterThan(0);
+    expect(rules.attribution).toHaveProperty("name");
+    expect(rules.attribution).toHaveProperty("title");
+  });
+
+  it("rules arrays contain only strings", () => {
+    rules.remember.forEach((r) => expect(typeof r).toBe("string"));
+    rules.rules.forEach((r) => expect(typeof r).toBe("string"));
+    expect(typeof rules.attribution.name).toBe("string");
+    expect(typeof rules.attribution.title).toBe("string");
   });
 
   it("rules include the specific known ID-tag and 1 Cor. 14:40 rules verbatim", () => {
     // Guards against paraphrased/rewritten rule text slipping in undetected.
-    expect(rules).toContain(
-      "Identification (ID tags) must be worn at all times and is required for convention hall entry."
+    expect(rules.rules[0]).toBe(
+      "Ensure that your identification tag is always on throughout the duration of the convention. You will not be allowed in the Convention Hall without your tag."
     );
-    expect(rules).toContain("Let all things be done decently and in order (1 Cor. 14:40).");
+    expect(rules.remember[0]).toContain("Let all things be done decently and in order");
+    expect(rules.remember[0]).toContain("1 Cor. 14:40");
   });
 
   it("history has founding year 1976", () => {
