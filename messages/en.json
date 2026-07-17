@@ -12,17 +12,36 @@
     "archive": "Archive",
     "contact": "Contact"
   },
+  "Footer": {
+    "blurb": "Christ Apostolic Church North America — one fold, gathered from every region, once a year.",
+    "tagline": "One Fold, One Shepherd — John 10:16",
+    "attendHeading": "Attend",
+    "connectHeading": "Connect",
+    "contactHeading": "Contact",
+    "copyright": "© {year} CACNA Convention"
+  },
   "Home": {
-    "title": "CACNA Convention",
-    "subtitle": "Christ Apostolic Church North America — join us for our national convention.",
+    "kicker": "Christ Apostolic Church North America",
+    "title": "Every region, one flame of revival",
+    "subtitle": "A national gathering of CAC churches across North America — a week of ministers' sessions, revival nights, and reunion, carried from CAC Nigeria & Overseas to every region we serve.",
     "learnMore": "Learn More",
-    "viewSchedule": "View Schedule"
+    "viewSchedule": "View Schedule",
+    "missionHeading": "What a CACNA week looks like",
+    "missionBody": "Every convention follows the same rhythm: daily prayer and worship, ministers' sessions from visiting CAC leadership, break-outs for youth, young adults, and children's ministry, and a revival night every evening — closing with Holy Communion and a send-off service.",
+    "registrationHeading": "Registration",
+    "registrationComingSoon": "Registration for 2027 opens in January — pricing and exact dates will be posted here as soon as they're confirmed.",
+    "registrationCta": "Get notified — view registration",
+    "giveHeading": "Support the convention",
+    "giveBody": "Every gift keeps food free for all ages throughout the week and helps with travel support for the churches that need it most.",
+    "giveCta": "Give"
   },
   "About": {
+    "title": "About CACNA",
     "ourStory": "Our Story",
     "leadership": "Leadership",
     "committee": "Committee",
-    "founded": "Founded in {year} by {founder} in {location}."
+    "founded": "Founded in {year} by {founder} in {location}.",
+    "todayReach": "Today, CAC North America spans {count} DCCs and Zones across the United States and Canada."
   },
   "Schedule": {
     "title": "Schedule",
@@ -32,8 +51,15 @@
   "PlanYourVisit": {
     "title": "Plan Your Visit",
     "hotelsHeading": "Hotels",
+    "hotelsIntro": "All hotels below offer a group rate for CACNA — mention the group code when booking. Complimentary breakfast and WiFi at every property; hotels are roughly 30 minutes from CAC Village.",
     "rulesHeading": "Rules & Etiquette",
-    "groupCode": "Group code: {code}"
+    "groupCode": "Group code: {code}",
+    "travelHeading": "Getting there",
+    "recommendedAirport": "Recommended airport",
+    "milesAway": "{miles} miles from CAC Village",
+    "otherAirportsHeading": "Other nearby airports",
+    "drivingHeading": "Driving from BWI",
+    "budgetLodging": "Budget lodging"
   },
   "Archive": {
     "title": "Past Conventions",
@@ -66,7 +92,7 @@
     "contactEmail": "Email",
     "contactPhone": "Phone",
     "submit": "Continue to Payment",
-    "notOpenYet": "Registration for the next convention isn't open yet — check back soon."
+    "notOpenYet": "Registration for the 2027 convention opens in January 2027 — check back then."
   },
   "PromoBanner": {
     "beforeIncrease": "Adult rate is ${price} through {date} — register now before it goes up.",

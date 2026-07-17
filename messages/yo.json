@@ -12,17 +12,36 @@
     "archive": "Àkójọpọ̀ Àtijọ́",
     "contact": "Kàn Sí Wa"
   },
+  "Footer": {
+    "blurb": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà — agbo kan, tí a kójọ láti agbègbè kọ̀ọ̀kan, lẹ́ẹ̀kan lọ́dún.",
+    "tagline": "Agbo Kan, Olùṣọ́-Àgùntàn Kan — Jòhánù 10:16",
+    "attendHeading": "Kópa",
+    "connectHeading": "Darapọ̀",
+    "contactHeading": "Kàn Sí Wa",
+    "copyright": "© {year} Àpéjọ CACNA"
+  },
   "Home": {
-    "title": "Àpéjọ CACNA",
-    "subtitle": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà — ẹ dara pọ̀ mọ́ wa fún àpéjọ orílẹ̀-èdè wa.",
+    "kicker": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà",
+    "title": "Agbègbè kọ̀ọ̀kan, ọ̀wọ́ iná ìsọ̀jí kan",
+    "subtitle": "Àpéjọ orílẹ̀-èdè fún àwọn ìjọ CAC jákèjádò Àríwá Amẹ́ríkà — ọ̀sẹ̀ kan ti ìpàdé àwọn aṣíwájú, alẹ́ ìsọ̀jí, àti àtúnpàdé, láti ọwọ́ CAC Nàìjíríà àti Òkèèrè dé agbègbè kọ̀ọ̀kan tí à ń sìn.",
     "learnMore": "Kọ́ Ẹ̀kọ́ Síi",
-    "viewSchedule": "Wo Ìtòlẹ́sẹ̀"
+    "viewSchedule": "Wo Ìtòlẹ́sẹ̀",
+    "missionHeading": "Bí ọ̀sẹ̀ CACNA ṣe rí",
+    "missionBody": "Àpéjọ kọ̀ọ̀kan máa ń tẹ̀lé ìlànà kan náà: àdúrà àti ìjọsìn ojoojúmọ́, ìpàdé àwọn aṣíwájú láti ọwọ́ àwọn aṣíwájú CAC tí wọ́n wá, ìpàdé pàtàkì fún àwọn ọ̀dọ́ àti ọmọdé, àti alẹ́ ìsọ̀jí ní alẹ́ kọ̀ọ̀kan — tí a óò fi Oúnjẹ Alẹ́ Olúwa àti iṣẹ́ ìsìn ìdágbére parí.",
+    "registrationHeading": "Ìforúkọsílẹ̀",
+    "registrationComingSoon": "Ìforúkọsílẹ̀ fún ọdún 2027 yóò ṣí ní oṣù January — a óò fi owó àti ọjọ́ pàtó síta níbí ní kété tí wọ́n bá ti dá wọn lójú.",
+    "registrationCta": "Gba ìsọfúnni — wo ìforúkọsílẹ̀",
+    "giveHeading": "Ṣe àtìlẹyìn fún àpéjọ",
+    "giveBody": "Ẹ̀bùn kọ̀ọ̀kan ni ó ń jẹ́ kí oúnjẹ máa ọ̀fẹ́ fún gbogbo ọjọ́orí ní gbogbo ọ̀sẹ̀ tí ó sì ń ràn àwọn ìjọ tí wọ́n nílò lọ́wọ́ fún ìrìnàjò.",
+    "giveCta": "Ẹ̀bùn"
   },
   "About": {
+    "title": "Nípa CACNA",
     "ourStory": "Ìtàn Wa",
     "leadership": "Aṣíwájú",
     "committee": "Ìgbìmọ̀",
-    "founded": "A dá sílẹ̀ ní ọdún {year} láti ọwọ́ {founder} ní {location}."
+    "founded": "A dá sílẹ̀ ní ọdún {year} láti ọwọ́ {founder} ní {location}.",
+    "todayReach": "Lónìí, CAC Àríwá Amẹ́ríkà ti fẹ̀ jáde sí DCC àti Àgbègbè {count} jákèjádò Amẹ́ríkà àti Kánádà."
   },
   "Schedule": {
     "title": "Iṣètò",
@@ -32,8 +51,15 @@
   "PlanYourVisit": {
     "title": "Ṣe Ètò Ìbẹ̀wò Rẹ",
     "hotelsHeading": "Àwọn Hotẹ́ẹ̀lì",
+    "hotelsIntro": "Gbogbo hotẹ́ẹ̀lì tí ó wà nísàlẹ̀ ní ọ̀wọ́n ẹgbẹ́ pàtàkì fún CACNA — sọ kóòdù ẹgbẹ́ nígbà tí o bá ń dá àwè. Oúnjẹ àárọ̀ àti WiFi ọ̀fẹ́ ní gbogbo ibi; hotẹ́ẹ̀lì wà ní bí ìṣẹ́jú 30 sí Abúlé CAC.",
     "rulesHeading": "Òfin àti Ìwà",
-    "groupCode": "Kóòdù ẹgbẹ́: {code}"
+    "groupCode": "Kóòdù ẹgbẹ́: {code}",
+    "travelHeading": "Bí a ṣe lè dé ibẹ̀",
+    "recommendedAirport": "Pápá ọkọ̀ òfurufú tí a gbaníyànjú",
+    "milesAway": "kìlómítà {miles} sí Abúlé CAC",
+    "otherAirportsHeading": "Àwọn pápá ọkọ̀ òfurufú mìíràn nítòsí",
+    "drivingHeading": "Wíwakọ̀ láti BWI",
+    "budgetLodging": "Ibùgbé olówó kékeré"
   },
   "Archive": {
     "title": "Àwọn Àpéjọ Àtijọ́",
@@ -66,7 +92,7 @@
     "contactEmail": "Ímeèlì",
     "contactPhone": "Fóònù",
     "submit": "Tẹ̀síwájú sí Ìsanwó",
-    "notOpenYet": "Ìforúkọsílẹ̀ fún àpéjọ tí ń bọ̀ kò tíì ṣí — ṣàyẹ̀wò padà láìpẹ́."
+    "notOpenYet": "Ìforúkọsílẹ̀ fún àpéjọ ọdún 2027 yóò ṣí ní oṣù January ọdún 2027 — ṣàyẹ̀wò padà nígbà náà."
   },
   "PromoBanner": {
     "beforeIncrease": "Owó Àgbà jẹ́ ${price} títí di {date} — forúkọsílẹ̀ nísisìyí kí ó tó lọ sókè.",

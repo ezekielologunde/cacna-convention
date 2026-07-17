@@ -18,11 +18,14 @@ export function PromoBanner({
   }
 
   return (
-    <div className="flex items-center justify-between gap-4 bg-[var(--color-brand)] px-6 py-3 text-[var(--color-brand-contrast)]">
+    <div
+      className="flex flex-wrap items-center justify-center gap-3 px-6 py-3 text-center text-sm font-semibold text-white sm:justify-between sm:text-left"
+      style={{ background: "var(--flame)" }}
+    >
       <p>{t("beforeIncrease", { price: (priceBeforeIncrease / 100).toFixed(0), date: nextDeadline })}</p>
       <Link
         href={`/${locale}/register`}
-        className="whitespace-nowrap rounded-full bg-[var(--color-brand-contrast)] px-4 py-1 font-medium text-[var(--color-brand)]"
+        className="flex-none rounded-full bg-white px-4 py-1.5 font-semibold text-[var(--color-maroon-deep)]"
       >
         {t("cta")}
       </Link>

@@ -20,8 +20,31 @@ import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
 // tests/app/archive.test.tsx, tests/app/contact.test.tsx.)
 vi.mock("next-intl/server", () => createNextIntlServerMock(messages));
 
+// The homepage now calls `getActiveEdition` (via `@/lib/supabase/server`)
+// the same way the Schedule page does, to decide whether to show real
+// pricing or the "registration hasn't opened yet" copy. Mock the
+// `convention_editions` query chain to resolve no active edition — the
+// same state the real (unseeded) database is in today — so this test
+// exercises the actual no-edition path rather than skipping the query.
+const createClientMock = vi.fn();
+vi.mock("@/lib/supabase/server", () => ({
+  createClient: createClientMock,
+}));
+
+function mockNoActiveEdition() {
+  const maybeSingleMock = vi.fn().mockResolvedValue({ data: null, error: null });
+  const limitMock = vi.fn(() => ({ maybeSingle: maybeSingleMock }));
+  const orderMock = vi.fn(() => ({ limit: limitMock }));
+  const inMock = vi.fn(() => ({ order: orderMock }));
+  createClientMock.mockResolvedValue({
+    from: () => ({ select: () => ({ in: inMock }) }),
+  });
+}
+
 describe("HomePage", () => {
   it("renders quick links to About and Schedule", async () => {
+    mockNoActiveEdition();
+
     const { default: HomePage } = await import("../../app/(site)/[locale]/page");
     const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
 
@@ -29,5 +52,20 @@ describe("HomePage", () => {
 
     expect(screen.getByRole("link", { name: "Learn More" })).toHaveAttribute("href", "/en/about");
     expect(screen.getByRole("link", { name: "View Schedule" })).toHaveAttribute("href", "/en/schedule");
+  });
+
+  it("shows the registration-not-open copy when there is no active edition", async () => {
+    mockNoActiveEdition();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(
+      screen.getByText(
+        "Registration for 2027 opens in January — pricing and exact dates will be posted here as soon as they're confirmed."
+      )
+    ).toBeInTheDocument();
   });
 });
