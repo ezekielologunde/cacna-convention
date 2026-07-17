@@ -37,5 +37,13 @@
     "title": "Àwọn Àpéjọ Àtijọ́",
     "sessionCount": "Ìpàdé {count}",
     "empty": "Kò tíì sí àpéjọ àtijọ́ kankan."
+  },
+  "Contact": {
+    "title": "Kàn Sí Wa",
+    "generalInquiries": "Ìbéèrè gbogbogbò"
+  },
+  "Gallery": {
+    "title": "Àwòrán",
+    "comingSoon": "A óò fi àwòrán àpéjọ síta níbí."
   }
 }

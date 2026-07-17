@@ -37,5 +37,13 @@
     "title": "Past Conventions",
     "sessionCount": "{count} sessions",
     "empty": "No past conventions yet."
+  },
+  "Contact": {
+    "title": "Contact",
+    "generalInquiries": "General inquiries"
+  },
+  "Gallery": {
+    "title": "Gallery",
+    "comingSoon": "Photos from the convention will be posted here."
   }
 }
