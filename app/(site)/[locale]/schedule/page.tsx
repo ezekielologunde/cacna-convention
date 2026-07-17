@@ -32,10 +32,12 @@ export default async function SchedulePage({
 
   if (!edition) {
     return (
-      <div className="px-6 py-12">
+      <div>
         <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
-        <h1 className="text-3xl font-semibold">{t("title")}</h1>
-        <p className="mt-4 text-[var(--color-muted)]">{t("noEdition")}</p>
+        <div className="mx-auto max-w-2xl px-6 py-16 text-center">
+          <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
+          <p className="mx-auto mt-4 max-w-[48ch] text-[var(--color-muted)]">{t("noEdition")}</p>
+        </div>
       </div>
     );
   }
@@ -58,12 +60,16 @@ export default async function SchedulePage({
   );
 
   return (
-    <div className="px-6 py-12">
+    <div>
       <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
-      <h1 className="text-3xl font-semibold">{t("title")}</h1>
-      {orderedDays.map(([dayDate, daySessions]) => (
-        <ScheduleDay key={dayDate} dayDate={dayDate} sessions={daySessions} />
-      ))}
+      <div className="mx-auto max-w-3xl px-6 py-12">
+        <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
+        <div className="mt-8 flex flex-col gap-6">
+          {orderedDays.map(([dayDate, daySessions]) => (
+            <ScheduleDay key={dayDate} dayDate={dayDate} sessions={daySessions} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

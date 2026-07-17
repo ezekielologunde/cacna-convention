@@ -1,32 +1,66 @@
 @import "tailwindcss";
 
+/*
+ * CACNA Convention design tokens.
+ *
+ * Palette matches the sibling Christ Apostolic Church site
+ * (cacsalvationcenter.org)'s shipped "flame" system — orange to red to
+ * maroon — plus gold, cross-checked against the 2026 convention flyer's
+ * black/red/gold. White carries most of the page; the flame gradient and
+ * deep maroon are used deliberately as bookends (hero, footer, primary
+ * CTAs), not as a wall-to-wall dark theme.
+ */
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1b130e;
+
   --color-bg: #ffffff;
-  --color-fg: #17171a;
-  --color-brand: #7c3aed;
+  --color-fg: #1b130e;
+  --color-muted: #6b5d51;
+  --color-border: #ece3da;
+  --color-surface: #fff8f2;
+
+  --color-orange: #f15f22;
+  --color-red: #d62828;
+  --color-maroon: #9e1b1b;
+  --color-maroon-deep: #6b1010;
+  --color-gold: #b7791f;
+  --color-gold-light: #ffd9a8;
+
+  --color-brand: var(--color-red);
   --color-brand-contrast: #ffffff;
-  --color-muted: #6b7280;
-  --color-border: #e5e7eb;
+
+  --flame: linear-gradient(100deg, var(--color-orange), var(--color-red), var(--color-maroon));
+  --flame-hero: linear-gradient(150deg, var(--color-red) 0%, var(--color-maroon) 55%, var(--color-maroon-deep) 100%);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-public-sans);
+  --font-display: var(--font-archivo-black);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #17110d;
+    --foreground: #f7ede4;
+    --color-bg: #17110d;
+    --color-fg: #f7ede4;
+    --color-muted: #c9b9ac;
+    --color-border: #3a2c22;
+    --color-surface: #221a14;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
 }

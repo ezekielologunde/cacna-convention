@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { PrimaryNav } from "@/components/navigation/PrimaryNav";
 import { FooterNav } from "@/components/navigation/FooterNav";
-import { geistSans, geistMono } from "@/lib/fonts";
+import { displayFont, bodyFont } from "@/lib/fonts";
 import "../../globals.css";
 
 export const metadata: Metadata = {
@@ -33,7 +33,7 @@ export default async function LocaleRootLayout({
   setRequestLocale(locale);
 
   return (
-    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang={locale} className={`${displayFont.variable} ${bodyFont.variable} antialiased`}>
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider locale={locale}>
           <PrimaryNav />

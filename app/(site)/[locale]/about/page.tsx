@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEdition } from "@/lib/editions";
 import { getActivePricingForEdition } from "@/lib/pricing";
@@ -15,6 +15,7 @@ export default async function AboutPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations("About");
 
   const supabase = await createClient();
   const edition = await getActiveEdition(supabase);
@@ -34,6 +35,9 @@ export default async function AboutPage({
   return (
     <>
       <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
+      <div className="mx-auto max-w-3xl px-6 pt-12">
+        <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
+      </div>
       <AboutTabs leadership={leadership} committee={committee} history={history} />
     </>
   );

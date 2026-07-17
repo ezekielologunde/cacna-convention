@@ -17,9 +17,9 @@ export default async function RegisterPage({
 
   if (!edition) {
     return (
-      <div className="px-6 py-12">
-        <h1 className="text-3xl font-semibold">{t("title")}</h1>
-        <p className="mt-4 text-[var(--color-muted)]">{t("notOpenYet")}</p>
+      <div className="mx-auto max-w-2xl px-6 py-16 text-center">
+        <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
+        <p className="mx-auto mt-4 max-w-[48ch] text-[var(--color-muted)]">{t("notOpenYet")}</p>
       </div>
     );
   }

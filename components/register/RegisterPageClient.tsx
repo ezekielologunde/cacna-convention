@@ -26,15 +26,22 @@ export function RegisterPageClient() {
     window.location.href = checkoutUrl;
   }
 
+  const tabClass = (active: boolean) =>
+    `px-4 py-2.5 text-sm font-semibold transition-colors ${
+      active
+        ? "border-b-2 border-[var(--color-maroon)] text-[var(--color-maroon)]"
+        : "border-b-2 border-transparent text-[var(--color-muted)] hover:text-[var(--color-fg)]"
+    }`;
+
   return (
-    <div className="px-6 py-12">
-      <h1 className="text-3xl font-semibold">{t("title")}</h1>
-      <div role="tablist" className="mt-6 flex gap-4 border-b border-[var(--color-border)]">
+    <div className="mx-auto max-w-3xl px-6 py-12">
+      <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
+      <div role="tablist" className="mt-6 flex gap-2 border-b border-[var(--color-border)]">
         <button
           role="tab"
           aria-selected={mode === "individual"}
           onClick={() => setMode("individual")}
-          className="px-3 py-2"
+          className={tabClass(mode === "individual")}
         >
           {t("individualTab")}
         </button>
@@ -42,12 +49,12 @@ export function RegisterPageClient() {
           role="tab"
           aria-selected={mode === "group"}
           onClick={() => setMode("group")}
-          className="px-3 py-2"
+          className={tabClass(mode === "group")}
         >
           {t("groupTab")}
         </button>
       </div>
-      <div className="mt-6">
+      <div className="mt-8">
         <RegistrationForm mode={mode} onSubmit={handleSubmit} />
       </div>
     </div>

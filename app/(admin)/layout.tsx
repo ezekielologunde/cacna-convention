@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { geistSans, geistMono } from "@/lib/fonts";
+import { displayFont, bodyFont } from "@/lib/fonts";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default function AdminRootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable} antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

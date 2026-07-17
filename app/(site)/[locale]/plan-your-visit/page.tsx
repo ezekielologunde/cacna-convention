@@ -5,6 +5,12 @@ import { getActivePricingForEdition } from "@/lib/pricing";
 import { PromoBanner } from "@/components/register/PromoBanner";
 import { hotels, hotelGroupCode } from "@/lib/content/hotels";
 import { rules } from "@/lib/content/rules";
+import {
+  recommendedAirport,
+  nearbyAirports,
+  drivingRoute,
+  budgetLodgingNote,
+} from "@/lib/content/travel";
 
 export default async function PlanYourVisitPage({
   params,
@@ -30,34 +36,109 @@ export default async function PlanYourVisitPage({
     }
   }
 
+  const hotelsByCity = new Map<string, typeof hotels>();
+  for (const hotel of hotels) {
+    const existing = hotelsByCity.get(hotel.city) ?? [];
+    existing.push(hotel);
+    hotelsByCity.set(hotel.city, existing);
+  }
+
   return (
-    <div className="px-6 py-12">
+    <div>
       <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
-      <h1 className="text-3xl font-semibold">{t("title")}</h1>
+      <div className="mx-auto max-w-3xl px-6 py-12">
+        <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
 
-      <section className="mt-8">
-        <h2 className="text-xl font-medium">{t("hotelsHeading")}</h2>
-        <p className="text-sm text-[var(--color-muted)]">{t("groupCode", { code: hotelGroupCode })}</p>
-        <ul className="mt-4 flex flex-col gap-3">
-          {hotels.map((hotel) => (
-            <li key={`${hotel.name}-${hotel.city}`}>
-              <p className="font-medium">{hotel.name}</p>
-              <p className="text-sm text-[var(--color-muted)]">
-                {hotel.city} · {hotel.phone} · ${hotel.ratePerNight}/night · {hotel.bookingNote}
+        <section className="mt-10">
+          <h2 className="font-display text-xl text-[var(--color-fg)]">{t("travelHeading")}</h2>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl border border-[var(--color-border)] p-5">
+              <p className="text-xs font-bold tracking-wide text-[var(--color-maroon)] uppercase">
+                {t("recommendedAirport")}
               </p>
-            </li>
-          ))}
-        </ul>
-      </section>
+              <p className="mt-1.5 font-semibold text-[var(--color-fg)]">{recommendedAirport.name}</p>
+              <p className="mt-0.5 text-sm text-[var(--color-muted)] tabular-nums">
+                {t("milesAway", { miles: recommendedAirport.distanceMiles })}
+              </p>
+            </div>
+            <div className="rounded-2xl border border-[var(--color-border)] p-5">
+              <p className="text-xs font-bold tracking-wide text-[var(--color-muted)] uppercase">
+                {t("otherAirportsHeading")}
+              </p>
+              <ul className="mt-2 flex flex-col gap-1 text-sm text-[var(--color-fg)]">
+                {nearbyAirports.map((airport) => (
+                  <li key={airport.name} className="flex justify-between gap-3">
+                    <span>{airport.name}</span>
+                    <span className="text-[var(--color-muted)] tabular-nums">
+                      {airport.distanceMiles} mi
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <p className="mt-4 text-sm text-[var(--color-muted)]">
+            <span className="font-semibold text-[var(--color-fg)]">{t("drivingHeading")}: </span>
+            {drivingRoute}
+          </p>
+        </section>
 
-      <section className="mt-8">
-        <h2 className="text-xl font-medium">{t("rulesHeading")}</h2>
-        <ul className="mt-4 list-disc pl-5">
-          {rules.map((rule) => (
-            <li key={rule}>{rule}</li>
-          ))}
-        </ul>
-      </section>
+        <section className="mt-10">
+          <h2 className="font-display text-xl text-[var(--color-fg)]">{t("hotelsHeading")}</h2>
+          <p className="mt-2 max-w-[62ch] text-sm text-[var(--color-muted)]">{t("hotelsIntro")}</p>
+          <p className="mt-1 text-sm font-semibold text-[var(--color-maroon)]">
+            {t("groupCode", { code: hotelGroupCode })}
+          </p>
+
+          <div className="mt-5 flex flex-col gap-6">
+            {Array.from(hotelsByCity.entries()).map(([city, cityHotels]) => (
+              <div key={city}>
+                <h3 className="text-sm font-bold tracking-wide text-[var(--color-muted)] uppercase">
+                  {city}
+                </h3>
+                <ul className="mt-2 flex flex-col gap-3">
+                  {cityHotels.map((hotel) => (
+                    <li
+                      key={`${hotel.name}-${hotel.city}`}
+                      className="flex flex-col justify-between gap-1 rounded-2xl border border-[var(--color-border)] p-4 sm:flex-row sm:items-center"
+                    >
+                      <div>
+                        <p className="font-semibold text-[var(--color-fg)]">{hotel.name}</p>
+                        <p className="mt-0.5 text-sm text-[var(--color-muted)]">
+                          {hotel.phone} · {hotel.bookingNote}
+                        </p>
+                      </div>
+                      <p className="flex-none font-semibold text-[var(--color-fg)] tabular-nums">
+                        ${hotel.ratePerNight}/night
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 text-sm text-[var(--color-muted)]">
+            <span className="font-semibold text-[var(--color-fg)]">{t("budgetLodging")}: </span>
+            {budgetLodgingNote}
+          </p>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="font-display text-xl text-[var(--color-fg)]">{t("rulesHeading")}</h2>
+          <ul className="mt-4 flex flex-col gap-2.5">
+            {rules.map((rule) => (
+              <li key={rule} className="flex gap-2.5 text-sm text-[var(--color-fg)]">
+                <span
+                  aria-hidden="true"
+                  className="mt-2 h-1.5 w-1.5 flex-none rounded-full"
+                  style={{ background: "var(--color-maroon)" }}
+                />
+                {rule}
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
     </div>
   );
 }

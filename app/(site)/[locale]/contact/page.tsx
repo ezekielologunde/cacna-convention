@@ -42,16 +42,23 @@ export default async function ContactPage({
   const t = await getTranslations("Contact");
 
   return (
-    <div className="px-6 py-12">
-      <h1 className="text-3xl font-semibold">{t("title")}</h1>
-      <ul className="mt-8 flex flex-col gap-6">
+    <div className="mx-auto max-w-3xl px-6 py-12">
+      <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
+      <ul className="mt-8 flex flex-col gap-4">
         {CONTACTS.map((contact) => (
-          <li key={contact.email}>
-            <p className="font-medium">
+          <li key={contact.email} className="rounded-2xl border border-[var(--color-border)] p-5">
+            <p className="font-semibold text-[var(--color-fg)]">
               {contact.name} — {t(contact.roleKey)}
             </p>
-            <p className="text-sm text-[var(--color-muted)]">{contact.phone} · {contact.email}</p>
-            <p className="text-sm text-[var(--color-muted)]">{contact.org}</p>
+            <p className="mt-1.5 text-sm text-[var(--color-muted)]">{contact.org}</p>
+            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-semibold">
+              <a href={`tel:${contact.phone}`} className="text-[var(--color-maroon)] tabular-nums">
+                {contact.phone}
+              </a>
+              <a href={`mailto:${contact.email}`} className="text-[var(--color-maroon)]">
+                {contact.email}
+              </a>
+            </div>
           </li>
         ))}
       </ul>
