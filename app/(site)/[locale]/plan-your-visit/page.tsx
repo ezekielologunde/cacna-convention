@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveEdition } from "@/lib/editions";
 import { getActivePricingForEdition } from "@/lib/pricing";
 import { PromoBanner } from "@/components/register/PromoBanner";
+import { BulletList } from "@/components/ui/BulletList";
 import { hotels, hotelGroupCode } from "@/lib/content/hotels";
 import { rules } from "@/lib/content/rules";
 import {
@@ -129,34 +130,20 @@ export default async function PlanYourVisitPage({
           <h3 className="mt-4 text-sm font-bold tracking-wide text-[var(--color-maroon)] uppercase">
             {t("rememberHeading")}
           </h3>
-          <ul className="mt-2 flex flex-col gap-2.5">
-            {rules.remember.map((item) => (
-              <li key={item} className="flex gap-2.5 text-sm text-[var(--color-fg)]">
-                <span
-                  aria-hidden="true"
-                  className="mt-2 h-1.5 w-1.5 flex-none rounded-full"
-                  style={{ background: "var(--color-maroon)" }}
-                />
-                {item}
-              </li>
-            ))}
-          </ul>
+          <BulletList
+            items={rules.remember}
+            className="gap-2.5"
+            itemClassName="text-sm text-[var(--color-fg)]"
+          />
 
           <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-maroon)] uppercase">
             {t("rulesListHeading")}
           </h3>
-          <ul className="mt-2 flex flex-col gap-2.5">
-            {rules.rules.map((item) => (
-              <li key={item} className="flex gap-2.5 text-sm text-[var(--color-fg)]">
-                <span
-                  aria-hidden="true"
-                  className="mt-2 h-1.5 w-1.5 flex-none rounded-full"
-                  style={{ background: "var(--color-maroon)" }}
-                />
-                {item}
-              </li>
-            ))}
-          </ul>
+          <BulletList
+            items={rules.rules}
+            className="gap-2.5"
+            itemClassName="text-sm text-[var(--color-fg)]"
+          />
 
           <p className="mt-6 text-sm text-[var(--color-muted)]">
             <span className="font-semibold text-[var(--color-fg)]">{rules.attribution.name}</span>

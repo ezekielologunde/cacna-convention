@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { BulletList } from "@/components/ui/BulletList";
 import type { LeadershipMember } from "@/lib/content/leadership";
 import type { CommitteeMember } from "@/lib/content/committee";
 import type { Superintendent } from "@/lib/content/superintendents";
@@ -85,34 +86,18 @@ export function AboutTabs({
           <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-maroon)] uppercase">
             {t("biblicallyBasedHeading")}
           </h3>
-          <ul className="mt-2 flex flex-col gap-1.5 text-[var(--color-muted)]">
-            {aboutConvention.biblicallyBased.map((point) => (
-              <li key={point} className="flex gap-2.5">
-                <span
-                  aria-hidden="true"
-                  className="mt-2 h-1.5 w-1.5 flex-none rounded-full"
-                  style={{ background: "var(--color-maroon)" }}
-                />
-                {point}
-              </li>
-            ))}
-          </ul>
+          <BulletList
+            items={aboutConvention.biblicallyBased}
+            className="gap-1.5 text-[var(--color-muted)]"
+          />
 
           <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-maroon)] uppercase">
             {t("kingdomFocusedHeading")}
           </h3>
-          <ul className="mt-2 flex flex-col gap-1.5 text-[var(--color-muted)]">
-            {aboutConvention.kingdomFocused.map((point) => (
-              <li key={point} className="flex gap-2.5">
-                <span
-                  aria-hidden="true"
-                  className="mt-2 h-1.5 w-1.5 flex-none rounded-full"
-                  style={{ background: "var(--color-maroon)" }}
-                />
-                {point}
-              </li>
-            ))}
-          </ul>
+          <BulletList
+            items={aboutConvention.kingdomFocused}
+            className="gap-1.5 text-[var(--color-muted)]"
+          />
         </div>
       ) : null}
 
