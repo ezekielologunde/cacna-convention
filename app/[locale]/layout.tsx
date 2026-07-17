@@ -2,6 +2,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { PrimaryNav } from "@/components/navigation/PrimaryNav";
 
 export default async function LocaleLayout({
   children,
@@ -22,7 +23,12 @@ export default async function LocaleLayout({
   // /en and /yo at build time. See https://next-intl.dev/docs/getting-started/app-router#static-rendering
   setRequestLocale(locale);
 
-  return <NextIntlClientProvider locale={locale}>{children}</NextIntlClientProvider>;
+  return (
+    <NextIntlClientProvider locale={locale}>
+      <PrimaryNav />
+      {children}
+    </NextIntlClientProvider>
+  );
 }
 
 export function generateStaticParams() {
