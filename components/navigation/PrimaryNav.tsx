@@ -25,19 +25,23 @@ export function PrimaryNav() {
       className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/95 backdrop-blur"
     >
       <div className="flex items-center gap-6 px-6 py-3.5">
-        <Link
-          href={`/${locale}`}
-          className="flex items-center gap-2.5 font-display text-lg tracking-tight text-[var(--color-fg)]"
-        >
+        <Link href={`/${locale}`} className="flex items-center gap-2.5">
           <Image
             src="/brand/icon.png"
             alt=""
             width={32}
             height={32}
-            className="h-8 w-8 flex-none rounded-full"
+            className="h-8 w-8 flex-none rounded-xl object-cover"
             priority
           />
-          CACNA Convention
+          <span className="flex flex-col leading-none">
+            <span className="text-[10px] font-bold tracking-[0.15em] text-[var(--color-gold-deep)] uppercase">
+              {t("orgKicker")}
+            </span>
+            <span className="mt-0.5 font-display text-lg tracking-tight text-[var(--color-fg)]">
+              CACNA Convention
+            </span>
+          </span>
         </Link>
         <ul className="hidden items-center gap-6 text-sm font-semibold tracking-wide text-[var(--color-muted)] uppercase md:flex">
           {PRIMARY_ITEMS.map((item) => (

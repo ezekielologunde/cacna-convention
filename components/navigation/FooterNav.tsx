@@ -33,9 +33,20 @@ export function FooterNav() {
     >
       <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
         <div>
-          <div className="flex items-center gap-2.5 font-display text-lg">
-            <Image src="/brand/icon.png" alt="" width={28} height={28} className="h-7 w-7 flex-none rounded-full" />
-            CACNA Convention
+          <div className="flex items-center gap-2.5">
+            <Image
+              src="/brand/icon.png"
+              alt=""
+              width={28}
+              height={28}
+              className="h-7 w-7 flex-none rounded-lg object-cover"
+            />
+            <span className="flex flex-col leading-none">
+              <span className="text-[9px] font-bold tracking-[0.15em] text-[var(--color-gold-light)] uppercase">
+                {t("orgKicker")}
+              </span>
+              <span className="mt-0.5 font-display text-lg text-white">CACNA Convention</span>
+            </span>
           </div>
           <p className="mt-3 max-w-[32ch] text-sm text-white/75">{tFooter("blurb")}</p>
         </div>

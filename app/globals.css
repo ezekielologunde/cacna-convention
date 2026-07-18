@@ -28,6 +28,14 @@
   --color-maroon-deep: #6b1010;
   --color-gold: #b7791f;
   --color-gold-light: #ffd9a8;
+  /*
+   * --color-gold as small text on --color-bg only reaches ~3.4:1 (below
+   * WCAG AA's 4.5:1 for text this size, e.g. the nav wordmark's kicker
+   * line) -- this darkened shade reaches ~5.4:1 while staying the same
+   * amber hue. --color-gold itself stays untouched for decorative/large
+   * uses (e.g. the hero kicker dot) where contrast doesn't apply.
+   */
+  --color-gold-deep: #8c5c16;
 
   --color-brand: var(--color-red);
   --color-brand-contrast: #ffffff;
