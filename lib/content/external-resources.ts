@@ -14,6 +14,11 @@
 
 export const externalResources = [
   {
+    label: "CAC North America",
+    url: "https://cacnorthamerica.com/",
+    description: "The official site for Christ Apostolic Church North America, the organization behind this convention.",
+  },
+  {
     label: "CAC News",
     url: "https://www.cacworldnews.com/",
     description: "News and updates from Christ Apostolic Church Worldwide.",
