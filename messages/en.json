@@ -13,7 +13,8 @@
     "planYourVisit": "Plan Your Visit",
     "gallery": "Gallery",
     "archive": "Archive",
-    "contact": "Contact"
+    "contact": "Contact",
+    "children": "Children's Program"
   },
   "Footer": {
     "blurb": "Christ Apostolic Church North America — one fold, gathered from every region, once a year.",
@@ -64,6 +65,16 @@
     "title": "Schedule",
     "guestMinister": "Guest Minister",
     "noEdition": "Schedule details will be posted closer to the convention."
+  },
+  "Children": {
+    "title": "Children's Convention Program",
+    "themeLabel": "Theme",
+    "coordinatorLabel": "Program Coordinator",
+    "dailyStructureHeading": "Every Session",
+    "morningLabel": "Morning",
+    "afternoonLabel": "Afternoon",
+    "scheduleHeading": "Daily Schedule",
+    "teachersListHeading": "Children's Convention Teachers"
   },
   "PlanYourVisit": {
     "title": "Plan Your Visit",

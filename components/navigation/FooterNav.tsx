@@ -9,6 +9,7 @@ const ATTEND_ITEMS = [
   { key: "register", href: "/register" },
   { key: "about", href: "/about" },
   { key: "schedule", href: "/schedule" },
+  { key: "children", href: "/children" },
   { key: "planYourVisit", href: "/plan-your-visit" },
 ] as const;
 

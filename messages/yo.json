@@ -13,7 +13,8 @@
     "planYourVisit": "Ṣe Ètò Ìbẹ̀wò Rẹ",
     "gallery": "Àwòrán",
     "archive": "Àkójọpọ̀ Àtijọ́",
-    "contact": "Kàn Sí Wa"
+    "contact": "Kàn Sí Wa",
+    "children": "Ètò Àwọn Ọmọdé"
   },
   "Footer": {
     "blurb": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà — agbo kan, tí a kójọ láti agbègbè kọ̀ọ̀kan, lẹ́ẹ̀kan lọ́dún.",
@@ -64,6 +65,16 @@
     "title": "Iṣètò",
     "guestMinister": "Aṣíwájú Àlejò",
     "noEdition": "A óò fi ìtòlẹ́sẹ̀ payẹ̀wò síta nígbà tí àpéjọ bá súnmọ́."
+  },
+  "Children": {
+    "title": "Ètò Àpéjọ Àwọn Ọmọdé",
+    "themeLabel": "Àkòrí",
+    "coordinatorLabel": "Alábòójútó Ètò",
+    "dailyStructureHeading": "Gbogbo Ìpàdé",
+    "morningLabel": "Àárọ̀",
+    "afternoonLabel": "Ọ̀sán",
+    "scheduleHeading": "Ìtòlẹ́sẹ̀ Ojoojúmọ́",
+    "teachersListHeading": "Àwọn Olùkọ́ Àpéjọ Àwọn Ọmọdé"
   },
   "PlanYourVisit": {
     "title": "Ṣe Ètò Ìbẹ̀wò Rẹ",

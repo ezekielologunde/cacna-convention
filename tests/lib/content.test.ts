@@ -30,41 +30,23 @@ describe("static content data", () => {
     leadership.forEach((member) => expect(member.photo).toMatch(/^\/photos\/people\/.+/));
   });
 
-  it("committee has the 3 named roles", () => {
-    expect(committee.map((c) => c.role)).toEqual(["Chairman", "Secretary", "PRO"]);
+  it("committee has 30 members, starting with Chairman/Secretary/PRO", () => {
+    // Transcribed from the 2026 Convention & Conference Committee Members
+    // list. The first three carry the same roles as the earlier 3-person
+    // list, under fuller name variants (e.g. "Pastor Yomi Ademuwagun" ->
+    // "Pastor Abayomi Ademuwagun" is the same person, still PRO).
+    expect(committee).toHaveLength(30);
+    expect(committee[0]).toEqual({ name: "Pastor David O. Adenodi, Ph.D.", role: "Chairman" });
+    expect(committee[1]).toEqual({ name: "Pastor Oluwagbemiga Famojuro, D.Min.", role: "Secretary" });
+    expect(committee[2]).toEqual({ name: "Pastor Abayomi Ademuwagun", role: "PRO" });
   });
 
-  it("committee entries match the transcribed source exactly (name, organization, phone)", () => {
-    // Values transcribed from the doc's Convention Committee table. Note
-    // "C.A.C Vineyard of Comfort" has no trailing period (matches the Committee
-    // page, unlike the Contacts page's "C.A.C." spelling) — this is intentional,
-    // not a typo to "fix". `photo` is checked separately (non-empty path)
-    // rather than pinned to an exact string, since it points at a scraped
-    // asset rather than transcribed text.
-    expect(committee.map((c) => ({ ...c, photo: undefined }))).toEqual([
-      {
-        role: "Chairman",
-        name: "David Adenodi",
-        organization: "C.A.C Vineyard of Comfort",
-        phone: "301-440-7033",
-        photo: undefined,
-      },
-      {
-        role: "Secretary",
-        name: "Pastor Timothy Famojuro",
-        organization: "C.A.C. FITA, Brooklyn, NY",
-        phone: "917-709-1892",
-        photo: undefined,
-      },
-      {
-        role: "PRO",
-        name: "Pastor Yomi Ademuwagun",
-        organization: "CAC Agape Fellowship MD",
-        phone: "443-583-9416",
-        photo: undefined,
-      },
-    ]);
-    committee.forEach((member) => expect(member.photo).toMatch(/^\/photos\/people\/.+/));
+  it("committee members without a listed role have no role field", () => {
+    // The source list didn't attach a role to every member -- these should
+    // stay role-less rather than fall back to an invented placeholder.
+    const noRole = committee.find((c) => c.name === "Ebunoluwa Oke");
+    expect(noRole).toEqual({ name: "Ebunoluwa Oke" });
+    expect(noRole).not.toHaveProperty("role");
   });
 
   it("hotels covers all three cities", () => {

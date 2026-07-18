@@ -165,29 +165,12 @@ export function AboutTabs({
           {committee.map((member) => (
             <li
               key={member.name}
-              className="flex flex-col justify-between gap-4 rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)] sm:flex-row sm:items-center"
+              className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
             >
-              <div className="flex items-center gap-4">
-                <Image
-                  src={member.photo}
-                  alt=""
-                  width={56}
-                  height={56}
-                  className="h-14 w-14 flex-none rounded-full object-cover"
-                />
-                <div>
-                  <p className="font-semibold text-[var(--color-fg)]">{member.name}</p>
-                  <p className="mt-1 text-sm text-[var(--color-muted)]">
-                    {member.role} — {member.organization}
-                  </p>
-                </div>
-              </div>
-              <a
-                href={`tel:${member.phone.replace(/[^0-9+]/g, "")}`}
-                className="inline-flex min-h-11 items-center text-sm font-semibold tabular-nums text-[var(--color-maroon)]"
-              >
-                {member.phone}
-              </a>
+              <p className="font-semibold text-[var(--color-fg)]">{member.name}</p>
+              {member.role ? (
+                <p className="mt-1 text-sm text-[var(--color-muted)]">{member.role}</p>
+              ) : null}
             </li>
           ))}
         </ul>
