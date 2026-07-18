@@ -137,7 +137,7 @@ export function AboutTabs({
           {leadership.map((member) => (
             <li
               key={member.name}
-              className="flex items-center gap-4 rounded-2xl border border-[var(--color-border)] p-5"
+              className="flex items-center gap-4 rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
             >
               <Image
                 src={member.photo}
@@ -165,7 +165,7 @@ export function AboutTabs({
           {committee.map((member) => (
             <li
               key={member.name}
-              className="flex flex-col justify-between gap-4 rounded-2xl border border-[var(--color-border)] p-5 sm:flex-row sm:items-center"
+              className="flex flex-col justify-between gap-4 rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)] sm:flex-row sm:items-center"
             >
               <div className="flex items-center gap-4">
                 <Image
@@ -203,7 +203,7 @@ export function AboutTabs({
           {superintendents.map((person) => (
             <li
               key={person.name}
-              className="rounded-2xl border border-[var(--color-border)] p-5"
+              className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
             >
               <p className="font-semibold text-[var(--color-fg)]">{person.name}</p>
               <p className="mt-1 text-sm text-[var(--color-muted)]">{person.title}</p>

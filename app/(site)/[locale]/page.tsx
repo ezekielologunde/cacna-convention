@@ -151,7 +151,7 @@ export default async function Home({
 
       {/* Registration */}
       <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
-        <div className="mx-auto max-w-3xl rounded-3xl border border-[var(--color-border)] bg-white p-8 text-center sm:p-10">
+        <div className="mx-auto max-w-3xl rounded-3xl border border-[var(--color-border)] bg-white p-8 text-center shadow-[var(--shadow-card)] sm:p-10">
           <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">
             {t("registrationHeading")}
           </h2>
@@ -173,7 +173,7 @@ export default async function Home({
       {/* Give */}
       <section className="px-6 py-16">
         <div
-          className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-6 rounded-3xl border border-[var(--color-border)] p-8 text-center sm:flex-row sm:text-left"
+          className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-6 rounded-3xl border border-[var(--color-border)] p-8 text-center shadow-[var(--shadow-card)] sm:flex-row sm:text-left"
         >
           <div>
             <h3 className="font-display text-xl text-[var(--color-fg)]">{t("giveHeading")}</h3>

@@ -84,7 +84,7 @@ export function RegistrationForm({
       {registrants.map((registrant, index) => (
         <div
           key={index}
-          className="flex flex-col gap-3 rounded-2xl border border-[var(--color-border)] p-4"
+          className="flex flex-col gap-3 rounded-2xl border border-[var(--color-border)] p-4 shadow-[var(--shadow-card)]"
         >
           <label className={labelClass}>
             {t("fullName")}

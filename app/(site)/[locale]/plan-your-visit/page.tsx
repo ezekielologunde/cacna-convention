@@ -53,7 +53,7 @@ export default async function PlanYourVisitPage({
         <section className="mt-10">
           <h2 className="font-display text-xl text-[var(--color-fg)]">{t("travelHeading")}</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-[var(--color-border)] p-5">
+            <div className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]">
               <p className="text-xs font-bold tracking-wide text-[var(--color-maroon)] uppercase">
                 {t("recommendedAirport")}
               </p>
@@ -62,7 +62,7 @@ export default async function PlanYourVisitPage({
                 {t("milesAway", { miles: recommendedAirport.distanceMiles })}
               </p>
             </div>
-            <div className="rounded-2xl border border-[var(--color-border)] p-5">
+            <div className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]">
               <p className="text-xs font-bold tracking-wide text-[var(--color-muted)] uppercase">
                 {t("otherAirportsHeading")}
               </p>
@@ -101,7 +101,7 @@ export default async function PlanYourVisitPage({
                   {cityHotels.map((hotel) => (
                     <li
                       key={`${hotel.name}-${hotel.city}`}
-                      className="flex flex-col justify-between gap-1 rounded-2xl border border-[var(--color-border)] p-4 sm:flex-row sm:items-center"
+                      className="flex flex-col justify-between gap-1 rounded-2xl border border-[var(--color-border)] p-4 shadow-[var(--shadow-card)] sm:flex-row sm:items-center"
                     >
                       <div>
                         <p className="font-semibold text-[var(--color-fg)]">{hotel.name}</p>

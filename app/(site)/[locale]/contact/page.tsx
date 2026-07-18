@@ -46,7 +46,7 @@ export default async function ContactPage({
       <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
       <ul className="mt-8 flex flex-col gap-4">
         {CONTACTS.map((contact) => (
-          <li key={contact.email} className="rounded-2xl border border-[var(--color-border)] p-5">
+          <li key={contact.email} className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]">
             <p className="font-semibold text-[var(--color-fg)]">
               {contact.name} — {t(contact.roleKey)}
             </p>

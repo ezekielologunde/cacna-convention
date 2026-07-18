@@ -29,7 +29,7 @@ export default async function NewsPage({
         {newsEvents.map((event) => (
           <li
             key={event.title}
-            className="rounded-2xl border border-[var(--color-border)] p-5"
+            className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
           >
             <p className="text-sm font-semibold tabular-nums text-[var(--color-maroon)]">
               {dateFormatter.format(new Date(`${event.date}T12:00:00Z`))}

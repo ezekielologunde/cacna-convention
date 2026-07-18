@@ -43,6 +43,14 @@
    */
   --flame: linear-gradient(100deg, #c2481a, var(--color-red), var(--color-maroon));
   --flame-hero: linear-gradient(150deg, var(--color-red) 0%, var(--color-maroon) 55%, var(--color-maroon-deep) 100%);
+
+  /*
+   * cacsalvationcenter.org's own card shadow (sampled from its computed
+   * box-shadow: 0 10px 26px rgba(27,19,14,0.06) -- 27,19,14 is this
+   * project's --color-fg). CACNA's bordered rounded-2xl/3xl cards had no
+   * shadow at all; this gives them the same soft lift.
+   */
+  --shadow-card: 0 10px 26px rgba(27, 19, 14, 0.06);
 }
 
 @theme inline {

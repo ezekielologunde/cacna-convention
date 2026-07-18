@@ -30,7 +30,7 @@ export function ScheduleDay({
   });
 
   return (
-    <section className="rounded-3xl border border-[var(--color-border)] p-6 sm:p-7">
+    <section className="rounded-3xl border border-[var(--color-border)] p-6 shadow-[var(--shadow-card)] sm:p-7">
       <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold tracking-wide text-white uppercase" style={{ background: "var(--flame)" }}>
         {weekday}
       </span>

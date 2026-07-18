@@ -33,7 +33,7 @@ export default async function ArchivePage({
       <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
 
       {!editions || editions.length === 0 ? (
-        <div className="mt-8 rounded-3xl border border-[var(--color-border)] p-8 text-center">
+        <div className="mt-8 rounded-3xl border border-[var(--color-border)] p-8 text-center shadow-[var(--shadow-card)]">
           <p className="text-[var(--color-muted)]">{t("empty")}</p>
         </div>
       ) : (
@@ -41,7 +41,7 @@ export default async function ArchivePage({
           {editions.map((edition) => (
             <li
               key={edition.id}
-              className="rounded-2xl border border-[var(--color-border)] p-5"
+              className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
             >
               <h2 className="font-display text-xl text-[var(--color-fg)]">
                 {edition.year} — {edition.theme}
