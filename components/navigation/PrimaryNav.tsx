@@ -39,7 +39,7 @@ export function PrimaryNav() {
               {t("orgKicker")}
             </span>
             <span className="mt-0.5 font-display text-lg tracking-tight text-[var(--color-fg)]">
-              CACNA Convention
+              Convention
             </span>
           </span>
         </Link>
