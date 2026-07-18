@@ -45,7 +45,7 @@ export function FooterNav() {
               <span className="text-[9px] font-bold tracking-[0.15em] text-[var(--color-gold-light)] uppercase">
                 {t("orgKicker")}
               </span>
-              <span className="mt-0.5 font-display text-lg text-white">Convention</span>
+              <span className="mt-0.5 font-display text-lg text-white">North America Convention</span>
             </span>
           </div>
           <p className="mt-3 max-w-[32ch] text-sm text-white/75">{tFooter("blurb")}</p>
