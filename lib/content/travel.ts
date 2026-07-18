@@ -1,3 +1,10 @@
+// Confirmed directly (2026-07-17) against this year's convention flyer text --
+// matches the venue_address already recorded on the 2026 convention_editions
+// row ("Blue Ridge Summit, PA"), just with the full street address and ZIP
+// added. The flyer text itself misspelled it "Blue Bridge Summit" -- the ZIP
+// (17214) belongs to the real Blue Ridge Summit, PA, so that's used here.
+export const venueAddress = "14051 Stahley Road, Blue Ridge Summit, PA 17214";
+
 export type Airport = {
   name: string;
   distanceMiles: number;

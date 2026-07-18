@@ -11,6 +11,7 @@ import {
   nearbyAirports,
   drivingRoute,
   budgetLodgingNote,
+  venueAddress,
 } from "@/lib/content/travel";
 
 export default async function PlanYourVisitPage({
@@ -52,6 +53,10 @@ export default async function PlanYourVisitPage({
 
         <section className="mt-10">
           <h2 className="font-display text-xl text-[var(--color-fg)]">{t("travelHeading")}</h2>
+          <p className="mt-2 text-sm text-[var(--color-muted)]">
+            <span className="font-semibold text-[var(--color-fg)]">{t("venueHeading")}: </span>
+            {venueAddress}
+          </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]">
               <p className="text-xs font-bold tracking-wide text-[var(--color-maroon)] uppercase">
