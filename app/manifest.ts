@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Christ Apostolic Church North America Convention",
     start_url: "/",
     display: "standalone",
-    background_color: "#ffffff",
+    background_color: "#fff7ef",
     theme_color: "#6b1010",
     icons: [
       { src: "/brand/icon.png", sizes: "512x512", type: "image/png", purpose: "any" },
