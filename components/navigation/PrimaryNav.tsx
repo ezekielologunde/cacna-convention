@@ -37,7 +37,7 @@ export function PrimaryNav() {
             className="h-8 w-8 flex-none rounded-full"
             priority
           />
-          CACNA
+          CACNA Convention
         </Link>
         <ul className="hidden items-center gap-6 text-sm font-semibold tracking-wide text-[var(--color-muted)] uppercase md:flex">
           {PRIMARY_ITEMS.map((item) => (

@@ -106,8 +106,12 @@
   },
   "Live": {
     "title": "Ìtànkálẹ̀ Ààyè",
-    "comingSoon": "Ojú ewé ìtànkálẹ̀ ààyè pàtàkì fún àpéjọ ń bọ̀ — nígbà tí à ń dúró, wo àwọn iṣẹ́ ìsìn CACNA lórí ẹ̀rọ YouTube wa.",
-    "watchCta": "Wo lórí YouTube",
+    "intro": "Wo àwọn iṣẹ́ ìsìn àpéjọ CACNA ní ìtànkálẹ̀ ààyè lórí YouTube, kí o sì wo àwọn ìpàdé ọdún yìí ní ìsàlẹ̀.",
+    "watchLiveCta": "Wo Ìtànkálẹ̀ Ààyè lórí YouTube",
+    "sessionsHeading": "Àwọn Ìpàdé Ọdún Yìí",
+    "sessionsIntro": "Àkójọpọ̀ kíkún ti àwọn ìpàdé àpéjọ ọdún yìí, tí a ń ṣàtúnṣe sí bí ọ̀kọ̀ọ̀kan ṣe ń tàn.",
+    "pastYearsNote": "Ṣé o ń wá àpéjọ ọdún tí ó ti kọjá?",
+    "pastYearsCta": "Wo àwọn ìtànkálẹ̀ tí ó ti kọjá lórí ẹ̀rọ YouTube wa",
     "opensInNewTab": " (yóò ṣí ní táàbù tuntun)"
   },
   "Register": {

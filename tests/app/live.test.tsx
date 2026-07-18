@@ -15,13 +15,23 @@ describe("LivePage", () => {
     render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
 
     expect(screen.getByRole("heading", { name: "Live" })).toBeInTheDocument();
-    expect(screen.getByText(messages.Live.comingSoon)).toBeInTheDocument();
+    expect(screen.getByText(messages.Live.intro)).toBeInTheDocument();
     // Regex, not a plain string: getByRole's `name` option ignores `exact`
     // for string matchers (always exact-equality) -- only RegExp/function
     // matchers do a partial match. The link's accessible name also includes
     // an "(opens in a new tab)" suffix via aria-label for screen readers.
     expect(
-      screen.getByRole("link", { name: /^Watch on YouTube/ })
+      screen.getByRole("link", { name: /^Watch Live on YouTube/ })
+    ).toHaveAttribute("href", "https://www.youtube.com/@cacnorthamericalatunderegi1330/live");
+
+    expect(screen.getByRole("heading", { name: "This Year's Sessions" })).toBeInTheDocument();
+    expect(screen.getByTitle("This Year's Sessions")).toHaveAttribute(
+      "src",
+      "https://www.youtube.com/embed/videoseries?list=PLhXt6OVepbyjadJt8WufxY-5Mt5OAjsSf"
+    );
+
+    expect(
+      screen.getByRole("link", { name: /^Browse past broadcasts on our YouTube channel/ })
     ).toHaveAttribute("href", "https://youtube.com/@cacnorthamericalatunderegi1330");
   });
 });

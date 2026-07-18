@@ -106,8 +106,12 @@
   },
   "Live": {
     "title": "Live",
-    "comingSoon": "A dedicated live page for the convention is coming — in the meantime, watch CACNA services on our YouTube channel.",
-    "watchCta": "Watch on YouTube",
+    "intro": "Watch CACNA convention services live on YouTube, and catch up on this year's sessions below.",
+    "watchLiveCta": "Watch Live on YouTube",
+    "sessionsHeading": "This Year's Sessions",
+    "sessionsIntro": "The full playlist of this year's convention sessions, updated as each one streams.",
+    "pastYearsNote": "Looking for a previous year's convention?",
+    "pastYearsCta": "Browse past broadcasts on our YouTube channel",
     "opensInNewTab": " (opens in a new tab)"
   },
   "Register": {

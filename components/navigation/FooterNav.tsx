@@ -43,10 +43,13 @@ export function FooterNav() {
           <h4 className="text-xs font-bold tracking-wider text-white/55 uppercase">
             {tFooter("attendHeading")}
           </h4>
-          <ul className="mt-3 flex flex-col gap-2 text-sm">
+          <ul className="mt-3 flex flex-col text-sm">
             {ATTEND_ITEMS.map((item) => (
               <li key={item.key}>
-                <Link href={`/${locale}${item.href}`} className="hover:text-[var(--color-gold-light)]">
+                <Link
+                  href={`/${locale}${item.href}`}
+                  className="flex min-h-11 items-center hover:text-[var(--color-gold-light)]"
+                >
                   {t(item.key)}
                 </Link>
               </li>
@@ -57,10 +60,13 @@ export function FooterNav() {
           <h4 className="text-xs font-bold tracking-wider text-white/55 uppercase">
             {tFooter("connectHeading")}
           </h4>
-          <ul className="mt-3 flex flex-col gap-2 text-sm">
+          <ul className="mt-3 flex flex-col text-sm">
             {CONNECT_ITEMS.map((item) => (
               <li key={item.key}>
-                <Link href={`/${locale}${item.href}`} className="hover:text-[var(--color-gold-light)]">
+                <Link
+                  href={`/${locale}${item.href}`}
+                  className="flex min-h-11 items-center hover:text-[var(--color-gold-light)]"
+                >
                   {t(item.key)}
                 </Link>
               </li>
@@ -72,7 +78,7 @@ export function FooterNav() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${resource.label}${tFooter("opensInNewTab")}`}
-                  className="hover:text-[var(--color-gold-light)]"
+                  className="flex min-h-11 items-center hover:text-[var(--color-gold-light)]"
                 >
                   {resource.label}
                 </a>
@@ -84,9 +90,12 @@ export function FooterNav() {
           <h4 className="text-xs font-bold tracking-wider text-white/55 uppercase">
             {tFooter("contactHeading")}
           </h4>
-          <ul className="mt-3 flex flex-col gap-2 text-sm">
+          <ul className="mt-3 flex flex-col text-sm">
             <li>
-              <Link href={`/${locale}/contact`} className="hover:text-[var(--color-gold-light)]">
+              <Link
+                href={`/${locale}/contact`}
+                className="flex min-h-11 items-center hover:text-[var(--color-gold-light)]"
+              >
                 {t("contact")}
               </Link>
             </li>

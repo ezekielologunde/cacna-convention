@@ -37,15 +37,18 @@ export function AboutTabs({
   ];
 
   const tabClass = (active: boolean) =>
-    `inline-flex min-h-11 items-center px-4 text-sm font-semibold transition-colors ${
+    `inline-flex min-h-11 flex-none items-center whitespace-nowrap px-4 text-sm font-semibold transition-colors ${
       active
         ? "border-b-2 border-[var(--color-maroon)] text-[var(--color-maroon)]"
         : "border-b-2 border-transparent text-[var(--color-muted)] hover:text-[var(--color-fg)]"
     }`;
 
   return (
-    <div className="mx-auto max-w-3xl px-6 pt-6 pb-12">
-      <div role="tablist" className="flex gap-2 border-b border-[var(--color-border)]">
+    <div className="mx-auto max-w-3xl pt-6 pb-12">
+      <div
+        role="tablist"
+        className="flex gap-2 overflow-x-auto border-b border-[var(--color-border)] px-6"
+      >
         {tabs.map((tabItem) => (
           <button
             key={tabItem.id}
@@ -66,7 +69,7 @@ export function AboutTabs({
           id="about-panel-story"
           role="tabpanel"
           aria-labelledby="about-tab-story"
-          className="mt-8 max-w-[68ch]"
+          className="mt-8 max-w-[68ch] px-6"
         >
           <p className="text-lg text-[var(--color-fg)]">
             {t("founded", {
@@ -129,7 +132,7 @@ export function AboutTabs({
           id="about-panel-leadership"
           role="tabpanel"
           aria-labelledby="about-tab-leadership"
-          className="mt-8 flex flex-col gap-4"
+          className="mt-8 flex flex-col gap-4 px-6"
         >
           {leadership.map((member) => (
             <li
@@ -157,7 +160,7 @@ export function AboutTabs({
           id="about-panel-committee"
           role="tabpanel"
           aria-labelledby="about-tab-committee"
-          className="mt-8 flex flex-col gap-4"
+          className="mt-8 flex flex-col gap-4 px-6"
         >
           {committee.map((member) => (
             <li
@@ -195,7 +198,7 @@ export function AboutTabs({
           id="about-panel-superintendents"
           role="tabpanel"
           aria-labelledby="about-tab-superintendents"
-          className="mt-8 flex flex-col gap-4"
+          className="mt-8 flex flex-col gap-4 px-6"
         >
           {superintendents.map((person) => (
             <li
