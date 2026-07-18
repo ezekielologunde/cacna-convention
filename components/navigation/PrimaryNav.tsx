@@ -48,7 +48,7 @@ export function PrimaryNav() {
             <li key={item.key}>
               <Link
                 href={`/${locale}${item.href}`}
-                className="transition-colors hover:text-[var(--color-maroon)]"
+                className="rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-maroon)]"
               >
                 {t(item.key)}
               </Link>
