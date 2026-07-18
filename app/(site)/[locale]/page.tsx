@@ -58,9 +58,18 @@ export default async function Home({
           <p className="text-sm font-semibold tracking-wide text-[var(--color-gold-light)] uppercase">
             {t("kicker")}
           </p>
-          <h1 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">
-            {t("title")}
-          </h1>
+          <div className="mt-3 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Image
+              src="/brand/icon.png"
+              alt=""
+              width={56}
+              height={56}
+              className="h-12 w-12 flex-none rounded-full sm:h-14 sm:w-14"
+            />
+            <h1 className="font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">
+              {t("title")}
+            </h1>
+          </div>
           <p className="mx-auto mt-5 max-w-[48ch] text-lg text-white/85">{t("subtitle")}</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
