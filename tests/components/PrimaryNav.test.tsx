@@ -13,13 +13,14 @@ function renderNav() {
 }
 
 describe("PrimaryNav", () => {
-  it("renders the five primary nav items", () => {
+  it("renders the six primary nav items", () => {
     renderNav();
     expect(screen.getByRole("link", { name: "Home" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "About" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Schedule" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Register" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Live" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "News" })).toHaveAttribute("href", "/en/news");
   });
 
   it("renders a dominant Register Now CTA and a secondary Give button", () => {
@@ -44,6 +45,7 @@ describe("PrimaryNav", () => {
     const panel = document.getElementById("primary-mobile-menu")!;
     expect(within(panel).getByRole("link", { name: "About" })).toBeInTheDocument();
     expect(within(panel).getByRole("link", { name: "Live" })).toBeInTheDocument();
+    expect(within(panel).getByRole("link", { name: "News" })).toBeInTheDocument();
     expect(within(panel).getByRole("link", { name: "Give" })).toBeInTheDocument();
 
     fireEvent.click(within(panel).getByRole("link", { name: "About" }));

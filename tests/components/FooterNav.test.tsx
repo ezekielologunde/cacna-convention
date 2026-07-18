@@ -22,6 +22,11 @@ describe("FooterNav", () => {
     expect(screen.getByRole("link", { name: "Contact" })).toBeInTheDocument();
   });
 
+  it("renders a News link", () => {
+    renderFooter();
+    expect(screen.getByRole("link", { name: "News" })).toHaveAttribute("href", "/en/news");
+  });
+
   it("renders external CAC resource links", () => {
     renderFooter();
     for (const resource of externalResources) {

@@ -11,6 +11,7 @@ const PRIMARY_ITEMS = [
   { key: "schedule", href: "/schedule" },
   { key: "register", href: "/register" },
   { key: "live", href: "/live" },
+  { key: "news", href: "/news" },
 ] as const;
 
 export function PrimaryNav() {

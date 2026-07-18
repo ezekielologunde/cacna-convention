@@ -94,4 +94,15 @@ describe("HomePage", () => {
 
     expect(screen.getByRole("link", { name: "View Gallery" })).toHaveAttribute("href", "/en/gallery");
   });
+
+  it("renders a News & Events CTA linking to the news page", async () => {
+    mockNoActiveEdition();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("link", { name: "See News & Events" })).toHaveAttribute("href", "/en/news");
+  });
 });

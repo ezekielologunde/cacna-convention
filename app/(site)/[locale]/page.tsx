@@ -113,8 +113,23 @@ export default async function Home({
         </div>
       </section>
 
+      {/* News & Events teaser */}
+      <section className="px-6 py-16 text-center">
+        <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">
+          {t("newsHeading")}
+        </h2>
+        <p className="mx-auto mt-3 max-w-[48ch] text-[var(--color-muted)]">{t("newsBody")}</p>
+        <Link
+          href={`/${locale}/news`}
+          className="mt-6 inline-block rounded-full px-6 py-3 font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5"
+          style={{ background: "var(--flame)" }}
+        >
+          {t("newsCta")}
+        </Link>
+      </section>
+
       {/* Mission / what a CACNA week looks like */}
-      <section className="px-6 py-16">
+      <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">
             {t("missionHeading")}

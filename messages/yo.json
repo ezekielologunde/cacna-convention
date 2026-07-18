@@ -6,6 +6,7 @@
     "register": "Forúkọsílẹ̀",
     "registerCta": "Forúkọsílẹ̀ Nísisìyí",
     "live": "Ìtànkálẹ̀ Ààyè",
+    "news": "Ìròyìn",
     "give": "Ẹ̀bùn",
     "planYourVisit": "Ṣe Ètò Ìbẹ̀wò Rẹ",
     "gallery": "Àwòrán",
@@ -32,6 +33,9 @@
     "missionBody": "Àpéjọ kọ̀ọ̀kan máa ń tẹ̀lé ìlànà kan náà: àdúrà àti ìjọsìn ojoojúmọ́, ìpàdé àwọn aṣíwájú láti ọwọ́ àwọn aṣíwájú CAC tí wọ́n wá, ìpàdé pàtàkì fún àwọn ọ̀dọ́ àti ọmọdé, àti alẹ́ ìsọ̀jí ní alẹ́ kọ̀ọ̀kan — tí a óò fi Oúnjẹ Alẹ́ Olúwa àti iṣẹ́ ìsìn ìdágbére parí.",
     "galleryHeading": "Wo àwòrán láti àpéjọ tí ó kọjá",
     "galleryCta": "Wo Àwòrán",
+    "newsHeading": "Ìròyìn àti Ìṣẹ̀lẹ̀",
+    "newsBody": "Máa mọ̀ nípa àwọn ìkéde CACNA, títí kan ayẹyẹ ọdún àádọ́ta wa tí ń bọ̀.",
+    "newsCta": "Wo Ìròyìn àti Ìṣẹ̀lẹ̀",
     "registrationHeading": "Ìforúkọsílẹ̀",
     "registrationComingSoon": "Ìforúkọsílẹ̀ fún ọdún 2027 yóò ṣí ní oṣù January — a óò fi owó àti ọjọ́ pàtó síta níbí ní kété tí wọ́n bá ti dá wọn lójú.",
     "registrationCta": "Gba ìsọfúnni — wo ìforúkọsílẹ̀",
@@ -92,6 +96,10 @@
   "Give": {
     "title": "Ẹ̀bùn",
     "comingSoon": "Ẹ̀bùn orí-ayélujára kò tíì ṣetán — ẹ ṣàyẹ̀wò padà láìpẹ́."
+  },
+  "News": {
+    "title": "Ìròyìn àti Ìṣẹ̀lẹ̀",
+    "intro": "Ìkéde àti àwọn ìṣẹ̀lẹ̀ tí ń bọ̀ láti ọ̀dọ̀ CACNA."
   },
   "Live": {
     "title": "Ìtànkálẹ̀ Ààyè",

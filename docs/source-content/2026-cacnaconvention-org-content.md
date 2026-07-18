@@ -162,3 +162,9 @@ The user pointed to two more real CAC resources not found in earlier crawls; bot
 **Update (2026-07-17):** wired the YouTube channel into `/live` as a "Watch on YouTube" button, alongside the existing placeholder copy (now reworded to point there while a dedicated live page is still pending). `/give` is unchanged — no safe, working resource exists to link to yet.
 
 **Update (2026-07-17), later the same day:** CAC Worldwide and CAC News are now linked from the site after all (`lib/content/external-resources.ts`) — both in the footer's "Connect" column and as an "External Resources" list at the end of About > Our Story, opening in a new tab. The "out of scope" framing above was this project's own initial call; the site owner asked for them to be connected.
+
+## News & Events page added: 50th anniversary celebration (2026-07-17)
+
+The site owner provided a fact directly (not scraped from any page, same treatment as the earlier "registration opens January 2027" confirmation): **October 10, 2026** is Christ Apostolic Church North America's **50th anniversary celebration**, at CAC Village — the same grounds as the annual convention. The math checks out against this project's own founding data (`lib/content/history.ts`: founded 1976), and general web search confirms 2026 is the org's 50th year, but the specific October 10 date isn't independently published anywhere searchable yet — recorded here as owner-provided, not source-site-derived.
+
+Built a new `/news` page (`lib/content/news-events.ts`, structured for future events beyond just this one) and wired it in everywhere per the site owner's request ("add to all"): the primary nav (both desktop and the mobile menu panel), the footer's Connect column, and a new "News & Events" homepage teaser section (positioned between Welcome and Mission, ahead of the existing Gallery teaser, given the significance of a 50th-anniversary announcement).
