@@ -89,10 +89,21 @@ body {
   font-family: var(--font-sans), -apple-system, "Segoe UI", system-ui, sans-serif;
 }
 
+/*
+ * cacsalvationcenter.org's headings are heavy and tight (its H1 measures
+ * font-weight 800, letter-spacing ~-3% of font-size; H2 800/-2.3%; H3
+ * 800/-1.5%, all sampled from computed styles) -- CACNA's headings only
+ * ever set font-family, leaving them at Bricolage Grotesque's unstyled
+ * default weight/tracking. -0.02em lands in the middle of that -1.5%
+ * to -3% range and reads correctly across this site's smaller heading
+ * sizes (its H1 is much larger than any heading used here).
+ */
 h1,
 h2,
 h3 {
   font-family: var(--font-display), var(--font-sans), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 @media (prefers-reduced-motion: reduce) {
