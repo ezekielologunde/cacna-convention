@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 
 const PRIMARY_ITEMS = [
@@ -17,7 +18,13 @@ const PRIMARY_ITEMS = [
 export function PrimaryNav() {
   const t = useTranslations("Nav");
   const locale = useLocale();
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const isActive = (href: string) => {
+    const target = `/${locale}${href}`;
+    return href === "" ? pathname === target : pathname.startsWith(target);
+  };
 
   return (
     <nav
@@ -48,7 +55,10 @@ export function PrimaryNav() {
             <li key={item.key}>
               <Link
                 href={`/${locale}${item.href}`}
-                className="rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-maroon)]"
+                aria-current={isActive(item.href) ? "page" : undefined}
+                className={`rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-maroon)] ${
+                  isActive(item.href) ? "bg-[var(--color-surface)] text-[var(--color-maroon)]" : ""
+                }`}
               >
                 {t(item.key)}
               </Link>
@@ -98,7 +108,10 @@ export function PrimaryNav() {
                 <Link
                   href={`/${locale}${item.href}`}
                   onClick={() => setMobileOpen(false)}
-                  className="block rounded-lg px-3 py-3"
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  className={`block rounded-lg px-3 py-3 ${
+                    isActive(item.href) ? "text-[var(--color-maroon)]" : ""
+                  }`}
                 >
                   {t(item.key)}
                 </Link>

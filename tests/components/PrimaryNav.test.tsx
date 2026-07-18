@@ -1,8 +1,20 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent, within } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import { PrimaryNav } from "../../components/navigation/PrimaryNav";
 import messages from "../../messages/en.json";
+
+// `usePathname` needs a real Next.js App Router context, which isn't present
+// in this plain jsdom test render -- it returns `null` unmocked, which then
+// throws inside the component's own `pathname.startsWith(...)` active-link
+// check (same class of issue as the `next-intl/server` mock elsewhere in
+// this test suite; `pathname` is never actually null in real usage). Mocked
+// per-test below via `mockPathname` so each test controls which link (if
+// any) should render as active.
+let mockPathname = "/en";
+vi.mock("next/navigation", () => ({
+  usePathname: () => mockPathname,
+}));
 
 function renderNav() {
   return render(
@@ -50,5 +62,16 @@ describe("PrimaryNav", () => {
 
     fireEvent.click(within(panel).getByRole("link", { name: "About" }));
     expect(screen.getByRole("button", { name: "Open menu" })).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("marks the current page's nav link with aria-current, and no other", () => {
+    mockPathname = "/en/schedule";
+    renderNav();
+
+    expect(screen.getByRole("link", { name: "Schedule" })).toHaveAttribute("aria-current", "page");
+    expect(screen.getByRole("link", { name: "Home" })).not.toHaveAttribute("aria-current");
+    expect(screen.getByRole("link", { name: "About" })).not.toHaveAttribute("aria-current");
+
+    mockPathname = "/en";
   });
 });
