@@ -115,7 +115,9 @@
   },
   "News": {
     "title": "News & Events",
-    "intro": "Announcements and upcoming events from CACNA."
+    "intro": "Announcements and upcoming events from CACNA.",
+    "moreInfoCta": "See details",
+    "opensInNewTab": " (opens in a new tab)"
   },
   "Live": {
     "title": "Live",

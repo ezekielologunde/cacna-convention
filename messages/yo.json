@@ -115,7 +115,9 @@
   },
   "News": {
     "title": "Ìròyìn àti Ìṣẹ̀lẹ̀",
-    "intro": "Ìkéde àti àwọn ìṣẹ̀lẹ̀ tí ń bọ̀ láti ọ̀dọ̀ CACNA."
+    "intro": "Ìkéde àti àwọn ìṣẹ̀lẹ̀ tí ń bọ̀ láti ọ̀dọ̀ CACNA.",
+    "moreInfoCta": "Wo àwọn kúlẹ̀kúlẹ̀",
+    "opensInNewTab": " (yóò ṣí ní táàbù tuntun)"
   },
   "Live": {
     "title": "Ìtànkálẹ̀ Ààyè",
