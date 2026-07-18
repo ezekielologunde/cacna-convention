@@ -144,7 +144,7 @@
     "categoryChild": "Child (1-19) — Free",
     "contactName": "Contact name",
     "contactEmail": "Email",
-    "contactPhone": "Phone",
+    "contactPhone": "Phone (optional)",
     "submit": "Continue to Payment",
     "submitting": "Submitting…",
     "submitError": "Registration failed. Please try again or contact us.",
