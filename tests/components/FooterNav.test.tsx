@@ -1,9 +1,17 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import { FooterNav } from "../../components/navigation/FooterNav";
 import messages from "../../messages/en.json";
 import { externalResources } from "../../lib/content/external-resources";
+
+// See tests/components/PrimaryNav.test.tsx for why next/navigation is mocked
+// here -- usePathname needs a real App Router context, unavailable in this
+// plain jsdom render.
+let mockPathname = "/en";
+vi.mock("next/navigation", () => ({
+  usePathname: () => mockPathname,
+}));
 
 function renderFooter() {
   return render(
@@ -39,5 +47,16 @@ describe("FooterNav", () => {
         screen.getByRole("link", { name: new RegExp(`^${resource.label}`) })
       ).toHaveAttribute("href", resource.url);
     }
+  });
+
+  it("marks the current page's footer link with aria-current, and no other", () => {
+    mockPathname = "/en/gallery";
+    renderFooter();
+
+    expect(screen.getByRole("link", { name: "Gallery" })).toHaveAttribute("aria-current", "page");
+    expect(screen.getByRole("link", { name: "Archive" })).not.toHaveAttribute("aria-current");
+    expect(screen.getByRole("link", { name: "Contact" })).not.toHaveAttribute("aria-current");
+
+    mockPathname = "/en";
   });
 });

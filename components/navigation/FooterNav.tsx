@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { externalResources } from "@/lib/content/external-resources";
 
@@ -25,6 +26,8 @@ export function FooterNav() {
   const t = useTranslations("Nav");
   const tFooter = useTranslations("Footer");
   const locale = useLocale();
+  const pathname = usePathname();
+  const isActive = (href: string) => pathname.startsWith(`/${locale}${href}`);
 
   return (
     <footer
@@ -60,7 +63,10 @@ export function FooterNav() {
               <li key={item.key}>
                 <Link
                   href={`/${locale}${item.href}`}
-                  className="flex min-h-11 items-center hover:text-[var(--color-gold-light)]"
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  className={`flex min-h-11 items-center hover:text-[var(--color-gold-light)] ${
+                    isActive(item.href) ? "font-bold text-[var(--color-gold-light)]" : ""
+                  }`}
                 >
                   {t(item.key)}
                 </Link>
@@ -77,7 +83,10 @@ export function FooterNav() {
               <li key={item.key}>
                 <Link
                   href={`/${locale}${item.href}`}
-                  className="flex min-h-11 items-center hover:text-[var(--color-gold-light)]"
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  className={`flex min-h-11 items-center hover:text-[var(--color-gold-light)] ${
+                    isActive(item.href) ? "font-bold text-[var(--color-gold-light)]" : ""
+                  }`}
                 >
                   {t(item.key)}
                 </Link>
@@ -106,7 +115,10 @@ export function FooterNav() {
             <li>
               <Link
                 href={`/${locale}/contact`}
-                className="flex min-h-11 items-center hover:text-[var(--color-gold-light)]"
+                aria-current={isActive("/contact") ? "page" : undefined}
+                className={`flex min-h-11 items-center hover:text-[var(--color-gold-light)] ${
+                  isActive("/contact") ? "font-bold text-[var(--color-gold-light)]" : ""
+                }`}
               >
                 {t("contact")}
               </Link>
