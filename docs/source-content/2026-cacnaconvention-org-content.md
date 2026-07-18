@@ -140,4 +140,11 @@ Four additional pieces of real content brought over this pass, all verified agai
 
 The source homepage's date/location banner and "Registration Guidelines" heading are written for the 2026 convention (per this doc's existing "2026 convention is already underway" note) — the homepage kicker adapts this to `2027 · CAC Village, USA` (year + location only, no fabricated specific dates, since no 2027 `convention_editions` row exists yet).
 
-Not brought over: the ~40 uncaptioned 2025 gallery photos (still meant to be sourced fresh via the admin gallery-upload feature) and the CACNA Superintendent page's single uncaptioned "Tunde Lawal" photo (still needs a real content ask to organizers before it's usable).
+## CAC North America page + CAC Worldwide link check (2026-07-17)
+
+Checked two more "About" submenu links directly against the live site:
+
+- **CAC North America** (`/cac-north-america/`) — a distinct page from "About CACNA Convention" above. Confirms the founding facts already in `lib/content/history.ts` and adds two new facts, now also in that file: the founding Brooklyn congregation serves as headquarters for the "First in the Americas" (FITA) Disciplinary and Care Committee, and the org's governance spans five levels of authority from Trustees (top) to assembly Pastors (bottom) — the source page names only the top and bottom tiers, not the three in between, so those aren't invented here either.
+- **CAC Worldwide** (`cachqtrsonline.org`, linked from the source site's own nav) — currently **broken/untrustworthy**: the domain returns a TLS certificate for `ablandscaping.co.uk`, an unrelated site, meaning it no longer resolves to what it claims to be (expired/repointed domain, most likely). Not linked from this rebuild, and shouldn't be until it's confirmed safe again.
+
+Both items previously flagged as "not brought over" in earlier revisions of this doc (the 2025 gallery photos and the Superintendent page content) were fully resolved in the same-day updates above — nothing remains outstanding from the original source-content sweep.

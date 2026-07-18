@@ -24,6 +24,8 @@ describe("AboutTabs", () => {
     );
 
     expect(screen.getByText(history.founder, { exact: false })).toBeInTheDocument();
+    expect(screen.getByText(history.fitaHqNote)).toBeInTheDocument();
+    expect(screen.getByText(history.governanceNote)).toBeInTheDocument();
     expect(screen.getByText(aboutConvention.missionStatement)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Biblically Based" })).toBeInTheDocument();
     expect(screen.getByText(aboutConvention.biblicallyBased[0])).toBeInTheDocument();

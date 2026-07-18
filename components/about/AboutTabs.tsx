@@ -77,6 +77,8 @@ export function AboutTabs({
           <p className="mt-4 text-[var(--color-muted)]">
             {t("todayReach", { count: history.zoneCount })}
           </p>
+          <p className="mt-4 text-[var(--color-muted)]">{history.fitaHqNote}</p>
+          <p className="mt-4 text-[var(--color-muted)]">{history.governanceNote}</p>
 
           <h3 className="mt-6 font-display text-lg text-[var(--color-fg)]">
             {t("missionHeading")}
