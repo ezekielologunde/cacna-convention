@@ -6,19 +6,21 @@
  * Palette matches the sibling Christ Apostolic Church site
  * (cacsalvationcenter.org)'s shipped "flame" system — orange to red to
  * maroon — plus gold, cross-checked against the 2026 convention flyer's
- * black/red/gold. White carries most of the page; the flame gradient and
- * deep maroon are used deliberately as bookends (hero, footer, primary
- * CTAs), not as a wall-to-wall dark theme.
+ * black/red/gold. --color-bg/--color-surface are cacsalvationcenter.org's
+ * own warm cream pairing (#fff7ef / #fbead9, sampled directly from its
+ * computed styles), replacing plain white so alternating sections read the
+ * same way theirs do; the flame gradient and deep maroon are still used
+ * deliberately as bookends (hero, footer, primary CTAs), not a dark theme.
  */
 :root {
-  --background: #ffffff;
+  --background: #fff7ef;
   --foreground: #1b130e;
 
-  --color-bg: #ffffff;
+  --color-bg: #fff7ef;
   --color-fg: #1b130e;
   --color-muted: #6b5d51;
   --color-border: #ece3da;
-  --color-surface: #fff8f2;
+  --color-surface: #fbead9;
 
   --color-orange: #f15f22;
   --color-red: #d62828;
@@ -46,8 +48,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-public-sans);
-  --font-display: var(--font-archivo-black);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
 }
 
 @media (prefers-color-scheme: dark) {
