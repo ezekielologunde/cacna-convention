@@ -1,5 +1,13 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+// YouTube channel confirmed live and linked from cacnorthamerica.com's own
+// "Video Channel" nav item (see docs/source-content/2026-cacnaconvention-org-content.md
+// for provenance) -- the "latunderegi" handle matches the Latunde Region
+// branding used elsewhere in this project's sourced content (e.g. the
+// Superintendents flyer), confirming it's genuinely connected, not a
+// coincidence.
+const YOUTUBE_CHANNEL_URL = "https://youtube.com/@cacnorthamericalatunderegi1330";
+
 export default async function LivePage({
   params,
 }: {
@@ -23,6 +31,15 @@ export default async function LivePage({
           </svg>
         </span>
         <p className="mx-auto mt-4 max-w-[42ch] text-[var(--color-muted)]">{t("comingSoon")}</p>
+        <a
+          href={YOUTUBE_CHANNEL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-block rounded-full px-6 py-3 font-semibold text-white transition-transform hover:-translate-y-0.5"
+          style={{ background: "var(--flame)" }}
+        >
+          {t("watchCta")}
+        </a>
       </div>
     </div>
   );

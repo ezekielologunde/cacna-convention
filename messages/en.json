@@ -94,7 +94,8 @@
   },
   "Live": {
     "title": "Live",
-    "comingSoon": "The livestream will be posted here during the convention."
+    "comingSoon": "A dedicated live page for the convention is coming — in the meantime, watch CACNA services on our YouTube channel.",
+    "watchCta": "Watch on YouTube"
   },
   "Register": {
     "title": "Register",

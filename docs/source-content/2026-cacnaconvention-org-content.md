@@ -148,3 +148,15 @@ Checked two more "About" submenu links directly against the live site:
 - **CAC Worldwide** (`cachqtrsonline.org`, linked from the source site's own nav) — currently **broken/untrustworthy**: the domain returns a TLS certificate for `ablandscaping.co.uk`, an unrelated site, meaning it no longer resolves to what it claims to be (expired/repointed domain, most likely). Not linked from this rebuild, and shouldn't be until it's confirmed safe again.
 
 Both items previously flagged as "not brought over" in earlier revisions of this doc (the 2025 gallery photos and the Superintendent page content) were fully resolved in the same-day updates above — nothing remains outstanding from the original source-content sweep.
+
+## Sibling site cacnorthamerica.com: real CAC Worldwide/News resources + Live/Give findings (2026-07-17)
+
+The user pointed to two more real CAC resources not found in earlier crawls; both verified directly:
+
+- **CAC Worldwide, correctly identified this time**: `cac-worldwide.org` (not `cachqtrsonline.org`, which is broken per the entry above) — a real, working official site. Nigeria HQ, ~5M members worldwide, current leadership named on the homepage (Pastor Dr. Henry Ojo, Pastor James Deke Onagwa, Prophet Richard Adebayo Kolawole, Pastor Dr. Emmanuel Olujide Babajide). Not linked from this rebuild (out of scope — general denominational info, not CACNA-convention-specific), but recorded here as the correct link should it ever be needed.
+- **CAC News**: `cacworldnews.com` — a real, working news platform for the wider CAC denomination (articles, leader interviews, church profiles). Also not linked from this rebuild; recorded for reference.
+- **cacnorthamerica.com** — a separate, real, complementary site for the same CACNA organization (distinct from `cacnaconvention.org`, which is convention-specific). It links back to `cacnaconvention.org` for registration, confirming the two sites are run by the same org, not rival/impostor domains.
+  - **Give**: cacnorthamerica.com's own `/donation/` page is currently non-functional — its Stripe integration explicitly shows "Credit Card field is disabled, Stripe keys are missing." Even the org's own official giving mechanism doesn't work right now, so this rebuild's honest "coming soon" placeholder on `/give` stays as the correct state — linking to a broken donation form would be worse.
+  - **Live**: cacnorthamerica.com's `/live-streaming/` page has no embedded player, but its "Video Channel" nav item links to a real, working YouTube channel: `youtube.com/@cacnorthamericalatunderegi1330`. The "latunderegi" handle matches the Latunde Region branding already confirmed elsewhere in this project's real content (the Superintendents flyer's "CAC Latunde Region Superintendents" title), corroborating it's genuinely connected to this organization rather than an unrelated channel.
+
+**Update (2026-07-17):** wired the YouTube channel into `/live` as a "Watch on YouTube" button, alongside the existing placeholder copy (now reworded to point there while a dedicated live page is still pending). `/give` is unchanged — no safe, working resource exists to link to yet.

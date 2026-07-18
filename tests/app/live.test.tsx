@@ -16,5 +16,9 @@ describe("LivePage", () => {
 
     expect(screen.getByRole("heading", { name: "Live" })).toBeInTheDocument();
     expect(screen.getByText(messages.Live.comingSoon)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Watch on YouTube" })).toHaveAttribute(
+      "href",
+      "https://youtube.com/@cacnorthamericalatunderegi1330"
+    );
   });
 });
