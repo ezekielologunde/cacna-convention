@@ -8,6 +8,7 @@ import { committee } from "../../lib/content/committee";
 import { superintendents } from "../../lib/content/superintendents";
 import { history } from "../../lib/content/history";
 import { aboutConvention } from "../../lib/content/about-convention";
+import { externalResources } from "../../lib/content/external-resources";
 
 describe("AboutTabs", () => {
   it("shows Our Story by default and switches tabs on click", () => {
@@ -31,6 +32,10 @@ describe("AboutTabs", () => {
     expect(screen.getByText(aboutConvention.biblicallyBased[0])).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Kingdom Focused" })).toBeInTheDocument();
     expect(screen.getByText(aboutConvention.kingdomFocused[0])).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "External Resources" })).toBeInTheDocument();
+    for (const resource of externalResources) {
+      expect(screen.getByRole("link", { name: resource.label })).toHaveAttribute("href", resource.url);
+    }
 
     fireEvent.click(screen.getByRole("tab", { name: "Leadership" }));
     expect(screen.getByText(leadership[0].name)).toBeInTheDocument();

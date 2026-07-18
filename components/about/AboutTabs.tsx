@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { BulletList } from "@/components/ui/BulletList";
+import { externalResources } from "@/lib/content/external-resources";
 import type { LeadershipMember } from "@/lib/content/leadership";
 import type { CommitteeMember } from "@/lib/content/committee";
 import type { Superintendent } from "@/lib/content/superintendents";
@@ -100,6 +101,25 @@ export function AboutTabs({
             items={aboutConvention.kingdomFocused}
             className="gap-1.5 text-[var(--color-muted)]"
           />
+
+          <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-maroon)] uppercase">
+            {t("externalResourcesHeading")}
+          </h3>
+          <ul className="mt-2 flex flex-col gap-1.5">
+            {externalResources.map((resource) => (
+              <li key={resource.url}>
+                <a
+                  href={resource.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-[var(--color-maroon)] underline"
+                >
+                  {resource.label}
+                </a>
+                <span className="text-[var(--color-muted)]"> — {resource.description}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       ) : null}
 

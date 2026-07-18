@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import { FooterNav } from "../../components/navigation/FooterNav";
 import messages from "../../messages/en.json";
+import { externalResources } from "../../lib/content/external-resources";
 
 function renderFooter() {
   return render(
@@ -19,5 +20,12 @@ describe("FooterNav", () => {
     expect(screen.getByRole("link", { name: "Gallery" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Archive" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Contact" })).toBeInTheDocument();
+  });
+
+  it("renders external CAC resource links", () => {
+    renderFooter();
+    for (const resource of externalResources) {
+      expect(screen.getByRole("link", { name: resource.label })).toHaveAttribute("href", resource.url);
+    }
   });
 });

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
+import { externalResources } from "@/lib/content/external-resources";
 
 const ATTEND_ITEMS = [
   { key: "register", href: "/register" },
@@ -61,6 +62,18 @@ export function FooterNav() {
                 <Link href={`/${locale}${item.href}`} className="hover:text-[var(--color-gold-light)]">
                   {t(item.key)}
                 </Link>
+              </li>
+            ))}
+            {externalResources.map((resource) => (
+              <li key={resource.url}>
+                <a
+                  href={resource.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[var(--color-gold-light)]"
+                >
+                  {resource.label}
+                </a>
               </li>
             ))}
           </ul>
