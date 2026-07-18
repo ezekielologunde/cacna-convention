@@ -7,6 +7,7 @@
     "registerCta": "Register Now",
     "live": "Live",
     "news": "News",
+    "skipToContent": "Skip to main content",
     "give": "Give",
     "planYourVisit": "Plan Your Visit",
     "gallery": "Gallery",
@@ -16,6 +17,7 @@
   "Footer": {
     "blurb": "Christ Apostolic Church North America — one fold, gathered from every region, once a year.",
     "tagline": "One Fold, One Shepherd — John 10:16",
+    "opensInNewTab": " (opens in a new tab)",
     "attendHeading": "Attend",
     "connectHeading": "Connect",
     "contactHeading": "Contact",
@@ -53,6 +55,7 @@
     "biblicallyBasedHeading": "Biblically Based",
     "kingdomFocusedHeading": "Kingdom Focused",
     "externalResourcesHeading": "External Resources",
+    "opensInNewTab": " (opens in a new tab)",
     "founded": "Founded in {year} by {founder} in {location}.",
     "todayReach": "Today, CAC North America spans {count} DCCs and Zones across the United States and Canada."
   },
@@ -104,7 +107,8 @@
   "Live": {
     "title": "Live",
     "comingSoon": "A dedicated live page for the convention is coming — in the meantime, watch CACNA services on our YouTube channel.",
-    "watchCta": "Watch on YouTube"
+    "watchCta": "Watch on YouTube",
+    "opensInNewTab": " (opens in a new tab)"
   },
   "Register": {
     "title": "Register",

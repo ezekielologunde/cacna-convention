@@ -112,6 +112,7 @@ export function AboutTabs({
                   href={resource.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`${resource.label}${t("opensInNewTab")}`}
                   className="font-semibold text-[var(--color-maroon)] underline"
                 >
                   {resource.label}

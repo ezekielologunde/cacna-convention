@@ -7,6 +7,7 @@
     "registerCta": "Forúkọsílẹ̀ Nísisìyí",
     "live": "Ìtànkálẹ̀ Ààyè",
     "news": "Ìròyìn",
+    "skipToContent": "Fò lọ sí àkóónú àkọ́kọ́",
     "give": "Ẹ̀bùn",
     "planYourVisit": "Ṣe Ètò Ìbẹ̀wò Rẹ",
     "gallery": "Àwòrán",
@@ -16,6 +17,7 @@
   "Footer": {
     "blurb": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà — agbo kan, tí a kójọ láti agbègbè kọ̀ọ̀kan, lẹ́ẹ̀kan lọ́dún.",
     "tagline": "Agbo Kan, Olùṣọ́-Àgùntàn Kan — Jòhánù 10:16",
+    "opensInNewTab": " (yóò ṣí ní táàbù tuntun)",
     "attendHeading": "Kópa",
     "connectHeading": "Darapọ̀",
     "contactHeading": "Kàn Sí Wa",
@@ -53,6 +55,7 @@
     "biblicallyBasedHeading": "Tí Ó Dá Lórí Bíbélì",
     "kingdomFocusedHeading": "Tí Ó Kọ́ Sí Ìjọba Ọlọ́run",
     "externalResourcesHeading": "Àwọn Ìsopọ̀ Ìta",
+    "opensInNewTab": " (yóò ṣí ní táàbù tuntun)",
     "founded": "A dá sílẹ̀ ní ọdún {year} láti ọwọ́ {founder} ní {location}.",
     "todayReach": "Lónìí, CAC Àríwá Amẹ́ríkà ti fẹ̀ jáde sí DCC àti Àgbègbè {count} jákèjádò Amẹ́ríkà àti Kánádà."
   },
@@ -104,7 +107,8 @@
   "Live": {
     "title": "Ìtànkálẹ̀ Ààyè",
     "comingSoon": "Ojú ewé ìtànkálẹ̀ ààyè pàtàkì fún àpéjọ ń bọ̀ — nígbà tí à ń dúró, wo àwọn iṣẹ́ ìsìn CACNA lórí ẹ̀rọ YouTube wa.",
-    "watchCta": "Wo lórí YouTube"
+    "watchCta": "Wo lórí YouTube",
+    "opensInNewTab": " (yóò ṣí ní táàbù tuntun)"
   },
   "Register": {
     "title": "Forúkọsílẹ̀",

@@ -35,6 +35,7 @@ export default async function LivePage({
           href={YOUTUBE_CHANNEL_URL}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label={`${t("watchCta")}${t("opensInNewTab")}`}
           className="mt-6 inline-block rounded-full px-6 py-3 font-semibold text-white transition-transform hover:-translate-y-0.5"
           style={{ background: "var(--flame)" }}
         >

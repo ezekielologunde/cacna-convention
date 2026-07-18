@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { PrimaryNav } from "@/components/navigation/PrimaryNav";
@@ -31,13 +31,22 @@ export default async function LocaleRootLayout({
   // Next.js falls back to on-demand rendering instead of prerendering
   // /en and /yo at build time. See https://next-intl.dev/docs/getting-started/app-router#static-rendering
   setRequestLocale(locale);
+  const t = await getTranslations("Nav");
 
   return (
     <html lang={locale} className={`${displayFont.variable} ${bodyFont.variable} antialiased`}>
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider locale={locale}>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:font-semibold focus:text-[var(--color-fg)] focus:shadow-lg"
+          >
+            {t("skipToContent")}
+          </a>
           <PrimaryNav />
-          {children}
+          <main id="main-content" className="flex flex-1 flex-col">
+            {children}
+          </main>
           <FooterNav />
         </NextIntlClientProvider>
       </body>

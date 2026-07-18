@@ -71,6 +71,7 @@ export function FooterNav() {
                   href={resource.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`${resource.label}${tFooter("opensInNewTab")}`}
                   className="hover:text-[var(--color-gold-light)]"
                 >
                   {resource.label}

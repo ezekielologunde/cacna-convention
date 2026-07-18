@@ -29,8 +29,15 @@ describe("FooterNav", () => {
 
   it("renders external CAC resource links", () => {
     renderFooter();
+    // Regex, not a plain string: getByRole's `name` option ignores `exact`
+    // for string matchers (always exact-equality) -- only RegExp/function
+    // matchers do a partial match. Each link's accessible name also
+    // includes an "(opens in a new tab)" suffix via aria-label for screen
+    // reader users.
     for (const resource of externalResources) {
-      expect(screen.getByRole("link", { name: resource.label })).toHaveAttribute("href", resource.url);
+      expect(
+        screen.getByRole("link", { name: new RegExp(`^${resource.label}`) })
+      ).toHaveAttribute("href", resource.url);
     }
   });
 });

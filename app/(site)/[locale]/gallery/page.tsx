@@ -26,7 +26,7 @@ export default async function GalleryPage({
             >
               <Image
                 src={src}
-                alt={t("conventionHeading")}
+                alt=""
                 fill
                 sizes="(min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
                 className="object-cover"
@@ -46,7 +46,7 @@ export default async function GalleryPage({
             >
               <Image
                 src={src}
-                alt={t("childrenHeading")}
+                alt=""
                 fill
                 sizes="(min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
                 className="object-cover"

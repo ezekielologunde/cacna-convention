@@ -16,9 +16,12 @@ describe("LivePage", () => {
 
     expect(screen.getByRole("heading", { name: "Live" })).toBeInTheDocument();
     expect(screen.getByText(messages.Live.comingSoon)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Watch on YouTube" })).toHaveAttribute(
-      "href",
-      "https://youtube.com/@cacnorthamericalatunderegi1330"
-    );
+    // Regex, not a plain string: getByRole's `name` option ignores `exact`
+    // for string matchers (always exact-equality) -- only RegExp/function
+    // matchers do a partial match. The link's accessible name also includes
+    // an "(opens in a new tab)" suffix via aria-label for screen readers.
+    expect(
+      screen.getByRole("link", { name: /^Watch on YouTube/ })
+    ).toHaveAttribute("href", "https://youtube.com/@cacnorthamericalatunderegi1330");
   });
 });
