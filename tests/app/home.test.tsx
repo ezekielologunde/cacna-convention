@@ -65,7 +65,7 @@ describe("HomePage", () => {
 
     expect(
       screen.getByText(
-        "Registration for 2027 opens in January — pricing and exact dates will be posted here as soon as they're confirmed."
+        "Registration for the July 12–17, 2027 convention opens in October 2026 — pricing will be posted here as soon as it's confirmed."
       )
     ).toBeInTheDocument();
   });
@@ -78,7 +78,7 @@ describe("HomePage", () => {
 
     render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
 
-    expect(screen.getByText("2027 · CAC Village, USA")).toBeInTheDocument();
+    expect(screen.getByText("July 12–17, 2027 · CAC Village, USA")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Welcome to CACNA Convention" })).toBeInTheDocument();
     expect(screen.getByText(welcomeMessage.paragraphs[0])).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "contact us" })).toHaveAttribute("href", "/en/contact");

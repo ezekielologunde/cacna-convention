@@ -24,7 +24,7 @@
   "Home": {
     "title": "CACNA Convention",
     "subtitle": "Christ Apostolic Church North America Convention",
-    "kicker": "2027 · CAC Village, USA",
+    "kicker": "July 12–17, 2027 · CAC Village, USA",
     "welcomeHeading": "Welcome to CACNA Convention",
     "contactLinkText": "contact us",
     "learnMore": "Learn More",
@@ -37,7 +37,7 @@
     "newsBody": "Stay up to date with CACNA announcements, including our upcoming 50th anniversary celebration.",
     "newsCta": "See News & Events",
     "registrationHeading": "Registration",
-    "registrationComingSoon": "Registration for 2027 opens in January — pricing and exact dates will be posted here as soon as they're confirmed.",
+    "registrationComingSoon": "Registration for the July 12–17, 2027 convention opens in October 2026 — pricing will be posted here as soon as it's confirmed.",
     "registrationCta": "Get notified — view registration",
     "giveHeading": "Support the convention",
     "giveBody": "Every gift keeps food free for all ages throughout the week and helps with travel support for the churches that need it most.",
@@ -125,7 +125,7 @@
     "submit": "Continue to Payment",
     "submitting": "Submitting…",
     "submitError": "Registration failed. Please try again or contact us.",
-    "notOpenYet": "Registration for the 2027 convention opens in January 2027 — check back then."
+    "notOpenYet": "Registration for the July 12–17, 2027 convention opens in October 2026 — check back then."
   },
   "PromoBanner": {
     "beforeIncrease": "Adult rate is ${price} through {date} — register now before it goes up.",
