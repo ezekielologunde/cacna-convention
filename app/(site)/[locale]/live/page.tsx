@@ -41,7 +41,7 @@ export default async function LivePage({
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${t("watchLiveCta")}${t("opensInNewTab")}`}
-        className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full px-6 py-3 font-semibold text-white transition-transform hover:-translate-y-0.5"
+        className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full px-6 py-3 font-semibold text-white transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
         style={{ background: "var(--flame)" }}
       >
         <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

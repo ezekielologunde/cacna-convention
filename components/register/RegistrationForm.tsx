@@ -172,7 +172,7 @@ export function RegistrationForm({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-full px-5 py-3 font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5 disabled:opacity-60 disabled:hover:translate-y-0"
+        className="rounded-full px-5 py-3 font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95 disabled:opacity-60 disabled:hover:translate-y-0 disabled:active:scale-100"
         style={{ background: "var(--flame)" }}
       >
         {isSubmitting ? t("submitting") : t("submit")}

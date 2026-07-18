@@ -121,7 +121,7 @@ export default async function Home({
         <p className="mx-auto mt-3 max-w-[48ch] text-[var(--color-muted)]">{t("newsBody")}</p>
         <Link
           href={`/${locale}/news`}
-          className="mt-6 inline-block rounded-full px-6 py-3 font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5"
+          className="mt-6 inline-block rounded-full px-6 py-3 font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
           style={{ background: "var(--flame)" }}
         >
           {t("newsCta")}
@@ -162,7 +162,7 @@ export default async function Home({
           )}
           <Link
             href={`/${locale}/register`}
-            className="mt-6 inline-block rounded-full px-6 py-3 font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5"
+            className="mt-6 inline-block rounded-full px-6 py-3 font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
             style={{ background: "var(--flame)" }}
           >
             {t("registrationCta")}

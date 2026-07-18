@@ -74,7 +74,7 @@ export function PrimaryNav() {
           </Link>
           <Link
             href={`/${locale}/register`}
-            className="inline-flex min-h-11 items-center rounded-full px-5 text-sm font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5"
+            className="inline-flex min-h-11 items-center rounded-full px-5 text-sm font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
             style={{ background: "var(--flame)" }}
           >
             {t("registerCta")}
