@@ -11,6 +11,8 @@ const ATTEND_ITEMS = [
   { key: "about", href: "/about" },
   { key: "schedule", href: "/schedule" },
   { key: "children", href: "/children" },
+  { key: "goodWomen", href: "/good-women" },
+  { key: "ministersWives", href: "/ministers-wives" },
   { key: "planYourVisit", href: "/plan-your-visit" },
 ] as const;
 

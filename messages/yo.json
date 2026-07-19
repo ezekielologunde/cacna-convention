@@ -14,7 +14,9 @@
     "gallery": "Àwòrán",
     "archive": "Àkójọpọ̀ Àtijọ́",
     "contact": "Kàn Sí Wa",
-    "children": "Ètò Àwọn Ọmọdé"
+    "children": "Ètò Àwọn Ọmọdé",
+    "goodWomen": "Àpéjọ Àwọn Ìyá Rere",
+    "ministersWives": "Àpéjọ Àwọn Ìyàwó Ìjọ"
   },
   "Footer": {
     "blurb": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà — agbo kan, tí a kójọ láti agbègbè kọ̀ọ̀kan, lẹ́ẹ̀kan lọ́dún.",
@@ -75,6 +77,17 @@
     "afternoonLabel": "Ọ̀sán",
     "scheduleHeading": "Ìtòlẹ́sẹ̀ Ojoojúmọ́",
     "teachersListHeading": "Àwọn Olùkọ́ Àpéjọ Àwọn Ọmọdé"
+  },
+  "GoodWomen": {
+    "title": "Àpéjọ Ẹgbẹ́ Àwọn Ìyá Rere",
+    "leaderLabel": "Aṣáájú CACNAGWA"
+  },
+  "MinistersWives": {
+    "title": "Àpéjọ Àwọn Ìyàwó Ìjọ",
+    "executiveHeading": "Àwọn Olórí Ìgbìmọ̀",
+    "timeLabel": "Àkókò",
+    "eventLabel": "Ìṣẹ̀lẹ̀",
+    "speakerLabel": "Agbọ̀rọ̀sọ"
   },
   "PlanYourVisit": {
     "title": "Ṣe Ètò Ìbẹ̀wò Rẹ",

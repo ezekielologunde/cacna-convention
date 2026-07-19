@@ -14,7 +14,9 @@
     "gallery": "Gallery",
     "archive": "Archive",
     "contact": "Contact",
-    "children": "Children's Program"
+    "children": "Children's Program",
+    "goodWomen": "Good Women Conference",
+    "ministersWives": "Ministers' Wives Conference"
   },
   "Footer": {
     "blurb": "Christ Apostolic Church North America — one fold, gathered from every region, once a year.",
@@ -75,6 +77,17 @@
     "afternoonLabel": "Afternoon",
     "scheduleHeading": "Daily Schedule",
     "teachersListHeading": "Children's Convention Teachers"
+  },
+  "GoodWomen": {
+    "title": "Good Women Association Conference",
+    "leaderLabel": "CACNAGWA Leader"
+  },
+  "MinistersWives": {
+    "title": "Ministers' Wives Conference",
+    "executiveHeading": "Executive Members",
+    "timeLabel": "Time",
+    "eventLabel": "Event",
+    "speakerLabel": "Speaker"
   },
   "PlanYourVisit": {
     "title": "Plan Your Visit",
