@@ -1,5 +1,10 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { businessGroupFellowship, businessGroupAgenda } from "@/lib/content/business-group-program";
+import {
+  businessGroupFellowship,
+  businessGroupAgenda,
+  businessGroupExecutives,
+  kingdomEconomicsMessage,
+} from "@/lib/content/business-group-program";
 
 export default async function BusinessGroupPage({
   params,
@@ -43,6 +48,27 @@ export default async function BusinessGroupPage({
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="font-display text-lg text-[var(--color-fg)]">{t("executivesHeading")}</h2>
+        <ul className="mt-3 flex flex-col gap-1 text-sm text-[var(--color-fg)]">
+          {businessGroupExecutives.map((m) => (
+            <li key={m}>{m}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-10 rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]">
+        <h2 className="font-display text-lg text-[var(--color-fg)]">{kingdomEconomicsMessage.title}</h2>
+        <p className="mt-1 text-sm text-[var(--color-muted)]">
+          {kingdomEconomicsMessage.verse} · {t("messageByLabel")} {kingdomEconomicsMessage.author}, {kingdomEconomicsMessage.authorTitle}
+        </p>
+        <div className="mt-4 flex flex-col gap-3 text-sm text-[var(--color-fg)]">
+          {kingdomEconomicsMessage.body.map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
         </div>
       </section>
     </div>

@@ -109,7 +109,9 @@
     "orderHeading": "Order of Program",
     "timeLabel": "Time",
     "programLabel": "Program",
-    "handlerLabel": "Handler"
+    "handlerLabel": "Handler",
+    "executivesHeading": "Executive Officers",
+    "messageByLabel": "Message by"
   },
   "Youth": {
     "themeLabel": "Theme",
