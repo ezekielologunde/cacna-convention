@@ -37,21 +37,21 @@ export const businessGroupExecutives: string[] = [
 ];
 
 // Transcribed from the same booklet -- a multi-page feature on doing
-// business God's way, run across the Business Group Fellowship program.
-// The closing scripture/signature block read "Pastor T.A.O. Agbeja, Ph.D.,
-// Regional Superintendent, CACNA (Latunde Region)", kept as the byline.
-// Two further pages (headed "Introduction" / "The Apostle Paul's Counsel" /
-// "A Few Examples in the Real World") carry sidebar photo credits for
-// Pastor Gabriel Idowu (Supervisor, Business Group Fellowship, Latunde
-// Region) and Pastor Bolaji Oladunni (Chairman, Business Group Fellowship)
-// -- the first-person testimony below reads as Oladunni's own account, so
-// it's attributed to him directly rather than folded anonymously into the
-// body text.
+// business God's way, run across the Business Group Fellowship program,
+// with distinct sections signed by three different contributors: Pastor
+// T.A.O. Agbeja (Regional Superintendent), Pastor Gabriel Idowu (Supervisor,
+// Latunde Region Business Group Fellowship -- whose name signs the piece's
+// actual "Conclusion" section), and Pastor Bolaji Oladunni (Chairman,
+// Business Group Fellowship, whose first-person testimony appears mid-piece).
+// Credited jointly rather than picking one primary author.
 export const kingdomEconomicsMessage = {
   title: "Kingdom Economics: Doing Business God's Way — Representing God at Work",
   verse: "Deuteronomy 8:18",
-  author: "Pastor T.A.O. Agbeja, Ph.D.",
-  authorTitle: "Regional Superintendent, CACNA (Latunde Region)",
+  contributors: [
+    { name: "Pastor T.A.O. Agbeja, Ph.D.", title: "Regional Superintendent, CACNA (Latunde Region)" },
+    { name: "Pastor Gabriel Idowu", title: "Supervisor, Latunde Region Business Group Fellowship" },
+    { name: "Pastor Bolaji Oladunni", title: "Chairman, Business Group Fellowship" },
+  ],
   body: [
     "Most believers think that our God is present only in prayer, worship, and other church related activities but looking intensely into the Scripture, we quickly come to see that God is interested in ALL the facets of our earthly activities. \"Dishonest scales are an abomination to the Lord, but a just weight is His delight\" (Proverbs 11:1). Further, \"Do not be deceived, God is not mocked; for whatever a man sows, that he will also reap\" — that mind is in the business place as seen in the book of Proverbs, which is interested in church related matters. Therefore, let's conduct all our affairs both spiritual and physical, having God in our mind as He's interested in all of them.",
     "Our office is a mission field. Our work is a worship center. Our business place is a platform for witness and our trading place is an altar!",
@@ -64,6 +64,11 @@ export const kingdomEconomicsMessage = {
     "The Lord's answers can come in many forms: wisdom, direction, protection, and healing; inspiration for new ideas and inventions; open doors and new opportunities; supernatural increase and provision; divine connections; crises averted; families restored; a new way forward is revealed.",
     "Can you relate to one of these needs? Are you tired of hearing testimonies of God's provision while you struggle to meet payroll? Do your prayers seem to be falling to the ground, unheard and unanswered? Are you wondering where you went wrong and what you can do to fix it? Do you question what it means to have God's favor in your life? Are you exhausted from pushing the boulder uphill and ready to let go and let God show you a better way?",
     "The best solution to all these questions is to focus doing your business God's way, study the word and statues of God and you shall have a good success, not just but a good success (Joshua 1:8, NKJV).",
+    "False representation, fraud and exploitation: please do not build your wealth on deception, lying, or unethical inflation of prices — as a true child of God, let your yes be yes. \"Whatever you do, do it heartily, as to the Lord and not to men, knowing that from the Lord you will receive the reward of the inheritance; for you serve the Lord Christ. But he who does wrong will be repaid for what he has done, and there is no partiality\" (Colossians 3:23-25). Working half-heartedly because it isn't \"for God\" is not a productivity issue but a spiritual one — a true Christian businessman preaches Christ with words but must not deny Him with actions. \"Let your light so shine before men, that they may see your good works and glorify your Father in heaven\" (Matthew 5:16). Before God enlarges you, He tests you in small things (Luke 16:10-12).",
+    "NOW is the time to change and start doing business in God's way — exhibiting integrity in all our transactions, excellence in service delivery, avoiding shortcuts and corruption, and giving fair treatment to employees and customers. Doing business God's way is not a slogan; it is a lifestyle of stewardship, integrity, excellence, and witness. When believers embrace this truth, the marketplace becomes a mission field and ordinary work becomes extraordinary worship. \"I leave you with this question,\" Pastor Gabriel Idowu writes in closing, \"if God audited your company right now, would He approve not only your profit, but your process?\"",
+    "We often separate our spiritual beliefs from our work, business, and ministry — acting like different people in different places, a compartmentalization rooted in doubting God's provision and believing we have to cut corners to get ahead. Compromise rarely looks ugly at first; it looks simple and necessary, right up until it's really saying, \"God, I don't think You're big enough to take care of it.\" Deuteronomy 8:18 stands as our correction: it is the Lord our God who gives us the power to get wealth, to establish His covenant.",
+    "The Path God Expects: doing business God's way means embracing two core shifts. Re-establish your source — God is the Provider, not our clever schemes or shortcuts; every door of compromise is a channel for consequences, and our blessings come from God's hands, not human tactics (Proverbs 10:22). Shift your identity — your ministry or business is not just where you earn a living, it is where you put God's character on display; refusing to cut corners tells the marketplace your God is trustworthy, and true blessing is not just about the reward but how it is achieved.",
+    "True Kingdom Economics demands immediate, decisive action, not passive listening — three choices to align our marketplace impact with divine standards: Repent (confess hidden compromises, like dishonest taxes or bribes, and bring them into God's light), Reset (clean up business practices with the courage to lose a lucrative deal rather than cut corners), and Rest (abandon high-pressure manipulation and trust God completely as your ultimate provider). Walk in total integrity, and anchor your business in divine peace today.",
     "\"This Book of the Law shall not depart from your mouth, but you shall meditate in it day and night, that you may observe to do according to all that is written in it. For then you will make your way prosperous, and then you will have good success.\" (Joshua 1:8, NKJV)",
   ],
 };

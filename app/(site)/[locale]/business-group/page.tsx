@@ -63,7 +63,13 @@ export default async function BusinessGroupPage({
       <section className="mt-10 rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]">
         <h2 className="font-display text-lg text-[var(--color-fg)]">{kingdomEconomicsMessage.title}</h2>
         <p className="mt-1 text-sm text-[var(--color-muted)]">
-          {kingdomEconomicsMessage.verse} · {t("messageByLabel")} {kingdomEconomicsMessage.author}, {kingdomEconomicsMessage.authorTitle}
+          {kingdomEconomicsMessage.verse} · {t("messageByLabel")}{" "}
+          {kingdomEconomicsMessage.contributors.map((c, i) => (
+            <span key={c.name}>
+              {i > 0 && "; "}
+              {c.name}, {c.title}
+            </span>
+          ))}
         </p>
         <div className="mt-4 flex flex-col gap-3 text-sm text-[var(--color-fg)]">
           {kingdomEconomicsMessage.body.map((p, i) => (
