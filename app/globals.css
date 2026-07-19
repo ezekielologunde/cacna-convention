@@ -18,24 +18,35 @@
 
   --color-bg: #fff7ef;
   --color-fg: #1b130e;
-  --color-muted: #6b5d51;
-  --color-border: #ece3da;
+  /*
+   * --color-muted/--color-border verified against cac-salvation-center's
+   * actual source (github.com/ezekielologunde/cac-salvation-center):
+   * --ink-soft is #6a584c exactly (this project's earlier value, #6b5d51,
+   * was a close-but-not-exact sample). --color-border is tuned to match
+   * their --line token (rgba(27,19,14,0.12), i.e. --color-fg at 12%)
+   * resolved against --color-bg, since Tailwind v4 custom properties here
+   * are consumed as flat hex rather than alpha-composited at each use site.
+   */
+  --color-muted: #6a584c;
+  --color-border: #e4dcd4;
   --color-surface: #fbead9;
 
   --color-orange: #f15f22;
   --color-red: #d62828;
   --color-maroon: #9e1b1b;
   --color-maroon-deep: #6b1010;
-  --color-gold: #b7791f;
-  --color-gold-light: #ffd9a8;
   /*
-   * --color-gold as small text on --color-bg only reaches ~3.4:1 (below
-   * WCAG AA's 4.5:1 for text this size, e.g. the nav wordmark's kicker
-   * line) -- this darkened shade reaches ~5.4:1 while staying the same
-   * amber hue. --color-gold itself stays untouched for decorative/large
-   * uses (e.g. the hero kicker dot) where contrast doesn't apply.
+   * --color-gold verified against the real source's --gold token
+   * (#e8a33d exactly) -- this project's earlier value, #b7791f, was a
+   * muddier brown-gold guessed from a live-site screenshot rather than
+   * read from source. The real site never puts --gold as small text
+   * directly on its cream background (only on dark surfaces, or inside a
+   * tinted chip), which is why no --color-gold-deep contrast-safe variant
+   * exists there -- see PrimaryNav's nav kicker, which now follows the
+   * same rule (accent = red on the light bar, gold reserved for dark).
    */
-  --color-gold-deep: #8c5c16;
+  --color-gold: #e8a33d;
+  --color-gold-light: #ffd9a8;
 
   --color-brand: var(--color-red);
   --color-brand-contrast: #ffffff;
@@ -77,9 +88,6 @@
     --color-muted: #c9b9ac;
     --color-border: #3a2c22;
     --color-surface: #221a14;
-    /* --color-gold-deep's light-mode value only reaches ~3.3:1 against
-       this dark background -- lighten it here to clear 4.5:1 (~8.2:1). */
-    --color-gold-deep: #d4a44a;
   }
 }
 

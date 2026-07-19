@@ -39,7 +39,7 @@ export function FooterNav() {
     <footer
       aria-label="Footer"
       className="mt-auto px-6 py-12 text-white"
-      style={{ background: "var(--color-maroon-deep)" }}
+      style={{ background: "var(--color-fg)" }}
     >
       <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
         <div>
