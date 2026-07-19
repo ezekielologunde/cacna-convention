@@ -13,6 +13,10 @@ const ATTEND_ITEMS = [
   { key: "children", href: "/children" },
   { key: "goodWomen", href: "/good-women" },
   { key: "ministersWives", href: "/ministers-wives" },
+  { key: "cacma", href: "/cacma" },
+  { key: "christianEducation", href: "/christian-education" },
+  { key: "businessGroup", href: "/business-group" },
+  { key: "youth", href: "/youth" },
   { key: "planYourVisit", href: "/plan-your-visit" },
 ] as const;
 

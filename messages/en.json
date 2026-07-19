@@ -16,7 +16,11 @@
     "contact": "Contact",
     "children": "Children's Program",
     "goodWomen": "Good Women Conference",
-    "ministersWives": "Ministers' Wives Conference"
+    "ministersWives": "Ministers' Wives Conference",
+    "cacma": "CACMA (Men's Association)",
+    "christianEducation": "Christian Education",
+    "businessGroup": "Business Group Fellowship",
+    "youth": "Youth & Young Ministry"
   },
   "Footer": {
     "blurb": "Christ Apostolic Church North America — one fold, gathered from every region, once a year.",
@@ -88,6 +92,28 @@
     "timeLabel": "Time",
     "eventLabel": "Event",
     "speakerLabel": "Speaker"
+  },
+  "Cacma": {
+    "title": "CAC Latunde Region Men Association (CACMA)"
+  },
+  "ChristianEducation": {
+    "themeLabel": "Theme",
+    "moderatorLabel": "Moderator",
+    "orderHeading": "Order of Program",
+    "timeLabel": "Time",
+    "programLabel": "Program",
+    "handlerLabel": "Handler"
+  },
+  "BusinessGroup": {
+    "moderatorsLabel": "Moderators",
+    "orderHeading": "Order of Program",
+    "timeLabel": "Time",
+    "programLabel": "Program",
+    "handlerLabel": "Handler"
+  },
+  "Youth": {
+    "themeLabel": "Theme",
+    "coordinatorLabel": "Regional Youth Coordinator"
   },
   "PlanYourVisit": {
     "title": "Plan Your Visit",

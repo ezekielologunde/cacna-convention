@@ -16,7 +16,11 @@
     "contact": "Kàn Sí Wa",
     "children": "Ètò Àwọn Ọmọdé",
     "goodWomen": "Àpéjọ Àwọn Ìyá Rere",
-    "ministersWives": "Àpéjọ Àwọn Ìyàwó Ìjọ"
+    "ministersWives": "Àpéjọ Àwọn Ìyàwó Ìjọ",
+    "cacma": "CACMA (Ẹgbẹ́ Àwọn Ọkùnrin)",
+    "christianEducation": "Ẹ̀kọ́ Kristẹ́ni",
+    "businessGroup": "Àpéjọ Ẹgbẹ́ Òwò",
+    "youth": "Iṣẹ́ Ìránṣẹ́ Àwọn Ọ̀dọ́"
   },
   "Footer": {
     "blurb": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà — agbo kan, tí a kójọ láti agbègbè kọ̀ọ̀kan, lẹ́ẹ̀kan lọ́dún.",
@@ -88,6 +92,28 @@
     "timeLabel": "Àkókò",
     "eventLabel": "Ìṣẹ̀lẹ̀",
     "speakerLabel": "Agbọ̀rọ̀sọ"
+  },
+  "Cacma": {
+    "title": "Ẹgbẹ́ Àwọn Ọkùnrin Ẹkùn Latunde (CACMA)"
+  },
+  "ChristianEducation": {
+    "themeLabel": "Àkòrí",
+    "moderatorLabel": "Alámòjútó",
+    "orderHeading": "Ìtòlẹ́sẹ̀ Ètò",
+    "timeLabel": "Àkókò",
+    "programLabel": "Ètò",
+    "handlerLabel": "Oníṣe"
+  },
+  "BusinessGroup": {
+    "moderatorsLabel": "Àwọn Alámòjútó",
+    "orderHeading": "Ìtòlẹ́sẹ̀ Ètò",
+    "timeLabel": "Àkókò",
+    "programLabel": "Ètò",
+    "handlerLabel": "Oníṣe"
+  },
+  "Youth": {
+    "themeLabel": "Àkòrí",
+    "coordinatorLabel": "Alámòjútó Àwọn Ọ̀dọ́ Ẹkùn"
   },
   "PlanYourVisit": {
     "title": "Ṣe Ètò Ìbẹ̀wò Rẹ",
