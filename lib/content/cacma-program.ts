@@ -1,9 +1,8 @@
+import type { ScheduleSession } from "./types";
+
 // Transcribed from the 2026 convention program book's "CAC Latunde Region
 // Men Association" (CACMA) pages.
-export type CacmaAgendaItem = { time: string; event: string; speaker?: string };
-export type CacmaSession = { dayLabel: string; timeRange: string; agenda: CacmaAgendaItem[] };
-
-export const cacmaSchedule: CacmaSession[] = [
+export const cacmaSchedule: ScheduleSession[] = [
   {
     dayLabel: "Wednesday, July 15, 2026",
     timeRange: "Early Afternoon Session · 11:45am – 1:15pm",

@@ -6,10 +6,9 @@
 // Ademuwagun" -> "Pastor Abayomi Ademuwagun", same PRO role). `role` is left
 // out entirely for members whose entry in the source list had no role
 // attached, rather than inventing a generic placeholder.
-export type CommitteeMember = {
-  name: string;
-  role?: string;
-};
+import type { Person } from "./types";
+
+export type CommitteeMember = Person;
 
 export const committee: CommitteeMember[] = [
   { name: "Pastor David O. Adenodi, Ph.D.", role: "Chairman" },

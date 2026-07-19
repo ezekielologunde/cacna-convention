@@ -35,7 +35,7 @@ export default async function BusinessGroupPage({
               <tr className="border-b border-[var(--color-border)] text-xs font-bold tracking-wide text-[var(--color-muted)] uppercase">
                 <th className="px-4 py-3">{t("timeLabel")}</th>
                 <th className="px-4 py-3">{t("programLabel")}</th>
-                <th className="px-4 py-3">{t("handlerLabel")}</th>
+                <th className="px-4 py-3">{t("speakerLabel")}</th>
               </tr>
             </thead>
             <tbody>
@@ -43,7 +43,7 @@ export default async function BusinessGroupPage({
                 <tr key={i} className="border-b border-[var(--color-border)] last:border-b-0">
                   <td className="px-4 py-3 tabular-nums text-[var(--color-muted)]">{item.time}</td>
                   <td className="px-4 py-3 font-semibold text-[var(--color-fg)]">{item.event}</td>
-                  <td className="px-4 py-3 text-[var(--color-muted)]">{item.handler}</td>
+                  <td className="px-4 py-3 text-[var(--color-muted)]">{item.speaker}</td>
                 </tr>
               ))}
             </tbody>
@@ -55,7 +55,7 @@ export default async function BusinessGroupPage({
         <h2 className="font-display text-lg text-[var(--color-fg)]">{t("executivesHeading")}</h2>
         <ul className="mt-3 flex flex-col gap-1 text-sm text-[var(--color-fg)]">
           {businessGroupExecutives.map((m) => (
-            <li key={m}>{m}</li>
+            <li key={m.name}>{m.name} — {m.role}</li>
           ))}
         </ul>
       </section>

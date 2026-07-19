@@ -103,14 +103,14 @@
     "orderHeading": "Order of Program",
     "timeLabel": "Time",
     "programLabel": "Program",
-    "handlerLabel": "Handler"
+    "speakerLabel": "Speaker"
   },
   "BusinessGroup": {
     "moderatorsLabel": "Moderators",
     "orderHeading": "Order of Program",
     "timeLabel": "Time",
     "programLabel": "Program",
-    "handlerLabel": "Handler",
+    "speakerLabel": "Speaker",
     "executivesHeading": "Executive Officers",
     "messageByLabel": "Message by"
   },

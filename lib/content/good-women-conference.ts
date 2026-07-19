@@ -1,3 +1,5 @@
+import type { Person, ScheduleSession } from "./types";
+
 // Transcribed from the CAC Latunde Region Good Women Association 2026
 // Conference program flyer. The Wednesday-morning session's timing is
 // printed clearly and transcribed in full below. The two afternoon
@@ -16,18 +18,15 @@ export const goodWomenConference = {
 // Executive Committee (EXCO), cross-confirmed against this year's own
 // conference schedule above -- Benson, Awosanya, and Olajide all appear
 // in the 2026 program under these same names.
-export const goodWomenExecutives: string[] = [
-  "L/Evang. Bolanle Mustapha — Leader",
-  "L/Evang. Bisi Benson — Women Leader",
-  "L/Evang. Janet Olajide — Secretary",
-  "L/Evang. Yomi Adeneye — Chaplain",
-  "L/Evang. Bukola Awosanya — Financial Secretary",
+export const goodWomenExecutives: Person[] = [
+  { name: "L/Evang. Bolanle Mustapha", role: "Leader" },
+  { name: "L/Evang. Bisi Benson", role: "Women Leader" },
+  { name: "L/Evang. Janet Olajide", role: "Secretary" },
+  { name: "L/Evang. Yomi Adeneye", role: "Chaplain" },
+  { name: "L/Evang. Bukola Awosanya", role: "Financial Secretary" },
 ];
 
-export type GoodWomenAgendaItem = { time?: string; event: string; speaker?: string };
-export type GoodWomenSession = { dayLabel: string; timeRange: string; agenda: GoodWomenAgendaItem[] };
-
-export const goodWomenSchedule: GoodWomenSession[] = [
+export const goodWomenSchedule: ScheduleSession[] = [
   {
     dayLabel: "Wednesday, July 15",
     timeRange: "11:45am – 1:15pm",

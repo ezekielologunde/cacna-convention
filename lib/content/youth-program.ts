@@ -1,3 +1,5 @@
+import type { AgendaItem } from "./types";
+
 // Transcribed from the 2026 convention program book's "CAC North America
 // Youth and Young Ministry 2026 Convention Schedule."
 export const youthProgram = {
@@ -6,8 +8,11 @@ export const youthProgram = {
   regionalCoordinator: "Pastor Adekunmi Browne",
 };
 
-export type YouthAgendaItem = { time: string; event: string };
-export type YouthScheduleDay = { dayLabel: string; agenda: YouthAgendaItem[] };
+// Speakers for youth sessions are embedded in the `event` text itself
+// (e.g. "— Pastor Adekunmi Browne, Regional Youth Coordinator") rather than
+// tracked as a separate field, since the source flyer didn't print a
+// per-item speaker column the way the other sub-conference schedules do.
+export type YouthScheduleDay = { dayLabel: string; agenda: AgendaItem[] };
 
 export const youthSchedule: YouthScheduleDay[] = [
   {

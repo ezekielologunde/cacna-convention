@@ -1,3 +1,5 @@
+import type { Person, ScheduleSession } from "./types";
+
 // Transcribed from the 2026 CAC Latunde Region Convention Ministers' Wives
 // Conference program flyer (a clean, clearly printed schedule table).
 export const ministersWivesConference = {
@@ -5,18 +7,15 @@ export const ministersWivesConference = {
   chairperson: "Evang./Mrs. Agnes Agbeja",
   secretary: "Evang./Mrs. Toyin Ademuwagun, Esq.",
   executiveMembers: [
-    "Evang./Mrs. Agnes Agbeja — Chairperson",
-    "Evang./Mrs. Esther Adenodi",
-    "Evang./Mrs. Janet Adelani",
-    "Evang./Mrs. Beatrice Olawale",
-    "Evang./Mrs. Toyin Ademuwagun, Esq. — Secretary",
-  ],
+    { name: "Evang./Mrs. Agnes Agbeja", role: "Chairperson" },
+    { name: "Evang./Mrs. Esther Adenodi" },
+    { name: "Evang./Mrs. Janet Adelani" },
+    { name: "Evang./Mrs. Beatrice Olawale" },
+    { name: "Evang./Mrs. Toyin Ademuwagun, Esq.", role: "Secretary" },
+  ] as Person[],
 };
 
-export type MinistersWivesAgendaItem = { time: string; event: string; speaker: string };
-export type MinistersWivesSession = { dayLabel: string; timeRange: string; agenda: MinistersWivesAgendaItem[] };
-
-export const ministersWivesSchedule: MinistersWivesSession[] = [
+export const ministersWivesSchedule: ScheduleSession[] = [
   {
     dayLabel: "Wednesday, July 15, 2026",
     timeRange: "11:45am – 1:15pm",

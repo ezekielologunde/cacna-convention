@@ -34,7 +34,7 @@ export default async function ChristianEducationPage({
               <tr className="border-b border-[var(--color-border)] text-xs font-bold tracking-wide text-[var(--color-muted)] uppercase">
                 <th className="px-4 py-3">{t("timeLabel")}</th>
                 <th className="px-4 py-3">{t("programLabel")}</th>
-                <th className="px-4 py-3">{t("handlerLabel")}</th>
+                <th className="px-4 py-3">{t("speakerLabel")}</th>
               </tr>
             </thead>
             <tbody>
@@ -42,7 +42,7 @@ export default async function ChristianEducationPage({
                 <tr key={i} className="border-b border-[var(--color-border)] last:border-b-0">
                   <td className="px-4 py-3 tabular-nums text-[var(--color-muted)]">{item.time}</td>
                   <td className="px-4 py-3 font-semibold text-[var(--color-fg)]">{item.event}</td>
-                  <td className="px-4 py-3 text-[var(--color-muted)]">{item.handler}</td>
+                  <td className="px-4 py-3 text-[var(--color-muted)]">{item.speaker}</td>
                 </tr>
               ))}
             </tbody>
