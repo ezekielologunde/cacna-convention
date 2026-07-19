@@ -16,9 +16,17 @@ export default async function MinistersWivesPage({
 
       <section className="mt-8">
         <h2 className="font-display text-lg text-[var(--color-fg)]">{t("executiveHeading")}</h2>
-        <ul className="mt-3 flex flex-col gap-1 text-sm text-[var(--color-fg)]">
-          {ministersWivesConference.executiveMembers.map((m) => (
-            <li key={m.name}>{m.name}{m.role && ` — ${m.role}`}</li>
+        <ul className="mt-4 flex flex-col gap-4">
+          {ministersWivesConference.executiveMembers.map((member) => (
+            <li
+              key={member.name}
+              className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
+            >
+              <p className="font-semibold text-[var(--color-fg)]">{member.name}</p>
+              {member.role && (
+                <p className="mt-1 text-sm text-[var(--color-muted)]">{member.role}</p>
+              )}
+            </li>
           ))}
         </ul>
       </section>
