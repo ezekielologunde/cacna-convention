@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { goodWomenConference, goodWomenSchedule } from "@/lib/content/good-women-conference";
+import { goodWomenConference, goodWomenSchedule, goodWomenExecutives } from "@/lib/content/good-women-conference";
 
 export default async function GoodWomenPage({
   params,
@@ -18,6 +18,15 @@ export default async function GoodWomenPage({
         <span className="font-semibold text-[var(--color-fg)]">{t("leaderLabel")}: </span>
         {goodWomenConference.leader} — {goodWomenConference.leaderTitle}
       </p>
+
+      <section className="mt-8">
+        <h2 className="font-display text-lg text-[var(--color-fg)]">{t("executivesHeading")}</h2>
+        <ul className="mt-3 flex flex-col gap-1 text-sm text-[var(--color-fg)]">
+          {goodWomenExecutives.map((m) => (
+            <li key={m}>{m}</li>
+          ))}
+        </ul>
+      </section>
 
       <section className="mt-10 flex flex-col gap-6">
         {goodWomenSchedule.map((session, i) => (

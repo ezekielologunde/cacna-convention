@@ -13,6 +13,17 @@ export const goodWomenConference = {
   leaderTitle: "CACNAGWA Leader",
 };
 
+// Executive Committee (EXCO), cross-confirmed against this year's own
+// conference schedule above -- Benson, Awosanya, and Olajide all appear
+// in the 2026 program under these same names.
+export const goodWomenExecutives: string[] = [
+  "L/Evang. Bolanle Mustapha — Leader",
+  "L/Evang. Bisi Benson — Women Leader",
+  "L/Evang. Janet Olajide — Secretary",
+  "L/Evang. Yomi Adeneye — Chaplain",
+  "L/Evang. Bukola Awosanya — Financial Secretary",
+];
+
 export type GoodWomenAgendaItem = { time?: string; event: string; speaker?: string };
 export type GoodWomenSession = { dayLabel: string; timeRange: string; agenda: GoodWomenAgendaItem[] };
 
