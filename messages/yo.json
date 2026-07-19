@@ -54,7 +54,9 @@
     "giveCta": "Ẹ̀bùn"
   },
   "About": {
+    "eyebrow": "Nípa",
     "title": "Nípa CACNA",
+    "subtitle": "Ìtàn, Ète, àti àwọn ènìyàn tí ó wà lẹ́yìn Àpéjọ Ọdọọdún CACNA.",
     "ourStory": "Ìtàn Wa",
     "leadership": "Aṣíwájú",
     "committee": "Ìgbìmọ̀",
@@ -65,7 +67,11 @@
     "externalResourcesHeading": "Àwọn Ìsopọ̀ Ìta",
     "opensInNewTab": " (yóò ṣí ní táàbù tuntun)",
     "founded": "A dá sílẹ̀ ní ọdún {year} láti ọwọ́ {founder} ní {location}.",
-    "todayReach": "Lónìí, CAC Àríwá Amẹ́ríkà ti fẹ̀ jáde sí DCC àti Àgbègbè {count} jákèjádò Amẹ́ríkà àti Kánádà."
+    "readFullStory": "Ka ìtàn kíkún ti CAC Àríwá Amẹ́ríkà, pẹ̀lú ètò-ìṣèto àti ìtàn wa, ní ojú-òpó wẹ́ẹ̀bù àkọ́kọ́ wa.",
+    "readFullStoryCta": "Ka ìtàn kíkún wa ní cacnorthamerica.com",
+    "superintendentsBlurb": "Àwọn DCC àti Àgbègbè CACNA ni àwọn alábòójútó olùfọkànsìn ń darí jákèjádò Amẹ́ríkà àti Kánádà. Wá tìrẹ ní ojú-òpó wẹ́ẹ̀bù àkọ́kọ́ wa.",
+    "findYourZone": "Wá Àgbègbè Rẹ →",
+    "findYourDcc": "Wá DCC Rẹ →"
   },
   "Schedule": {
     "title": "Iṣètò",
@@ -85,7 +91,10 @@
   "GoodWomen": {
     "title": "Àpéjọ Ẹgbẹ́ Àwọn Ìyá Rere",
     "leaderLabel": "Aṣáájú CACNAGWA",
-    "executivesHeading": "Àwọn Olórí Ìgbìmọ̀"
+    "executivesHeading": "Àwọn Olórí Ìgbìmọ̀",
+    "timeLabel": "Àkókò",
+    "programLabel": "Ètò",
+    "speakerLabel": "Oníṣe"
   },
   "MinistersWives": {
     "title": "Àpéjọ Àwọn Ìyàwó Ìjọ",
@@ -95,9 +104,13 @@
     "speakerLabel": "Agbọ̀rọ̀sọ"
   },
   "Cacma": {
-    "title": "Ẹgbẹ́ Àwọn Ọkùnrin Ẹkùn Latunde (CACMA)"
+    "title": "Ẹgbẹ́ Àwọn Ọkùnrin Ẹkùn Latunde (CACMA)",
+    "timeLabel": "Àkókò",
+    "programLabel": "Ètò",
+    "speakerLabel": "Oníṣe"
   },
   "ChristianEducation": {
+    "dateLabel": "Ọjọ́",
     "themeLabel": "Àkòrí",
     "moderatorLabel": "Alámòjútó",
     "orderHeading": "Ìtòlẹ́sẹ̀ Ètò",
@@ -106,6 +119,7 @@
     "speakerLabel": "Oníṣe"
   },
   "BusinessGroup": {
+    "dateLabel": "Ọjọ́",
     "moderatorsLabel": "Àwọn Alámòjútó",
     "orderHeading": "Ìtòlẹ́sẹ̀ Ètò",
     "timeLabel": "Àkókò",
@@ -116,7 +130,10 @@
   },
   "Youth": {
     "themeLabel": "Àkòrí",
-    "coordinatorLabel": "Alámòjútó Àwọn Ọ̀dọ́ Ẹkùn"
+    "coordinatorLabel": "Alámòjútó Àwọn Ọ̀dọ́ Ẹkùn",
+    "timeLabel": "Àkókò",
+    "programLabel": "Ètò",
+    "speakerLabel": "Oníṣe"
   },
   "PlanYourVisit": {
     "title": "Ṣe Ètò Ìbẹ̀wò Rẹ",
@@ -153,7 +170,9 @@
   },
   "Give": {
     "title": "Ẹ̀bùn",
-    "comingSoon": "Ẹ̀bùn orí-ayélujára kò tíì ṣetán — ẹ ṣàyẹ̀wò padà láìpẹ́."
+    "intro": "Ẹ̀bùn fún àwọn iṣẹ́-ìsìn CACNA, Àpéjọ Ọdọọdún, àti Iṣẹ́ Ilé Ẹ̀wádún CAC ni a ń ṣe ní ojú-òpó wẹ́ẹ̀bù àkọ́kọ́ wa.",
+    "cta": "Fi ẹ̀bùn sí cacnorthamerica.com",
+    "opensInNewTab": " (yóò ṣí ní táàbù tuntun)"
   },
   "News": {
     "title": "Ìròyìn àti Ìṣẹ̀lẹ̀",

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { PageHero } from "@/components/ui/PageHero";
 import { mainGalleryPhotos, childrenGalleryPhotos } from "@/lib/content/gallery";
 
 export default async function GalleryPage({
@@ -12,11 +13,10 @@ export default async function GalleryPage({
   const t = await getTranslations("Gallery");
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-12">
-      <h1 className="text-center font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
-      <p className="mx-auto mt-3 max-w-[52ch] text-center text-[var(--color-muted)]">{t("intro")}</p>
-
-      <section className="mt-10">
+    <>
+      <PageHero title={t("title")} subtitle={t("intro")} />
+      <div className="mx-auto max-w-5xl px-6 py-12">
+      <section>
         <h2 className="font-display text-xl text-[var(--color-fg)]">{t("conventionHeading")}</h2>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           {mainGalleryPhotos.map((src) => (
@@ -55,6 +55,7 @@ export default async function GalleryPage({
           ))}
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

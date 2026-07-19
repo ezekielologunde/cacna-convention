@@ -23,4 +23,19 @@ export const externalResources = [
     url: "https://www.cacworldnews.com/",
     description: "News and updates from Christ Apostolic Church Worldwide.",
   },
+  {
+    label: "Regional Leadership",
+    url: "https://cacnorthamerica.com/leadership",
+    description: "The full CACNA regional and CAC Nigeria & Overseas leadership directory.",
+  },
+  {
+    label: "Zones & DCCs",
+    url: "https://cacnorthamerica.com/zones",
+    description: "Find your Zone or DCC and its Superintendent across the United States and Canada.",
+  },
+  {
+    label: "Giving",
+    url: "https://cacnorthamerica.com/giving",
+    description: "Ways to give to CACNA's ministries, the CAC Centenary Building Project, and more.",
+  },
 ];

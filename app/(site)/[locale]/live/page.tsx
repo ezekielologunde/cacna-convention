@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { PageHero } from "@/components/ui/PageHero";
 
 // YouTube channel confirmed live and linked from cacnorthamerica.com's own
 // "Video Channel" nav item (see docs/source-content/2026-cacnaconvention-org-content.md
@@ -32,10 +33,9 @@ export default async function LivePage({
   const t = await getTranslations("Live");
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-12">
-      <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
-      <p className="mt-3 max-w-[60ch] text-[var(--color-muted)]">{t("intro")}</p>
-
+    <>
+      <PageHero title={t("title")} subtitle={t("intro")} />
+      <div className="mx-auto max-w-3xl px-6 py-12">
       <a
         href={YOUTUBE_LIVE_URL}
         target="_blank"
@@ -77,6 +77,7 @@ export default async function LivePage({
           {t("pastYearsCta")}
         </a>
       </p>
-    </div>
+      </div>
+    </>
   );
 }

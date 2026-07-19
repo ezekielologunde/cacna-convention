@@ -16,7 +16,7 @@ describe("YouthPage", () => {
 
     expect(screen.getByRole("heading", { name: youthProgram.title, level: 1 })).toBeInTheDocument();
     expect(screen.getAllByText(youthProgram.theme, { exact: false }).length).toBeGreaterThan(0);
-    expect(screen.getByText(youthProgram.regionalCoordinator)).toBeInTheDocument();
+    expect(screen.getAllByText(youthProgram.regionalCoordinator, { exact: false }).length).toBeGreaterThan(0);
 
     for (const day of youthSchedule) {
       expect(screen.getByRole("heading", { name: day.dayLabel })).toBeInTheDocument();

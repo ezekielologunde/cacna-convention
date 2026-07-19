@@ -4,9 +4,9 @@ import { getActiveEdition } from "@/lib/editions";
 import { getActivePricingForEdition } from "@/lib/pricing";
 import { AboutTabs } from "@/components/about/AboutTabs";
 import { PromoBanner } from "@/components/register/PromoBanner";
+import { PageHero } from "@/components/ui/PageHero";
 import { leadership } from "@/lib/content/leadership";
 import { committee } from "@/lib/content/committee";
-import { superintendents } from "@/lib/content/superintendents";
 import { aboutConvention } from "@/lib/content/about-convention";
 import { history } from "@/lib/content/history";
 
@@ -37,13 +37,10 @@ export default async function AboutPage({
   return (
     <>
       <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
-      <div className="mx-auto max-w-3xl px-6 pt-12">
-        <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
-      </div>
+      <PageHero eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} tone="navy" />
       <AboutTabs
         leadership={leadership}
         committee={committee}
-        superintendents={superintendents}
         aboutConvention={aboutConvention}
         history={history}
       />

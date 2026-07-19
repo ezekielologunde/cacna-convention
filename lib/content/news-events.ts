@@ -22,6 +22,10 @@ export const newsEvents: NewsEvent[] = [
     location: "CAC Village, USA",
     description:
       "Christ Apostolic Church North America celebrates 50 years since its founding in 1976, at CAC Village — the same grounds that host the annual convention.",
+    // Org-wide milestone, not Convention programming — no dedicated page
+    // for it exists on cacnorthamerica.com yet, so this links to the
+    // homepage rather than a guessed/nonexistent path.
+    moreInfoUrl: "https://cacnorthamerica.com/",
   },
   {
     // Transcribed from the 2027 Ministers Retreat flyer (2026-07-17). No
@@ -39,6 +43,9 @@ export const newsEvents: NewsEvent[] = [
       "Empowerment — Be equipped to lead with impact.",
       "Prayer & Intercession — Seek God together for our church and communities.",
     ],
-    moreInfoUrl: "https://cacnorthamerica.com/",
+    // A real dedicated page for this now exists on cacnorthamerica.com
+    // (built and verified this session) — link there directly instead of
+    // the generic homepage.
+    moreInfoUrl: "https://cacnorthamerica.com/events/ministers-retreat-2027",
   },
 ];

@@ -1,4 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { PageHero } from "@/components/ui/PageHero";
+import { AgendaTable } from "@/components/schedule/AgendaTable";
 import { youthProgram, youthSchedule } from "@/lib/content/youth-program";
 
 export default async function YouthPage({
@@ -11,38 +13,29 @@ export default async function YouthPage({
   const t = await getTranslations("Youth");
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-12">
-      <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{youthProgram.title}</h1>
-
-      <div className="mt-4 flex flex-col gap-1 text-sm text-[var(--color-muted)]">
-        <p>
-          <span className="font-semibold text-[var(--color-fg)]">{t("themeLabel")}: </span>
-          &ldquo;{youthProgram.theme}&rdquo;
-        </p>
-        <p>
-          <span className="font-semibold text-[var(--color-fg)]">{t("coordinatorLabel")}: </span>
-          {youthProgram.regionalCoordinator}
-        </p>
+    <>
+      <PageHero
+        eyebrow={`${t("themeLabel")}: "${youthProgram.theme}"`}
+        title={youthProgram.title}
+        subtitle={`${t("coordinatorLabel")}: ${youthProgram.regionalCoordinator}`}
+      />
+      <div className="mx-auto max-w-3xl px-6 py-12">
+        <section className="flex flex-col gap-8">
+          {youthSchedule.map((day) => (
+            <div key={day.dayLabel}>
+              <h2 className="font-display text-lg text-[var(--color-fg)]">{day.dayLabel}</h2>
+              <div className="mt-3">
+                <AgendaTable
+                  items={day.agenda}
+                  timeLabel={t("timeLabel")}
+                  programLabel={t("programLabel")}
+                  speakerLabel={t("speakerLabel")}
+                />
+              </div>
+            </div>
+          ))}
+        </section>
       </div>
-
-      <section className="mt-10 flex flex-col gap-6">
-        {youthSchedule.map((day) => (
-          <div
-            key={day.dayLabel}
-            className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
-          >
-            <h2 className="font-display text-lg text-[var(--color-fg)]">{day.dayLabel}</h2>
-            <ul className="mt-3 flex flex-col gap-2">
-              {day.agenda.map((item, i) => (
-                <li key={i} className="text-sm text-[var(--color-fg)]">
-                  <span className="mr-2 font-semibold tabular-nums text-[var(--color-muted)]">{item.time}</span>
-                  {item.event}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </section>
-    </div>
+    </>
   );
 }

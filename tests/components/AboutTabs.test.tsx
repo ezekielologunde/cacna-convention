@@ -5,7 +5,6 @@ import { AboutTabs } from "../../components/about/AboutTabs";
 import messages from "../../messages/en.json";
 import { leadership } from "../../lib/content/leadership";
 import { committee } from "../../lib/content/committee";
-import { superintendents } from "../../lib/content/superintendents";
 import { history } from "../../lib/content/history";
 import { aboutConvention } from "../../lib/content/about-convention";
 import { externalResources } from "../../lib/content/external-resources";
@@ -17,7 +16,6 @@ describe("AboutTabs", () => {
         <AboutTabs
           leadership={leadership}
           committee={committee}
-          superintendents={superintendents}
           aboutConvention={aboutConvention}
           history={history}
         />
@@ -25,8 +23,6 @@ describe("AboutTabs", () => {
     );
 
     expect(screen.getByText(history.founder, { exact: false })).toBeInTheDocument();
-    expect(screen.getByText(history.fitaHqNote)).toBeInTheDocument();
-    expect(screen.getByText(history.governanceNote)).toBeInTheDocument();
     expect(screen.getByText(aboutConvention.missionStatement)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Biblically Based" })).toBeInTheDocument();
     expect(screen.getByText(aboutConvention.biblicallyBased[0])).toBeInTheDocument();
@@ -51,7 +47,11 @@ describe("AboutTabs", () => {
     expect(screen.getByText(committee[0].name)).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("tab", { name: "Superintendents" }));
-    expect(screen.getByText(superintendents[0].name)).toBeInTheDocument();
-    expect(screen.getAllByText(superintendents[0].name)).toHaveLength(1);
+    expect(
+      screen.getByRole("link", { name: /Find your Zone/i })
+    ).toHaveAttribute("href", "https://cacnorthamerica.com/zones");
+    expect(
+      screen.getByRole("link", { name: /Find your DCC/i })
+    ).toHaveAttribute("href", "https://cacnorthamerica.com/dccs");
   });
 });

@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { PageHero } from "@/components/ui/PageHero";
 import {
   childrenConvention,
   dailyStructure,
@@ -16,21 +17,14 @@ export default async function ChildrenPage({
   const t = await getTranslations("Children");
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-12">
-      <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
-
-      <div className="mt-4 flex flex-col gap-1 text-sm text-[var(--color-muted)]">
-        <p>
-          <span className="font-semibold text-[var(--color-fg)]">{t("themeLabel")}: </span>
-          &ldquo;{childrenConvention.theme}&rdquo; ({childrenConvention.themeVerse})
-        </p>
-        <p>
-          <span className="font-semibold text-[var(--color-fg)]">{t("coordinatorLabel")}: </span>
-          {childrenConvention.coordinator}
-        </p>
-      </div>
-
-      <section className="mt-10">
+    <>
+      <PageHero
+        eyebrow={`${t("themeLabel")}: "${childrenConvention.theme}" (${childrenConvention.themeVerse})`}
+        title={t("title")}
+        subtitle={`${t("coordinatorLabel")}: ${childrenConvention.coordinator}`}
+      />
+      <div className="mx-auto max-w-3xl px-6 py-12">
+      <section className="mt-2">
         <h2 className="font-display text-xl text-[var(--color-fg)]">
           {t("dailyStructureHeading")}
         </h2>
@@ -106,7 +100,12 @@ export default async function ChildrenPage({
         <h2 className="font-display text-xl text-[var(--color-fg)]">{t("teachersListHeading")}</h2>
         <ul className="mt-4 grid gap-x-6 gap-y-1.5 text-sm text-[var(--color-fg)] sm:grid-cols-2">
           {childrenTeachers.map((teacher) => (
-            <li key={teacher}>{teacher}</li>
+            <li key={teacher.name}>
+              {teacher.name}
+              {teacher.ageRange && (
+                <span className="text-[var(--color-muted)]"> — {teacher.ageRange}</span>
+              )}
+            </li>
           ))}
         </ul>
       </section>
@@ -115,6 +114,7 @@ export default async function ChildrenPage({
         {childrenConvention.safetyNote}
       </p>
       <p className="mt-2 text-sm text-[var(--color-muted)]">{childrenConvention.closingNote}</p>
-    </div>
+      </div>
+    </>
   );
 }

@@ -5,6 +5,7 @@ import { getActiveEdition } from "@/lib/editions";
 import { getActivePricingForEdition } from "@/lib/pricing";
 import { ScheduleDay } from "@/components/schedule/ScheduleDay";
 import { PromoBanner } from "@/components/register/PromoBanner";
+import { PageHero } from "@/components/ui/PageHero";
 
 export default async function SchedulePage({
   params,
@@ -62,9 +63,9 @@ export default async function SchedulePage({
   return (
     <div>
       <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
+      <PageHero title={t("title")} />
       <div className="mx-auto max-w-3xl px-6 py-12">
-        <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
-        <div className="mt-8 flex flex-col gap-6">
+        <div className="flex flex-col gap-6">
           {orderedDays.map(([dayDate, daySessions]) => (
             <ScheduleDay key={dayDate} dayDate={dayDate} sessions={daySessions} />
           ))}

@@ -27,7 +27,7 @@ describe("ChildrenPage", () => {
     }
 
     for (const teacher of childrenTeachers) {
-      expect(screen.getByText(teacher)).toBeInTheDocument();
+      expect(screen.getAllByText(teacher.name, { exact: false }).length).toBeGreaterThan(0);
     }
   });
 });

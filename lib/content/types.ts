@@ -27,4 +27,8 @@ export interface ConferenceMessage {
   verse?: string;
   contributors: Person[];
   body: string[];
+  /** Shown beneath a condensed excerpt, pointing to where the rest lives
+   *  (e.g. the printed convention program) — omitted when `body` is the
+   *  complete message. */
+  fullMessageNote?: string;
 }

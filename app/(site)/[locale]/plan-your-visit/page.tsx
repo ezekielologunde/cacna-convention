@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getActiveEdition } from "@/lib/editions";
 import { getActivePricingForEdition } from "@/lib/pricing";
 import { PromoBanner } from "@/components/register/PromoBanner";
+import { PageHero } from "@/components/ui/PageHero";
 import { BulletList } from "@/components/ui/BulletList";
 import { hotels, hotelGroupCode } from "@/lib/content/hotels";
 import { rules } from "@/lib/content/rules";
@@ -48,10 +49,9 @@ export default async function PlanYourVisitPage({
   return (
     <div>
       <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
+      <PageHero title={t("title")} />
       <div className="mx-auto max-w-3xl px-6 py-12">
-        <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
-
-        <section className="mt-10">
+        <section>
           <h2 className="font-display text-xl text-[var(--color-fg)]">{t("travelHeading")}</h2>
           <p className="mt-2 text-sm text-[var(--color-muted)]">
             <span className="font-semibold text-[var(--color-fg)]">{t("venueHeading")}: </span>

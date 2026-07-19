@@ -16,17 +16,35 @@ export const dailyStructure = [
   { label: "Prayers", morning: "12:00–12:15pm", afternoon: "4:00–4:15pm" },
 ];
 
-const teachers58 = [
-  "Evang. Mrs. J. Adewunmi",
-  "Mrs. A. Bankole",
-  "Evang. Mrs. I.B. Ajisafe",
-  "Evang. Mrs. M. Okusanya",
-  "Mrs. G. Omowole",
-  "Mrs. C. Odetoye",
-  "Mrs. Olajumoke Alaba",
+// Single canonical teacher list (2026-07-19) — previously transcribed
+// twice: once as first-initial shorthand split by age group (teachers58/
+// teachers912, as printed in the daily schedule) and again as a separate
+// full-name "Teachers" roll call (childrenTeachers, below), which is the
+// same ~10 people typed up in two different formats. Full names are now
+// the single source of truth; age-group filters derive from it. The
+// Program Coordinator (childrenConvention.coordinator, above) is
+// intentionally not repeated here even though the old full-name roll call
+// included her. Two names (Esan, Ijaola) have no age-group assignment on
+// the source flyer, so they're listed without one rather than guessed.
+export type ChildrenTeacher = { name: string; ageRange?: "5–8 yrs" | "9–12 yrs" };
+
+export const childrenTeachers: ChildrenTeacher[] = [
+  { name: "Evang. Mrs. Juliana Adewunmi", ageRange: "5–8 yrs" },
+  { name: "Mrs. Adeola Bankole", ageRange: "5–8 yrs" },
+  { name: "Evang. Mrs. Iyabo Bolanle Ajisafe", ageRange: "5–8 yrs" },
+  { name: "Evang. Mrs. Michelle Okusanya", ageRange: "5–8 yrs" },
+  { name: "Mrs. Gloria Omowole", ageRange: "5–8 yrs" },
+  { name: "Mrs. Christiana Odetoye", ageRange: "5–8 yrs" },
+  { name: "Mrs. Olajumoke Alaba", ageRange: "5–8 yrs" },
+  { name: "Mrs. Adeola Babs Mala", ageRange: "9–12 yrs" },
+  { name: "Evang. Mrs. Sumbo Oni", ageRange: "9–12 yrs" },
+  { name: "Evang. Mrs. Folasade Olorunfemi", ageRange: "9–12 yrs" },
+  { name: "Mrs. Esan" },
+  { name: "Mr. Ijaola" },
 ];
 
-const teachers912 = ["Mrs. A. Babs Mala", "Evang. Mrs. S. Oni", "Evang. Mrs. F. Olorunfemi"];
+const teachers58 = childrenTeachers.filter((t) => t.ageRange === "5–8 yrs").map((t) => t.name);
+const teachers912 = childrenTeachers.filter((t) => t.ageRange === "9–12 yrs").map((t) => t.name);
 
 export type ChildrenTeacherGroup = { ageRange: string; teachers: string[] };
 export type ChildrenSession = {
@@ -87,23 +105,4 @@ export const childrenSchedule: ChildrenScheduleDay[] = [
       activity: "Question & Answer Session with Prizes",
     },
   },
-];
-
-// Distinct from `teachers58`/`teachers912` above, which use first-initial
-// shorthand as printed in the daily schedule -- this is the flyer's own
-// separate "Children's Convention Teachers" roll call, in full names.
-export const childrenTeachers: string[] = [
-  "Evang. Mrs. Oluwatoyin Oni",
-  "Mrs. Adeola Babs Mala",
-  "Evang. Mrs. Juliana Adewunmi",
-  "Mrs. Gloria Omowole",
-  "Evang. Mrs. Iyabo Bolanle Ajisafe",
-  "Evang. Mrs. Sumbo Oni",
-  "Evang. Mrs. Michelle Okusanya",
-  "Mrs. Adeola Bankole",
-  "Mrs. Christiana Odetoye",
-  "Mrs. Esan",
-  "Evang. Mrs. Folasade Olorunfemi",
-  "Mrs. Olajumoke Alaba",
-  "Mr. Ijaola",
 ];

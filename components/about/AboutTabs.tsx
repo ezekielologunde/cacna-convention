@@ -7,7 +7,6 @@ import { BulletList } from "@/components/ui/BulletList";
 import { externalResources } from "@/lib/content/external-resources";
 import type { LeadershipMember } from "@/lib/content/leadership";
 import type { CommitteeMember } from "@/lib/content/committee";
-import type { Superintendent } from "@/lib/content/superintendents";
 import type { AboutConvention } from "@/lib/content/about-convention";
 import type { history as History } from "@/lib/content/history";
 
@@ -16,13 +15,11 @@ type Tab = "story" | "leadership" | "committee" | "superintendents";
 export function AboutTabs({
   leadership,
   committee,
-  superintendents,
   aboutConvention,
   history,
 }: {
   leadership: LeadershipMember[];
   committee: CommitteeMember[];
-  superintendents: Superintendent[];
   aboutConvention: AboutConvention;
   history: typeof History;
 }) {
@@ -79,10 +76,17 @@ export function AboutTabs({
             })}
           </p>
           <p className="mt-4 text-[var(--color-muted)]">
-            {t("todayReach", { count: history.zoneCount })}
+            {t("readFullStory")}{" "}
+            <a
+              href="https://cacnorthamerica.com/about"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${t("readFullStoryCta")}${t("opensInNewTab")}`}
+              className="font-semibold text-[var(--color-maroon)] underline"
+            >
+              {t("readFullStoryCta")}
+            </a>
           </p>
-          <p className="mt-4 text-[var(--color-muted)]">{history.fitaHqNote}</p>
-          <p className="mt-4 text-[var(--color-muted)]">{history.governanceNote}</p>
 
           <h3 className="mt-6 font-display text-lg text-[var(--color-fg)]">
             {t("missionHeading")}
@@ -177,22 +181,38 @@ export function AboutTabs({
       ) : null}
 
       {tab === "superintendents" ? (
-        <ul
+        <div
           id="about-panel-superintendents"
           role="tabpanel"
           aria-labelledby="about-tab-superintendents"
-          className="mt-8 flex flex-col gap-4 px-6"
+          className="mt-8 max-w-[60ch] px-6"
         >
-          {superintendents.map((person) => (
-            <li
-              key={person.name}
-              className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
-            >
-              <p className="font-semibold text-[var(--color-fg)]">{person.name}</p>
-              <p className="mt-1 text-sm text-[var(--color-muted)]">{person.title}</p>
+          <p className="text-[var(--color-muted)]">{t("superintendentsBlurb")}</p>
+          <ul className="mt-4 flex flex-col gap-2">
+            <li>
+              <a
+                href="https://cacnorthamerica.com/zones"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${t("findYourZone")}${t("opensInNewTab")}`}
+                className="font-semibold text-[var(--color-maroon)] underline"
+              >
+                {t("findYourZone")}
+              </a>
             </li>
-          ))}
-        </ul>
+            <li>
+              <a
+                href="https://cacnorthamerica.com/dccs"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${t("findYourDcc")}${t("opensInNewTab")}`}
+                className="font-semibold text-[var(--color-maroon)] underline"
+              >
+                {t("findYourDcc")}
+              </a>
+            </li>
+          </ul>
+        </div>
       ) : null}
     </div>
   );

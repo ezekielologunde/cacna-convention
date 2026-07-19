@@ -54,7 +54,9 @@
     "giveCta": "Give"
   },
   "About": {
+    "eyebrow": "About",
     "title": "About CACNA",
+    "subtitle": "The story, mission, and people behind the CACNA Annual Convention.",
     "ourStory": "Our Story",
     "leadership": "Leadership",
     "committee": "Committee",
@@ -65,7 +67,11 @@
     "externalResourcesHeading": "External Resources",
     "opensInNewTab": " (opens in a new tab)",
     "founded": "Founded in {year} by {founder} in {location}.",
-    "todayReach": "Today, CAC North America spans {count} DCCs and Zones across the United States and Canada."
+    "readFullStory": "Read the full CAC North America story, including our organizational structure and history, on our main site.",
+    "readFullStoryCta": "Read our full story on cacnorthamerica.com",
+    "superintendentsBlurb": "CACNA's Zones and DCCs are shepherded by dedicated superintendents across the United States and Canada. Find yours on our main site.",
+    "findYourZone": "Find your Zone →",
+    "findYourDcc": "Find your DCC →"
   },
   "Schedule": {
     "title": "Schedule",
@@ -85,7 +91,10 @@
   "GoodWomen": {
     "title": "Good Women Association Conference",
     "leaderLabel": "CACNAGWA Leader",
-    "executivesHeading": "Executive Committee"
+    "executivesHeading": "Executive Committee",
+    "timeLabel": "Time",
+    "programLabel": "Program",
+    "speakerLabel": "Speaker"
   },
   "MinistersWives": {
     "title": "Ministers' Wives Conference",
@@ -95,9 +104,13 @@
     "speakerLabel": "Speaker"
   },
   "Cacma": {
-    "title": "CAC Latunde Region Men Association (CACMA)"
+    "title": "CAC Latunde Region Men Association (CACMA)",
+    "timeLabel": "Time",
+    "programLabel": "Program",
+    "speakerLabel": "Speaker"
   },
   "ChristianEducation": {
+    "dateLabel": "Date",
     "themeLabel": "Theme",
     "moderatorLabel": "Moderator",
     "orderHeading": "Order of Program",
@@ -106,6 +119,7 @@
     "speakerLabel": "Speaker"
   },
   "BusinessGroup": {
+    "dateLabel": "Date",
     "moderatorsLabel": "Moderators",
     "orderHeading": "Order of Program",
     "timeLabel": "Time",
@@ -116,7 +130,10 @@
   },
   "Youth": {
     "themeLabel": "Theme",
-    "coordinatorLabel": "Regional Youth Coordinator"
+    "coordinatorLabel": "Regional Youth Coordinator",
+    "timeLabel": "Time",
+    "programLabel": "Program",
+    "speakerLabel": "Speaker"
   },
   "PlanYourVisit": {
     "title": "Plan Your Visit",
@@ -153,7 +170,9 @@
   },
   "Give": {
     "title": "Give",
-    "comingSoon": "Online giving isn't set up yet — check back soon."
+    "intro": "Giving for CACNA's ministries, the Annual Convention, and the CAC Centenary Building Project is handled on our main site.",
+    "cta": "Give on cacnorthamerica.com",
+    "opensInNewTab": " (opens in a new tab)"
   },
   "News": {
     "title": "News & Events",

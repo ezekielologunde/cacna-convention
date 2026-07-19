@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { PageHero } from "@/components/ui/PageHero";
 
 type ContactRoleKey = "chairman" | "secretary" | "generalInquiries";
 
@@ -42,9 +43,10 @@ export default async function ContactPage({
   const t = await getTranslations("Contact");
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-12">
-      <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
-      <ul className="mt-8 flex flex-col gap-4">
+    <>
+      <PageHero title={t("title")} tone="navy" />
+      <div className="mx-auto max-w-3xl px-6 py-12">
+      <ul className="flex flex-col gap-4">
         {CONTACTS.map((contact) => (
           <li key={contact.email} className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]">
             <p className="font-semibold text-[var(--color-fg)]">
@@ -68,6 +70,7 @@ export default async function ContactPage({
           </li>
         ))}
       </ul>
-    </div>
+      </div>
+    </>
   );
 }

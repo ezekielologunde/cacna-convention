@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
+import { PageHero } from "@/components/ui/PageHero";
 
 export default async function ArchivePage({
   params,
@@ -29,9 +30,9 @@ export default async function ArchivePage({
   const formatDate = (dateStr: string) => dateFormatter.format(new Date(`${dateStr}T12:00:00Z`));
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-12">
-      <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
-
+    <>
+      <PageHero title={t("title")} tone="navy" />
+      <div className="mx-auto max-w-3xl px-6 py-12">
       {!editions || editions.length === 0 ? (
         <div className="mt-8 rounded-3xl border border-[var(--color-border)] p-8 text-center shadow-[var(--shadow-card)]">
           <p className="text-[var(--color-muted)]">{t("empty")}</p>
@@ -53,6 +54,7 @@ export default async function ArchivePage({
           ))}
         </ul>
       )}
-    </div>
+      </div>
+    </>
   );
 }

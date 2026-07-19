@@ -48,6 +48,16 @@
   --color-gold: #e8a33d;
   --color-gold-light: #ffd9a8;
 
+  /*
+   * Secondary accent, reserved for pages that would otherwise read
+   * identically maroon (About/Give hero, a couple of sub-conference
+   * pages) — matches the navy already introduced on the sibling
+   * cacnorthamerica.com site's own Giving redesign, so the two sites'
+   * accent vocabularies stay in the same family.
+   */
+  --color-navy: #1b2a6b;
+  --color-navy-deep: #14205a;
+
   --color-brand: var(--color-red);
   --color-brand-contrast: #ffffff;
 
@@ -62,6 +72,7 @@
    */
   --flame: linear-gradient(100deg, #c2481a, var(--color-red), var(--color-maroon));
   --flame-hero: linear-gradient(150deg, var(--color-red) 0%, var(--color-maroon) 55%, var(--color-maroon-deep) 100%);
+  --navy-hero: linear-gradient(150deg, var(--color-navy) 0%, var(--color-navy-deep) 100%);
 
   /*
    * cacsalvationcenter.org's own card shadow (sampled from its computed

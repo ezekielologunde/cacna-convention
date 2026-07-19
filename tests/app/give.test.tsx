@@ -15,6 +15,9 @@ describe("GivePage", () => {
     render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
 
     expect(screen.getByRole("heading", { name: "Give" })).toBeInTheDocument();
-    expect(screen.getByText(messages.Give.comingSoon)).toBeInTheDocument();
+    expect(screen.getByText(messages.Give.intro)).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: new RegExp(`^${messages.Give.cta}`) })
+    ).toHaveAttribute("href", "https://cacnorthamerica.com/giving");
   });
 });

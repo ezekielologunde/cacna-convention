@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { PageHero } from "@/components/ui/PageHero";
 import { newsEvents } from "@/lib/content/news-events";
 
 export default async function NewsPage({
@@ -21,11 +22,10 @@ export default async function NewsPage({
   });
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-12">
-      <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
-      <p className="mt-3 max-w-[52ch] text-[var(--color-muted)]">{t("intro")}</p>
-
-      <ul className="mt-8 flex flex-col gap-4">
+    <>
+      <PageHero title={t("title")} subtitle={t("intro")} />
+      <div className="mx-auto max-w-3xl px-6 py-12">
+      <ul className="flex flex-col gap-4">
         {newsEvents.map((event) => (
           <li
             key={event.title}
@@ -65,6 +65,7 @@ export default async function NewsPage({
           </li>
         ))}
       </ul>
-    </div>
+      </div>
+    </>
   );
 }

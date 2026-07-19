@@ -40,12 +40,11 @@ describe("NewsPage", () => {
       expect(screen.getByText(highlight)).toBeInTheDocument();
     }
 
-    // Regex, not a plain string: getByRole's `name` option ignores `exact`
-    // for string matchers (always exact-equality) -- only RegExp/function
-    // matchers do a partial match. The link's accessible name also includes
-    // an "(opens in a new tab)" suffix via aria-label for screen readers.
-    expect(
-      screen.getByRole("link", { name: /^See details/ })
-    ).toHaveAttribute("href", retreat.moreInfoUrl);
+    // Both news events now have a "See details" link (the 50th anniversary
+    // entry also links out, to cacnorthamerica.com's homepage), so find the
+    // one whose href matches this specific event's URL rather than
+    // asserting there's exactly one such link on the page.
+    const detailLinks = screen.getAllByRole("link", { name: /^See details/ });
+    expect(detailLinks.some((link) => link.getAttribute("href") === retreat.moreInfoUrl)).toBe(true);
   });
 });
