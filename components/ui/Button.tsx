@@ -4,7 +4,7 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes, CSSProperties, ReactNo
 type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
 
 const base =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-coral-text)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]";
+  "inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-coral-text)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]";
 
 const variantClass: Record<ButtonVariant, string> = {
   primary: "text-white shadow-[var(--shadow-glow-coral)]",

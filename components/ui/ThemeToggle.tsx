@@ -6,7 +6,7 @@ type Theme = "light" | "dark";
 
 const STORAGE_KEY = "cacna-theme";
 
-export function ThemeToggle() {
+export function ThemeToggle({ className = "" }: { className?: string }) {
   const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export function ThemeToggle() {
       type="button"
       aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="inline-flex h-11 w-11 flex-none items-center justify-center rounded-full text-[var(--color-fg)] transition-colors hover:bg-[var(--color-surface)]"
+      className={`inline-flex h-11 w-11 flex-none items-center justify-center rounded-full text-[var(--color-fg)] transition-colors hover:bg-[var(--color-surface)] ${className}`}
     >
       {theme === "dark" ? (
         <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

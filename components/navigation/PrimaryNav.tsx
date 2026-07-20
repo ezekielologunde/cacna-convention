@@ -68,12 +68,27 @@ export function PrimaryNav() {
           ))}
         </ul>
         <div className="ml-auto flex items-center gap-3">
-          <ThemeToggle />
-          <Button href={`/${locale}/give`} variant="outline" className="hidden sm:inline-flex">
-            {t("give")}
-          </Button>
-          <Button href={`/${locale}/register`} variant="primary">
-            {t("registerCta")}
+          {/*
+            Visibility is controlled on a wrapper span, not via className on
+            Button/ThemeToggle directly -- both components' own base classes
+            already include an unconditional `inline-flex`, which sits at
+            the same specificity as a caller-supplied `hidden` and can win
+            the cascade regardless of class order (confirmed: Give rendered
+            visible on mobile despite `hidden sm:inline-flex` before this
+            fix). A wrapper's display is the only display-related class on
+            that element, so there's no such conflict.
+          */}
+          <span className="hidden sm:inline-flex">
+            <ThemeToggle />
+          </span>
+          <span className="hidden sm:inline-flex">
+            <Button href={`/${locale}/give`} variant="outline">
+              {t("give")}
+            </Button>
+          </span>
+          <Button href={`/${locale}/register`} variant="primary" aria-label={t("registerCta")}>
+            <span aria-hidden="true" className="sm:hidden">{t("register")}</span>
+            <span aria-hidden="true" className="hidden sm:inline">{t("registerCta")}</span>
           </Button>
           <button
             type="button"
