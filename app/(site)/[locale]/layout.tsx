@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { PrimaryNav } from "@/components/navigation/PrimaryNav";
 import { FooterNav } from "@/components/navigation/FooterNav";
+import { ChatShortcut } from "@/components/ui/ChatShortcut";
 import { displayFont, bodyFont } from "@/lib/fonts";
 import "../../globals.css";
 
@@ -52,6 +53,7 @@ export default async function LocaleRootLayout({
             {children}
           </main>
           <FooterNav />
+          <ChatShortcut />
         </NextIntlClientProvider>
       </body>
     </html>

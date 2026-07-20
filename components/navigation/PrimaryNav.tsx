@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { SearchBar } from "@/components/navigation/SearchBar";
 
 const PRIMARY_ITEMS = [
   { key: "home", href: "" },
@@ -78,6 +79,7 @@ export function PrimaryNav() {
             fix). A wrapper's display is the only display-related class on
             that element, so there's no such conflict.
           */}
+          <SearchBar />
           <span className="hidden sm:inline-flex">
             <ThemeToggle />
           </span>

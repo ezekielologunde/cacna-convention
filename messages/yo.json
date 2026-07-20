@@ -23,6 +23,16 @@
     "youth": "Iṣẹ́ Ìránṣẹ́ Àwọn Ọ̀dọ́",
     "store": "Ilé Ìtajà"
   },
+  "Search": {
+    "open": "Wá",
+    "title": "Wá",
+    "placeholder": "Wá orí ojú-òpó wẹ́ẹ̀bù yìí…",
+    "close": "Ti wíwá",
+    "noResults": "Kò sí èsì kankan"
+  },
+  "Chat": {
+    "openLabel": "Bá Wa Sọ̀rọ̀"
+  },
   "Footer": {
     "blurb": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà — agbo kan, tí a kójọ láti agbègbè kọ̀ọ̀kan, lẹ́ẹ̀kan lọ́dún.",
     "tagline": "Agbo Kan, Olùṣọ́-Àgùntàn Kan — Jòhánù 10:16",

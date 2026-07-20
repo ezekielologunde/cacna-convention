@@ -23,6 +23,16 @@
     "youth": "Youth & Young Ministry",
     "store": "Store"
   },
+  "Search": {
+    "open": "Search",
+    "title": "Search",
+    "placeholder": "Search the site…",
+    "close": "Close search",
+    "noResults": "No results found"
+  },
+  "Chat": {
+    "openLabel": "Chat with us"
+  },
   "Footer": {
     "blurb": "Christ Apostolic Church North America — one fold, gathered from every region, once a year.",
     "tagline": "One Fold, One Shepherd — John 10:16",
