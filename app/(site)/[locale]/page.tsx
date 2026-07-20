@@ -6,6 +6,8 @@ import { getActiveEdition } from "@/lib/editions";
 import { getActivePricingForEdition } from "@/lib/pricing";
 import { PromoBanner } from "@/components/register/PromoBanner";
 import { welcomeMessage } from "@/lib/content/welcome";
+import { Reveal } from "@/components/ui/Reveal";
+import { UpcomingPrograms } from "@/components/home/UpcomingPrograms";
 
 export default async function Home({
   params,
@@ -54,11 +56,11 @@ export default async function Home({
               "linear-gradient(135deg, rgba(107,16,16,0.88), rgba(158,27,27,0.8) 45%, rgba(20,10,8,0.75))",
           }}
         />
-        <div className="relative mx-auto max-w-3xl">
-          <p className="text-sm font-semibold tracking-wide text-[var(--color-gold-light)] uppercase">
+        <Reveal className="relative mx-auto max-w-3xl">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-bold tracking-[0.2em] text-[var(--color-gold-light)] uppercase backdrop-blur-sm">
             {t("kicker")}
-          </p>
-          <div className="mt-3 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          </span>
+          <div className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Image
               src="/brand/icon.png"
               alt=""
@@ -74,7 +76,7 @@ export default async function Home({
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
               href={`/${locale}/about`}
-              className="rounded-full px-6 py-3 font-semibold text-[var(--color-maroon-deep)]"
+              className="rounded-full px-6 py-3 font-semibold text-[var(--color-maroon-deep)] shadow-[0_14px_34px_-10px_rgba(232,163,61,.6)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
               style={{ background: "var(--color-gold)" }}
             >
               {t("learnMore")}
@@ -86,47 +88,69 @@ export default async function Home({
               {t("viewSchedule")}
             </Link>
           </div>
+        </Reveal>
+      </section>
+
+      {/* Welcome — bold, joyful full-bleed treatment matching PageHero's flame-gradient vocabulary */}
+      <section className="relative overflow-hidden px-6 py-20 sm:py-24" style={{ background: "var(--flame-hero)" }}>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full opacity-30 blur-3xl"
+          style={{ background: "var(--color-gold)" }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-white/10 blur-3xl"
+        />
+        <div className="relative mx-auto max-w-3xl text-center">
+          <Reveal>
+            <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-gold-light)] uppercase">
+              {t("welcomeKicker")}
+            </span>
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 className="mt-4 font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl">
+              {t("welcomeHeading")}
+            </h2>
+          </Reveal>
+          <Reveal delay={140}>
+            <div className="mx-auto mt-8 max-w-2xl rounded-3xl bg-white/10 p-8 text-left backdrop-blur-sm sm:p-10">
+              {welcomeMessage.paragraphs.map((paragraph, index) => (
+                <p key={index} className={index > 0 ? "mt-4 text-white/85" : "text-white/85"}>
+                  {paragraph}
+                </p>
+              ))}
+              <p className="mt-4 text-white/85">
+                {welcomeMessage.closingLead}{" "}
+                <Link href={`/${locale}/contact`} className="font-semibold text-[var(--color-gold-light)] underline">
+                  {t("contactLinkText")}
+                </Link>
+                .
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Welcome */}
-      <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">
-            {t("welcomeHeading")}
-          </h2>
-          {welcomeMessage.paragraphs.map((paragraph, index) => (
-            <p key={index} className="mt-4 text-[var(--color-muted)]">
-              {paragraph}
-            </p>
-          ))}
-          <p className="mt-4 text-[var(--color-muted)]">
-            {welcomeMessage.closingLead}{" "}
-            <Link
-              href={`/${locale}/contact`}
-              className="font-semibold text-[var(--color-maroon)] underline"
-            >
-              {t("contactLinkText")}
-            </Link>
-            .
-          </p>
-        </div>
-      </section>
+      {/* Upcoming Programs — real, dated events */}
+      <UpcomingPrograms heading={t("upcomingHeading")} cta={t("newsCta")} locale={locale} />
 
       {/* News & Events teaser */}
-      <section className="px-6 py-16 text-center">
-        <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">
-          {t("newsHeading")}
-        </h2>
-        <p className="mx-auto mt-3 max-w-[48ch] text-[var(--color-muted)]">{t("newsBody")}</p>
-        <Link
-          href={`/${locale}/news`}
-          className="mt-6 inline-block rounded-full px-6 py-3 font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
-          style={{ background: "var(--flame)" }}
-        >
-          {t("newsCta")}
-        </Link>
-      </section>
+      <Reveal>
+        <section className="px-6 py-16 text-center">
+          <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">
+            {t("newsHeading")}
+          </h2>
+          <p className="mx-auto mt-3 max-w-[48ch] text-[var(--color-muted)]">{t("newsBody")}</p>
+          <Link
+            href={`/${locale}/news`}
+            className="mt-6 inline-block rounded-full px-6 py-3 font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+            style={{ background: "var(--flame)" }}
+          >
+            {t("newsCta")}
+          </Link>
+        </section>
+      </Reveal>
 
       {/* Mission / what a CACNA week looks like */}
       <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
