@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
-import { getActiveEdition } from "@/lib/editions";
+import { getActiveEdition, getMostRecentPastEdition } from "@/lib/editions";
 import { getActivePricingForEdition } from "@/lib/pricing";
 import { PromoBanner } from "@/components/register/PromoBanner";
 import { welcomeMessage } from "@/lib/content/welcome";
@@ -28,15 +28,34 @@ export default async function Home({
 
   let nextDeadline: string | null = null;
   let priceBeforeIncrease: number | null = null;
+  let tiersCount = 0;
 
   if (edition) {
     const tiers = await getActivePricingForEdition(supabase, edition.id);
+    tiersCount = tiers.length;
     const adultTier = tiers.find((tier) => tier.category === "adult");
     if (adultTier) {
       nextDeadline = adultTier.ends_on;
       priceBeforeIncrease = adultTier.price_cents;
     }
   }
+  // An edition row existing (status upcoming/current) doesn't mean
+  // registration is actually open -- pricing_tiers is the real signal.
+  // 2027 is the active edition today but has no pricing yet (it opens in
+  // October 2026), so this must check both, not just `edition`.
+  const registrationOpen = Boolean(edition) && tiersCount > 0;
+
+  const pastEdition = await getMostRecentPastEdition(supabase);
+  const dateFormatter = new Intl.DateTimeFormat(locale === "yo" ? "yo-NG" : "en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+  // Anchored at noon UTC (not `new Date(dateStr)` at midnight) so a
+  // negative-offset timezone reading this at render time can't roll the
+  // date back a day -- same reasoning as Archive/ScheduleDay's date labels.
+  const formatDate = (dateStr: string) => dateFormatter.format(new Date(`${dateStr}T12:00:00Z`));
 
   return (
     <div className="flex flex-1 flex-col">
@@ -57,6 +76,11 @@ export default async function Home({
         <Reveal className="relative mx-auto max-w-6xl">
           <div className="flex flex-col-reverse items-center gap-10 lg:flex-row lg:items-center lg:gap-16">
             <div className="flex-1 text-center lg:text-left">
+              {!registrationOpen && (
+                <Badge tone="teal" className="mb-3">
+                  {t("registrationOpensBadge")}
+                </Badge>
+              )}
               <span
                 className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold tracking-[0.2em] uppercase"
                 style={{ background: "var(--color-coral-light)", color: "var(--color-coral-text)" }}
@@ -106,6 +130,38 @@ export default async function Home({
           </div>
         </Reveal>
       </section>
+
+      {/* Just Concluded — real data from the most recent past edition */}
+      {pastEdition && (
+        <Reveal>
+          <section className="px-6 pb-16">
+            <div className="mx-auto max-w-4xl">
+              <Card
+                padding="lg"
+                className="flex flex-col items-center gap-6 text-center sm:flex-row sm:justify-between sm:text-left"
+              >
+                <div>
+                  <Badge tone="teal">{t("justConcludedKicker")}</Badge>
+                  <h2 className="mt-3 font-display text-xl text-[var(--color-fg)] sm:text-2xl">
+                    {pastEdition.year} — {pastEdition.theme}
+                  </h2>
+                  <p className="mt-1 text-sm text-[var(--color-muted)] tabular-nums">
+                    {formatDate(pastEdition.starts_on)} – {formatDate(pastEdition.ends_on)} · {pastEdition.venue_name}
+                  </p>
+                </div>
+                <div className="flex flex-none flex-wrap justify-center gap-3">
+                  <Button href={`/${locale}/gallery`} variant="secondary">
+                    {t("justConcludedCta")}
+                  </Button>
+                  <Button href={`/${locale}/archive`} variant="outline">
+                    {t("pastConventionsCta")}
+                  </Button>
+                </div>
+              </Card>
+            </div>
+          </section>
+        </Reveal>
+      )}
 
       {/* Welcome — two-column on desktop: gradient panel + message card */}
       <section className="relative overflow-hidden px-6 py-16 sm:py-20" style={{ background: "var(--gradient-hero-coral)" }}>
@@ -180,7 +236,7 @@ export default async function Home({
           <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">
             {t("registrationHeading")}
           </h2>
-          {!edition && (
+          {!registrationOpen && (
             <p className="mx-auto mt-3 max-w-[48ch] text-[var(--color-muted)]">
               {t("registrationComingSoon")}
             </p>

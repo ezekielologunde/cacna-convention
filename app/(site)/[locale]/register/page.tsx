@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEdition } from "@/lib/editions";
+import { getActivePricingForEdition } from "@/lib/pricing";
 import { RegisterPageClient } from "@/components/register/RegisterPageClient";
 import { registrationGuidelines } from "@/lib/content/registration-guidelines";
 
@@ -15,10 +16,17 @@ export default async function RegisterPage({
 
   const supabase = await createClient();
   const edition = await getActiveEdition(supabase);
+  // An edition row existing (status upcoming/current) doesn't mean
+  // registration is actually open -- pricing_tiers is the real signal
+  // (empty for 2027 as of this writing; it opens in October 2026). Without
+  // this check, the form renders and accepts submissions with no pricing
+  // behind them the moment an edition row is created for the next year.
+  const tiers = edition ? await getActivePricingForEdition(supabase, edition.id) : [];
+  const registrationOpen = Boolean(edition) && tiers.length > 0;
 
   return (
     <div>
-      {!edition ? (
+      {!registrationOpen ? (
         <div className="mx-auto max-w-2xl px-6 py-16 text-center">
           <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
           <p className="mx-auto mt-4 max-w-[48ch] text-[var(--color-muted)]">{t("notOpenYet")}</p>
