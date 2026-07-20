@@ -31,7 +31,7 @@ export const externalResources = [
   {
     label: "Zones & DCCs",
     url: "https://cacnorthamerica.com/zones",
-    description: "Find your Zone or DCC and its Superintendent across the United States and Canada.",
+    description: "Find your Zone or DCC and its Superintendent across the United States, Canada, and South America.",
   },
   {
     label: "Giving",
