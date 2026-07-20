@@ -20,7 +20,8 @@
     "cacma": "CACMA (Men's Association)",
     "christianEducation": "Christian Education",
     "businessGroup": "Business Group Fellowship",
-    "youth": "Youth & Young Ministry"
+    "youth": "Youth & Young Ministry",
+    "store": "Store"
   },
   "Footer": {
     "blurb": "Christ Apostolic Church North America — one fold, gathered from every region, once a year.",
@@ -136,6 +137,20 @@
     "timeLabel": "Time",
     "programLabel": "Program",
     "speakerLabel": "Speaker"
+  },
+  "Store": {
+    "title": "Store",
+    "intro": "Sunday school materials and devotionals from CACNA's Christian Education Department, plus convention merchandise.",
+    "materialsHeading": "Christian Education Materials",
+    "materialsIntro": "Current items from the CACNA Christian Education Printing Press, with prices as listed on their shop.",
+    "shopCta": "Shop all materials",
+    "opensInNewTab": " (opens in a new tab)",
+    "apparelHeading": "Apparel & Merchandise",
+    "apparelIntro": "A live Shopify store is being connected for convention, Good Women, and Youth & Young Adult apparel. The items below are a design preview, not available for purchase yet.",
+    "conventionApparel": "Convention Apparel",
+    "goodWomenApparel": "Good Women Association Apparel",
+    "youthApparel": "Youth & Young Adult Tees",
+    "demoLabel": "Demo"
   },
   "PlanYourVisit": {
     "title": "Plan Your Visit",

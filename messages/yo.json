@@ -20,7 +20,8 @@
     "cacma": "CACMA (Ẹgbẹ́ Àwọn Ọkùnrin)",
     "christianEducation": "Ẹ̀kọ́ Kristẹ́ni",
     "businessGroup": "Àpéjọ Ẹgbẹ́ Òwò",
-    "youth": "Iṣẹ́ Ìránṣẹ́ Àwọn Ọ̀dọ́"
+    "youth": "Iṣẹ́ Ìránṣẹ́ Àwọn Ọ̀dọ́",
+    "store": "Ilé Ìtajà"
   },
   "Footer": {
     "blurb": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà — agbo kan, tí a kójọ láti agbègbè kọ̀ọ̀kan, lẹ́ẹ̀kan lọ́dún.",
@@ -136,6 +137,20 @@
     "timeLabel": "Àkókò",
     "programLabel": "Ètò",
     "speakerLabel": "Oníṣe"
+  },
+  "Store": {
+    "title": "Ilé Ìtajà",
+    "intro": "Àwọn ohun èlò ilé ẹ̀kọ́ ọjọ́ ìsimi àti ìwé àdúrà láti Ẹ̀ka Ẹ̀kọ́ Kristẹ́ni CACNA, pẹ̀lú aṣọ àpéjọ.",
+    "materialsHeading": "Àwọn Ohun Èlò Ẹ̀kọ́ Kristẹ́ni",
+    "materialsIntro": "Àwọn ohun èlò tí ó wà nísisìyí láti ọ̀dọ̀ Ilé Ìtẹ̀wé Ẹ̀kọ́ Kristẹ́ni CACNA, pẹ̀lú owó gẹ́gẹ́ bí ó ti wà ní ilé ìtajà wọn.",
+    "shopCta": "Ra gbogbo ohun èlò",
+    "opensInNewTab": " (yóò ṣí ní táàbù tuntun)",
+    "apparelHeading": "Aṣọ àti Ọjà",
+    "apparelIntro": "A ń so ilé ìtajà Shopify gidi pọ̀ fún aṣọ àpéjọ, Ẹgbẹ́ Àwọn Ìyá Rere, àti ti àwọn Ọ̀dọ́. Àwọn nǹkan tí ó wà nísàlẹ̀ jẹ́ àwòrán àpẹẹrẹ nìkan, a kò tíì lè rà wọ́n.",
+    "conventionApparel": "Aṣọ Àpéjọ",
+    "goodWomenApparel": "Aṣọ Ẹgbẹ́ Àwọn Ìyá Rere",
+    "youthApparel": "Aṣọ T àwọn Ọ̀dọ́",
+    "demoLabel": "Àpẹẹrẹ"
   },
   "PlanYourVisit": {
     "title": "Ṣe Ètò Ìbẹ̀wò Rẹ",

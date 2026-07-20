@@ -22,6 +22,7 @@ const ATTEND_ITEMS = [
 
 const CONNECT_ITEMS = [
   { key: "give", href: "/give" },
+  { key: "store", href: "/store" },
   { key: "live", href: "/live" },
   { key: "news", href: "/news" },
   { key: "archive", href: "/archive" },

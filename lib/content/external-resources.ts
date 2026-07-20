@@ -38,4 +38,9 @@ export const externalResources = [
     url: "https://cacnorthamerica.com/giving",
     description: "Ways to give to CACNA's ministries, the CAC Centenary Building Project, and more.",
   },
+  {
+    label: "Christian Education Printing Press",
+    url: "https://www.cacnachristianeducation.com/",
+    description: "Sunday school lessons, Bible study manuals, and devotionals published by CACNA's Christian Education department.",
+  },
 ];
