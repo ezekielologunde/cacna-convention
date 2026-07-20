@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
+import { Card } from "@/components/ui/Card";
 import { newsEvents, type NewsEvent } from "@/lib/content/news-events";
 
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
@@ -29,14 +30,15 @@ export function UpcomingPrograms({ heading, cta, locale }: { heading: string; ct
         <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2">
           {newsEvents.map((ev, i) => {
             const { month, day } = dateBadge(ev.date);
+            const accent = i % 2 === 0 ? "coral" : "teal";
             return (
               <Reveal key={ev.title} delay={i * 90}>
                 {(() => {
                   const CardBody = (
-                    <div className="flex h-full items-start gap-5 rounded-2xl border border-[var(--color-border)] bg-white p-6 shadow-[var(--shadow-card)] transition-transform duration-300 hover:-translate-y-1">
+                    <Card hoverable className="flex h-full items-start gap-5">
                       <div
                         className="flex flex-none flex-col items-center justify-center rounded-xl px-4 py-3 text-white"
-                        style={{ background: "var(--flame)" }}
+                        style={{ background: accent === "coral" ? "var(--color-coral-deep)" : "var(--color-teal-deep)" }}
                       >
                         <span className="text-[10px] font-bold tracking-wider">{month}</span>
                         <span className="font-display text-xl leading-none">{day}</span>
@@ -44,9 +46,14 @@ export function UpcomingPrograms({ heading, cta, locale }: { heading: string; ct
                       <div className="min-w-0">
                         <h3 className="font-display text-lg leading-tight text-[var(--color-fg)]">{ev.title}</h3>
                         <p className="mt-2 line-clamp-2 text-sm text-[var(--color-muted)]">{ev.description}</p>
-                        <span className="mt-2 block text-xs font-semibold text-[var(--color-maroon)]">{dateLabel(ev)}</span>
+                        <span
+                          className="mt-2 block text-xs font-semibold"
+                          style={{ color: accent === "coral" ? "var(--color-coral-text)" : "var(--color-teal-text)" }}
+                        >
+                          {dateLabel(ev)}
+                        </span>
                       </div>
-                    </div>
+                    </Card>
                   );
                   return ev.moreInfoUrl ? (
                     <a href={ev.moreInfoUrl} target="_blank" rel="noopener noreferrer" className="block h-full">
@@ -66,7 +73,7 @@ export function UpcomingPrograms({ heading, cta, locale }: { heading: string; ct
         <div className="mt-8 text-center">
           <Link
             href={`/${locale}/news`}
-            className="inline-flex items-center gap-2 font-semibold text-[var(--color-maroon)] underline"
+            className="inline-flex items-center gap-2 font-semibold text-[var(--color-coral-text)] underline"
           >
             {cta}
           </Link>

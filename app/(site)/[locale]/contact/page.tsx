@@ -44,7 +44,7 @@ export default async function ContactPage({
 
   return (
     <>
-      <PageHero title={t("title")} tone="navy" />
+      <PageHero title={t("title")} tone="teal" />
       <div className="mx-auto max-w-3xl px-6 py-12">
       <ul className="flex flex-col gap-4">
         {CONTACTS.map((contact) => (
@@ -56,13 +56,13 @@ export default async function ContactPage({
             <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-semibold">
               <a
                 href={`tel:${contact.phone}`}
-                className="inline-flex min-h-11 items-center text-[var(--color-maroon)] tabular-nums"
+                className="inline-flex min-h-11 items-center text-[var(--color-coral-text)] tabular-nums"
               >
                 {contact.phone}
               </a>
               <a
                 href={`mailto:${contact.email}`}
-                className="inline-flex min-h-11 items-center text-[var(--color-maroon)]"
+                className="inline-flex min-h-11 items-center text-[var(--color-coral-text)]"
               >
                 {contact.email}
               </a>

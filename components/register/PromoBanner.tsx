@@ -20,12 +20,12 @@ export function PromoBanner({
   return (
     <div
       className="flex flex-wrap items-center justify-center gap-3 px-6 py-3 text-center text-sm font-semibold text-white sm:justify-between sm:text-left"
-      style={{ background: "var(--flame)" }}
+      style={{ background: "var(--gradient-cta)" }}
     >
       <p>{t("beforeIncrease", { price: (priceBeforeIncrease / 100).toFixed(0), date: nextDeadline })}</p>
       <Link
         href={`/${locale}/register`}
-        className="inline-flex min-h-11 flex-none items-center rounded-full bg-white px-4 font-semibold text-[var(--color-maroon-deep)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+        className="inline-flex min-h-11 flex-none items-center rounded-full bg-white px-4 font-semibold text-[var(--color-coral-text)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
       >
         {t("cta")}
       </Link>

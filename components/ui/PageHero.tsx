@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 
 /**
- * Shared hero band for interior pages. Previously every page beyond the
- * homepage was a bare `max-w-3xl` container with a plain `h1` and no hero
- * art at all — this gives every top-level page the same visual weight as
- * the homepage's flame-gradient hero, without literally repeating it.
+ * Shared hero band for interior pages. Gives every top-level page beyond
+ * the homepage the same bold visual weight: a full-bleed coral/teal
+ * gradient, two offset blur circles for a two-tone energy signature, and a
+ * diagonal-cut bottom edge instead of a flat rectangle.
  *
  * `variant="split"` puts a stat/date callout beside the heading (for pages
  * with one obvious headline fact — a date, a count); `variant="center"`
@@ -17,40 +17,46 @@ export function PageHero({
   subtitle,
   variant = "center",
   stat,
-  tone = "flame",
+  tone = "coral",
 }: {
   eyebrow?: string;
   title: ReactNode;
   subtitle?: ReactNode;
   variant?: "center" | "split";
   stat?: { label: string; value: string };
-  /** "flame" (default, maroon/red) or "navy" — used sparingly so a handful
-   *  of pages (About, Give) don't read identically to every other page. */
-  tone?: "flame" | "navy";
+  /** "coral" (default) or "teal" — used sparingly so a handful of pages
+   *  (About, Contact, Archive, Give) don't read identically to every other page. */
+  tone?: "coral" | "teal";
 }) {
+  const gradient = tone === "teal" ? "var(--gradient-hero-teal)" : "var(--gradient-hero-coral)";
   return (
     <section
-      className="relative overflow-hidden px-6 py-14 sm:py-20"
-      style={{ background: tone === "navy" ? "var(--navy-hero)" : "var(--flame-hero)" }}
+      className="relative overflow-hidden px-6 py-16 sm:py-24"
+      style={{ background: gradient, clipPath: "polygon(0 0, 100% 0, 100% 97%, 0 100%)" }}
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full opacity-30 blur-3xl"
-        style={{ background: "var(--color-gold)" }}
+        className="pointer-events-none absolute -top-20 -right-16 h-72 w-72 rounded-full opacity-40 blur-3xl"
+        style={{ background: "var(--color-coral)" }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full opacity-30 blur-3xl"
+        style={{ background: "var(--color-teal)" }}
       />
       {variant === "split" && stat ? (
         <div className="relative mx-auto flex max-w-4xl flex-wrap items-end justify-between gap-8">
           <div className="max-w-xl">
             {eyebrow && (
-              <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-gold-light)] uppercase">
+              <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-mist)] uppercase">
                 {eyebrow}
               </span>
             )}
             <h1 className="mt-3 font-display text-3xl text-white sm:text-4xl">{title}</h1>
-            {subtitle && <p className="mt-3 max-w-[52ch] text-white/80">{subtitle}</p>}
+            {subtitle && <p className="mt-3 max-w-[52ch] text-white/85">{subtitle}</p>}
           </div>
           <div className="rounded-2xl bg-white/10 px-6 py-4 text-right backdrop-blur-sm">
-            <div className="text-xs font-bold tracking-wide text-[var(--color-gold-light)] uppercase">
+            <div className="text-xs font-bold tracking-wide text-[var(--color-mist)] uppercase">
               {stat.label}
             </div>
             <div className="mt-1 font-display text-2xl text-white">{stat.value}</div>
@@ -59,12 +65,12 @@ export function PageHero({
       ) : (
         <div className="relative mx-auto max-w-3xl text-center">
           {eyebrow && (
-            <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-gold-light)] uppercase">
+            <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-mist)] uppercase">
               {eyebrow}
             </span>
           )}
           <h1 className="mt-3 font-display text-3xl text-white sm:text-4xl">{title}</h1>
-          {subtitle && <p className="mx-auto mt-3 max-w-[56ch] text-white/80">{subtitle}</p>}
+          {subtitle && <p className="mx-auto mt-3 max-w-[56ch] text-white/85">{subtitle}</p>}
         </div>
       )}
     </section>

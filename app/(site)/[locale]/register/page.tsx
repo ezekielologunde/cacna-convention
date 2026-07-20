@@ -32,14 +32,14 @@ export default async function RegisterPage({
         <ol className="mt-3 flex flex-col gap-2 text-sm text-[var(--color-muted)]">
           {registrationGuidelines.items.map((item, index) => (
             <li key={item} className="flex gap-2.5">
-              <span aria-hidden="true" className="font-semibold text-[var(--color-maroon)] tabular-nums">
+              <span aria-hidden="true" className="font-semibold text-[var(--color-coral-text)] tabular-nums">
                 {index + 1}.
               </span>
               {item}
             </li>
           ))}
         </ol>
-        <p className="mt-3 text-sm font-semibold text-[var(--color-maroon)]">
+        <p className="mt-3 text-sm font-semibold text-[var(--color-coral-text)]">
           {registrationGuidelines.freeFoodNote}
         </p>
       </section>

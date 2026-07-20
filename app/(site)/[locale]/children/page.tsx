@@ -66,7 +66,7 @@ export default async function ChildrenPage({
                 .filter((block) => block.session)
                 .map((block) => (
                   <div key={block.label} className="mt-3">
-                    <p className="text-xs font-bold tracking-wide text-[var(--color-maroon)] uppercase">
+                    <p className="text-xs font-bold tracking-wide text-[var(--color-coral-text)] uppercase">
                       {block.label} · {block.session!.time}
                     </p>
                     {block.session!.message ? (
@@ -110,7 +110,7 @@ export default async function ChildrenPage({
         </ul>
       </section>
 
-      <p className="mt-10 text-sm font-semibold text-[var(--color-maroon)]">
+      <p className="mt-10 text-sm font-semibold text-[var(--color-coral-text)]">
         {childrenConvention.safetyNote}
       </p>
       <p className="mt-2 text-sm text-[var(--color-muted)]">{childrenConvention.closingNote}</p>

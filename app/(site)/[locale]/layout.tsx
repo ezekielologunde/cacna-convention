@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -36,6 +37,9 @@ export default async function LocaleRootLayout({
   return (
     <html lang={locale} className={`${displayFont.variable} ${bodyFont.variable} antialiased`}>
       <body className="min-h-full flex flex-col">
+        <Script id="theme-init" strategy="afterInteractive">
+          {`(function(){try{var t=localStorage.getItem('cacna-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`}
+        </Script>
         <NextIntlClientProvider locale={locale}>
           <a
             href="#main-content"

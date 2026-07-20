@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import { Button } from "@/components/ui/Button";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const PRIMARY_ITEMS = [
   { key: "home", href: "" },
@@ -42,7 +44,7 @@ export function PrimaryNav() {
             priority
           />
           <span className="flex min-w-0 flex-col leading-none">
-            <span className="truncate text-[10px] font-bold tracking-[0.15em] text-[var(--color-maroon)] uppercase">
+            <span className="truncate text-[10px] font-bold tracking-[0.15em] text-[var(--color-coral-text)] uppercase">
               {t("orgKicker")}
             </span>
             <span className="mt-0.5 truncate font-display text-base tracking-tight text-[var(--color-fg)] sm:text-lg">
@@ -56,8 +58,8 @@ export function PrimaryNav() {
               <Link
                 href={`/${locale}${item.href}`}
                 aria-current={isActive(item.href) ? "page" : undefined}
-                className={`rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-maroon)] ${
-                  isActive(item.href) ? "bg-[var(--color-surface)] text-[var(--color-maroon)]" : ""
+                className={`rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-coral-text)] ${
+                  isActive(item.href) ? "bg-[var(--color-surface)] text-[var(--color-coral-text)]" : ""
                 }`}
               >
                 {t(item.key)}
@@ -66,19 +68,13 @@ export function PrimaryNav() {
           ))}
         </ul>
         <div className="ml-auto flex items-center gap-3">
-          <Link
-            href={`/${locale}/give`}
-            className="hidden min-h-11 items-center rounded-full border border-[var(--color-border)] px-4 text-sm font-semibold text-[var(--color-fg)] transition-colors hover:border-[var(--color-maroon)] sm:inline-flex"
-          >
+          <ThemeToggle />
+          <Button href={`/${locale}/give`} variant="outline" className="hidden sm:inline-flex">
             {t("give")}
-          </Link>
-          <Link
-            href={`/${locale}/register`}
-            className="inline-flex min-h-11 items-center rounded-full px-5 text-sm font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
-            style={{ background: "var(--flame)" }}
-          >
+          </Button>
+          <Button href={`/${locale}/register`} variant="primary">
             {t("registerCta")}
-          </Link>
+          </Button>
           <button
             type="button"
             aria-expanded={mobileOpen}
@@ -110,7 +106,7 @@ export function PrimaryNav() {
                   onClick={() => setMobileOpen(false)}
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className={`block rounded-lg px-3 py-3 ${
-                    isActive(item.href) ? "text-[var(--color-maroon)]" : ""
+                    isActive(item.href) ? "text-[var(--color-coral-text)]" : ""
                   }`}
                 >
                   {t(item.key)}
@@ -125,6 +121,10 @@ export function PrimaryNav() {
               >
                 {t("give")}
               </Link>
+            </li>
+            <li className="flex items-center justify-between px-3 py-3">
+              <span>Theme</span>
+              <ThemeToggle />
             </li>
           </ul>
         </div>

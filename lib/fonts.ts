@@ -1,23 +1,24 @@
-import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
+import { Unbounded, Manrope } from "next/font/google";
 
 // Shared across both root layouts (app/(site)/[locale]/layout.tsx and
 // app/(admin)/layout.tsx) so the font loader calls aren't duplicated
 // verbatim between the two multiple-root-layouts trees.
 //
-// Matches the sibling Christ Apostolic Church site (cacsalvationcenter.org)'s
-// font pairing. The Yoruba orthography this site renders needs precomposed
-// dot-below vowels (ẹ, ọ -- U+1EB9, U+1ECD) and combining tone-mark accents
-// (grave/acute/tilde, U+0300-0304) -- Google Fonts buckets both under the
-// "vietnamese" subset rather than "latin-ext" for every font checked here
-// (confirmed by diffing the compiled @font-face unicode-range output for
-// this exact pairing, and for the Public Sans/Archivo Black pairing this
-// replaces, which had the same subset layout). "latin" alone omits them.
-export const displayFont = Bricolage_Grotesque({
+// Bold, geometric display face (Unbounded) paired with Manrope's warm,
+// rounded body face -- part of the bold/vibrant visual redesign. The
+// Yoruba orthography this site renders needs precomposed dot-below vowels
+// (ẹ, ọ -- U+1EB9, U+1ECD) and combining tone-mark accents (grave/acute/
+// tilde, U+0300-0304) -- both fonts confirmed to include the "vietnamese"
+// subset (Google Fonts buckets this diacritic coverage there, not under
+// "latin-ext"), verified by diffing compiled @font-face unicode-range
+// output for a modern-browser UA, the same method used for the previous
+// Bricolage Grotesque + Plus Jakarta Sans pairing this replaces.
+export const displayFont = Unbounded({
   variable: "--font-heading",
   subsets: ["latin", "vietnamese"],
 });
 
-export const bodyFont = Plus_Jakarta_Sans({
+export const bodyFont = Manrope({
   variable: "--font-body",
   subsets: ["latin", "vietnamese"],
 });

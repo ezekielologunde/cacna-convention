@@ -31,7 +31,7 @@ export default async function NewsPage({
             key={event.title}
             className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
           >
-            <p className="text-sm font-semibold tabular-nums text-[var(--color-maroon)]">
+            <p className="text-sm font-semibold tabular-nums text-[var(--color-coral-text)]">
               {dateFormatter.format(new Date(`${event.date}T12:00:00Z`))}
               {event.endDate
                 ? ` – ${dateFormatter.format(new Date(`${event.endDate}T12:00:00Z`))}`
@@ -57,7 +57,7 @@ export default async function NewsPage({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${t("moreInfoCta")}${t("opensInNewTab")}`}
-                className="mt-3 inline-block text-sm font-semibold text-[var(--color-maroon)] underline"
+                className="mt-3 inline-block text-sm font-semibold text-[var(--color-coral-text)] underline"
               >
                 {t("moreInfoCta")}
               </a>

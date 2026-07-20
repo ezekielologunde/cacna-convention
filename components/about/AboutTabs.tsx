@@ -36,7 +36,7 @@ export function AboutTabs({
   const tabClass = (active: boolean) =>
     `inline-flex min-h-11 flex-none items-center whitespace-nowrap px-4 text-sm font-semibold transition-colors ${
       active
-        ? "border-b-2 border-[var(--color-maroon)] text-[var(--color-maroon)]"
+        ? "border-b-2 border-[var(--color-coral-text)] text-[var(--color-coral-text)]"
         : "border-b-2 border-transparent text-[var(--color-muted)] hover:text-[var(--color-fg)]"
     }`;
 
@@ -82,7 +82,7 @@ export function AboutTabs({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${t("readFullStoryCta")}${t("opensInNewTab")}`}
-              className="font-semibold text-[var(--color-maroon)] underline"
+              className="font-semibold text-[var(--color-coral-text)] underline"
             >
               {t("readFullStoryCta")}
             </a>
@@ -93,7 +93,7 @@ export function AboutTabs({
           </h3>
           <p className="mt-2 text-[var(--color-muted)]">{aboutConvention.missionStatement}</p>
 
-          <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-maroon)] uppercase">
+          <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-coral-text)] uppercase">
             {t("biblicallyBasedHeading")}
           </h3>
           <BulletList
@@ -101,7 +101,7 @@ export function AboutTabs({
             className="gap-1.5 text-[var(--color-muted)]"
           />
 
-          <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-maroon)] uppercase">
+          <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-coral-text)] uppercase">
             {t("kingdomFocusedHeading")}
           </h3>
           <BulletList
@@ -109,7 +109,7 @@ export function AboutTabs({
             className="gap-1.5 text-[var(--color-muted)]"
           />
 
-          <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-maroon)] uppercase">
+          <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-coral-text)] uppercase">
             {t("externalResourcesHeading")}
           </h3>
           <ul className="mt-2 flex flex-col gap-1.5">
@@ -120,7 +120,7 @@ export function AboutTabs({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${resource.label}${t("opensInNewTab")}`}
-                  className="font-semibold text-[var(--color-maroon)] underline"
+                  className="font-semibold text-[var(--color-coral-text)] underline"
                 >
                   {resource.label}
                 </a>
@@ -195,7 +195,7 @@ export function AboutTabs({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${t("findYourZone")}${t("opensInNewTab")}`}
-                className="font-semibold text-[var(--color-maroon)] underline"
+                className="font-semibold text-[var(--color-coral-text)] underline"
               >
                 {t("findYourZone")}
               </a>
@@ -206,7 +206,7 @@ export function AboutTabs({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${t("findYourDcc")}${t("opensInNewTab")}`}
-                className="font-semibold text-[var(--color-maroon)] underline"
+                className="font-semibold text-[var(--color-coral-text)] underline"
               >
                 {t("findYourDcc")}
               </a>

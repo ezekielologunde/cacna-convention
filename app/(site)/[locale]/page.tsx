@@ -6,7 +6,11 @@ import { getActiveEdition } from "@/lib/editions";
 import { getActivePricingForEdition } from "@/lib/pricing";
 import { PromoBanner } from "@/components/register/PromoBanner";
 import { welcomeMessage } from "@/lib/content/welcome";
+import { history } from "@/lib/content/history";
 import { Reveal } from "@/components/ui/Reveal";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
+import { Card } from "@/components/ui/Card";
 import { UpcomingPrograms } from "@/components/home/UpcomingPrograms";
 
 export default async function Home({
@@ -38,83 +42,93 @@ export default async function Home({
     <div className="flex flex-1 flex-col">
       {edition && <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />}
 
-      {/* Hero */}
-      <section className="relative overflow-hidden px-6 py-20 text-center text-white sm:py-28">
-        <Image
-          src="/photos/hero-convention.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
+      {/* Hero — asymmetric split: headline left, photo right (photo-above-headline on mobile) */}
+      <section className="relative overflow-hidden px-6 pt-14 pb-20 sm:pt-20 sm:pb-28">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 -left-24 h-96 w-96 rounded-full opacity-30 blur-3xl"
+          style={{ background: "var(--color-coral)" }}
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(135deg, rgba(107,16,16,0.88), rgba(158,27,27,0.8) 45%, rgba(20,10,8,0.75))",
-          }}
+          className="pointer-events-none absolute top-1/2 -right-32 h-80 w-80 rounded-full opacity-20 blur-3xl"
+          style={{ background: "var(--color-teal)" }}
         />
-        <Reveal className="relative mx-auto max-w-3xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-bold tracking-[0.2em] text-[var(--color-gold-light)] uppercase backdrop-blur-sm">
-            {t("kicker")}
-          </span>
-          <div className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Image
-              src="/brand/icon.png"
-              alt=""
-              width={56}
-              height={56}
-              className="h-12 w-12 flex-none rounded-full sm:h-14 sm:w-14"
-            />
-            <h1 className="font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">
-              {t("title")}
-            </h1>
-          </div>
-          <p className="mx-auto mt-5 max-w-[48ch] text-lg text-white/85">{t("subtitle")}</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link
-              href={`/${locale}/about`}
-              className="rounded-full px-6 py-3 font-semibold text-[var(--color-maroon-deep)] shadow-[0_14px_34px_-10px_rgba(232,163,61,.6)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
-              style={{ background: "var(--color-gold)" }}
-            >
-              {t("learnMore")}
-            </Link>
-            <Link
-              href={`/${locale}/schedule`}
-              className="rounded-full border border-white/45 px-6 py-3 font-semibold text-white transition-colors hover:border-white"
-            >
-              {t("viewSchedule")}
-            </Link>
+        <Reveal className="relative mx-auto max-w-6xl">
+          <div className="flex flex-col-reverse items-center gap-10 lg:flex-row lg:items-center lg:gap-16">
+            <div className="flex-1 text-center lg:text-left">
+              <span
+                className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold tracking-[0.2em] uppercase"
+                style={{ background: "var(--color-coral-light)", color: "var(--color-coral-text)" }}
+              >
+                {t("kicker")}
+              </span>
+              <h1 className="mt-5 font-display text-5xl leading-[1.02] tracking-tight text-[var(--color-fg)] sm:text-6xl lg:text-7xl">
+                {t("title")}
+              </h1>
+              <p className="mx-auto mt-5 max-w-[48ch] text-lg text-[var(--color-muted)] lg:mx-0">{t("subtitle")}</p>
+              <div className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
+                <Button href={`/${locale}/about`} variant="primary">
+                  {t("learnMore")}
+                </Button>
+                <Button href={`/${locale}/schedule`} variant="outline">
+                  {t("viewSchedule")}
+                </Button>
+              </div>
+              <div className="mt-8 flex justify-center lg:justify-start">
+                <Badge tone="coral">{t("establishedBadge", { year: history.foundingYear })}</Badge>
+              </div>
+            </div>
+            <div className="relative flex-1">
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-sm lg:max-w-md">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -top-8 -right-8 h-56 w-56 rounded-full opacity-50 blur-3xl"
+                  style={{ background: "var(--color-coral)" }}
+                />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full opacity-40 blur-3xl"
+                  style={{ background: "var(--color-teal)" }}
+                />
+                <div className="relative h-full w-full rotate-2 overflow-hidden rounded-[2rem] shadow-2xl">
+                  <Image
+                    src="/photos/hero-convention.jpg"
+                    alt=""
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 28rem, 90vw"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </Reveal>
       </section>
 
-      {/* Welcome — bold, joyful full-bleed treatment matching PageHero's flame-gradient vocabulary */}
-      <section className="relative overflow-hidden px-6 py-20 sm:py-24" style={{ background: "var(--flame-hero)" }}>
+      {/* Welcome — two-column on desktop: gradient panel + message card */}
+      <section className="relative overflow-hidden px-6 py-16 sm:py-20" style={{ background: "var(--gradient-hero-coral)" }}>
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full opacity-30 blur-3xl"
-          style={{ background: "var(--color-gold)" }}
+          style={{ background: "var(--color-coral)" }}
         />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-white/10 blur-3xl"
         />
-        <div className="relative mx-auto max-w-3xl text-center">
+        <div className="relative mx-auto grid max-w-5xl gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-center">
           <Reveal>
-            <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-gold-light)] uppercase">
+            <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-mist)] uppercase">
               {t("welcomeKicker")}
             </span>
-          </Reveal>
-          <Reveal delay={80}>
             <h2 className="mt-4 font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl">
               {t("welcomeHeading")}
             </h2>
           </Reveal>
-          <Reveal delay={140}>
-            <div className="mx-auto mt-8 max-w-2xl rounded-3xl bg-white/10 p-8 text-left backdrop-blur-sm sm:p-10">
+          <Reveal delay={100}>
+            <div className="rounded-3xl bg-white/10 p-8 text-left backdrop-blur-sm sm:p-10">
               {welcomeMessage.paragraphs.map((paragraph, index) => (
                 <p key={index} className={index > 0 ? "mt-4 text-white/85" : "text-white/85"}>
                   {paragraph}
@@ -122,7 +136,7 @@ export default async function Home({
               ))}
               <p className="mt-4 text-white/85">
                 {welcomeMessage.closingLead}{" "}
-                <Link href={`/${locale}/contact`} className="font-semibold text-[var(--color-gold-light)] underline">
+                <Link href={`/${locale}/contact`} className="font-semibold text-[var(--color-mist)] underline">
                   {t("contactLinkText")}
                 </Link>
                 .
@@ -133,45 +147,32 @@ export default async function Home({
       </section>
 
       {/* Upcoming Programs — real, dated events */}
-      <UpcomingPrograms heading={t("upcomingHeading")} cta={t("newsCta")} locale={locale} />
+      <UpcomingPrograms heading={t("upcomingHeading")} cta={t("upcomingCta")} locale={locale} />
 
-      {/* News & Events teaser */}
+      {/* Mission + News + Gallery — consolidated 3-up card grid */}
       <Reveal>
-        <section className="px-6 py-16 text-center">
-          <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">
-            {t("newsHeading")}
-          </h2>
-          <p className="mx-auto mt-3 max-w-[48ch] text-[var(--color-muted)]">{t("newsBody")}</p>
-          <Link
-            href={`/${locale}/news`}
-            className="mt-6 inline-block rounded-full px-6 py-3 font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
-            style={{ background: "var(--flame)" }}
-          >
-            {t("newsCta")}
-          </Link>
+        <section className="px-6 py-16">
+          <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-3">
+            <Card padding="lg" className="flex flex-col text-center">
+              <h2 className="font-display text-lg text-[var(--color-fg)]">{t("missionHeading")}</h2>
+              <p className="mt-3 flex-1 text-sm text-[var(--color-muted)]">{t("missionBody")}</p>
+            </Card>
+            <Card padding="lg" className="flex flex-col text-center">
+              <h2 className="font-display text-lg text-[var(--color-fg)]">{t("newsHeading")}</h2>
+              <p className="mt-3 flex-1 text-sm text-[var(--color-muted)]">{t("newsBody")}</p>
+              <Link href={`/${locale}/news`} className="mt-4 font-semibold text-[var(--color-coral-text)] underline">
+                {t("newsCta")}
+              </Link>
+            </Card>
+            <Card padding="lg" className="flex flex-col text-center">
+              <h2 className="font-display text-lg text-[var(--color-fg)]">{t("galleryHeading")}</h2>
+              <Link href={`/${locale}/gallery`} className="mt-auto pt-4 font-semibold text-[var(--color-coral-text)] underline">
+                {t("galleryCta")}
+              </Link>
+            </Card>
+          </div>
         </section>
       </Reveal>
-
-      {/* Mission / what a CACNA week looks like */}
-      <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">
-            {t("missionHeading")}
-          </h2>
-          <p className="mt-4 text-[var(--color-muted)]">{t("missionBody")}</p>
-        </div>
-      </section>
-
-      {/* Gallery teaser */}
-      <section className="px-6 pb-16 text-center">
-        <h2 className="font-display text-xl text-[var(--color-fg)]">{t("galleryHeading")}</h2>
-        <Link
-          href={`/${locale}/gallery`}
-          className="mt-4 inline-block rounded-full border border-[var(--color-border)] px-6 py-3 font-semibold text-[var(--color-fg)] transition-colors hover:border-[var(--color-maroon)]"
-        >
-          {t("galleryCta")}
-        </Link>
-      </section>
 
       {/* Registration */}
       <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
@@ -184,13 +185,11 @@ export default async function Home({
               {t("registrationComingSoon")}
             </p>
           )}
-          <Link
-            href={`/${locale}/register`}
-            className="mt-6 inline-block rounded-full px-6 py-3 font-semibold text-white shadow-[0_10px_26px_-10px_rgba(214,40,40,0.55)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
-            style={{ background: "var(--flame)" }}
-          >
-            {t("registrationCta")}
-          </Link>
+          <div className="mt-6 flex justify-center">
+            <Button href={`/${locale}/register`} variant="primary">
+              {t("registrationCta")}
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -203,13 +202,9 @@ export default async function Home({
             <h3 className="font-display text-xl text-[var(--color-fg)]">{t("giveHeading")}</h3>
             <p className="mt-2 max-w-[44ch] text-[var(--color-muted)]">{t("giveBody")}</p>
           </div>
-          <Link
-            href={`/${locale}/give`}
-            className="flex-none rounded-full px-6 py-3 font-semibold text-white"
-            style={{ background: "var(--color-maroon)" }}
-          >
+          <Button href={`/${locale}/give`} variant="secondary" className="flex-none">
             {t("giveCta")}
-          </Link>
+          </Button>
         </div>
       </section>
     </div>

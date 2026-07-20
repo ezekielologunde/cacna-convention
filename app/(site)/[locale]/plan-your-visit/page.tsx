@@ -59,7 +59,7 @@ export default async function PlanYourVisitPage({
           </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]">
-              <p className="text-xs font-bold tracking-wide text-[var(--color-maroon)] uppercase">
+              <p className="text-xs font-bold tracking-wide text-[var(--color-coral-text)] uppercase">
                 {t("recommendedAirport")}
               </p>
               <p className="mt-1.5 font-semibold text-[var(--color-fg)]">{recommendedAirport.name}</p>
@@ -92,7 +92,7 @@ export default async function PlanYourVisitPage({
         <section className="mt-10">
           <h2 className="font-display text-xl text-[var(--color-fg)]">{t("hotelsHeading")}</h2>
           <p className="mt-2 max-w-[62ch] text-sm text-[var(--color-muted)]">{t("hotelsIntro")}</p>
-          <p className="mt-1 text-sm font-semibold text-[var(--color-maroon)]">
+          <p className="mt-1 text-sm font-semibold text-[var(--color-coral-text)]">
             {t("groupCode", { code: hotelGroupCode })}
           </p>
 
@@ -132,7 +132,7 @@ export default async function PlanYourVisitPage({
         <section className="mt-10">
           <h2 className="font-display text-xl text-[var(--color-fg)]">{t("rulesHeading")}</h2>
 
-          <h3 className="mt-4 text-sm font-bold tracking-wide text-[var(--color-maroon)] uppercase">
+          <h3 className="mt-4 text-sm font-bold tracking-wide text-[var(--color-coral-text)] uppercase">
             {t("rememberHeading")}
           </h3>
           <BulletList
@@ -141,7 +141,7 @@ export default async function PlanYourVisitPage({
             itemClassName="text-sm text-[var(--color-fg)]"
           />
 
-          <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-maroon)] uppercase">
+          <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-coral-text)] uppercase">
             {t("rulesListHeading")}
           </h3>
           <BulletList

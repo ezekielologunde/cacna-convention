@@ -31,14 +31,14 @@ export function ScheduleDay({
 
   return (
     <section className="rounded-3xl border border-[var(--color-border)] p-6 shadow-[var(--shadow-card)] sm:p-7">
-      <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold tracking-wide text-white uppercase" style={{ background: "var(--flame)" }}>
+      <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold tracking-wide text-white uppercase" style={{ background: "var(--gradient-cta)" }}>
         {weekday}
       </span>
       <h2 className="sr-only">{dayDate}</h2>
       <ul className="mt-4 flex flex-col gap-4">
         {sessions.map((session) => (
           <li key={session.id} className="border-b border-[var(--color-border)] pb-4 last:border-b-0 last:pb-0">
-            <p className="text-sm font-semibold text-[var(--color-maroon)] tabular-nums">
+            <p className="text-sm font-semibold text-[var(--color-coral-text)] tabular-nums">
               {session.starts_at.slice(0, 5)}–{session.ends_at.slice(0, 5)}
             </p>
             <p className="mt-0.5 font-semibold text-[var(--color-fg)]">{session.title}</p>

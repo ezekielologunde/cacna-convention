@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
+import { Badge } from "@/components/ui/Badge";
 import {
   christianEducationMaterials,
   conventionApparelDemo,
@@ -26,11 +27,11 @@ function ApparelCategory({
             key={item.name}
             className="relative flex flex-col justify-between rounded-2xl border border-dashed border-[var(--color-border)] p-5"
           >
-            <span className="absolute top-4 right-4 rounded-full bg-[var(--color-surface)] px-2.5 py-1 text-[10px] font-bold tracking-wide text-[var(--color-muted)] uppercase">
+            <Badge tone="coral" className="absolute top-4 right-4">
               {demoLabel}
-            </span>
+            </Badge>
             <p className="pr-14 font-semibold text-[var(--color-fg)]">{item.name}</p>
-            <p className="mt-3 font-display text-lg text-[var(--color-maroon)]">{item.price}</p>
+            <p className="mt-3 font-display text-lg text-[var(--color-coral-text)]">{item.price}</p>
           </li>
         ))}
       </ul>
@@ -61,7 +62,7 @@ export default async function StorePage({
                 className="flex flex-col justify-between rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
               >
                 <p className="font-semibold text-[var(--color-fg)]">{item.name}</p>
-                <p className="mt-3 font-display text-lg text-[var(--color-maroon)]">{item.price}</p>
+                <p className="mt-3 font-display text-lg text-[var(--color-coral-text)]">{item.price}</p>
               </li>
             ))}
           </ul>
@@ -71,7 +72,7 @@ export default async function StorePage({
             rel="noopener noreferrer"
             aria-label={`${t("shopCta")}${t("opensInNewTab")}`}
             className="mt-6 inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold text-white"
-            style={{ background: "var(--flame)" }}
+            style={{ background: "var(--gradient-cta)" }}
           >
             {t("shopCta")}
           </a>

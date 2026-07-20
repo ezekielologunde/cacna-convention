@@ -1,86 +1,64 @@
 @import "tailwindcss";
 
 /*
- * CACNA Convention design tokens.
+ * CACNA Convention design tokens -- bold/vibrant redesign.
  *
- * Palette matches the sibling Christ Apostolic Church site
- * (cacsalvationcenter.org)'s shipped "flame" system — orange to red to
- * maroon — plus gold, cross-checked against the 2026 convention flyer's
- * black/red/gold. --color-bg/--color-surface are cacsalvationcenter.org's
- * own warm cream pairing (#fff7ef / #fbead9, sampled directly from its
- * computed styles), replacing plain white so alternating sections read the
- * same way theirs do; the flame gradient and deep maroon are still used
- * deliberately as bookends (hero, footer, primary CTAs), not a dark theme.
+ * Coral (warm orange -> pink) is the primary accent; teal is its true
+ * color-wheel complement, used for secondary CTAs, alternating tone, and
+ * badges. Every accent splits into a fill role (-deep: solid background
+ * behind white text, contrast is self-contained so it never needs a dark
+ * override) and a foreground role (-text: links/icons/active-nav sitting
+ * directly on the page background, so it DOES need a dark override since
+ * its contrast depends on what's behind it). All ratios below verified
+ * against WCAG AA (4.5:1 body text, 3:1 large text/UI).
  */
 :root {
-  --background: #fff7ef;
-  --foreground: #1b130e;
+  --background: #ffffff;
+  --foreground: #16121a;
 
-  --color-bg: #fff7ef;
-  --color-fg: #1b130e;
-  /*
-   * --color-muted/--color-border verified against cac-salvation-center's
-   * actual source (github.com/ezekielologunde/cac-salvation-center):
-   * --ink-soft is #6a584c exactly (this project's earlier value, #6b5d51,
-   * was a close-but-not-exact sample). --color-border is tuned to match
-   * their --line token (rgba(27,19,14,0.12), i.e. --color-fg at 12%)
-   * resolved against --color-bg, since Tailwind v4 custom properties here
-   * are consumed as flat hex rather than alpha-composited at each use site.
-   */
-  --color-muted: #6a584c;
-  --color-border: #e4dcd4;
-  --color-surface: #fbead9;
+  --color-bg: #ffffff;
+  --color-fg: #16121a;
+  --color-muted: #6b5f6e; /* 5.57:1 on bg/surface */
+  --color-border: #ece3e6;
+  --color-surface: #fff4ef; /* coral-tinted cream, section banding */
 
-  --color-orange: #f15f22;
-  --color-red: #d62828;
-  --color-maroon: #9e1b1b;
-  --color-maroon-deep: #6b1010;
-  /*
-   * --color-gold verified against the real source's --gold token
-   * (#e8a33d exactly) -- this project's earlier value, #b7791f, was a
-   * muddier brown-gold guessed from a live-site screenshot rather than
-   * read from source. The real site never puts --gold as small text
-   * directly on its cream background (only on dark surfaces, or inside a
-   * tinted chip), which is why no --color-gold-deep contrast-safe variant
-   * exists there -- see PrimaryNav's nav kicker, which now follows the
-   * same rule (accent = red on the light bar, gold reserved for dark).
-   */
-  --color-gold: #e8a33d;
-  --color-gold-light: #ffd9a8;
+  /* Coral -- warm orange/pink primary accent */
+  --color-coral: #ff6152; /* decorative/large only (>=24px text) -- 2.96:1 on white */
+  --color-coral-deep: #c13a22; /* solid button/badge fill + white text -- 5.39:1, theme-invariant */
+  --color-coral-text: #b93619; /* links/icons/active-nav on page bg -- 5.83:1 on white, dark-overridden */
+  --color-coral-light: #ffe3dc; /* chip/tint background, dark-overridden */
+
+  /* Teal -- secondary/complementary accent */
+  --color-teal: #0ea5a0; /* decorative/large only -- 3.04:1 on white */
+  --color-teal-deep: #0b7a76; /* solid fill + white text -- 5.17:1, theme-invariant */
+  --color-teal-text: #0a716d; /* links/icons on page bg -- 5.84:1 on white, dark-overridden */
+  --color-teal-light: #d9f5f1; /* chip/tint background, dark-overridden */
 
   /*
-   * Secondary accent, reserved for pages that would otherwise read
-   * identically maroon (About/Give hero, a couple of sub-conference
-   * pages) — matches the navy already introduced on the sibling
-   * cacnorthamerica.com site's own Giving redesign, so the two sites'
-   * accent vocabularies stay in the same family.
+   * Eyebrow/label text sitting on the hero gradients below -- verified
+   * >=4.5:1 against the lightest point of BOTH hero gradients, so unlike
+   * -text tokens it does not need a dark override (it's never placed
+   * directly on --color-bg).
    */
-  --color-navy: #1b2a6b;
-  --color-navy-deep: #14205a;
+  --color-mist: #ffeee8;
 
-  --color-brand: var(--color-red);
+  --color-brand: var(--color-coral-text);
   --color-brand-contrast: #ffffff;
 
   /*
-   * --flame always carries white button/label text (see PrimaryNav,
-   * RegistrationForm, PromoBanner, ScheduleDay). Its first stop is a
-   * darkened orange (#c2481a, not --color-orange's #f15f22) because
-   * white-on-#f15f22 only reaches ~3.3:1 contrast — below the 4.5:1 WCAG AA
-   * minimum for normal text. #c2481a reaches ~4.96:1 while staying visibly
-   * orange. --color-orange itself is untouched since it's only ever used
-   * decoratively (e.g. the hero kicker dot), where contrast doesn't apply.
+   * These three gradients always carry white text on a saturated,
+   * self-contained fill -- not blended with page background -- so they're
+   * theme-invariant, same reasoning the old --flame's darkened first stop
+   * applied to one stop, verified here across the whole ramp (21 sample
+   * points; minimum white-text contrast noted per gradient).
    */
-  --flame: linear-gradient(100deg, #c2481a, var(--color-red), var(--color-maroon));
-  --flame-hero: linear-gradient(150deg, var(--color-red) 0%, var(--color-maroon) 55%, var(--color-maroon-deep) 100%);
-  --navy-hero: linear-gradient(150deg, var(--color-navy) 0%, var(--color-navy-deep) 100%);
+  --gradient-cta: linear-gradient(100deg, #a8341c 0%, #c13a4a 50%, #a8305c 100%); /* min white 5.29:1 */
+  --gradient-hero-coral: linear-gradient(150deg, #c13a4a 0%, #a8305c 55%, #6b1b3d 100%); /* min white 5.29:1, min mist 4.70:1 */
+  --gradient-hero-teal: linear-gradient(150deg, #0b7a76 0%, #0a5553 55%, #063230 100%); /* min white 5.17:1, min mist 4.59:1 */
 
-  /*
-   * cacsalvationcenter.org's own card shadow (sampled from its computed
-   * box-shadow: 0 10px 26px rgba(27,19,14,0.06) -- 27,19,14 is this
-   * project's --color-fg). CACNA's bordered rounded-2xl/3xl cards had no
-   * shadow at all; this gives them the same soft lift.
-   */
-  --shadow-card: 0 10px 26px rgba(27, 19, 14, 0.06);
+  --shadow-card: 0 10px 26px rgba(22, 18, 26, 0.08);
+  --shadow-glow-coral: 0 14px 34px -10px rgba(193, 58, 34, 0.45);
+  --shadow-glow-teal: 0 14px 34px -10px rgba(11, 122, 118, 0.4);
 }
 
 @theme inline {
@@ -90,16 +68,42 @@
   --font-display: var(--font-heading);
 }
 
+/*
+ * Dark values live in one place, applied by two selectors: the media
+ * query for pure-system users (skipped if a manual "light" choice is
+ * stored), and [data-theme="dark"] for the manual toggle in
+ * components/ui/ThemeToggle.tsx. Keep both blocks identical -- there's no
+ * CSS "include" here, so drift is a real risk if only one is edited.
+ */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #17110d;
-    --foreground: #f7ede4;
-    --color-bg: #17110d;
-    --color-fg: #f7ede4;
-    --color-muted: #c9b9ac;
-    --color-border: #3a2c22;
-    --color-surface: #221a14;
+  :root:not([data-theme="light"]) {
+    --background: #16121a;
+    --foreground: #f3ede9;
+    --color-bg: #16121a;
+    --color-fg: #f3ede9;
+    --color-muted: #c9bec7;
+    --color-border: #4a3a50;
+    --color-surface: #211a28;
+    --color-coral-text: #ff8a73; /* 8.04:1 on dark bg */
+    --color-coral-light: #3a2018;
+    --color-teal-text: #4dd9ce; /* 10.68:1 on dark bg */
+    --color-teal-light: #123330;
+    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.45);
   }
+}
+:root[data-theme="dark"] {
+  --background: #16121a;
+  --foreground: #f3ede9;
+  --color-bg: #16121a;
+  --color-fg: #f3ede9;
+  --color-muted: #c9bec7;
+  --color-border: #4a3a50;
+  --color-surface: #211a28;
+  --color-coral-text: #ff8a73;
+  --color-coral-light: #3a2018;
+  --color-teal-text: #4dd9ce;
+  --color-teal-light: #123330;
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
 
 body {
@@ -109,20 +113,17 @@ body {
 }
 
 /*
- * cacsalvationcenter.org's headings are heavy and tight (its H1 measures
- * font-weight 800, letter-spacing ~-3% of font-size; H2 800/-2.3%; H3
- * 800/-1.5%, all sampled from computed styles) -- CACNA's headings only
- * ever set font-family, leaving them at Bricolage Grotesque's unstyled
- * default weight/tracking. -0.02em lands in the middle of that -1.5%
- * to -3% range and reads correctly across this site's smaller heading
- * sizes (its H1 is much larger than any heading used here).
+ * Unbounded's letterforms are already wide/open (unlike the previous
+ * Bricolage Grotesque, a tighter grotesk), so the tracking here is dialed
+ * back from the earlier -0.02em to avoid over-tightening a display face
+ * designed to be spacious. Weight stays heavy for the bold/vibrant feel.
  */
 h1,
 h2,
 h3 {
   font-family: var(--font-display), var(--font-sans), sans-serif;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 @media (prefers-reduced-motion: reduce) {

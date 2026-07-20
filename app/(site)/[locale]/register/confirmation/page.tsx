@@ -41,7 +41,7 @@ export default async function RegisterConfirmationPage({
       <span
         aria-hidden="true"
         className="flex h-16 w-16 items-center justify-center rounded-full text-white"
-        style={{ background: "var(--flame)" }}
+        style={{ background: "var(--gradient-cta)" }}
       >
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
           <path d="M5 12.5l4.5 4.5L19 7" />

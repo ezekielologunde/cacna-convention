@@ -40,7 +40,11 @@ export function FooterNav() {
     <footer
       aria-label="Footer"
       className="mt-auto px-6 py-12 text-white"
-      style={{ background: "var(--color-fg)" }}
+      // Deliberately pinned dark in both themes (not tied to --color-fg,
+      // which inverts to a light value in dark mode) -- the footer's white
+      // text/link contrast depends on staying dark regardless of the
+      // page's current theme.
+      style={{ background: "#16121a" }}
     >
       <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
         <div>
@@ -53,7 +57,7 @@ export function FooterNav() {
               className="h-7 w-7 flex-none rounded-lg object-cover"
             />
             <span className="flex min-w-0 flex-col leading-none">
-              <span className="truncate text-[9px] font-bold tracking-[0.15em] text-[var(--color-gold-light)] uppercase">
+              <span className="truncate text-[9px] font-bold tracking-[0.15em] text-[var(--color-mist)] uppercase">
                 {t("orgKicker")}
               </span>
               <span className="mt-0.5 truncate font-display text-lg text-white">North America Convention</span>
@@ -71,8 +75,8 @@ export function FooterNav() {
                 <Link
                   href={`/${locale}${item.href}`}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className={`flex min-h-11 items-center hover:text-[var(--color-gold-light)] ${
-                    isActive(item.href) ? "font-bold text-[var(--color-gold-light)]" : ""
+                  className={`flex min-h-11 items-center hover:text-[var(--color-mist)] ${
+                    isActive(item.href) ? "font-bold text-[var(--color-mist)]" : ""
                   }`}
                 >
                   {t(item.key)}
@@ -91,8 +95,8 @@ export function FooterNav() {
                 <Link
                   href={`/${locale}${item.href}`}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className={`flex min-h-11 items-center hover:text-[var(--color-gold-light)] ${
-                    isActive(item.href) ? "font-bold text-[var(--color-gold-light)]" : ""
+                  className={`flex min-h-11 items-center hover:text-[var(--color-mist)] ${
+                    isActive(item.href) ? "font-bold text-[var(--color-mist)]" : ""
                   }`}
                 >
                   {t(item.key)}
@@ -106,7 +110,7 @@ export function FooterNav() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${resource.label}${tFooter("opensInNewTab")}`}
-                  className="flex min-h-11 items-center hover:text-[var(--color-gold-light)]"
+                  className="flex min-h-11 items-center hover:text-[var(--color-mist)]"
                 >
                   {resource.label}
                 </a>
@@ -123,8 +127,8 @@ export function FooterNav() {
               <Link
                 href={`/${locale}/contact`}
                 aria-current={isActive("/contact") ? "page" : undefined}
-                className={`flex min-h-11 items-center hover:text-[var(--color-gold-light)] ${
-                  isActive("/contact") ? "font-bold text-[var(--color-gold-light)]" : ""
+                className={`flex min-h-11 items-center hover:text-[var(--color-mist)] ${
+                  isActive("/contact") ? "font-bold text-[var(--color-mist)]" : ""
                 }`}
               >
                 {t("contact")}

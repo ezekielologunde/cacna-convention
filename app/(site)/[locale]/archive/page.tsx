@@ -31,7 +31,7 @@ export default async function ArchivePage({
 
   return (
     <>
-      <PageHero title={t("title")} tone="navy" />
+      <PageHero title={t("title")} tone="teal" />
       <div className="mx-auto max-w-3xl px-6 py-12">
       {!editions || editions.length === 0 ? (
         <div className="mt-8 rounded-3xl border border-[var(--color-border)] p-8 text-center shadow-[var(--shadow-card)]">
