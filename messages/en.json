@@ -26,9 +26,23 @@
   },
   "Account": {
     "title": "Account",
-    "subtitle": "Manage how the site looks and, soon, sign in to find a past registration.",
+    "subtitle": "Manage how the site looks, and sign in to find a past registration.",
     "preferencesHeading": "Preferences",
-    "themeLabel": "Theme"
+    "themeLabel": "Theme",
+    "signedInHeading": "Signed in",
+    "signOutCta": "Sign out",
+    "signInHeading": "Find a registration",
+    "signInPrompt": "Sign in to look up a registration you already submitted, without needing your confirmation link.",
+    "signInCta": "Sign in"
+  },
+  "AccountLogin": {
+    "title": "Sign in",
+    "emailLabel": "Email address",
+    "submitCta": "Send magic link",
+    "submitting": "Sending…",
+    "errorMessage": "Something went wrong sending the link. Please try again.",
+    "checkEmailTitle": "Check your email",
+    "checkEmailBody": "If that email is on file, we've sent a link to sign in — it may take a minute to arrive. You can close this tab."
   },
   "Search": {
     "open": "Search",

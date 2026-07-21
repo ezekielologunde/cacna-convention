@@ -42,6 +42,23 @@ describe("createClient (server, SSR)", () => {
   });
 });
 
+describe("createAttendeeClient (server, SSR)", () => {
+  it("uses a distinct cookie name from the default/admin client", async () => {
+    const { createAttendeeClient } = await import("../../lib/supabase/server");
+    const client = await createAttendeeClient();
+
+    expect(createServerClientMock).toHaveBeenCalledWith(
+      "https://example.supabase.co",
+      "anon-key",
+      expect.objectContaining({
+        cookieOptions: { name: "sb-cacna-site-auth-token" },
+        cookies: expect.any(Object),
+      })
+    );
+    expect(client).toEqual({ __client: "server" });
+  });
+});
+
 describe("createServiceClient", () => {
   it("builds a service-role client with the configured URL and service key", async () => {
     const { createServiceClient } = await import("../../lib/supabase/server");

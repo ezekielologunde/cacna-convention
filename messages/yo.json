@@ -26,9 +26,23 @@
   },
   "Account": {
     "title": "Àkọọ́nti",
-    "subtitle": "Ṣàkóso bí ojú-òpó wẹ́ẹ̀bù ṣe rí, kí o sì lè wọlé láìpẹ́ láti wá ìforúkọsílẹ̀ tí o ti ṣe.",
+    "subtitle": "Ṣàkóso bí ojú-òpó wẹ́ẹ̀bù ṣe rí, kí o sì wọlé láti wá ìforúkọsílẹ̀ tí o ti ṣe.",
     "preferencesHeading": "Àṣàyàn",
-    "themeLabel": "Àwọ̀"
+    "themeLabel": "Àwọ̀",
+    "signedInHeading": "O ti wọlé",
+    "signOutCta": "Jáde",
+    "signInHeading": "Wá ìforúkọsílẹ̀ rẹ",
+    "signInPrompt": "Wọlé láti wá ìforúkọsílẹ̀ tí o ti ṣe, láìsí àìní ọ̀nà ìjẹ́rìísí rẹ.",
+    "signInCta": "Wọlé"
+  },
+  "AccountLogin": {
+    "title": "Wọlé",
+    "emailLabel": "Àdírẹ́sì Í-meèlì",
+    "submitCta": "Fi ìjápọ̀ ìwọlé ránṣẹ́",
+    "submitting": "Ń firánṣẹ́…",
+    "errorMessage": "Àṣìṣe ṣẹlẹ̀ nígbà fífi ìjápọ̀ ránṣẹ́. Jọ̀wọ́ tún gbìyànjú.",
+    "checkEmailTitle": "Ṣàyẹ̀wò í-meèlì rẹ",
+    "checkEmailBody": "Bí í-meèlì yẹn bá wà lára àkọsílẹ̀ wa, a ti fi ìjápọ̀ kan ránṣẹ́ fún ọ láti wọlé — ó lè gba ìṣẹ́jú kan láti dé. O lè ti táàbù yìí."
   },
   "Search": {
     "open": "Wá",

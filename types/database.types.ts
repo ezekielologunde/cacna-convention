@@ -43,6 +43,22 @@ export type Database = {
         Update: Partial<Database["public"]["Tables"]["admin_profiles"]["Insert"]>;
         Relationships: [];
       };
+      attendee_profiles: {
+        Row: {
+          id: string;
+          email: string;
+          full_name: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id: string;
+          email: string;
+          full_name?: string | null;
+          created_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["attendee_profiles"]["Insert"]>;
+        Relationships: [];
+      };
       schedule_sessions: {
         Row: {
           id: string;

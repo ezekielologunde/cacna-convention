@@ -30,6 +30,35 @@ export async function createClient() {
   );
 }
 
+// Distinct cookie name from the default/admin client above -- see
+// lib/supabase/client.ts's createAttendeeClient() for why.
+export async function createAttendeeClient() {
+  const cookieStore = await cookies();
+
+  return createServerClient<Database>(
+    requireEnv("NEXT_PUBLIC_SUPABASE_URL"),
+    requireEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
+    {
+      cookieOptions: { name: "sb-cacna-site-auth-token" },
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
+        },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            );
+          } catch {
+            // Called from a Server Component; safe to ignore because
+            // middleware is responsible for refreshing user sessions.
+          }
+        },
+      },
+    }
+  );
+}
+
 export function createServiceClient() {
   return createSupabaseJsClient<Database>(
     requireEnv("NEXT_PUBLIC_SUPABASE_URL"),

@@ -23,3 +23,16 @@ describe("createClient (browser)", () => {
     expect(client).toEqual({ __client: "browser" });
   });
 });
+
+describe("createAttendeeClient (browser)", () => {
+  it("uses a distinct cookie name from the default client", async () => {
+    const { createAttendeeClient } = await import("../../lib/supabase/client");
+    createAttendeeClient();
+
+    expect(createBrowserClientMock).toHaveBeenCalledWith(
+      "https://example.supabase.co",
+      "anon-key",
+      { cookieOptions: { name: "sb-cacna-site-auth-token" } }
+    );
+  });
+});
