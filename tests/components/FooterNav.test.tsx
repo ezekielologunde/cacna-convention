@@ -77,4 +77,12 @@ describe("FooterNav", () => {
       screen.getByRole("link", { name: /50th Anniversary/ })
     ).toHaveAttribute("href", anniversary.moreInfoUrl);
   });
+
+  it("renders a Contact the Convention Committee CTA and the newsletter form", async () => {
+    await renderFooter();
+    expect(
+      screen.getByRole("link", { name: /Contact the Convention Committee/ })
+    ).toHaveAttribute("href", "/en/contact");
+    expect(screen.getByPlaceholderText("Your email address")).toBeInTheDocument();
+  });
 });

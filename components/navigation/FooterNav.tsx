@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { CalendarDays, Compass, Globe, Mail, Phone, PlayCircle, Rss, ArrowUp, Users } from "lucide-react";
 import { FooterLink } from "@/components/navigation/FooterLink";
+import { NewsletterForm } from "@/components/navigation/NewsletterForm";
 import { externalResources } from "@/lib/content/external-resources";
 import { contacts } from "@/lib/content/contacts";
 import { anniversary } from "@/lib/content/anniversary";
@@ -75,6 +76,14 @@ export async function FooterNav({ locale }: { locale: string }) {
                 <span className="mt-1 truncate font-display text-xl text-white">Convention</span>
               </span>
             </div>
+
+            <Link
+              href={`/${locale}/contact`}
+              className="mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-full px-5 text-sm font-bold text-white"
+              style={{ background: "var(--gradient-cta)" }}
+            >
+              {tFooter("contactCommitteeCta")}
+            </Link>
 
             {/* Permanent (no dismiss) -- unlike AnniversaryBanner, this is a
                 small always-visible pill, not an interruptive announcement. */}
@@ -187,6 +196,16 @@ export async function FooterNav({ locale }: { locale: string }) {
                 </a>
               </li>
             </ul>
+          </div>
+        </div>
+
+        <div className="mx-auto mt-10 max-w-6xl rounded-3xl border border-[var(--color-gold)]/25 bg-white/5 p-6 sm:flex sm:items-center sm:justify-between sm:gap-6 sm:p-8">
+          <div>
+            <h4 className="font-display text-xl text-[var(--color-gold)]">{tFooter("newsletterHeading")}</h4>
+            <p className="mt-1 max-w-[42ch] text-sm text-white/70">{tFooter("newsletterBody")}</p>
+          </div>
+          <div className="mt-4 sm:mt-0 sm:w-80 sm:flex-none">
+            <NewsletterForm />
           </div>
         </div>
 
