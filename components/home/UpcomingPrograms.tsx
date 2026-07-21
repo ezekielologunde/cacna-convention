@@ -22,7 +22,7 @@ export function UpcomingPrograms({ heading, cta, locale }: { heading: string; ct
 
   return (
     <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-4xl 2xl:max-w-5xl">
         <Reveal>
           <h2 className="text-center font-display text-2xl text-[var(--color-fg)] sm:text-3xl">{heading}</h2>
         </Reveal>

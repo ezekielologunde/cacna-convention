@@ -42,7 +42,7 @@ export async function AboutContent({
     <div className="flex flex-1 flex-col">
       {/* Foundation — mission + the two pillars, as three cards */}
       <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
           <Reveal className="text-center">
             <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-coral-text)] uppercase">
               {t("foundationKicker")}
@@ -130,7 +130,7 @@ export async function AboutContent({
           className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full opacity-30 blur-3xl"
           style={{ background: "var(--color-teal)" }}
         />
-        <div className="relative mx-auto max-w-4xl text-center">
+        <div className="relative mx-auto max-w-4xl text-center 2xl:max-w-5xl">
           <Reveal>
             <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-mist)] uppercase">
               {t("heritageKicker")}
@@ -173,7 +173,7 @@ export async function AboutContent({
 
       {/* Leadership */}
       <section id="leadership" className="px-6 py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
           <Reveal className="text-center">
             <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("leadership")}</h2>
           </Reveal>
@@ -206,7 +206,7 @@ export async function AboutContent({
           evergreen organizational context (distinct from CACNA's own regional
           leadership above) */}
       <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
           <Reveal className="text-center">
             <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("worldwideLeadershipHeading")}</h2>
             <p className="mx-auto mt-3 max-w-2xl text-[var(--color-muted)]">{t("worldwideLeadershipBlurb")}</p>
@@ -241,7 +241,7 @@ export async function AboutContent({
 
       {/* Committee */}
       <section className="px-6 py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
           <Reveal className="text-center">
             <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("committee")}</h2>
           </Reveal>
@@ -287,7 +287,7 @@ export async function AboutContent({
 
       {/* Explore further */}
       <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
           <Reveal className="text-center">
             <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-teal-text)] uppercase">
               {t("exploreKicker")}

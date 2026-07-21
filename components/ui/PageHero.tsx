@@ -45,7 +45,7 @@ export function PageHero({
         style={{ background: "var(--color-teal)" }}
       />
       {variant === "split" && stat ? (
-        <div className="relative mx-auto flex max-w-4xl flex-wrap items-end justify-between gap-8">
+        <div className="relative mx-auto flex max-w-4xl flex-wrap items-end justify-between gap-8 2xl:max-w-5xl">
           <div className="max-w-xl">
             {eyebrow && (
               <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-mist)] uppercase">
@@ -63,7 +63,7 @@ export function PageHero({
           </div>
         </div>
       ) : (
-        <div className="relative mx-auto max-w-3xl text-center">
+        <div className="relative mx-auto max-w-3xl text-center 2xl:max-w-4xl">
           {eyebrow && (
             <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-mist)] uppercase">
               {eyebrow}

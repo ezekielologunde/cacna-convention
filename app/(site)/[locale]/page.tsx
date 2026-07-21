@@ -113,7 +113,7 @@ export default async function Home({
           className="pointer-events-none absolute top-1/2 -right-32 h-80 w-80 rounded-full opacity-20 blur-3xl"
           style={{ background: "var(--color-teal)" }}
         />
-        <Reveal className="relative mx-auto max-w-6xl">
+        <Reveal className="relative mx-auto max-w-6xl 2xl:max-w-7xl">
           <div className="flex flex-col-reverse items-center gap-10 lg:flex-row lg:items-center lg:gap-16">
             <div className="flex-1 text-center lg:text-left">
               {!registrationOpen && (
@@ -154,7 +154,7 @@ export default async function Home({
               </div>
             </div>
             <div className="relative flex-1">
-              <div className="relative mx-auto aspect-[4/5] w-full max-w-md lg:max-w-lg">
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-md lg:max-w-lg 2xl:max-w-xl">
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute -top-8 -right-8 h-56 w-56 rounded-full opacity-50 blur-3xl"
@@ -185,7 +185,7 @@ export default async function Home({
       {pastEdition && (
         <Reveal>
           <section className="px-6 pb-16">
-            <div className="mx-auto max-w-4xl">
+            <div className="mx-auto max-w-4xl 2xl:max-w-5xl">
               <Card
                 padding="lg"
                 className="flex flex-col items-center gap-6 text-center sm:flex-row sm:justify-between sm:text-left"
@@ -224,7 +224,7 @@ export default async function Home({
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-white/10 blur-3xl"
         />
-        <div className="relative mx-auto grid max-w-5xl gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-center">
+        <div className="relative mx-auto grid max-w-5xl gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-center 2xl:max-w-6xl">
           <Reveal>
             <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-mist)] uppercase">
               {t("welcomeKicker")}
@@ -255,7 +255,7 @@ export default async function Home({
       {/* What a CACNA week looks like — the daily rhythm, broken into a 4-up grid */}
       <Reveal>
         <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
-          <div className="mx-auto max-w-5xl">
+          <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("missionHeading")}</h2>
               <p className="mt-4 text-[var(--color-muted)]">{t("missionBody")}</p>
@@ -289,7 +289,7 @@ export default async function Home({
       {/* News + Gallery — a proper 2-up feature pair */}
       <Reveal>
         <section className="px-6 py-16">
-          <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2">
+          <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2 2xl:max-w-5xl">
             <Card padding="lg" hoverable className="flex h-full flex-col text-center sm:text-left">
               <Badge tone="coral" className="mx-auto sm:mx-0">
                 {t("newsHeading")}
@@ -320,7 +320,7 @@ export default async function Home({
 
       {/* Registration + Give — one closing band, two columns */}
       <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
-        <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.3fr_1fr]">
+        <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.3fr_1fr] 2xl:max-w-6xl">
           <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-bg)] p-8 text-center shadow-[var(--shadow-card)] sm:p-10 lg:text-left">
             <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">{t("registrationHeading")}</h2>
             {!registrationOpen && (
