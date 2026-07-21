@@ -27,7 +27,7 @@ export default async function GalleryPage({
   return (
     <>
       <PageHero title={t("title")} subtitle={t("intro")} />
-      <div className="mx-auto max-w-5xl px-6 py-12 2xl:max-w-6xl">
+      <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-6xl">
       <section>
         <h2 className="font-display text-xl text-[var(--color-fg)]">{t("conventionHeading")}</h2>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">

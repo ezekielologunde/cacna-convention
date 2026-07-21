@@ -38,7 +38,7 @@ export default async function ChildrenPage({
         title={t("title")}
         subtitle={`${t("coordinatorLabel")}: ${childrenConvention.coordinator}`}
       />
-      <div className="mx-auto max-w-3xl px-6 py-12 2xl:max-w-4xl">
+      <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
       <section className="mt-2">
         <h2 className="font-display text-xl text-[var(--color-fg)]">
           {t("dailyStructureHeading")}

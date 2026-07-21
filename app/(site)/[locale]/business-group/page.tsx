@@ -40,7 +40,7 @@ export default async function BusinessGroupPage({
         variant="split"
         stat={{ label: t("dateLabel"), value: businessGroupFellowship.date }}
       />
-      <div className="mx-auto max-w-3xl px-6 py-12 2xl:max-w-4xl">
+      <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <section>
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("foundingHeading")}</h2>
           <p className="mt-3 text-sm text-[var(--color-muted)]">{businessGroupFellowship.founding}</p>

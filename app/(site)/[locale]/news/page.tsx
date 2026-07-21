@@ -64,7 +64,7 @@ export default async function NewsPage({
   return (
     <>
       <PageHero title={t("title")} subtitle={t("intro")} />
-      <div className="mx-auto max-w-3xl px-6 py-12 2xl:max-w-4xl">
+      <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
       <ul className="flex flex-col gap-4">
         {newsEvents.map((event) => (
           <li
