@@ -37,7 +37,10 @@ function renderNav() {
 describe("PrimaryNav", () => {
   it("renders the primary nav items plus a Programs dropdown trigger", () => {
     renderNav();
-    expect(screen.getByRole("link", { name: "Home" })).toBeInTheDocument();
+    // No plain "Home" link -- the homepage is now the Register flow, and
+    // the logo (already linking to "/") covers that, so a second, redundant
+    // text link to the same place was removed.
+    expect(screen.queryByRole("link", { name: "Home" })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "About" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Programs" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Schedule" })).toBeInTheDocument();
@@ -45,18 +48,19 @@ describe("PrimaryNav", () => {
     expect(screen.getByRole("link", { name: "News" })).toHaveAttribute("href", "/en/news");
   });
 
-  it("no longer renders a plain 'Register' text link -- the primary CTA button is the only path to /register", () => {
+  it("no longer renders a plain 'Register' text link -- the primary CTA button is the only path to registration", () => {
     renderNav();
     // The CTA button's accessible name is "Register Now" (its aria-label),
     // distinct from the bare "Register" text link this nav used to also
-    // render alongside it.
+    // render alongside it. Registration lives at the homepage itself now.
     expect(screen.queryByRole("link", { name: "Register" })).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Register Now →" })).toHaveAttribute("href", "/en/register");
+    expect(screen.getByRole("link", { name: "Register Now →" })).toHaveAttribute("href", "/en");
   });
 
-  it("renders a dominant Register Now CTA and a secondary Give button", () => {
+  it("renders a dominant Register Now CTA plus Store and Give as secondary buttons -- the site's other most-important destination", () => {
     renderNav();
     expect(screen.getByRole("link", { name: "Register Now →" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Store" })).toHaveAttribute("href", "/en/store");
     expect(screen.getByRole("link", { name: "Give" })).toBeInTheDocument();
   });
 
@@ -83,6 +87,7 @@ describe("PrimaryNav", () => {
     expect(within(panel).getByRole("link", { name: "About" })).toBeInTheDocument();
     expect(within(panel).getByRole("link", { name: "Live" })).toBeInTheDocument();
     expect(within(panel).getByRole("link", { name: "News" })).toBeInTheDocument();
+    expect(within(panel).getByRole("link", { name: "Store" })).toHaveAttribute("href", "/en/store");
     expect(within(panel).getByRole("link", { name: "Give" })).toBeInTheDocument();
     expect(within(panel).getByRole("link", { name: "Account" })).toHaveAttribute("href", "/en/account");
 
@@ -95,7 +100,6 @@ describe("PrimaryNav", () => {
     renderNav();
 
     expect(screen.getByRole("link", { name: "Schedule" })).toHaveAttribute("aria-current", "page");
-    expect(screen.getByRole("link", { name: "Home" })).not.toHaveAttribute("aria-current");
     expect(screen.getByRole("link", { name: "About" })).not.toHaveAttribute("aria-current");
 
     mockPathname = "/en";

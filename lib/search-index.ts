@@ -24,10 +24,9 @@ export type SearchEntry = {
 };
 
 const pages: SearchEntry[] = [
-  { title: "Home", href: "", category: "Page" },
+  { title: "Register", href: "", category: "Page", excerpt: "Convention registration — the site's homepage" },
   { title: "About", href: "/about", category: "Page", excerpt: "Our story, mission, leadership, and committee" },
   { title: "Schedule", href: "/schedule", category: "Page", excerpt: "Full convention schedule" },
-  { title: "Register", href: "/register", category: "Page", excerpt: "Convention registration" },
   { title: "Live", href: "/live", category: "Page", excerpt: "Watch convention services live" },
   { title: "News", href: "/news", category: "Page" },
   { title: "Give", href: "/give", category: "Page" },

@@ -13,7 +13,7 @@ import { anniversary } from "@/lib/content/anniversary";
 // own "Programs" column below, mirroring the split PrimaryNav's dropdown
 // already makes between core pages and the 7 sub-conference pages.
 const ATTEND_ITEMS = [
-  { key: "register", href: "/register" },
+  { key: "register", href: "" },
   { key: "about", href: "/about" },
   { key: "schedule", href: "/schedule" },
   { key: "planYourVisit", href: "/plan-your-visit" },
@@ -101,7 +101,7 @@ export async function FooterNav({ locale }: { locale: string }) {
 
             <div className="mt-5 flex flex-wrap items-center gap-3">
               <Link
-                href={`/${locale}/register`}
+                href={`/${locale}`}
                 className="inline-flex min-h-11 items-center gap-1.5 rounded-full px-5 text-sm font-bold text-[#16121a]"
                 style={{ background: "var(--color-gold)" }}
               >

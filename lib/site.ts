@@ -13,14 +13,15 @@ export const SITE = {
 
 /**
  * Public, indexable routes (locale-agnostic paths). Excludes /account and
- * /account/login (personal, not content) and /register/confirmation
- * (a post-transaction receipt page, not meant to be discovered/indexed).
+ * /account/login (personal, not content), /register/confirmation (a
+ * post-transaction receipt page, not meant to be discovered/indexed), and
+ * /register itself (now just a redirect to "/", which already carries the
+ * top sitemap priority -- listing both would be duplicate-content noise).
  */
 export const ROUTES: { path: string; priority: number }[] = [
   { path: "/", priority: 1 },
   { path: "/about", priority: 0.8 },
   { path: "/schedule", priority: 0.8 },
-  { path: "/register", priority: 0.9 },
   { path: "/plan-your-visit", priority: 0.6 },
   { path: "/give", priority: 0.7 },
   { path: "/news", priority: 0.7 },

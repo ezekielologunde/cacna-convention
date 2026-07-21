@@ -244,7 +244,9 @@ export async function POST(request: Request) {
       ],
       customer_email: body.contactEmail,
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/register/confirmation?registration=${registration.id}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/register`,
+      // Registration lives at the homepage now, not /register (which just
+      // redirects there) -- send cancellations straight back to skip the hop.
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
       metadata: { registration_id: registration.id },
     });
 

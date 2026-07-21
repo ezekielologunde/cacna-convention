@@ -113,7 +113,7 @@ describe("MinistersWivesPage", () => {
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Get notified — view registration" })).toHaveAttribute(
       "href",
-      "/en/register"
+      "/en"
     );
   });
 });

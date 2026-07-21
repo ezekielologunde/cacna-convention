@@ -13,9 +13,10 @@ import { AccountNavLink } from "@/components/navigation/AccountNavLink";
 // pinned primary CTA button below, and having both meant the same
 // destination appeared twice in the bar (confirmed while auditing the nav:
 // a text link reading "Register" sitting right next to a button reading
-// "Register Now").
+// "Register Now"). "Home" is also gone -- the homepage IS the Register
+// flow now, and the logo already links there, so a plain "Home" text link
+// would be a second, redundant path to the same place.
 const BEFORE_PROGRAMS_ITEMS = [
-  { key: "home", href: "" },
   { key: "about", href: "/about" },
 ] as const;
 
@@ -209,13 +210,21 @@ export function PrimaryNav() {
           <span className="hidden sm:inline-flex">
             <AccountNavLink />
           </span>
+          {/* Store is the site's other most-important destination alongside
+              Register -- elevated to a button next to Give, not left as a
+              buried text link, matching the site owner's explicit call. */}
+          <span className="hidden sm:inline-flex">
+            <Button href={`/${locale}/store`} variant="outline">
+              {t("store")}
+            </Button>
+          </span>
           <span className="hidden sm:inline-flex">
             <Button href={`/${locale}/give`} variant="outline">
               {t("give")}
             </Button>
           </span>
           <Button
-            href={`/${locale}/register`}
+            href={`/${locale}`}
             variant="primary"
             aria-label={t("registerCta")}
             style={{ background: "var(--gradient-cta-gold)", color: "#16121a" }}
@@ -320,6 +329,15 @@ export function PrimaryNav() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href={`/${locale}/store`}
+                onClick={() => setMobileOpen(false)}
+                className="block rounded-lg px-3 py-3"
+              >
+                {t("store")}
+              </Link>
+            </li>
             <li>
               <Link
                 href={`/${locale}/give`}

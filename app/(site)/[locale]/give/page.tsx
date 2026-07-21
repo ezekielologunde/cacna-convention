@@ -99,7 +99,7 @@ export default async function GivePage({
           <h2 className="font-display text-xl text-[var(--color-fg)] sm:text-2xl">{t("registerTieHeading")}</h2>
           <p className="mx-auto mt-3 max-w-[52ch] text-[var(--color-muted)]">{t("registerTieBody")}</p>
           <div className="mt-6 flex justify-center">
-            <Button href={`/${locale}/register`} variant="primary">
+            <Button href={`/${locale}`} variant="primary">
               {t("registerTieCta")}
             </Button>
           </div>

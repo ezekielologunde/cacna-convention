@@ -18,6 +18,7 @@ const { aboutConvention } = await import("../../lib/content/about-convention");
 const { externalResources } = await import("../../lib/content/external-resources");
 const { worldwideLeadership, worldwideHistory } = await import("../../lib/content/worldwide-leadership");
 const { statementOfFaith } = await import("../../lib/content/statement-of-faith");
+const { welcomeMessage } = await import("../../lib/content/welcome");
 
 describe("AboutContent", () => {
   it("renders every section's real content", async () => {
@@ -33,6 +34,31 @@ describe("AboutContent", () => {
     });
 
     render(<NextIntlClientProvider locale="en" messages={messages}>{element}</NextIntlClientProvider>);
+
+    // Welcome -- moved here from the old homepage hero (now the Register
+    // flow): the verbatim welcome message, the founding/leaders/committee
+    // stat trio, and the week's rhythm grid.
+    expect(screen.getByRole("heading", { name: "One Fold, Gathered Once a Year" })).toBeInTheDocument();
+    expect(screen.getByText(welcomeMessage.paragraphs[0])).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "contact us" })).toHaveAttribute("href", "/en/contact");
+    // CountUp animates its number over ~1.2s via requestAnimationFrame even
+    // once the (stubbed) IntersectionObserver fires immediately -- findByText's
+    // default 1s timeout isn't enough, and under full-suite contention (many
+    // files' rAF timers competing for the same event loop) even 3s isn't
+    // reliably enough, so this is raised further than the single-file case
+    // needs (same fix as tests/app/home.test.tsx's identical stat-trio
+    // assertion, similarly widened).
+    const findOpts = { timeout: 8000 };
+    expect(await screen.findByText(String(history.foundingYear), {}, findOpts)).toBeInTheDocument();
+    expect(screen.getByText("Founded")).toBeInTheDocument();
+    expect(await screen.findByText(String(leadership.length), {}, findOpts)).toBeInTheDocument();
+    expect(screen.getByText("Regional Leaders")).toBeInTheDocument();
+    expect(await screen.findByText(String(committee.length), {}, findOpts)).toBeInTheDocument();
+    expect(screen.getByText("Committee Members")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Prayer & Worship" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Ministers' Sessions" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Break-Outs" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Revival Nights" })).toBeInTheDocument();
 
     // Foundation
     expect(screen.getByText(aboutConvention.introSentence)).toBeInTheDocument();
@@ -99,11 +125,11 @@ describe("AboutContent", () => {
     // the same <a>), so match on the leading title text, same as the
     // external-resource links below.
     expect(screen.getByRole("link", { name: /^Full Schedule/ })).toHaveAttribute("href", "/en/schedule");
-    expect(screen.getByRole("link", { name: /^Register/ })).toHaveAttribute("href", "/en/register");
+    expect(screen.getByRole("link", { name: /^Register/ })).toHaveAttribute("href", "/en");
     for (const resource of externalResources) {
       expect(
         screen.getByRole("link", { name: new RegExp(`^${resource.label}`) })
       ).toHaveAttribute("href", resource.url);
     }
-  });
+  }, 30000);
 });

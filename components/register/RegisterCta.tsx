@@ -33,7 +33,9 @@ export async function RegisterCta({ locale }: { locale: string }) {
           {registrationOpen ? t("bodyOpen") : t("bodyComingSoon")}
         </p>
         <div className="mt-6 flex justify-center">
-          <Button href={`/${locale}/register`} variant={registrationOpen ? "primary" : "outline"}>
+          {/* Registration lives at the homepage now, not /register (which
+              just redirects here) -- link straight there to skip the hop. */}
+          <Button href={`/${locale}`} variant={registrationOpen ? "primary" : "outline"}>
             {registrationOpen ? t("ctaOpen") : t("ctaComingSoon")}
           </Button>
         </div>
