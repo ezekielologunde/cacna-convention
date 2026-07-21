@@ -13,7 +13,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
-import { UpcomingPrograms } from "@/components/home/UpcomingPrograms";
+import { ConventionTimeline } from "@/components/home/ConventionTimeline";
+import { mainGalleryPhotos } from "@/lib/content/gallery";
+
+// The gallery teaser card's photo strip -- same first 3 photos the Gallery
+// page itself opens with, so the preview is an honest sample.
+const galleryPreviewPhotos = mainGalleryPhotos.slice(0, 3);
 
 const RHYTHM_ICONS = {
   prayer: (
@@ -181,38 +186,6 @@ export default async function Home({
         </Reveal>
       </section>
 
-      {/* Just Concluded — real data from the most recent past edition */}
-      {pastEdition && (
-        <Reveal>
-          <section className="px-6 pb-16">
-            <div className="mx-auto max-w-4xl 2xl:max-w-5xl">
-              <Card
-                padding="lg"
-                className="flex flex-col items-center gap-6 text-center sm:flex-row sm:justify-between sm:text-left"
-              >
-                <div>
-                  <Badge tone="teal">{t("justConcludedKicker")}</Badge>
-                  <h2 className="mt-3 font-display text-xl text-[var(--color-fg)] sm:text-2xl">
-                    {pastEdition.year} — {pastEdition.theme}
-                  </h2>
-                  <p className="mt-1 text-sm text-[var(--color-muted)] tabular-nums">
-                    {formatDate(pastEdition.starts_on)} – {formatDate(pastEdition.ends_on)} · {pastEdition.venue_name}
-                  </p>
-                </div>
-                <div className="flex flex-none flex-wrap justify-center gap-3">
-                  <Button href={`/${locale}/gallery`} variant="secondary">
-                    {t("justConcludedCta")}
-                  </Button>
-                  <Button href={`/${locale}/archive`} variant="outline">
-                    {t("pastConventionsCta")}
-                  </Button>
-                </div>
-              </Card>
-            </div>
-          </section>
-        </Reveal>
-      )}
-
       {/* Welcome — two-column on desktop: gradient panel + message card */}
       <section className="relative overflow-hidden px-6 py-16 sm:py-20" style={{ background: "var(--gradient-hero-coral)" }}>
         <div
@@ -236,11 +209,11 @@ export default async function Home({
           <Reveal delay={100}>
             <div className="rounded-3xl bg-white/10 p-8 text-left backdrop-blur-sm sm:p-10">
               {welcomeMessage.paragraphs.map((paragraph, index) => (
-                <p key={index} className={index > 0 ? "mt-4 text-white/85" : "text-white/85"}>
+                <p key={index} className={index > 0 ? "mt-4 text-white" : "text-white"}>
                   {paragraph}
                 </p>
               ))}
-              <p className="mt-4 text-white/85">
+              <p className="mt-4 text-white">
                 {welcomeMessage.closingLead}{" "}
                 <Link href={`/${locale}/contact`} className="font-semibold text-[var(--color-mist)] underline">
                   {t("contactLinkText")}
@@ -250,41 +223,49 @@ export default async function Home({
             </div>
           </Reveal>
         </div>
+
+        {/* The week's rhythm, folded directly into the Welcome band instead
+            of a separate section with its own redundant "about us" framing
+            heading -- the existing rhythm sentence leads straight into the
+            4-up grid instead of repeating it under a second heading. */}
+        <div className="relative mx-auto mt-16 max-w-5xl 2xl:max-w-6xl">
+          <Reveal delay={140}>
+            <p className="mx-auto max-w-2xl text-center text-white">{t("missionBody")}</p>
+          </Reveal>
+          <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {rhythmItems.map((item, i) => (
+              <Reveal key={item.key} delay={180 + i * 80}>
+                <Card padding="lg" className="h-full text-center">
+                  <span
+                    aria-hidden="true"
+                    className="mx-auto flex h-12 w-12 items-center justify-center rounded-full text-white"
+                    style={{ background: i % 2 === 0 ? "var(--gradient-cta)" : "var(--color-teal-deep)" }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      {RHYTHM_ICONS[item.key]}
+                    </svg>
+                  </span>
+                  <h3 className="mt-4 font-display text-base text-[var(--color-fg)]">{item.title}</h3>
+                  <p className="mt-2 text-sm text-[var(--color-muted)]">{item.desc}</p>
+                </Card>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </section>
 
-      {/* What a CACNA week looks like — the daily rhythm, broken into a 4-up grid */}
-      <Reveal>
-        <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
-          <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
-            <div className="mx-auto max-w-2xl text-center">
-              <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">{t("missionHeading")}</h2>
-              <p className="mt-4 text-[var(--color-muted)]">{t("missionBody")}</p>
-            </div>
-            <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {rhythmItems.map((item, i) => (
-                <Reveal key={item.key} delay={i * 80}>
-                  <Card padding="lg" className="h-full text-center">
-                    <span
-                      aria-hidden="true"
-                      className="mx-auto flex h-12 w-12 items-center justify-center rounded-full text-white"
-                      style={{ background: i % 2 === 0 ? "var(--gradient-cta)" : "var(--color-teal-deep)" }}
-                    >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        {RHYTHM_ICONS[item.key]}
-                      </svg>
-                    </span>
-                    <h3 className="mt-4 font-display text-base text-[var(--color-fg)]">{item.title}</h3>
-                    <p className="mt-2 text-sm text-[var(--color-muted)]">{item.desc}</p>
-                  </Card>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-      </Reveal>
-
-      {/* Upcoming Programs — real, dated events */}
-      <UpcomingPrograms heading={t("upcomingHeading")} cta={t("upcomingCta")} locale={locale} />
+      {/* Convention Timeline — Just Concluded + genuinely future-dated
+          programs, combined into one section instead of two separate bands */}
+      <ConventionTimeline
+        heading={t("upcomingHeading")}
+        cta={t("upcomingCta")}
+        locale={locale}
+        pastEdition={pastEdition}
+        formatDate={formatDate}
+        justConcludedKicker={t("justConcludedKicker")}
+        justConcludedCta={t("justConcludedCta")}
+        pastConventionsCta={t("pastConventionsCta")}
+      />
 
       {/* News + Gallery — a proper 2-up feature pair */}
       <Reveal>
@@ -303,6 +284,16 @@ export default async function Home({
               </Link>
             </Card>
             <Card padding="lg" hoverable className="flex h-full flex-col text-center sm:text-left">
+              {/* A real photo strip makes the case for the Gallery link far
+                  better than another line of text -- these are the same
+                  first 3 photos the Gallery page itself opens with. */}
+              <div className="-mt-2 -mx-2 mb-4 grid grid-cols-3 gap-1.5 overflow-hidden rounded-2xl">
+                {galleryPreviewPhotos.map((src) => (
+                  <div key={src} className="relative aspect-square">
+                    <Image src={src} alt="" fill sizes="120px" className="object-cover" />
+                  </div>
+                ))}
+              </div>
               <Badge tone="teal" className="mx-auto sm:mx-0">
                 {t("galleryHeading")}
               </Badge>
@@ -329,7 +320,10 @@ export default async function Home({
               </p>
             )}
             <div className="mt-6 flex justify-center lg:justify-start">
-              <Button href={`/${locale}/register`} variant="primary">
+              {/* Registration isn't open yet, so its own button shouldn't
+                  outrank the one CTA a visitor can actually complete today
+                  -- primary styling swaps to Give below until it opens. */}
+              <Button href={`/${locale}/register`} variant={registrationOpen ? "primary" : "outline"}>
                 {t("registrationCta")}
               </Button>
             </div>
@@ -338,7 +332,7 @@ export default async function Home({
             <h3 className="font-display text-xl text-[var(--color-fg)]">{t("giveHeading")}</h3>
             <p className="mt-2 text-[var(--color-muted)]">{t("giveBody")}</p>
             <div className="mt-6 flex justify-center lg:justify-start">
-              <Button href={`/${locale}/give`} variant="secondary">
+              <Button href={`/${locale}/give`} variant={registrationOpen ? "secondary" : "primary"}>
                 {t("giveCta")}
               </Button>
             </div>

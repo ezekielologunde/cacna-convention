@@ -20,16 +20,14 @@ describe("GalleryPage", () => {
     expect(screen.getByRole("heading", { name: "2025 Convention" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Children's Department" })).toBeInTheDocument();
 
-    // Photos are intentionally alt="" (decorative to assistive tech): the
-    // source site has no per-photo captions, and each grid's adjacent <h2>
-    // already names the album, so repeating that same name as alt text on
-    // every one of the 61 images would make a screen reader announce it 61
-    // times in a row instead of skipping straight past. That means these
-    // <img>s don't carry the accessible "img" role -- query by tag instead.
+    // No per-photo captions exist on the source site to migrate, so each
+    // image gets an honest, generic positional alt text instead of a
+    // fabricated specific one or an empty string.
     const images = container.querySelectorAll("img");
     expect(images).toHaveLength(mainGalleryPhotos.length + childrenGalleryPhotos.length);
-    for (const img of images) {
-      expect(img).toHaveAttribute("alt", "");
-    }
+    expect(screen.getByAltText(`Photo 1 of ${mainGalleryPhotos.length} from the 2025 CACNA Convention`)).toBeInTheDocument();
+    expect(
+      screen.getByAltText(`Photo 1 of ${childrenGalleryPhotos.length} from the 2025 CACNA Convention Children's Department`)
+    ).toBeInTheDocument();
   });
 });

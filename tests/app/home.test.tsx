@@ -7,6 +7,7 @@ import { welcomeMessage } from "../../lib/content/welcome";
 import { history } from "../../lib/content/history";
 import { leadership } from "../../lib/content/leadership";
 import { committee } from "../../lib/content/committee";
+import { mainGalleryPhotos } from "../../lib/content/gallery";
 
 // `next-intl/server`'s real (react-server) implementation of
 // `getTranslations`/`setRequestLocale` needs an actual Next.js RSC request
@@ -192,5 +193,56 @@ describe("HomePage", () => {
     expect(screen.getByRole("heading", { name: "Ministers' Sessions" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Break-Outs" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Revival Nights" })).toBeInTheDocument();
+  });
+
+  it("shows the Convention Timeline heading with genuinely future-dated items only, excluding a past-tense announcement", async () => {
+    mockEditionQueries();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("heading", { name: "The Convention Timeline" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "CAC North America 50th Anniversary Celebration" })).toBeInTheDocument();
+    // The Chairman-transition item is a past-tense announcement tied to the
+    // already-concluded 2026 convention, not a real upcoming program -- it
+    // must not appear in this "what's next" section (it still surfaces on
+    // /news, tested separately there).
+    expect(
+      screen.queryByRole("heading", { name: "Convention Chairman Concludes Two-Decade Tenure" })
+    ).not.toBeInTheDocument();
+  });
+
+  it("renders a real 3-photo strip on the Gallery teaser card", async () => {
+    mockEditionQueries();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    const previewPhotos = mainGalleryPhotos.slice(0, 3);
+    for (const src of previewPhotos) {
+      const img = document.querySelector(`img[src*="${encodeURIComponent(src)}"]`);
+      expect(img).not.toBeNull();
+    }
+  });
+
+  it("makes Give the primary CTA and Registration secondary while registration isn't open", async () => {
+    mockEditionQueries();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    const giveLink = screen.getByRole("link", { name: "Give" });
+    const registerLink = screen.getByRole("link", { name: "Get notified — view registration" });
+    // Primary/secondary variants carry a themed glow-shadow class; outline
+    // carries a plain border class instead -- distinct enough to assert on
+    // without depending on exact Tailwind color tokens.
+    expect(giveLink.className).toContain("shadow-[var(--shadow-glow-coral)]");
+    expect(registerLink.className).toContain("border border-[var(--color-border)]");
   });
 });

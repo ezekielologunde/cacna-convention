@@ -31,14 +31,17 @@ export default async function GalleryPage({
       <section>
         <h2 className="font-display text-xl text-[var(--color-fg)]">{t("conventionHeading")}</h2>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-          {mainGalleryPhotos.map((src) => (
+          {mainGalleryPhotos.map((src, i) => (
             <div
               key={src}
               className="relative aspect-square overflow-hidden rounded-xl bg-[var(--color-surface)]"
             >
               <Image
                 src={src}
-                alt=""
+                // No per-photo captions exist to migrate from the source
+                // gallery (see lib/content/gallery.ts) -- an honest, generic
+                // contextual label beats a fabricated specific one or silence.
+                alt={`Photo ${i + 1} of ${mainGalleryPhotos.length} from the 2025 CACNA Convention`}
                 fill
                 sizes="(min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
                 className="object-cover"
@@ -51,14 +54,14 @@ export default async function GalleryPage({
       <section className="mt-12">
         <h2 className="font-display text-xl text-[var(--color-fg)]">{t("childrenHeading")}</h2>
         <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-          {childrenGalleryPhotos.map((src) => (
+          {childrenGalleryPhotos.map((src, i) => (
             <div
               key={src}
               className="relative aspect-square overflow-hidden rounded-xl bg-[var(--color-surface)]"
             >
               <Image
                 src={src}
-                alt=""
+                alt={`Photo ${i + 1} of ${childrenGalleryPhotos.length} from the 2025 CACNA Convention Children's Department`}
                 fill
                 sizes="(min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
                 className="object-cover"
