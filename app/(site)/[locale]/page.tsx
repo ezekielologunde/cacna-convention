@@ -223,6 +223,7 @@ export default async function Home({
 
       <AnniversarySection
         locale={locale}
+        badge={t("anniversaryBadge")}
         heading={t("anniversaryHeading")}
         cta={t("anniversaryCta")}
         opensInNewTabLabel={t("opensInNewTab")}

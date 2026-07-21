@@ -1,5 +1,6 @@
+import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
-import { Button } from "@/components/ui/Button";
+import { Magnetic } from "@/components/ui/Magnetic";
 import { anniversary } from "@/lib/content/anniversary";
 
 // A handful of small aria-hidden decorative dots -- gold + white/30,
@@ -18,11 +19,13 @@ const CONFETTI_DOTS = [
 
 export function AnniversarySection({
   locale,
+  badge,
   heading,
   cta,
   opensInNewTabLabel,
 }: {
   locale: string;
+  badge: string;
   heading: string;
   cta: string;
   opensInNewTabLabel: string;
@@ -36,10 +39,25 @@ export function AnniversarySection({
   const formattedDate = dateFormatter.format(new Date(`${anniversary.date}T12:00:00Z`));
 
   return (
-    <section
-      className="relative overflow-hidden px-6 py-20 text-center sm:py-24"
-      style={{ background: "var(--gradient-band)" }}
-    >
+    <section className="relative overflow-hidden px-6 py-24 text-center sm:py-32">
+      {/* Real photo behind the gradient (same Ken Burns treatment as every
+          other photo hero on this site) -- bumped from a flat dark band to
+          this project's boldest available treatment per the user's "ads"
+          request, reserved elsewhere for the three conversion pages
+          (Register/Store/Give). opacity=0.9 (vs. those pages' 0.93) since
+          --gradient-band is darker than --gradient-hero to begin with, so
+          gold/white text stays comfortably AA either way. */}
+      <div aria-hidden="true" className="absolute inset-0">
+        <Image
+          src="/photos/gallery/IMG-20250719-WA0052.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="hero-kenburns object-cover"
+        />
+        <div className="absolute inset-0" style={{ background: "var(--gradient-band)", opacity: 0.9 }} />
+      </div>
+
       {CONFETTI_DOTS.map((dot, i) => (
         <span
           key={i}
@@ -63,27 +81,34 @@ export function AnniversarySection({
       ))}
 
       <div className="relative mx-auto max-w-2xl">
-        <div className="font-display text-7xl text-[var(--color-gold)] sm:text-8xl">{anniversary.years}</div>
         <Reveal>
-          <h2 className="mt-2 font-display text-3xl leading-[1.05] tracking-tight text-white sm:text-4xl">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/12 px-4 py-1.5 text-xs font-bold tracking-[0.15em] text-white uppercase backdrop-blur-sm">
+            {badge}
+          </span>
+        </Reveal>
+        <div className="mt-4 font-display text-8xl text-[var(--color-gold)] sm:text-9xl">{anniversary.years}</div>
+        <Reveal>
+          <h2 className="mt-3 text-balance font-display text-4xl leading-[1.02] tracking-tight text-white sm:text-5xl lg:text-6xl">
             {heading}
           </h2>
         </Reveal>
         <Reveal delay={100}>
-          <p className="mx-auto mt-5 max-w-[52ch] text-white/80">{anniversary.description}</p>
+          <p className="mx-auto mt-6 max-w-[52ch] text-lg text-white/85">{anniversary.description}</p>
           <p className="mt-5 text-xs font-bold tracking-[0.2em] text-[var(--color-gold)] uppercase">
             {formattedDate} · {anniversary.location}
           </p>
-          <div className="mt-8">
-            <Button
-              href={anniversary.moreInfoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="primary"
-              aria-label={`${cta}${opensInNewTabLabel}`}
-            >
-              {cta}
-            </Button>
+          <div className="mt-9 flex justify-center">
+            <Magnetic strength={0.3}>
+              <a
+                href={anniversary.moreInfoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${cta}${opensInNewTabLabel}`}
+                className="inline-flex min-h-14 items-center gap-2 rounded-full bg-white px-10 text-lg font-bold text-[#16121a] shadow-2xl transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+              >
+                {cta}
+              </a>
+            </Magnetic>
           </div>
         </Reveal>
       </div>

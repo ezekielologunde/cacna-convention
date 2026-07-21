@@ -337,6 +337,7 @@ describe("HomePage", () => {
 
     render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
 
+    expect(screen.getByText("50th Anniversary Celebration")).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "50 years of CAC North America." })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /See the celebration/ })).toHaveAttribute(
       "href",
