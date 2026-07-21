@@ -6,6 +6,12 @@
 // (lib/content/welcome.ts), so it only needs to exist once.
 
 export const aboutConvention = {
+  // Recovered from a 2017 Wayback Machine snapshot of this same source page
+  // (found 2026-07-20 re-crawl, verified directly) -- the lead-in sentence
+  // that originally preceded missionStatement below on the source site, not
+  // previously captured.
+  introSentence:
+    "The CACNA Convention is a large meeting of church members with their families coming together for several days to learn, be uplifted through the word of God ministered, talk about their shared work with other Ministers and to make decisions as a group.",
   missionStatement:
     "The CACNA Convention exists to facilitate, extend and enlarge the Great Commission of Christ under the umbrella of Christ Apostolic Church North America. This is achieved through the authority of God's inerrant Word to the glory of God the Father, under the Lordship of Jesus Christ, and by the empowerment of the Holy Spirit.",
   biblicallyBased: [

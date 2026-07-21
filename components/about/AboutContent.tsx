@@ -11,6 +11,7 @@ import type { CommitteeMember } from "@/lib/content/committee";
 import type { AboutConvention } from "@/lib/content/about-convention";
 import type { history as History } from "@/lib/content/history";
 import { worldwideLeadership, worldwideHistory } from "@/lib/content/worldwide-leadership";
+import { statementOfFaith } from "@/lib/content/statement-of-faith";
 
 /**
  * A single continuous, sectioned page (rebuilt to match the depth and
@@ -51,7 +52,10 @@ export async function AboutContent({
             </h2>
           </Reveal>
           <Reveal delay={80}>
-            <p className="mx-auto mt-6 max-w-2xl text-center text-lg text-[var(--color-fg)]">
+            <p className="mx-auto mt-6 max-w-2xl text-center text-[var(--color-muted)]">
+              {aboutConvention.introSentence}
+            </p>
+            <p className="mx-auto mt-3 max-w-2xl text-center text-lg text-[var(--color-fg)]">
               {aboutConvention.missionStatement}
             </p>
           </Reveal>
@@ -68,6 +72,24 @@ export async function AboutContent({
                 <BulletList items={aboutConvention.kingdomFocused} className="gap-2 text-[var(--color-muted)]" />
               </Card>
             </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* What We Believe — the full Statement of Faith, deepening the
+          Biblically Based pillar above with the actual doctrinal text */}
+      <section className="px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl">
+          <Reveal className="text-center">
+            <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("statementOfFaithHeading")}</h2>
+          </Reveal>
+          <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+            {statementOfFaith.map((item, i) => (
+              <Reveal key={item.title} delay={Math.min(i, 8) * 30}>
+                <h3 className="font-display text-lg text-[var(--color-fg)]">{item.title}</h3>
+                <p className="mt-2 text-sm text-[var(--color-muted)]">{item.body}</p>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

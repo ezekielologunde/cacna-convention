@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import messages from "../../messages/en.json";
 import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
+import { recurringSpeakerNote } from "../../lib/content/archive";
 
 const createClientMock = vi.fn();
 vi.mock("@/lib/supabase/server", () => ({
@@ -37,6 +38,8 @@ describe("ArchivePage", () => {
     const Page = await ArchivePage({ params: Promise.resolve({ locale: "en" }) });
 
     render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByText(recurringSpeakerNote)).toBeInTheDocument();
 
     // The seeded edition's `starts_on`/`ends_on` ("2026-07-13"/"2026-07-18")
     // both contain the year "2026" as a substring, same as the heading's own

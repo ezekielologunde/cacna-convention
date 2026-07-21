@@ -17,6 +17,7 @@ const { history } = await import("../../lib/content/history");
 const { aboutConvention } = await import("../../lib/content/about-convention");
 const { externalResources } = await import("../../lib/content/external-resources");
 const { worldwideLeadership, worldwideHistory } = await import("../../lib/content/worldwide-leadership");
+const { statementOfFaith } = await import("../../lib/content/statement-of-faith");
 
 describe("AboutContent", () => {
   it("renders every section's real content", async () => {
@@ -34,11 +35,19 @@ describe("AboutContent", () => {
     render(<NextIntlClientProvider locale="en" messages={messages}>{element}</NextIntlClientProvider>);
 
     // Foundation
+    expect(screen.getByText(aboutConvention.introSentence)).toBeInTheDocument();
     expect(screen.getByText(aboutConvention.missionStatement)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Biblically Based" })).toBeInTheDocument();
     expect(screen.getByText(aboutConvention.biblicallyBased[0])).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Kingdom Focused" })).toBeInTheDocument();
     expect(screen.getByText(aboutConvention.kingdomFocused[0])).toBeInTheDocument();
+
+    // Statement of Faith
+    expect(screen.getByRole("heading", { name: "What We Believe" })).toBeInTheDocument();
+    for (const item of statementOfFaith) {
+      expect(screen.getByRole("heading", { name: item.title })).toBeInTheDocument();
+      expect(screen.getByText(item.body)).toBeInTheDocument();
+    }
 
     // The Family
     expect(screen.getByRole("heading", { name: "More than an event. It's family." })).toBeInTheDocument();
