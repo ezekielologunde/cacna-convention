@@ -311,6 +311,13 @@
     "beforeIncrease": "Adult rate is ${price} through {date} — register now before it goes up.",
     "cta": "Register Now"
   },
+  "RegisterCta": {
+    "heading": "Join Us at the 2027 Convention",
+    "bodyComingSoon": "Registration for the July 12–17, 2027 convention opens in October 2026 — pricing will be posted as soon as it's confirmed.",
+    "ctaComingSoon": "Get notified — view registration",
+    "bodyOpen": "Secure your spot at CAC Village, July 12–17, 2027 — individual and group registration is open now.",
+    "ctaOpen": "Register now"
+  },
   "RegisterConfirmation": {
     "title": "Thank you for registering!",
     "body": "We've received your registration. A confirmation email is on its way."

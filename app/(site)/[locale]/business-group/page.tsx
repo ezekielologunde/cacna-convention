@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
+import { RegisterCta } from "@/components/register/RegisterCta";
 import { AgendaTable } from "@/components/schedule/AgendaTable";
 import {
   businessGroupFellowship,
@@ -98,6 +99,7 @@ export default async function BusinessGroupPage({
           )}
         </section>
       </div>
+      <RegisterCta locale={locale} />
     </>
   );
 }

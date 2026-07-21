@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
+import { RegisterCta } from "@/components/register/RegisterCta";
 import { Badge } from "@/components/ui/Badge";
 import {
   christianEducationMaterials,
@@ -99,6 +100,7 @@ export default async function StorePage({
           <ApparelCategory label={t("youthApparel")} items={youthApparelDemo} demoLabel={t("demoLabel")} />
         </section>
       </div>
+      <RegisterCta locale={locale} />
     </>
   );
 }

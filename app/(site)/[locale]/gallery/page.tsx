@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
+import { RegisterCta } from "@/components/register/RegisterCta";
 import { mainGalleryPhotos, childrenGalleryPhotos } from "@/lib/content/gallery";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -71,6 +72,7 @@ export default async function GalleryPage({
         </div>
       </section>
       </div>
+      <RegisterCta locale={locale} />
     </>
   );
 }

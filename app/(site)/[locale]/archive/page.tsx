@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { PageHero } from "@/components/ui/PageHero";
+import { RegisterCta } from "@/components/register/RegisterCta";
 import { pageMetadata } from "@/lib/metadata";
 import { recurringSpeakerNote } from "@/lib/content/archive";
 
@@ -72,6 +73,7 @@ export default async function ArchivePage({
         </ul>
       )}
       </div>
+      <RegisterCta locale={locale} />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
+import { RegisterCta } from "@/components/register/RegisterCta";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { newsEvents, upcomingConventionDates } from "@/lib/content/news-events";
@@ -245,6 +246,7 @@ export default async function NewsPage({
         </section>
       ) : null}
       </div>
+      <RegisterCta locale={locale} />
     </>
   );
 }

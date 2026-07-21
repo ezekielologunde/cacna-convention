@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
+import { RegisterCta } from "@/components/register/RegisterCta";
 import { pageMetadata } from "@/lib/metadata";
 
 // YouTube channel confirmed live and linked from cacnorthamerica.com's own
@@ -90,6 +91,7 @@ export default async function LivePage({
         </a>
       </p>
       </div>
+      <RegisterCta locale={locale} />
     </>
   );
 }

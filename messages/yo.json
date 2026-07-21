@@ -311,6 +311,13 @@
     "beforeIncrease": "Owó Àgbà jẹ́ ${price} títí di {date} — forúkọsílẹ̀ nísisìyí kí ó tó lọ sókè.",
     "cta": "Forúkọsílẹ̀ Nísisìyí"
   },
+  "RegisterCta": {
+    "heading": "Darapọ̀ Mọ́ Wa ní Àpéjọ 2027",
+    "bodyComingSoon": "Ìforúkọsílẹ̀ fún àpéjọ Oṣù Keje 12–17, 2027 yóò ṣí ní oṣù October 2026 — a óò fi owó síta ní kété tí wọ́n bá ti dá a lójú.",
+    "ctaComingSoon": "Gba ìsọfúnni — wo ìforúkọsílẹ̀",
+    "bodyOpen": "Dá ààyè rẹ sí í ní CAC Village, Oṣù Keje 12–17, 2027 — ìforúkọsílẹ̀ ẹnìkọ̀ọ̀kan àti ẹgbẹ́ ti ṣí báyìí.",
+    "ctaOpen": "Forúkọsílẹ̀ Nísisìyí"
+  },
   "RegisterConfirmation": {
     "title": "A dúpẹ́ pé o ti forúkọsílẹ̀!",
     "body": "A ti gba ìforúkọsílẹ̀ rẹ. Ímeèlì ìjẹ́rìísí ń bọ̀ wá."

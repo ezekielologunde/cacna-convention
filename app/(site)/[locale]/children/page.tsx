@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
+import { RegisterCta } from "@/components/register/RegisterCta";
 import {
   childrenConvention,
   dailyStructure,
@@ -130,6 +131,7 @@ export default async function ChildrenPage({
       </p>
       <p className="mt-2 text-sm text-[var(--color-muted)]">{childrenConvention.closingNote}</p>
       </div>
+      <RegisterCta locale={locale} />
     </>
   );
 }

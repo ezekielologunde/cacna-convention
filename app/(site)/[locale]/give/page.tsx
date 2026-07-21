@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
+import { RegisterCta } from "@/components/register/RegisterCta";
 import { pageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
@@ -49,6 +50,7 @@ export default async function GivePage({
           </a>
         </div>
       </div>
+      <RegisterCta locale={locale} />
     </>
   );
 }

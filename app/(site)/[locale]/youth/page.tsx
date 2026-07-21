@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
+import { RegisterCta } from "@/components/register/RegisterCta";
 import { AgendaTable } from "@/components/schedule/AgendaTable";
 import { youthProgram, youthSchedule } from "@/lib/content/youth-program";
 import { pageMetadata } from "@/lib/metadata";
@@ -54,6 +55,7 @@ export default async function YouthPage({
           ))}
         </section>
       </div>
+      <RegisterCta locale={locale} />
     </>
   );
 }

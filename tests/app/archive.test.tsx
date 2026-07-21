@@ -1,3 +1,4 @@
+import * as React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
@@ -10,6 +11,36 @@ vi.mock("@/lib/supabase/server", () => ({
   createClient: createClientMock,
 }));
 
+// `RegisterCta` is itself an async Server Component nested in this page's
+// returned JSX (`<RegisterCta locale={locale} />`), which Next's real RSC
+// renderer resolves automatically at request time. `@testing-library/react`
+// renders with the client reconciler instead, which throws "<RegisterCta> is
+// an async Client Component" the moment it reaches an unresolved async
+// function component -- confirmed by actually running this suite without
+// this shim first. This walks the page's top-level Fragment children, swaps
+// the RegisterCta element for its already-awaited output, and leaves
+// everything else untouched.
+async function resolveRegisterCta(page: React.ReactElement): Promise<React.ReactElement> {
+  // Dynamically imported (rather than a static top-level import) so this
+  // module -- and its own static `@/lib/supabase/server` import -- only
+  // loads after `createClientMock` above has actually been initialized; a
+  // static import here would get hoisted ahead of that `const` and throw
+  // "Cannot access 'createClientMock' before initialization" the moment the
+  // mock factory below runs. Matches the same specifier the page module
+  // itself imports, so Vitest's module cache hands back the identical
+  // reference used for the `child.type === RegisterCta` check below.
+  const { RegisterCta } = await import("../../components/register/RegisterCta");
+  const children = React.Children.toArray((page.props as { children?: React.ReactNode }).children);
+  const resolved = await Promise.all(
+    children.map((child) =>
+      React.isValidElement(child) && child.type === RegisterCta
+        ? (RegisterCta as unknown as (props: unknown) => Promise<React.ReactElement>)(child.props)
+        : child
+    )
+  );
+  return React.cloneElement(page, undefined, ...resolved);
+}
+
 // `next-intl/server`'s real (react-server) implementation of
 // `getTranslations`/`setRequestLocale` needs an actual Next.js RSC request
 // context (it reaches for `next/headers` under the hood). Outside of that —
@@ -21,7 +52,21 @@ vi.mock("@/lib/supabase/server", () => ({
 // react-server build at build/runtime. Mock the module here so the page's
 // translation calls resolve against the real `en.json` copy instead of the
 // stub. (Same pattern established in tests/app/plan-your-visit.test.tsx.)
-vi.mock("next-intl/server", () => createNextIntlServerMock(messages));
+vi.mock("next-intl/server", () => {
+  const mock = createNextIntlServerMock(messages);
+  // RegisterCta calls `getTranslations({ locale, namespace })` (the object
+  // form) while every other call site on this page uses the bare-string
+  // form `getTranslations("Namespace")`. `createNextIntlServerMock` only
+  // understands the string form -- confirmed by actually running this suite
+  // first, which threw "namespace.split is not a function" once
+  // RegisterCta's call reached it. Normalize both shapes to a namespace
+  // string here rather than touching the shared helper.
+  return {
+    ...mock,
+    getTranslations: (arg: string | { namespace: string }) =>
+      mock.getTranslations(typeof arg === "string" ? arg : arg.namespace),
+  };
+});
 
 describe("ArchivePage", () => {
   it("lists past editions with their theme and year", async () => {
@@ -30,12 +75,25 @@ describe("ArchivePage", () => {
       error: null,
     });
     const eqMock = vi.fn(() => ({ order: orderMock }));
+
+    // RegisterCta (now rendered at the bottom of this page) creates its own
+    // Supabase client and calls getActiveEdition(), which chains
+    // `.select().in("status", [...])` -- a different chain shape than this
+    // page's own `.select().eq("status", "past")` query above. Both need to
+    // hang off the same `select()` return value since `createClientMock`
+    // only supports a single resolved client. See
+    // tests/app/home.test.tsx's `mockEditionQueries` for the same pattern.
+    const activeMaybeSingleMock = vi.fn().mockResolvedValue({ data: null, error: null });
+    const activeLimitMock = vi.fn(() => ({ maybeSingle: activeMaybeSingleMock }));
+    const activeOrderMock = vi.fn(() => ({ limit: activeLimitMock }));
+    const inMock = vi.fn(() => ({ order: activeOrderMock }));
+
     createClientMock.mockResolvedValue({
-      from: () => ({ select: () => ({ eq: eqMock }) }),
+      from: () => ({ select: () => ({ eq: eqMock, in: inMock }) }),
     });
 
     const { default: ArchivePage } = await import("../../app/(site)/[locale]/archive/page");
-    const Page = await ArchivePage({ params: Promise.resolve({ locale: "en" }) });
+    const Page = await resolveRegisterCta(await ArchivePage({ params: Promise.resolve({ locale: "en" }) }));
 
     render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
 
@@ -68,5 +126,18 @@ describe("ArchivePage", () => {
     // not otherwise catch since it resolves regardless of what `.eq()` was
     // called with.
     expect(eqMock).toHaveBeenCalledWith("status", "past");
+
+    // RegisterCta's own edition query resolves to null via `inMock` above
+    // (no active edition), so it renders its "not open yet" band.
+    expect(screen.getByRole("heading", { name: "Join Us at the 2027 Convention" })).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Registration for the July 12–17, 2027 convention opens in October 2026 — pricing will be posted as soon as it's confirmed."
+      )
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Get notified — view registration" })).toHaveAttribute(
+      "href",
+      "/en/register"
+    );
   });
 });
