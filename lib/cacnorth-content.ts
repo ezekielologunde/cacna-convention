@@ -18,6 +18,16 @@ export type CacnorthBlogPost = {
   publishedAt: string | null;
 };
 
+export type CacnorthEvent = {
+  id: string;
+  title: string;
+  description: string | null;
+  eventDate: string;
+  endDate: string | null;
+  location: string | null;
+  eventUrl: string | null;
+};
+
 export async function getCacWorldNews(limit = 5): Promise<CacWorldNewsItem[]> {
   const supabase = createCacnorthClient();
   const { data, error } = await supabase
@@ -63,5 +73,33 @@ export async function getCacnorthBlogPosts(limit = 5): Promise<CacnorthBlogPost[
     excerpt: row.excerpt,
     imageUrl: row.image_url,
     publishedAt: row.published_at,
+  }));
+}
+
+// events also has zero rows in cacnorthamerica.com's database as of this
+// writing -- their site's visible "CACNA 2027 Annual Convention" card is
+// hardcoded, not database-backed, same situation as blog_posts above.
+// Filters to today-or-later so a stale/past row (however unlikely while
+// the table is unused) never shows as "upcoming".
+export async function getCacnorthEvents(limit = 5): Promise<CacnorthEvent[]> {
+  const supabase = createCacnorthClient();
+  const { data, error } = await supabase
+    .from("events")
+    .select("id, title, description, event_date, end_date, location, event_url")
+    .eq("published", true)
+    .gte("event_date", new Date().toISOString())
+    .order("event_date", { ascending: true })
+    .limit(limit);
+
+  if (error) throw error;
+
+  return (data ?? []).map((row) => ({
+    id: row.id,
+    title: row.title,
+    description: row.description,
+    eventDate: row.event_date,
+    endDate: row.end_date,
+    location: row.location,
+    eventUrl: row.event_url,
   }));
 }

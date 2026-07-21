@@ -8,15 +8,18 @@ import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
 // See tests/app/archive.test.tsx for why next-intl/server is mocked here.
 vi.mock("next-intl/server", () => createNextIntlServerMock(messages));
 
-// getCacWorldNews/getCacnorthBlogPosts hit a real, separate Supabase
-// project (lib/cacnorth-supabase.ts) over the network -- mocked per-test so
-// the suite never depends on external network access, matching the
-// no-live-calls-in-tests convention used everywhere else in this project.
+// getCacWorldNews/getCacnorthBlogPosts/getCacnorthEvents hit a real,
+// separate Supabase project (lib/cacnorth-supabase.ts) over the network --
+// mocked per-test so the suite never depends on external network access,
+// matching the no-live-calls-in-tests convention used everywhere else in
+// this project.
 const getCacWorldNewsMock = vi.fn().mockResolvedValue([]);
 const getCacnorthBlogPostsMock = vi.fn().mockResolvedValue([]);
+const getCacnorthEventsMock = vi.fn().mockResolvedValue([]);
 vi.mock("@/lib/cacnorth-content", () => ({
   getCacWorldNews: () => getCacWorldNewsMock(),
   getCacnorthBlogPosts: () => getCacnorthBlogPostsMock(),
+  getCacnorthEvents: () => getCacnorthEventsMock(),
 }));
 
 describe("NewsPage", () => {
@@ -67,6 +70,39 @@ describe("NewsPage", () => {
 
     expect(screen.queryByRole("heading", { name: "From CAC World" })).not.toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "From the CACNA Blog" })).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: "More Events from cacnorthamerica.com" })
+    ).not.toBeInTheDocument();
+  });
+
+  it("renders cacnorthamerica.com events once the events table has rows", async () => {
+    getCacnorthEventsMock.mockResolvedValueOnce([
+      {
+        id: "1",
+        title: "CACNA 2027 Annual Convention",
+        description: "Six days of worship and the Word.",
+        eventDate: "2027-07-12T00:00:00.000Z",
+        endDate: "2027-07-17T00:00:00.000Z",
+        location: "CAC Village, Blue Ridge Summit, PA",
+        eventUrl: "https://cacnorthamerica.com/events/cacna-2027",
+      },
+    ]);
+
+    const { default: NewsPage } = await import("../../app/(site)/[locale]/news/page");
+    const Page = await NewsPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(
+      screen.getByRole("heading", { name: "More Events from cacnorthamerica.com" })
+    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "CACNA 2027 Annual Convention" })).toBeInTheDocument();
+    expect(screen.getByText("July 12, 2027 – July 17, 2027")).toBeInTheDocument();
+    expect(screen.getByText("CAC Village, Blue Ridge Summit, PA")).toBeInTheDocument();
+    const detailLinks = screen.getAllByRole("link", { name: /^See details/ });
+    expect(
+      detailLinks.some((link) => link.getAttribute("href") === "https://cacnorthamerica.com/events/cacna-2027")
+    ).toBe(true);
   });
 
   it("renders CAC World News items linking out to their real source", async () => {
