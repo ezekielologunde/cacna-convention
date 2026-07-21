@@ -69,28 +69,13 @@
 }
 
 /*
- * Dark values live in one place, applied by two selectors: the media
- * query for pure-system users (skipped if a manual "light" choice is
- * stored), and [data-theme="dark"] for the manual toggle in
- * components/ui/ThemeToggle.tsx. Keep both blocks identical -- there's no
- * CSS "include" here, so drift is a real risk if only one is edited.
+ * Light is always the default, regardless of OS/browser preference --
+ * dark values apply ONLY via the explicit [data-theme="dark"] attribute
+ * set by components/ui/ThemeToggle.tsx (and the pre-hydration script in
+ * layout.tsx that reads the same stored choice). Deliberately no
+ * `@media (prefers-color-scheme: dark)` block: a system-dark preference
+ * alone must never flip the site dark without the visitor choosing it.
  */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --background: #16121a;
-    --foreground: #f3ede9;
-    --color-bg: #16121a;
-    --color-fg: #f3ede9;
-    --color-muted: #c9bec7;
-    --color-border: #4a3a50;
-    --color-surface: #211a28;
-    --color-coral-text: #ff8a73; /* 8.04:1 on dark bg */
-    --color-coral-light: #3a2018;
-    --color-teal-text: #4dd9ce; /* 10.68:1 on dark bg */
-    --color-teal-light: #123330;
-    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.45);
-  }
-}
 :root[data-theme="dark"] {
   --background: #16121a;
   --foreground: #f3ede9;

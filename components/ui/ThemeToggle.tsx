@@ -10,14 +10,10 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
+    // Light is the default regardless of OS/browser preference -- only an
+    // explicitly stored choice should ever start the site in dark mode.
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    setTheme(
-      stored === "light" || stored === "dark"
-        ? stored
-        : window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light"
-    );
+    setTheme(stored === "dark" ? "dark" : "light");
   }, []);
 
   useEffect(() => {
