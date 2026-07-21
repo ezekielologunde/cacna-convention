@@ -206,3 +206,19 @@ At the user's request to "drill down the old site every section," four research 
 - **Missions Department and Music Department histories** (found on cacnorthamerica.com) — real, but there's no dedicated page on this site for either department to host them on.
 - **Full lecture texts** (Bishop Asaju's Christian Education keynote; the President's and Regional Superintendent's full welcome addresses) — real and attributable, but long-form (hundreds to ~1,300 words each); would need deliberate excerpting/placement design, not done this pass.
 - **"Latunde" appearing after Olawale's/Adelani's names** on cacnorthamerica.com's `/current-leaders/` page — most likely a text-run-together rendering artifact ("Olawale" + "Latunde Regional Secretary..." title concatenated without a comma) rather than part of either person's actual name; left `leadership.ts` unchanged pending confirmation.
+
+## Fourth pass: Wayback Machine archives of both source sites (2026-07-20)
+
+At the user's direction to keep researching new ground, three more research agents checked social media presence, CAC Village's own facility/history details, and archived (Wayback Machine) versions of both source sites.
+
+**Social media**: neither source site actually links a working social account (their icons are dead `#` placeholders). Independently verified two real, active, org-affiliated accounts anyway: Facebook "CAC Village" (address matches the venue exactly) and Instagram `@cacnayyam` (Youth ministry, with story highlights literally titled "Convention 25'"/"Convention 24'" and a comment confirming live July 2026 convention content). Neither yielded usable photos — both platforms' photo/album views are login-walled for logged-out browsing, and no login was attempted.
+
+**CAC Village venue**: confirmed as a real, active church-owned property at 14051 Stahley Road, Blue Ridge Summit, PA 17214 (four independent sources) — but no public history, acquisition story, or facilities inventory exists anywhere (not on either site, not in news coverage, not in accessible property records). This is a genuine dead end, not a research gap.
+
+**Wayback Machine**: found real content since removed or never re-published on the current live sites, all verified by fetching the archive.org snapshots directly (not just trusting the research agent's summary):
+- The mission statement's original lead-in sentence (2017 snapshot of cacnaconvention.org's `/about/`) — added to `lib/content/about-convention.ts` as `introSentence`.
+- A full Statement of Faith, 12 points (2016 snapshot of cacnorthamerica.com's `/statement-of-faith/`) — not published on either live site today. Added verbatim as `lib/content/statement-of-faith.ts`, a new "What We Believe" section on the About page.
+- A cross-year fact: Prophet H. Oladeji has led Revival Night or Impartation Night at every recoverable CACNA convention program from 2019 through 2026 — added to the Archive page.
+- Three past convention editions (2019 "That the Scripture Might Be Fulfilled"; 2020 "God in the Administration of Man," held virtually via Zoom during COVID-19; 2024 "Spiritual Power and Gifts for the Body of Christ") were missing from the `convention_editions` table entirely — backfilled via `supabase/migrations/0007_seed_past_editions_2019_2020_2024.sql`, verified by downloading and extracting each year's archived program PDF directly.
+
+Also confirmed already-correct: the founding history, the 5-level governance structure, the core mission statement, and CAC Village's address were all already live on the current site (the address specifically is on Plan Your Visit, which the research agents hadn't checked).
