@@ -127,7 +127,7 @@ export default async function Home({
               >
                 {t("kicker")}
               </span>
-              <h1 className="mt-5 font-display text-5xl leading-[1.02] tracking-tight text-[var(--color-fg)] sm:text-6xl lg:text-7xl">
+              <h1 className="mt-5 font-display text-5xl leading-[1.02] tracking-tight text-[var(--color-fg)] sm:text-7xl lg:text-8xl">
                 {t("title")}
               </h1>
               <p className="mx-auto mt-5 max-w-[48ch] text-lg text-[var(--color-muted)] lg:mx-0">{t("subtitle")}</p>
@@ -229,7 +229,7 @@ export default async function Home({
             <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-mist)] uppercase">
               {t("welcomeKicker")}
             </span>
-            <h2 className="mt-4 font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl">
+            <h2 className="mt-4 font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
               {t("welcomeHeading")}
             </h2>
           </Reveal>
@@ -257,7 +257,7 @@ export default async function Home({
         <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
           <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
             <div className="mx-auto max-w-2xl text-center">
-              <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("missionHeading")}</h2>
+              <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">{t("missionHeading")}</h2>
               <p className="mt-4 text-[var(--color-muted)]">{t("missionBody")}</p>
             </div>
             <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -322,7 +322,7 @@ export default async function Home({
       <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
         <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.3fr_1fr] 2xl:max-w-6xl">
           <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-bg)] p-8 text-center shadow-[var(--shadow-card)] sm:p-10 lg:text-left">
-            <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">{t("registrationHeading")}</h2>
+            <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("registrationHeading")}</h2>
             {!registrationOpen && (
               <p className="mx-auto mt-3 max-w-[48ch] text-[var(--color-muted)] lg:mx-0">
                 {t("registrationComingSoon")}

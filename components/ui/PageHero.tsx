@@ -52,14 +52,14 @@ export function PageHero({
                 {eyebrow}
               </span>
             )}
-            <h1 className="mt-3 font-display text-3xl text-white sm:text-4xl">{title}</h1>
+            <h1 className="mt-3 font-display text-4xl text-white sm:text-5xl lg:text-6xl">{title}</h1>
             {subtitle && <p className="mt-3 max-w-[52ch] text-white/85">{subtitle}</p>}
           </div>
           <div className="rounded-2xl bg-white/10 px-6 py-4 text-right backdrop-blur-sm">
             <div className="text-xs font-bold tracking-wide text-[var(--color-mist)] uppercase">
               {stat.label}
             </div>
-            <div className="mt-1 font-display text-2xl text-white">{stat.value}</div>
+            <div className="mt-1 font-display text-3xl text-white">{stat.value}</div>
           </div>
         </div>
       ) : (
@@ -69,7 +69,7 @@ export function PageHero({
               {eyebrow}
             </span>
           )}
-          <h1 className="mt-3 font-display text-3xl text-white sm:text-4xl">{title}</h1>
+          <h1 className="mt-3 font-display text-4xl text-white sm:text-5xl lg:text-6xl">{title}</h1>
           {subtitle && <p className="mx-auto mt-3 max-w-[56ch] text-white/85">{subtitle}</p>}
         </div>
       )}

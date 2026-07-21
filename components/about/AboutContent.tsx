@@ -47,7 +47,7 @@ export async function AboutContent({
             <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-coral-text)] uppercase">
               {t("foundationKicker")}
             </span>
-            <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl text-[var(--color-fg)] sm:text-4xl">
+            <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">
               {t("missionHeading")}
             </h2>
           </Reveal>
@@ -81,7 +81,7 @@ export async function AboutContent({
       <section className="px-6 py-16 sm:py-20">
         <div className="mx-auto max-w-4xl">
           <Reveal className="text-center">
-            <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("statementOfFaithHeading")}</h2>
+            <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">{t("statementOfFaithHeading")}</h2>
           </Reveal>
           <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
             {statementOfFaith.map((item, i) => (
@@ -106,7 +106,7 @@ export async function AboutContent({
             <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-mist)] uppercase">
               {t("familyKicker")}
             </span>
-            <h2 className="mt-4 font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl">
+            <h2 className="mt-4 font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
               {t("familyHeading")}
             </h2>
           </Reveal>
@@ -135,7 +135,7 @@ export async function AboutContent({
             <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-mist)] uppercase">
               {t("heritageKicker")}
             </span>
-            <h2 className="mt-4 font-display text-3xl leading-[1.1] tracking-tight text-white sm:text-4xl">
+            <h2 className="mt-4 font-display text-3xl leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
               {t("heritageHeading", { year: history.foundingYear })}
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/85">{history.summary}</p>
@@ -175,7 +175,7 @@ export async function AboutContent({
       <section id="leadership" className="px-6 py-16 sm:py-20">
         <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
           <Reveal className="text-center">
-            <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("leadership")}</h2>
+            <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">{t("leadership")}</h2>
           </Reveal>
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
             {leadership.map((member, i) => (
@@ -208,7 +208,7 @@ export async function AboutContent({
       <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
         <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
           <Reveal className="text-center">
-            <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("worldwideLeadershipHeading")}</h2>
+            <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">{t("worldwideLeadershipHeading")}</h2>
             <p className="mx-auto mt-3 max-w-2xl text-[var(--color-muted)]">{t("worldwideLeadershipBlurb")}</p>
             <p className="mx-auto mt-3 max-w-2xl text-sm text-[var(--color-muted)]">{worldwideHistory}</p>
           </Reveal>
@@ -243,7 +243,7 @@ export async function AboutContent({
       <section className="px-6 py-16 sm:py-20">
         <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
           <Reveal className="text-center">
-            <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("committee")}</h2>
+            <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">{t("committee")}</h2>
           </Reveal>
           <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {committee.map((member, i) => (
@@ -292,7 +292,7 @@ export async function AboutContent({
             <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-teal-text)] uppercase">
               {t("exploreKicker")}
             </span>
-            <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl text-[var(--color-fg)] sm:text-4xl">
+            <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">
               {t("exploreHeading")}
             </h2>
           </Reveal>
