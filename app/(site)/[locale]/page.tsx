@@ -322,7 +322,7 @@ export default async function Home({
       <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
         <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.3fr_1fr] 2xl:max-w-6xl">
           <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-bg)] p-8 text-center shadow-[var(--shadow-card)] sm:p-10 lg:text-left">
-            <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("registrationHeading")}</h2>
+            <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">{t("registrationHeading")}</h2>
             {!registrationOpen && (
               <p className="mx-auto mt-3 max-w-[48ch] text-[var(--color-muted)] lg:mx-0">
                 {t("registrationComingSoon")}
