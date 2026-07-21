@@ -63,7 +63,7 @@ export default async function StorePage({
   return (
     <>
       <PageHero title={t("title")} subtitle={t("intro")} />
-      <div className="mx-auto max-w-5xl px-6 py-12">
+      <div className="mx-auto max-w-5xl px-6 py-12 2xl:max-w-6xl">
         <section>
           <h2 className="font-display text-xl text-[var(--color-fg)]">{t("materialsHeading")}</h2>
           <p className="mt-2 max-w-[65ch] text-sm text-[var(--color-muted)]">{t("materialsIntro")}</p>

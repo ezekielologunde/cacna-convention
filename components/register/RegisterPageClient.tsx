@@ -45,7 +45,7 @@ export function RegisterPageClient() {
     }`;
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-12">
+    <div className="mx-auto max-w-3xl px-6 py-12 2xl:max-w-4xl">
       <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
       <div role="tablist" className="mt-6 flex gap-2 border-b border-[var(--color-border)]">
         <button

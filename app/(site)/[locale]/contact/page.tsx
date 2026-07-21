@@ -29,7 +29,7 @@ export default async function ContactPage({
   return (
     <>
       <PageHero title={t("title")} tone="teal" />
-      <div className="mx-auto max-w-3xl px-6 py-12">
+      <div className="mx-auto max-w-3xl px-6 py-12 2xl:max-w-4xl">
       <ul className="flex flex-col gap-4">
         {contacts.map((contact) => (
           <li key={contact.email} className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]">

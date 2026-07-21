@@ -33,7 +33,7 @@ export default async function YouthPage({
         title={youthProgram.title}
         subtitle={`${t("coordinatorLabel")}: ${youthProgram.regionalCoordinator}`}
       />
-      <div className="mx-auto max-w-3xl px-6 py-12">
+      <div className="mx-auto max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <section className="pb-10">
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("historyHeading")}</h2>
           <p className="mt-3 text-sm text-[var(--color-muted)]">{youthProgram.history}</p>

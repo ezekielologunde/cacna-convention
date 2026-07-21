@@ -30,7 +30,7 @@ export default async function MinistersWivesPage({
   return (
     <>
       <PageHero title={t("title")} />
-      <div className="mx-auto max-w-3xl px-6 py-12">
+      <div className="mx-auto max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <section>
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("executiveHeading")}</h2>
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">

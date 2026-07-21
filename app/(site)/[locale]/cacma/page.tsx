@@ -30,7 +30,7 @@ export default async function CacmaPage({
   return (
     <>
       <PageHero title={t("title")} />
-      <div className="mx-auto max-w-3xl px-6 py-12">
+      <div className="mx-auto max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <section className="flex flex-col gap-8">
           {cacmaSchedule.map((session, i) => (
             <div key={`${session.dayLabel}-${i}`}>

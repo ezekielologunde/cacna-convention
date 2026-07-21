@@ -35,7 +35,7 @@ export default async function ChristianEducationPage({
         variant="split"
         stat={{ label: t("dateLabel"), value: christianEducation.date }}
       />
-      <div className="mx-auto max-w-3xl px-6 py-12">
+      <div className="mx-auto max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <section>
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("orderHeading")}</h2>
           <div className="mt-4">

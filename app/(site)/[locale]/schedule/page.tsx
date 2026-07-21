@@ -79,7 +79,7 @@ export default async function SchedulePage({
     <div>
       <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
       <PageHero title={t("title")} />
-      <div className="mx-auto max-w-3xl px-6 py-12">
+      <div className="mx-auto max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <div className="flex flex-col gap-6">
           {orderedDays.map(([dayDate, daySessions]) => (
             <ScheduleDay key={dayDate} dayDate={dayDate} sessions={daySessions} />
