@@ -39,17 +39,17 @@ export function PrimaryNav() {
           <Image
             src="/brand/icon.png"
             alt=""
-            width={32}
-            height={32}
-            className="h-8 w-8 flex-none rounded-xl object-cover"
+            width={44}
+            height={44}
+            className="h-11 w-11 flex-none rounded-xl object-cover"
             priority
           />
           <span className="flex min-w-0 flex-col leading-none">
             <span className="truncate text-[10px] font-bold tracking-[0.15em] text-[var(--color-coral-text)] uppercase">
               {t("orgKicker")}
             </span>
-            <span className="mt-0.5 truncate font-display text-base tracking-tight text-[var(--color-fg)] sm:text-lg">
-              North America Convention
+            <span className="mt-1 truncate font-display text-xl tracking-tight text-[var(--color-fg)] sm:text-2xl">
+              Convention
             </span>
           </span>
         </Link>

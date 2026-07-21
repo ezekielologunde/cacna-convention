@@ -52,15 +52,15 @@ export function FooterNav() {
             <Image
               src="/brand/icon.png"
               alt=""
-              width={28}
-              height={28}
-              className="h-7 w-7 flex-none rounded-lg object-cover"
+              width={40}
+              height={40}
+              className="h-10 w-10 flex-none rounded-lg object-cover"
             />
             <span className="flex min-w-0 flex-col leading-none">
               <span className="truncate text-[9px] font-bold tracking-[0.15em] text-[var(--color-mist)] uppercase">
                 {t("orgKicker")}
               </span>
-              <span className="mt-0.5 truncate font-display text-lg text-white">North America Convention</span>
+              <span className="mt-1 truncate font-display text-xl text-white">Convention</span>
             </span>
           </div>
           <p className="mt-3 max-w-[32ch] text-sm text-white/75">{tFooter("blurb")}</p>
