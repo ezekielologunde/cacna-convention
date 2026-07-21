@@ -27,6 +27,7 @@ export async function generateMetadata({
     alternates: {
       canonical: canonicalPath,
       languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l}`])),
+      types: { "application/rss+xml": `${SITE_URL}/feed.xml` },
     },
     icons: { icon: "/brand/icon.png", shortcut: "/brand/icon.png", apple: "/brand/icon.png" },
     openGraph: {

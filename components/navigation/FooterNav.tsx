@@ -1,23 +1,30 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import { CalendarDays, Compass, Mail, Phone, PlayCircle, ArrowUp } from "lucide-react";
+import { CalendarDays, Compass, Globe, Mail, Phone, PlayCircle, Rss, ArrowUp, Users } from "lucide-react";
 import { FooterLink } from "@/components/navigation/FooterLink";
 import { externalResources } from "@/lib/content/external-resources";
 import { contacts } from "@/lib/content/contacts";
 
+// Split from a single 11-item "Attend" list (which forced the whole footer
+// row to stretch to an 11-line-tall column) into this shorter list plus its
+// own "Programs" column below, mirroring the split PrimaryNav's dropdown
+// already makes between core pages and the 7 sub-conference pages.
 const ATTEND_ITEMS = [
   { key: "register", href: "/register" },
   { key: "about", href: "/about" },
   { key: "schedule", href: "/schedule" },
+  { key: "planYourVisit", href: "/plan-your-visit" },
+] as const;
+
+const PROGRAM_ITEMS = [
+  { key: "youth", href: "/youth" },
   { key: "children", href: "/children" },
   { key: "goodWomen", href: "/good-women" },
   { key: "ministersWives", href: "/ministers-wives" },
   { key: "cacma", href: "/cacma" },
   { key: "christianEducation", href: "/christian-education" },
   { key: "businessGroup", href: "/business-group" },
-  { key: "youth", href: "/youth" },
-  { key: "planYourVisit", href: "/plan-your-visit" },
 ] as const;
 
 const CONNECT_ITEMS = [
@@ -50,7 +57,7 @@ export async function FooterNav({ locale }: { locale: string }) {
       <div aria-hidden="true" className="h-[3px] w-full" style={{ background: "var(--gradient-cta)" }} />
 
       <div className="px-6 py-14">
-        <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-[1.3fr_repeat(3,1fr)]">
+        <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-[1.1fr_repeat(4,1fr)]">
           <div>
             <div className="flex min-w-0 items-center gap-2.5">
               <Image
@@ -86,6 +93,13 @@ export async function FooterNav({ locale }: { locale: string }) {
               >
                 <PlayCircle size={18} strokeWidth={2} aria-hidden="true" />
               </a>
+              <a
+                href="/feed.xml"
+                aria-label={tFooter("subscribeRss")}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white/75 transition-colors hover:border-white/40 hover:text-white"
+              >
+                <Rss size={18} strokeWidth={2} aria-hidden="true" />
+              </a>
             </div>
           </div>
 
@@ -105,6 +119,20 @@ export async function FooterNav({ locale }: { locale: string }) {
 
           <div>
             <h4 className="flex items-center gap-2 text-xs font-bold tracking-wider text-white/55 uppercase">
+              <Users size={14} strokeWidth={2.25} aria-hidden="true" />
+              {t("programs")}
+            </h4>
+            <ul className="mt-3 flex flex-col text-sm">
+              {PROGRAM_ITEMS.map((item) => (
+                <li key={item.key}>
+                  <FooterLink href={`/${locale}${item.href}`}>{t(item.key)}</FooterLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="flex items-center gap-2 text-xs font-bold tracking-wider text-white/55 uppercase">
               <Compass size={14} strokeWidth={2.25} aria-hidden="true" />
               {tFooter("connectHeading")}
             </h4>
@@ -112,23 +140,6 @@ export async function FooterNav({ locale }: { locale: string }) {
               {CONNECT_ITEMS.map((item) => (
                 <li key={item.key}>
                   <FooterLink href={`/${locale}${item.href}`}>{t(item.key)}</FooterLink>
-                </li>
-              ))}
-              {externalResources.map((resource) => (
-                <li key={resource.url}>
-                  <a
-                    href={resource.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${resource.label}${tFooter("opensInNewTab")}`}
-                    className="group flex min-h-11 items-center gap-2 text-white/75 transition-colors hover:text-white"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="h-1 w-1 flex-none rounded-full transition-colors group-hover:bg-[var(--color-gold)]"
-                    />
-                    {resource.label}
-                  </a>
                 </li>
               ))}
             </ul>
@@ -165,7 +176,34 @@ export async function FooterNav({ locale }: { locale: string }) {
           </div>
         </div>
 
-        <div className="mx-auto mt-10 flex max-w-6xl flex-wrap items-center justify-between gap-4 border-t border-white/15 pt-6 text-sm text-white/70">
+        {/* External links to the wider CAC family, as a single wrapped row
+            rather than a stacked column -- these 6 links (the site's most
+            content, previously tacked onto the end of Connect) made whichever
+            column held them the tallest in the grid above, and CSS Grid's
+            default row-stretch forces every other column to match that
+            height. A horizontal wrap costs at most 2 short lines regardless
+            of item count, and reads correctly as "external," since these
+            are a different kind of link from the site's own pages above. */}
+        <div className="mx-auto mt-10 flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 border-t border-white/15 pt-6">
+          <h4 className="flex items-center gap-2 text-xs font-bold tracking-wider text-white/55 uppercase">
+            <Globe size={14} strokeWidth={2.25} aria-hidden="true" />
+            {tFooter("cacFamilyHeading")}
+          </h4>
+          {externalResources.map((resource) => (
+            <a
+              key={resource.url}
+              href={resource.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${resource.label}${tFooter("opensInNewTab")}`}
+              className="text-sm text-white/75 underline underline-offset-2 transition-colors hover:text-white"
+            >
+              {resource.label}
+            </a>
+          ))}
+        </div>
+
+        <div className="mx-auto mt-6 flex max-w-6xl flex-wrap items-center justify-between gap-4 border-t border-white/15 pt-6 text-sm text-white/70">
           <div>
             <p>{tFooter("tagline")}</p>
             <p className="mt-1">{tFooter("copyright", { year: new Date().getFullYear() })}</p>

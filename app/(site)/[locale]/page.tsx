@@ -145,7 +145,21 @@ export default async function Home({
               >
                 {t("kicker")}
               </span>
-              <h1 className="mt-5 font-display text-5xl leading-[1.02] tracking-tight text-[var(--color-fg)] sm:text-7xl lg:text-8xl">
+              {/* Hanken Grotesk (the body face) rather than the site's global
+                  h1/h2/h3 font-family (Unbounded) -- at this size (96px at
+                  lg) Unbounded's heavy geometric letterforms read as a
+                  different visual language from the body copy immediately
+                  below it. Section h2/h3s keep the display face; this is the
+                  one heading big enough for the mismatch to actually
+                  register. Set inline: globals.css's `h1, h2, h3 {
+                  font-family: var(--font-heading) }` rule lives outside any
+                  Tailwind @layer, so it outranks the `font-sans` utility
+                  class regardless of specificity -- confirmed by checking
+                  the rendered page, where `font-sans` had no visible effect. */}
+              <h1
+                className="mt-5 text-5xl leading-[1.05] font-extrabold tracking-tight text-[var(--color-fg)] sm:text-7xl lg:text-8xl"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
                 {t("title")}
               </h1>
               <p className="mx-auto mt-5 max-w-[48ch] text-lg text-[var(--color-muted)] lg:mx-0">{t("subtitle")}</p>
@@ -266,8 +280,8 @@ export default async function Home({
                       {RHYTHM_ICONS[item.key]}
                     </svg>
                   </span>
-                  <h3 className="mt-4 font-display text-base text-[var(--color-fg)]">{item.title}</h3>
-                  <p className="mt-2 text-sm text-[var(--color-muted)]">{item.desc}</p>
+                  <h3 className="mt-4 font-display text-lg text-[var(--color-fg)]">{item.title}</h3>
+                  <p className="mt-2 text-base text-[var(--color-muted)]">{item.desc}</p>
                 </Card>
               </Reveal>
             ))}

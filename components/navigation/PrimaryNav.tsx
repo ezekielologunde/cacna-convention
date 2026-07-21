@@ -92,7 +92,11 @@ export function PrimaryNav() {
   return (
     <nav
       aria-label="Primary"
-      className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/95 backdrop-blur"
+      // shadow-sm (in addition to the existing border-b) so the bar reads as
+      // a raised layer sitting above the page rather than a flat line
+      // dividing two areas of the same plane -- reported as feeling
+      // "disconnected" from the content below it.
+      className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/95 shadow-sm backdrop-blur"
     >
       <div className="flex items-center gap-6 px-6 pt-safe pb-3.5">
         <Link href={`/${locale}`} className="flex min-w-0 flex-1 items-center gap-2.5 sm:flex-none">

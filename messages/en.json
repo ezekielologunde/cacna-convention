@@ -74,9 +74,11 @@
     "opensInNewTab": " (opens in a new tab)",
     "attendHeading": "Attend",
     "connectHeading": "Connect",
+    "cacFamilyHeading": "CAC Family",
     "contactHeading": "Contact",
     "copyright": "© {year} CACNA Convention",
     "watchOnYoutube": "Watch on YouTube",
+    "subscribeRss": "Subscribe via RSS",
     "backToTop": "Back to top"
   },
   "Home": {

@@ -78,7 +78,7 @@ export function FindYourPath({
                   <persona.icon size={19} strokeWidth={2} />
                 </span>
                 <h3 className="mt-4 font-display text-lg text-[var(--color-fg)]">{personaLabels[persona.key]}</h3>
-                <p className="mt-2 text-sm text-[var(--color-muted)]">{personaBodies[persona.key]}</p>
+                <p className="mt-2 text-base text-[var(--color-muted)]">{personaBodies[persona.key]}</p>
                 <ul className="mt-5 flex flex-col gap-2 border-t border-[var(--color-border)] pt-4">
                   {persona.links.map((link) => (
                     <li key={link.key}>
