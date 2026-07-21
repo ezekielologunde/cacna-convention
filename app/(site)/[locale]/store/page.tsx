@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
 import { Badge } from "@/components/ui/Badge";
@@ -8,6 +9,7 @@ import {
   youthApparelDemo,
   type StoreItem,
 } from "@/lib/content/store-items";
+import { pageMetadata } from "@/lib/metadata";
 
 function ApparelCategory({
   label,
@@ -37,6 +39,16 @@ function ApparelCategory({
       </ul>
     </div>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Store" });
+  return pageMetadata({ locale, path: "/store", title: t("title"), description: t("intro") });
 }
 
 export default async function StorePage({

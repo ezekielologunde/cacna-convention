@@ -8,17 +8,49 @@ import { PrimaryNav } from "@/components/navigation/PrimaryNav";
 import { FooterNav } from "@/components/navigation/FooterNav";
 import { ChatShortcut } from "@/components/ui/ChatShortcut";
 import { displayFont, bodyFont } from "@/lib/fonts";
+import { SITE, SITE_URL, organizationJsonLd } from "@/lib/site";
 import "../../globals.css";
 
-export const metadata: Metadata = {
-  title: "CACNA Convention",
-  description: "Christ Apostolic Church North America Convention",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: "CACNA",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const canonicalPath = `/${locale}`;
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: { default: SITE.name, template: `%s — ${SITE.name}` },
+    description: SITE.fullName,
+    applicationName: SITE.name,
+    alternates: {
+      canonical: canonicalPath,
+      languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l}`])),
+    },
+    icons: { icon: "/brand/icon.png", shortcut: "/brand/icon.png", apple: "/brand/icon.png" },
+    openGraph: {
+      type: "website",
+      siteName: SITE.name,
+      title: SITE.name,
+      description: SITE.fullName,
+      url: canonicalPath,
+      locale: locale === "yo" ? "yo_NG" : "en_US",
+      images: [{ url: SITE.logo, width: 512, height: 512, alt: `${SITE.name} logo` }],
+    },
+    twitter: {
+      card: "summary",
+      title: SITE.name,
+      description: SITE.fullName,
+      images: [SITE.logo],
+    },
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "black-translucent",
+      title: "CACNA",
+    },
+  };
+}
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -50,6 +82,13 @@ export default async function LocaleRootLayout({
   return (
     <html lang={locale} className={`${displayFont.variable} ${bodyFont.variable} antialiased`}>
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          // Static, app-controlled data only. `<` is escaped so no value can
+          // ever break out of the <script> element (JSON-LD hardening) —
+          // same pattern used on the sibling cacnorthamerica.com site.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()).replace(/</g, "\\u003c") }}
+        />
         <Script id="theme-init" strategy="afterInteractive">
           {`(function(){try{var t=localStorage.getItem('cacna-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`}
         </Script>

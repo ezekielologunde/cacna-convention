@@ -1,7 +1,21 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
 import { AgendaTable } from "@/components/schedule/AgendaTable";
 import { youthProgram, youthSchedule } from "@/lib/content/youth-program";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return pageMetadata({
+    locale, path: "/youth", title: youthProgram.title,
+    description: `Theme: "${youthProgram.theme}" — the Youth & Young Ministry program at the CACNA Annual Convention.`,
+  });
+}
 
 export default async function YouthPage({
   params,

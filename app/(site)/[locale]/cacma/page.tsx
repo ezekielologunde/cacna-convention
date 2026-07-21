@@ -1,7 +1,22 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
 import { AgendaTable } from "@/components/schedule/AgendaTable";
 import { cacmaSchedule } from "@/lib/content/cacma-program";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Cacma" });
+  return pageMetadata({
+    locale, path: "/cacma", title: t("title"),
+    description: "Schedule for the CAC Latunde Region Men Association (CACMA) at the CACNA Annual Convention.",
+  });
+}
 
 export default async function CacmaPage({
   params,

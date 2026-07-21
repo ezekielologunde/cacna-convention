@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
+import { pageMetadata } from "@/lib/metadata";
 
 // YouTube channel confirmed live and linked from cacnorthamerica.com's own
 // "Video Channel" nav item (see docs/source-content/2026-cacnaconvention-org-content.md
@@ -22,6 +24,16 @@ const YOUTUBE_LIVE_URL = "https://www.youtube.com/@cacnorthamericalatunderegi133
 // this page accurate as new sessions are added throughout convention week,
 // and keeps showing real past sessions once the week is over.
 const CURRENT_SESSIONS_PLAYLIST_ID = "PLhXt6OVepbyjadJt8WufxY-5Mt5OAjsSf";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Live" });
+  return pageMetadata({ locale, path: "/live", title: t("title"), description: t("intro") });
+}
 
 export default async function LivePage({
   params,

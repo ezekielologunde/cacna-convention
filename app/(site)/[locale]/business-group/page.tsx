@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
 import { AgendaTable } from "@/components/schedule/AgendaTable";
@@ -7,6 +8,19 @@ import {
   businessGroupExecutives,
   kingdomEconomicsMessage,
 } from "@/lib/content/business-group-program";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return pageMetadata({
+    locale, path: "/business-group", title: businessGroupFellowship.title,
+    description: `${businessGroupFellowship.title} — ${businessGroupFellowship.date}, moderated by ${businessGroupFellowship.moderators.join(", ")}.`,
+  });
+}
 
 export default async function BusinessGroupPage({
   params,

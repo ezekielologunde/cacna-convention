@@ -1,7 +1,21 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
 import { AgendaTable } from "@/components/schedule/AgendaTable";
 import { christianEducation, christianEducationAgenda } from "@/lib/content/christian-education-program";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return pageMetadata({
+    locale, path: "/christian-education", title: christianEducation.title,
+    description: `Theme: "${christianEducation.theme}" — the Christian Education program at the CACNA Annual Convention, ${christianEducation.date}.`,
+  });
+}
 
 export default async function ChristianEducationPage({
   params,

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getScheduleForEdition } from "@/lib/schedule";
@@ -6,6 +7,20 @@ import { getActivePricingForEdition } from "@/lib/pricing";
 import { ScheduleDay } from "@/components/schedule/ScheduleDay";
 import { PromoBanner } from "@/components/register/PromoBanner";
 import { PageHero } from "@/components/ui/PageHero";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Schedule" });
+  return pageMetadata({
+    locale, path: "/schedule", title: t("title"),
+    description: "The day-by-day schedule for the CACNA Annual Convention at CAC Village, Blue Ridge Summit, PA.",
+  });
+}
 
 export default async function SchedulePage({
   params,

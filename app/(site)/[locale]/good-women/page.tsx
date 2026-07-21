@@ -1,7 +1,22 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
 import { AgendaTable } from "@/components/schedule/AgendaTable";
 import { goodWomenConference, goodWomenSchedule, goodWomenExecutives } from "@/lib/content/good-women-conference";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "GoodWomen" });
+  return pageMetadata({
+    locale, path: "/good-women", title: t("title"),
+    description: `Schedule and executive committee for the Good Women Association Conference, led by ${goodWomenConference.leader}, at the CACNA Annual Convention.`,
+  });
+}
 
 export default async function GoodWomenPage({
   params,

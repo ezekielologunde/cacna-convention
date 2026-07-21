@@ -1,6 +1,21 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
 import { contacts } from "@/lib/content/contacts";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Contact" });
+  return pageMetadata({
+    locale, path: "/contact", title: t("title"),
+    description: "Contact the CACNA Convention Chairman, Secretary, or general inquiries.",
+  });
+}
 
 export default async function ContactPage({
   params,

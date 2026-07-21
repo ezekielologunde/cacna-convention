@@ -1,7 +1,19 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
 import { mainGalleryPhotos, childrenGalleryPhotos } from "@/lib/content/gallery";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Gallery" });
+  return pageMetadata({ locale, path: "/gallery", title: t("title"), description: t("intro") });
+}
 
 export default async function GalleryPage({
   params,

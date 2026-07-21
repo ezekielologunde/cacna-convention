@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
 import {
@@ -6,6 +7,20 @@ import {
   childrenSchedule,
   childrenTeachers,
 } from "@/lib/content/children-convention";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Children" });
+  return pageMetadata({
+    locale, path: "/children", title: t("title"),
+    description: `Theme: "${childrenConvention.theme}" — the Children's Convention Program at the CACNA Annual Convention.`,
+  });
+}
 
 export default async function ChildrenPage({
   params,

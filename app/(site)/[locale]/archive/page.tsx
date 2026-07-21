@@ -1,6 +1,21 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { PageHero } from "@/components/ui/PageHero";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Archive" });
+  return pageMetadata({
+    locale, path: "/archive", title: t("title"),
+    description: "Past CACNA Annual Convention editions — themes, dates, and session counts.",
+  });
+}
 
 export default async function ArchivePage({
   params,

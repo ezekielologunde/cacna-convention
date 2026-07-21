@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEdition } from "@/lib/editions";
@@ -14,6 +15,20 @@ import {
   budgetLodgingNote,
   venueAddress,
 } from "@/lib/content/travel";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "PlanYourVisit" });
+  return pageMetadata({
+    locale, path: "/plan-your-visit", title: t("title"),
+    description: "Hotels, travel directions, and rules & etiquette for attending the CACNA Annual Convention at CAC Village.",
+  });
+}
 
 export default async function PlanYourVisitPage({
   params,

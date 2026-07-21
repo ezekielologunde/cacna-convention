@@ -1,9 +1,11 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { newsEvents } from "@/lib/content/news-events";
 import { getCacWorldNews, getCacnorthBlogPosts, getCacnorthEvents } from "@/lib/cacnorth-content";
+import { pageMetadata } from "@/lib/metadata";
 
 // Without this, the CAC World/blog sections below would freeze at
 // whatever they were during the last deploy -- this page has no other
@@ -11,6 +13,16 @@ import { getCacWorldNews, getCacnorthBlogPosts, getCacnorthEvents } from "@/lib/
 // revalidation keeps it reasonably fresh without a live DB round-trip on
 // every request.
 export const revalidate = 3600;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "News" });
+  return pageMetadata({ locale, path: "/news", title: t("title"), description: t("intro") });
+}
 
 export default async function NewsPage({
   params,

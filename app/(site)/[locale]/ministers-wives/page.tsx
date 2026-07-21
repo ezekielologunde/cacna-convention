@@ -1,7 +1,22 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
 import { AgendaTable } from "@/components/schedule/AgendaTable";
 import { ministersWivesConference, ministersWivesSchedule } from "@/lib/content/ministers-wives-conference";
+import { pageMetadata } from "@/lib/metadata";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "MinistersWives" });
+  return pageMetadata({
+    locale, path: "/ministers-wives", title: t("title"),
+    description: "Schedule and executive members for the Ministers' Wives Conference at the CACNA Annual Convention.",
+  });
+}
 
 export default async function MinistersWivesPage({
   params,

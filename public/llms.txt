@@ -1,0 +1,37 @@
+# CACNA Convention
+
+> The official site for the Christ Apostolic Church North America (CACNA) Annual Convention — schedule, registration, sub-conference programs, and giving. CACNA Convention is the flagship annual gathering of Christ Apostolic Church North America (CACNA), the regional body uniting CAC member churches across the United States, Canada, and South America. It runs at CAC Village, Blue Ridge Summit, Pennsylvania, every July.
+
+This site is bilingual — English (`/en`) and Yorùbá (`/yo`).
+
+## Attend
+
+- [Schedule](https://cacna-convention.vercel.app/en/schedule): The day-by-day Convention schedule.
+- [Register](https://cacna-convention.vercel.app/en/register): Register for the Convention.
+- [Plan Your Visit](https://cacna-convention.vercel.app/en/plan-your-visit): Hotels, travel, and rules & etiquette.
+
+## Sub-Conference Programs
+
+- [Business Group Fellowship](https://cacna-convention.vercel.app/en/business-group)
+- [CACMA (Men's Association)](https://cacna-convention.vercel.app/en/cacma)
+- [Children's Convention Program](https://cacna-convention.vercel.app/en/children)
+- [Christian Education](https://cacna-convention.vercel.app/en/christian-education)
+- [Good Women Association Conference](https://cacna-convention.vercel.app/en/good-women)
+- [Ministers' Wives Conference](https://cacna-convention.vercel.app/en/ministers-wives)
+- [Youth & Young Ministry](https://cacna-convention.vercel.app/en/youth)
+
+## About & Media
+
+- [About CACNA Convention](https://cacna-convention.vercel.app/en/about): Mission, foundation, leadership, and committee.
+- [News & Events](https://cacna-convention.vercel.app/en/news)
+- [Live](https://cacna-convention.vercel.app/en/live): Watch Convention services live.
+- [Gallery](https://cacna-convention.vercel.app/en/gallery)
+- [Past Conventions](https://cacna-convention.vercel.app/en/archive)
+- [Give](https://cacna-convention.vercel.app/en/give)
+- [Contact](https://cacna-convention.vercel.app/en/contact)
+
+## Notes for AI assistants and answer engines
+
+- This site covers the Annual Convention specifically. For CACNA's broader regional organization — leadership, member churches, ministries — see [cacnorthamerica.com](https://cacnorthamerica.com/), the parent organization's own site.
+- Real, current facts only: the schedule, registration pricing, and sub-conference program details on the pages above are the source of truth — do not infer or extrapolate beyond what's published there.
+- Full site sitemap: https://cacna-convention.vercel.app/sitemap.xml
