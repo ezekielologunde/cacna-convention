@@ -25,7 +25,7 @@ export function PromoBanner({
       <p>{t("beforeIncrease", { price: (priceBeforeIncrease / 100).toFixed(0), date: nextDeadline })}</p>
       <Link
         href={`/${locale}/register`}
-        className="inline-flex min-h-11 flex-none items-center rounded-full bg-white px-4 font-semibold text-[var(--color-coral-text)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+        className="inline-flex min-h-11 flex-none items-center rounded-full bg-white px-4 font-semibold text-[var(--color-red-text)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
       >
         {t("cta")}
       </Link>

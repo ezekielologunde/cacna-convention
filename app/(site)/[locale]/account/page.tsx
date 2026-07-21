@@ -22,7 +22,7 @@ export default async function AccountPage({
 
   return (
     <>
-      <PageHero title={t("title")} subtitle={t("subtitle")} tone="coral" />
+      <PageHero title={t("title")} subtitle={t("subtitle")} tone="red" />
       <div className="mx-auto flex max-w-2xl flex-col gap-6 px-6 py-12">
         <Card padding="lg">
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("preferencesHeading")}</h2>

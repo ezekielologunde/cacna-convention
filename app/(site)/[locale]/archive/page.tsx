@@ -48,7 +48,7 @@ export default async function ArchivePage({
 
   return (
     <>
-      <PageHero title={t("title")} tone="teal" />
+      <PageHero title={t("title")} tone="blue" />
       <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
       <p className="text-sm text-[var(--color-muted)]">{recurringSpeakerNote}</p>
       {!editions || editions.length === 0 ? (

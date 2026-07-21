@@ -1,16 +1,21 @@
 @import "tailwindcss";
 
 /*
- * CACNA Convention design tokens -- bold/vibrant redesign.
- *
- * Coral (warm orange -> pink) is the primary accent; teal is its true
- * color-wheel complement, used for secondary CTAs, alternating tone, and
- * badges. Every accent splits into a fill role (-deep: solid background
+ * CACNA Convention design tokens -- unified with the sibling
+ * cacnorthamerica.com site's own red/gold brand (see that project's
+ * app/globals.css for the shared --gradient-hero/--gradient-hero-alt/
+ * --gradient-cta/--gradient-band token names). Red is the primary accent;
+ * blue is CACNA's own established secondary accent (used the same way
+ * across both sites). Gold is a NEW accent here, reserved for dark
+ * surfaces only -- white-on-gold and gold-on-white both fail contrast
+ * (~1.5:1 either direction), so it never takes a -deep/-text/-light role.
+ * Every accent still splits into a fill role (-deep: solid background
  * behind white text, contrast is self-contained so it never needs a dark
  * override) and a foreground role (-text: links/icons/active-nav sitting
  * directly on the page background, so it DOES need a dark override since
- * its contrast depends on what's behind it). All ratios below verified
- * against WCAG AA (4.5:1 body text, 3:1 large text/UI).
+ * its contrast depends on what's behind it). All ratios below computed via
+ * the WCAG relative-luminance formula against WCAG AA (4.5:1 body text,
+ * 3:1 large text/UI).
  */
 :root {
   --background: #ffffff;
@@ -20,45 +25,49 @@
   --color-fg: #16121a;
   --color-muted: #6b5f6e; /* 5.57:1 on bg/surface */
   --color-border: #ece3e6;
-  --color-surface: #fff4ef; /* coral-tinted cream, section banding */
+  --color-surface: #fff4ef; /* red-tinted cream, section banding */
 
-  /* Coral -- warm orange/pink primary accent */
-  --color-coral: #ff6152; /* decorative/large only (>=24px text) -- 2.96:1 on white */
-  --color-coral-deep: #c13a22; /* solid button/badge fill + white text -- 5.39:1, theme-invariant */
-  --color-coral-text: #b93619; /* links/icons/active-nav on page bg -- 5.83:1 on white, dark-overridden */
-  --color-coral-light: #ffe3dc; /* chip/tint background, dark-overridden */
+  /* Red -- CACNA's own primary brand accent (#C81E3A) */
+  --color-red: #c81e3a; /* decorative/large + body text -- 5.67:1 on white */
+  --color-red-deep: #7a1128; /* solid button/badge fill + white text -- 10.84:1, theme-invariant */
+  --color-red-text: #c81e3a; /* links/icons/active-nav on page bg -- 5.67:1 on white, dark-overridden */
+  --color-red-light: #fbe3e8; /* chip/tint background, dark-overridden */
 
-  /* Teal -- secondary/complementary accent */
-  --color-teal: #0ea5a0; /* decorative/large only -- 3.04:1 on white */
-  --color-teal-deep: #0b7a76; /* solid fill + white text -- 5.17:1, theme-invariant */
-  --color-teal-text: #0a716d; /* links/icons on page bg -- 5.84:1 on white, dark-overridden */
-  --color-teal-light: #d9f5f1; /* chip/tint background, dark-overridden */
+  /* Blue -- secondary/complementary accent, CACNA's own --blue (#2D42C9) */
+  --color-blue: #2d42c9; /* decorative/large + body text -- 7.68:1 on white */
+  --color-blue-deep: #23309c; /* solid fill + white text -- 10.64:1, theme-invariant */
+  --color-blue-text: #2d42c9; /* links/icons on page bg -- 7.68:1 on white, dark-overridden */
+  --color-blue-light: #e3e8ff; /* chip/tint background, dark-overridden */
+
+  /* Gold -- CACNA's own accent (#FDC841). Dark surfaces only, everywhere
+   * on this site -- never as a fill, link, or chip color on a light bg. */
+  --color-gold: #fdc841;
 
   /*
    * Eyebrow/label text sitting on the hero gradients below -- verified
    * >=4.5:1 against the lightest point of BOTH hero gradients, so unlike
    * -text tokens it does not need a dark override (it's never placed
-   * directly on --color-bg).
+   * directly on --color-bg). Unchanged from the red/blue era -- this
+   * warm cream happens to still clear 4.5:1 against both new gradients.
    */
   --color-mist: #ffeee8;
 
-  --color-brand: var(--color-coral-text);
+  --color-brand: var(--color-red-text);
   --color-brand-contrast: #ffffff;
 
   /*
-   * These three gradients always carry white text on a saturated,
+   * These four gradients always carry white text on a saturated,
    * self-contained fill -- not blended with page background -- so they're
-   * theme-invariant, same reasoning the old --flame's darkened first stop
-   * applied to one stop, verified here across the whole ramp (21 sample
-   * points; minimum white-text contrast noted per gradient).
+   * theme-invariant. Same token names as the sibling CACNA site.
    */
-  --gradient-cta: linear-gradient(100deg, #a8341c 0%, #c13a4a 50%, #a8305c 100%); /* min white 5.29:1 */
-  --gradient-hero-coral: linear-gradient(150deg, #c13a4a 0%, #a8305c 55%, #6b1b3d 100%); /* min white 5.29:1, min mist 4.70:1 */
-  --gradient-hero-teal: linear-gradient(150deg, #0b7a76 0%, #0a5553 55%, #063230 100%); /* min white 5.17:1, min mist 4.59:1 */
+  --gradient-cta: linear-gradient(100deg, #a81430 0%, #c81e3a 50%, #7a1128 100%); /* min white 5.67:1 */
+  --gradient-hero: linear-gradient(150deg, #c81e3a 0%, #8f1530 55%, #4a0c1c 100%); /* min white 5.67:1, min mist 5.04:1 */
+  --gradient-hero-alt: linear-gradient(150deg, #2d42c9 0%, #1f2f96 55%, #121a52 100%); /* min white 7.68:1, min mist 6.82:1 */
+  --gradient-band: linear-gradient(135deg, #16121a 0%, #241f2e 55%, #0a080c 100%); /* dark ink band, e.g. Watch section */
 
   --shadow-card: 0 10px 26px rgba(22, 18, 26, 0.08);
-  --shadow-glow-coral: 0 14px 34px -10px rgba(193, 58, 34, 0.45);
-  --shadow-glow-teal: 0 14px 34px -10px rgba(11, 122, 118, 0.4);
+  --shadow-glow-red: 0 14px 34px -10px rgba(200, 30, 58, 0.45);
+  --shadow-glow-blue: 0 14px 34px -10px rgba(45, 66, 201, 0.4);
 }
 
 @theme inline {
@@ -84,10 +93,12 @@
   --color-muted: #c9bec7;
   --color-border: #4a3a50;
   --color-surface: #211a28;
-  --color-coral-text: #ff8a73;
-  --color-coral-light: #3a2018;
-  --color-teal-text: #4dd9ce;
-  --color-teal-light: #123330;
+  /* Verified against --background #16121a (L=0.006777): red-text 7.41:1,
+   * blue-text 7.99:1 -- both well clear of AA's 4.5:1 body-text minimum. */
+  --color-red-text: #ff7a8d;
+  --color-red-light: #3a121c;
+  --color-blue-text: #93a5ff;
+  --color-blue-light: #1a2150;
   --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
 

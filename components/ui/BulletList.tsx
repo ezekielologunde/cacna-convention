@@ -1,5 +1,5 @@
 /**
- * Shared coral-dot bullet list used by the About and Plan Your Visit pages.
+ * Shared red-dot bullet list used by the About and Plan Your Visit pages.
  *
  * Plain function component (no client-only hooks) so it can be imported by
  * both a "use client" component (AboutTabs) and a server component
@@ -23,7 +23,7 @@ export function BulletList({
           <span
             aria-hidden="true"
             className="mt-2 h-1.5 w-1.5 flex-none rounded-full"
-            style={{ background: "var(--color-coral-deep)" }}
+            style={{ background: "var(--color-red-deep)" }}
           />
           {item}
         </li>

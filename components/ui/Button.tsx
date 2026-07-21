@@ -4,19 +4,19 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes, CSSProperties, ReactNo
 type ButtonVariant = "primary" | "secondary" | "outline" | "ghost";
 
 const base =
-  "inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-coral-text)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]";
+  "inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95 disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-red-text)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)]";
 
 const variantClass: Record<ButtonVariant, string> = {
-  primary: "text-white shadow-[var(--shadow-glow-coral)]",
-  secondary: "text-white shadow-[var(--shadow-glow-teal)]",
+  primary: "text-white shadow-[var(--shadow-glow-red)]",
+  secondary: "text-white shadow-[var(--shadow-glow-blue)]",
   outline:
-    "border border-[var(--color-border)] text-[var(--color-fg)] hover:border-[var(--color-coral-text)] hover:text-[var(--color-coral-text)]",
+    "border border-[var(--color-border)] text-[var(--color-fg)] hover:border-[var(--color-red-text)] hover:text-[var(--color-red-text)]",
   ghost: "text-[var(--color-fg)] hover:bg-[var(--color-surface)]",
 };
 
 const variantStyle: Partial<Record<ButtonVariant, CSSProperties>> = {
   primary: { background: "var(--gradient-cta)" },
-  secondary: { background: "var(--color-teal-deep)" },
+  secondary: { background: "var(--color-blue-deep)" },
 };
 
 type CommonProps = { variant?: ButtonVariant; children: ReactNode; className?: string };

@@ -62,7 +62,7 @@ export default function AccountLoginPage() {
 
   return (
     <>
-      <PageHero title={t("title")} tone="coral" />
+      <PageHero title={t("title")} tone="red" />
       <div className="mx-auto max-w-md px-6 py-12">
         <Card padding="lg">
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -78,12 +78,12 @@ export default function AccountLoginPage() {
                 autoComplete="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                className="mt-1.5 w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-2.5 text-[var(--color-fg)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-coral-text)]"
+                className="mt-1.5 w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-2.5 text-[var(--color-fg)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-red-text)]"
               />
             </div>
             <TurnstileWidget onVerify={setCaptchaToken} />
             {status === "error" ? (
-              <p role="alert" className="text-sm text-[var(--color-coral-text)]">
+              <p role="alert" className="text-sm text-[var(--color-red-text)]">
                 {t("errorMessage")}
               </p>
             ) : null}

@@ -111,24 +111,24 @@ export default async function Home({
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-32 -left-24 h-96 w-96 rounded-full opacity-30 blur-3xl"
-          style={{ background: "var(--color-coral)" }}
+          style={{ background: "var(--color-red)" }}
         />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute top-1/2 -right-32 h-80 w-80 rounded-full opacity-20 blur-3xl"
-          style={{ background: "var(--color-teal)" }}
+          style={{ background: "var(--color-blue)" }}
         />
         <Reveal className="relative mx-auto max-w-6xl 2xl:max-w-7xl">
           <div className="flex flex-col-reverse items-center gap-10 lg:flex-row lg:items-center lg:gap-16">
             <div className="flex-1 text-center lg:text-left">
               {!registrationOpen && (
-                <Badge tone="teal" className="mb-3">
+                <Badge tone="blue" className="mb-3">
                   {t("registrationOpensBadge")}
                 </Badge>
               )}
               <span
                 className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold tracking-[0.2em] uppercase"
-                style={{ background: "var(--color-coral-light)", color: "var(--color-coral-text)" }}
+                style={{ background: "var(--color-red-light)", color: "var(--color-red-text)" }}
               >
                 {t("kicker")}
               </span>
@@ -145,7 +145,7 @@ export default async function Home({
                 </Button>
               </div>
               <div className="mt-8 flex justify-center lg:justify-start">
-                <Badge tone="coral">{t("establishedBadge", { year: history.foundingYear })}</Badge>
+                <Badge tone="red">{t("establishedBadge", { year: history.foundingYear })}</Badge>
               </div>
               <div className="mx-auto mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-[var(--color-border)] pt-8 lg:mx-0">
                 {stats.map((stat) => (
@@ -163,12 +163,12 @@ export default async function Home({
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute -top-8 -right-8 h-56 w-56 rounded-full opacity-50 blur-3xl"
-                  style={{ background: "var(--color-coral)" }}
+                  style={{ background: "var(--color-red)" }}
                 />
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full opacity-40 blur-3xl"
-                  style={{ background: "var(--color-teal)" }}
+                  style={{ background: "var(--color-blue)" }}
                 />
                 <div className="relative h-full w-full rotate-2 overflow-hidden rounded-[2rem] shadow-2xl">
                   <Image
@@ -187,11 +187,11 @@ export default async function Home({
       </section>
 
       {/* Welcome — two-column on desktop: gradient panel + message card */}
-      <section className="relative overflow-hidden px-6 py-16 sm:py-20" style={{ background: "var(--gradient-hero-coral)" }}>
+      <section className="relative overflow-hidden px-6 py-16 sm:py-20" style={{ background: "var(--gradient-hero)" }}>
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full opacity-30 blur-3xl"
-          style={{ background: "var(--color-coral)" }}
+          style={{ background: "var(--color-red)" }}
         />
         <div
           aria-hidden="true"
@@ -239,7 +239,7 @@ export default async function Home({
                   <span
                     aria-hidden="true"
                     className="mx-auto flex h-12 w-12 items-center justify-center rounded-full text-white"
-                    style={{ background: i % 2 === 0 ? "var(--gradient-cta)" : "var(--color-teal-deep)" }}
+                    style={{ background: i % 2 === 0 ? "var(--gradient-cta)" : "var(--color-blue-deep)" }}
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       {RHYTHM_ICONS[item.key]}
@@ -272,13 +272,13 @@ export default async function Home({
         <section className="px-6 py-16">
           <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2 2xl:max-w-5xl">
             <Card padding="lg" hoverable className="flex h-full flex-col text-center sm:text-left">
-              <Badge tone="coral" className="mx-auto sm:mx-0">
+              <Badge tone="red" className="mx-auto sm:mx-0">
                 {t("newsHeading")}
               </Badge>
               <p className="mt-4 flex-1 text-[var(--color-muted)]">{t("newsBody")}</p>
               <Link
                 href={`/${locale}/news`}
-                className="mt-5 inline-flex items-center gap-1 self-center font-semibold text-[var(--color-coral-text)] underline sm:self-start"
+                className="mt-5 inline-flex items-center gap-1 self-center font-semibold text-[var(--color-red-text)] underline sm:self-start"
               >
                 {t("newsCta")}
               </Link>
@@ -294,13 +294,13 @@ export default async function Home({
                   </div>
                 ))}
               </div>
-              <Badge tone="teal" className="mx-auto sm:mx-0">
+              <Badge tone="blue" className="mx-auto sm:mx-0">
                 {t("galleryHeading")}
               </Badge>
               <p className="mt-4 flex-1 text-[var(--color-muted)]">{t("galleryBody")}</p>
               <Link
                 href={`/${locale}/gallery`}
-                className="mt-5 inline-flex items-center gap-1 self-center font-semibold text-[var(--color-teal-text)] underline sm:self-start"
+                className="mt-5 inline-flex items-center gap-1 self-center font-semibold text-[var(--color-blue-text)] underline sm:self-start"
               >
                 {t("galleryCta")}
               </Link>

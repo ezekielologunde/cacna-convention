@@ -85,7 +85,7 @@ export default async function LivePage({
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${t("pastYearsCta")}${t("opensInNewTab")}`}
-          className="font-semibold text-[var(--color-coral-text)] underline"
+          className="font-semibold text-[var(--color-red-text)] underline"
         >
           {t("pastYearsCta")}
         </a>

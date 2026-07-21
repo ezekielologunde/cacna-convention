@@ -35,7 +35,7 @@ export default async function GoodWomenPage({
         subtitle={`${t("leaderLabel")}: ${goodWomenConference.leader} — ${goodWomenConference.leaderTitle}`}
       />
       <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
-        <p className="text-sm font-semibold text-[var(--color-coral-text)]">{goodWomenConference.donationHighlight}</p>
+        <p className="text-sm font-semibold text-[var(--color-red-text)]">{goodWomenConference.donationHighlight}</p>
 
         <section className="mt-10">
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("executivesHeading")}</h2>

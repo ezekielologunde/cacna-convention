@@ -52,7 +52,7 @@ export function RegisterPageClient() {
   const tabClass = (active: boolean) =>
     `inline-flex min-h-11 items-center px-4 text-sm font-semibold transition-colors ${
       active
-        ? "border-b-2 border-[var(--color-coral-text)] text-[var(--color-coral-text)]"
+        ? "border-b-2 border-[var(--color-red-text)] text-[var(--color-red-text)]"
         : "border-b-2 border-transparent text-[var(--color-muted)] hover:text-[var(--color-fg)]"
     }`;
 

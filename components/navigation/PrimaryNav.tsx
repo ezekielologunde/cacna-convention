@@ -105,7 +105,7 @@ export function PrimaryNav() {
             priority
           />
           <span className="flex min-w-0 flex-col leading-none">
-            <span className="truncate text-[10px] font-bold tracking-[0.15em] text-[var(--color-coral-text)] uppercase">
+            <span className="truncate text-[10px] font-bold tracking-[0.15em] text-[var(--color-red-text)] uppercase">
               {t("orgKicker")}
             </span>
             <span className="mt-1 truncate font-display text-xl tracking-tight text-[var(--color-fg)] sm:text-2xl">
@@ -119,8 +119,8 @@ export function PrimaryNav() {
               <Link
                 href={`/${locale}${item.href}`}
                 aria-current={isActive(item.href) ? "page" : undefined}
-                className={`rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-coral-text)] ${
-                  isActive(item.href) ? "bg-[var(--color-surface)] text-[var(--color-coral-text)]" : ""
+                className={`rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-red-text)] ${
+                  isActive(item.href) ? "bg-[var(--color-surface)] text-[var(--color-red-text)]" : ""
                 }`}
               >
                 {t(item.key)}
@@ -134,8 +134,8 @@ export function PrimaryNav() {
               aria-expanded={programsOpen}
               aria-controls="programs-menu"
               onClick={() => setProgramsOpen((open) => !open)}
-              className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-coral-text)] ${
-                isProgramActive || programsOpen ? "bg-[var(--color-surface)] text-[var(--color-coral-text)]" : ""
+              className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-red-text)] ${
+                isProgramActive || programsOpen ? "bg-[var(--color-surface)] text-[var(--color-red-text)]" : ""
               }`}
             >
               {t("programs")}
@@ -166,8 +166,8 @@ export function PrimaryNav() {
                     href={`/${locale}${item.href}`}
                     onClick={() => setProgramsOpen(false)}
                     aria-current={isActive(item.href) ? "page" : undefined}
-                    className={`block rounded-lg px-3 py-2.5 text-sm font-semibold tracking-normal text-[var(--color-fg)] hover:bg-[var(--color-surface)] hover:text-[var(--color-coral-text)] ${
-                      isActive(item.href) ? "text-[var(--color-coral-text)]" : ""
+                    className={`block rounded-lg px-3 py-2.5 text-sm font-semibold tracking-normal text-[var(--color-fg)] hover:bg-[var(--color-surface)] hover:text-[var(--color-red-text)] ${
+                      isActive(item.href) ? "text-[var(--color-red-text)]" : ""
                     }`}
                   >
                     {t(item.key)}
@@ -181,8 +181,8 @@ export function PrimaryNav() {
               <Link
                 href={`/${locale}${item.href}`}
                 aria-current={isActive(item.href) ? "page" : undefined}
-                className={`rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-coral-text)] ${
-                  isActive(item.href) ? "bg-[var(--color-surface)] text-[var(--color-coral-text)]" : ""
+                className={`rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-red-text)] ${
+                  isActive(item.href) ? "bg-[var(--color-surface)] text-[var(--color-red-text)]" : ""
                 }`}
               >
                 {t(item.key)}
@@ -245,7 +245,7 @@ export function PrimaryNav() {
                   onClick={() => setMobileOpen(false)}
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className={`block rounded-lg px-3 py-3 ${
-                    isActive(item.href) ? "text-[var(--color-coral-text)]" : ""
+                    isActive(item.href) ? "text-[var(--color-red-text)]" : ""
                   }`}
                 >
                   {t(item.key)}
@@ -259,7 +259,7 @@ export function PrimaryNav() {
                 aria-controls="mobile-programs-menu"
                 onClick={() => setMobileProgramsOpen((open) => !open)}
                 className={`flex w-full items-center justify-between rounded-lg px-3 py-3 ${
-                  isProgramActive ? "text-[var(--color-coral-text)]" : ""
+                  isProgramActive ? "text-[var(--color-red-text)]" : ""
                 }`}
               >
                 {t("programs")}
@@ -287,7 +287,7 @@ export function PrimaryNav() {
                         onClick={() => setMobileOpen(false)}
                         aria-current={isActive(item.href) ? "page" : undefined}
                         className={`block rounded-lg px-3 py-2.5 text-xs ${
-                          isActive(item.href) ? "text-[var(--color-coral-text)]" : ""
+                          isActive(item.href) ? "text-[var(--color-red-text)]" : ""
                         }`}
                       >
                         {t(item.key)}
@@ -304,7 +304,7 @@ export function PrimaryNav() {
                   onClick={() => setMobileOpen(false)}
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className={`block rounded-lg px-3 py-3 ${
-                    isActive(item.href) ? "text-[var(--color-coral-text)]" : ""
+                    isActive(item.href) ? "text-[var(--color-red-text)]" : ""
                   }`}
                 >
                   {t(item.key)}

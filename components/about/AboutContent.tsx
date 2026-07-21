@@ -44,7 +44,7 @@ export async function AboutContent({
       <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
         <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
           <Reveal className="text-center">
-            <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-coral-text)] uppercase">
+            <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-red-text)] uppercase">
               {t("foundationKicker")}
             </span>
             <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">
@@ -94,12 +94,12 @@ export async function AboutContent({
         </div>
       </section>
 
-      {/* The Family — bold coral statement band */}
-      <section className="relative overflow-hidden px-6 py-20 sm:py-24" style={{ background: "var(--gradient-hero-coral)" }}>
+      {/* The Family — bold red statement band */}
+      <section className="relative overflow-hidden px-6 py-20 sm:py-24" style={{ background: "var(--gradient-hero)" }}>
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full opacity-30 blur-3xl"
-          style={{ background: "var(--color-coral)" }}
+          style={{ background: "var(--color-red)" }}
         />
         <div className="relative mx-auto max-w-2xl text-center">
           <Reveal>
@@ -115,7 +115,7 @@ export async function AboutContent({
           </Reveal>
           <Reveal delay={160}>
             <div className="mt-8 flex justify-center">
-              <Button href={`/${locale}/schedule`} variant="primary" className="bg-white text-[var(--color-coral-text)] shadow-none hover:bg-white/90" style={{ background: "#fff" }}>
+              <Button href={`/${locale}/schedule`} variant="primary" className="bg-white text-[var(--color-red-text)] shadow-none hover:bg-white/90" style={{ background: "#fff" }}>
                 {t("familyCta")}
               </Button>
             </div>
@@ -123,12 +123,12 @@ export async function AboutContent({
         </div>
       </section>
 
-      {/* Heritage — teal stats band */}
-      <section className="relative overflow-hidden px-6 py-20 sm:py-24" style={{ background: "var(--gradient-hero-teal)" }}>
+      {/* Heritage — blue stats band */}
+      <section className="relative overflow-hidden px-6 py-20 sm:py-24" style={{ background: "var(--gradient-hero-alt)" }}>
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full opacity-30 blur-3xl"
-          style={{ background: "var(--color-teal)" }}
+          style={{ background: "var(--color-blue)" }}
         />
         <div className="relative mx-auto max-w-4xl text-center 2xl:max-w-5xl">
           <Reveal>
@@ -268,7 +268,7 @@ export async function AboutContent({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${t("findYourZone")}${t("opensInNewTab")}`}
-              className="font-semibold text-[var(--color-coral-text)] underline"
+              className="font-semibold text-[var(--color-red-text)] underline"
             >
               {t("findYourZone")}
             </a>
@@ -277,7 +277,7 @@ export async function AboutContent({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${t("findYourDcc")}${t("opensInNewTab")}`}
-              className="font-semibold text-[var(--color-coral-text)] underline"
+              className="font-semibold text-[var(--color-red-text)] underline"
             >
               {t("findYourDcc")}
             </a>
@@ -289,7 +289,7 @@ export async function AboutContent({
       <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
         <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
           <Reveal className="text-center">
-            <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-teal-text)] uppercase">
+            <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-blue-text)] uppercase">
               {t("exploreKicker")}
             </span>
             <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">

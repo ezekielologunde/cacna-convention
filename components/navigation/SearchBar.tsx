@@ -124,7 +124,7 @@ export function SearchBar() {
                     className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-[var(--color-surface)]"
                   >
                     <span className="flex items-center gap-2">
-                      <span className="text-[10px] font-bold tracking-wide text-[var(--color-coral-text)] uppercase">
+                      <span className="text-[10px] font-bold tracking-wide text-[var(--color-red-text)] uppercase">
                         {result.category}
                       </span>
                       <span className="font-semibold text-[var(--color-fg)]">{result.title}</span>

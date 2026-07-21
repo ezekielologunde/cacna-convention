@@ -38,7 +38,7 @@ export function ScheduleDay({
       <ul className="mt-4 flex flex-col gap-4">
         {sessions.map((session) => (
           <li key={session.id} className="border-b border-[var(--color-border)] pb-4 last:border-b-0 last:pb-0">
-            <p className="text-sm font-semibold text-[var(--color-coral-text)] tabular-nums">
+            <p className="text-sm font-semibold text-[var(--color-red-text)] tabular-nums">
               {session.starts_at.slice(0, 5)}–{session.ends_at.slice(0, 5)}
             </p>
             <p className="mt-0.5 font-semibold text-[var(--color-fg)]">{session.title}</p>

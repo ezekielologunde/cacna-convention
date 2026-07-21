@@ -69,7 +69,7 @@ export function RegistrationForm({
   }
 
   const inputClass =
-    "rounded-xl border border-[var(--color-border)] px-3.5 py-2.5 text-[var(--color-fg)] outline-none transition-colors focus:border-[var(--color-coral-text)] focus-visible:ring-2 focus-visible:ring-[var(--color-coral-text)] focus-visible:ring-offset-1";
+    "rounded-xl border border-[var(--color-border)] px-3.5 py-2.5 text-[var(--color-fg)] outline-none transition-colors focus:border-[var(--color-red-text)] focus-visible:ring-2 focus-visible:ring-[var(--color-red-text)] focus-visible:ring-offset-1";
   const labelClass = "flex flex-col gap-1.5 text-sm font-semibold text-[var(--color-fg)]";
 
   return (
@@ -121,7 +121,7 @@ export function RegistrationForm({
             <button
               type="button"
               onClick={() => removeRegistrant(index)}
-              className="inline-flex min-h-11 items-center self-start text-sm font-semibold text-[var(--color-coral-text)] underline"
+              className="inline-flex min-h-11 items-center self-start text-sm font-semibold text-[var(--color-red-text)] underline"
             >
               {t("removeRegistrant")}
             </button>
@@ -133,7 +133,7 @@ export function RegistrationForm({
         <button
           type="button"
           onClick={addRegistrant}
-          className="inline-flex min-h-11 items-center self-start rounded-full border border-[var(--color-border)] px-4 text-sm font-semibold text-[var(--color-fg)] transition-colors hover:border-[var(--color-coral-text)]"
+          className="inline-flex min-h-11 items-center self-start rounded-full border border-[var(--color-border)] px-4 text-sm font-semibold text-[var(--color-fg)] transition-colors hover:border-[var(--color-red-text)]"
         >
           {t("addRegistrant")}
         </button>
@@ -171,7 +171,7 @@ export function RegistrationForm({
         />
       </label>
       {errorMessage ? (
-        <p role="alert" className="text-sm font-semibold text-[var(--color-coral-text)]">
+        <p role="alert" className="text-sm font-semibold text-[var(--color-red-text)]">
           {errorMessage}
         </p>
       ) : null}
@@ -179,7 +179,7 @@ export function RegistrationForm({
       <button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-full px-5 py-3 font-semibold text-white shadow-[var(--shadow-glow-coral)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95 disabled:opacity-60 disabled:hover:translate-y-0 disabled:active:scale-100"
+        className="rounded-full px-5 py-3 font-semibold text-white shadow-[var(--shadow-glow-red)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95 disabled:opacity-60 disabled:hover:translate-y-0 disabled:active:scale-100"
         style={{ background: "var(--gradient-cta)" }}
       >
         {isSubmitting ? t("submitting") : t("submit")}

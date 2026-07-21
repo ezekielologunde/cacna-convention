@@ -30,11 +30,11 @@ function ApparelCategory({
             key={item.name}
             className="relative flex flex-col justify-between rounded-2xl border border-dashed border-[var(--color-border)] p-5"
           >
-            <Badge tone="coral" className="absolute top-4 right-4">
+            <Badge tone="red" className="absolute top-4 right-4">
               {demoLabel}
             </Badge>
             <p className="pr-14 font-semibold text-[var(--color-fg)]">{item.name}</p>
-            <p className="mt-3 font-display text-lg text-[var(--color-coral-text)]">{item.price}</p>
+            <p className="mt-3 font-display text-lg text-[var(--color-red-text)]">{item.price}</p>
           </li>
         ))}
       </ul>
@@ -75,7 +75,7 @@ export default async function StorePage({
                 className="flex flex-col justify-between rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
               >
                 <p className="font-semibold text-[var(--color-fg)]">{item.name}</p>
-                <p className="mt-3 font-display text-lg text-[var(--color-coral-text)]">{item.price}</p>
+                <p className="mt-3 font-display text-lg text-[var(--color-red-text)]">{item.price}</p>
               </li>
             ))}
           </ul>

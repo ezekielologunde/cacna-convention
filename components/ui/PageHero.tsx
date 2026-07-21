@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 /**
  * Shared hero band for interior pages. Gives every top-level page beyond
- * the homepage the same bold visual weight: a full-bleed coral/teal
+ * the homepage the same bold visual weight: a full-bleed red/blue
  * gradient, two offset blur circles for a two-tone energy signature, and a
  * diagonal-cut bottom edge instead of a flat rectangle.
  *
@@ -17,18 +17,18 @@ export function PageHero({
   subtitle,
   variant = "center",
   stat,
-  tone = "coral",
+  tone = "red",
 }: {
   eyebrow?: string;
   title: ReactNode;
   subtitle?: ReactNode;
   variant?: "center" | "split";
   stat?: { label: string; value: string };
-  /** "coral" (default) or "teal" — used sparingly so a handful of pages
+  /** "red" (default) or "blue" — used sparingly so a handful of pages
    *  (About, Contact, Archive, Give) don't read identically to every other page. */
-  tone?: "coral" | "teal";
+  tone?: "red" | "blue";
 }) {
-  const gradient = tone === "teal" ? "var(--gradient-hero-teal)" : "var(--gradient-hero-coral)";
+  const gradient = tone === "blue" ? "var(--gradient-hero-alt)" : "var(--gradient-hero)";
   return (
     <section
       className="relative overflow-hidden px-6 py-16 sm:py-24"
@@ -37,12 +37,12 @@ export function PageHero({
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-20 -right-16 h-72 w-72 rounded-full opacity-40 blur-3xl"
-        style={{ background: "var(--color-coral)" }}
+        style={{ background: "var(--color-red)" }}
       />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full opacity-30 blur-3xl"
-        style={{ background: "var(--color-teal)" }}
+        style={{ background: "var(--color-blue)" }}
       />
       {variant === "split" && stat ? (
         <div className="relative mx-auto flex max-w-4xl flex-wrap items-end justify-between gap-8 2xl:max-w-5xl">

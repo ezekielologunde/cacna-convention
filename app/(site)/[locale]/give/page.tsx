@@ -25,7 +25,7 @@ export default async function GivePage({
 
   return (
     <>
-      <PageHero title={t("title")} tone="teal" />
+      <PageHero title={t("title")} tone="blue" />
       <div className="mx-auto max-w-2xl px-6 py-12 text-center">
         <div className="rounded-3xl border border-[var(--color-border)] p-12 shadow-[var(--shadow-card)]">
           <span

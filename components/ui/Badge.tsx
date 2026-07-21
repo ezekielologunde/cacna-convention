@@ -6,13 +6,13 @@ export function Badge({
   className = "",
 }: {
   children: ReactNode;
-  tone?: "neutral" | "coral" | "teal";
+  tone?: "neutral" | "red" | "blue";
   className?: string;
 }) {
   const toneClass = {
     neutral: "bg-[var(--color-surface)] text-[var(--color-muted)]",
-    coral: "bg-[var(--color-coral-light)] text-[var(--color-coral-text)]",
-    teal: "bg-[var(--color-teal-light)] text-[var(--color-teal-text)]",
+    red: "bg-[var(--color-red-light)] text-[var(--color-red-text)]",
+    blue: "bg-[var(--color-blue-light)] text-[var(--color-blue-text)]",
   }[tone];
   return (
     <span

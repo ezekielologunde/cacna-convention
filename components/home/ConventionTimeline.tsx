@@ -70,7 +70,7 @@ export function ConventionTimeline({
               className="mt-10 flex flex-col items-center gap-6 text-center sm:flex-row sm:justify-between sm:text-left"
             >
               <div>
-                <Badge tone="teal">{justConcludedKicker}</Badge>
+                <Badge tone="blue">{justConcludedKicker}</Badge>
                 <h3 className="mt-3 font-display text-xl text-[var(--color-fg)] sm:text-2xl">
                   {pastEdition.year} — {pastEdition.theme}
                 </h3>
@@ -94,7 +94,7 @@ export function ConventionTimeline({
           <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
             {upcoming.map((ev, i) => {
               const { month, day } = dateBadge(ev.date);
-              const accent = i % 2 === 0 ? "coral" : "teal";
+              const accent = i % 2 === 0 ? "red" : "blue";
               return (
                 <Reveal key={ev.title} delay={i * 90}>
                   {(() => {
@@ -102,7 +102,7 @@ export function ConventionTimeline({
                       <Card hoverable className="flex h-full items-start gap-5">
                         <div
                           className="flex flex-none flex-col items-center justify-center rounded-xl px-4 py-3 text-white"
-                          style={{ background: accent === "coral" ? "var(--color-coral-deep)" : "var(--color-teal-deep)" }}
+                          style={{ background: accent === "red" ? "var(--color-red-deep)" : "var(--color-blue-deep)" }}
                         >
                           <span className="text-[10px] font-bold tracking-wider">{month}</span>
                           <span className="font-display text-xl leading-none">{day}</span>
@@ -112,7 +112,7 @@ export function ConventionTimeline({
                           <p className="mt-2 line-clamp-2 text-sm text-[var(--color-muted)]">{ev.description}</p>
                           <span
                             className="mt-2 block text-xs font-semibold"
-                            style={{ color: accent === "coral" ? "var(--color-coral-text)" : "var(--color-teal-text)" }}
+                            style={{ color: accent === "red" ? "var(--color-red-text)" : "var(--color-blue-text)" }}
                           >
                             {dateLabel(ev)}
                           </span>
@@ -138,7 +138,7 @@ export function ConventionTimeline({
         <div className="mt-8 text-center">
           <Link
             href={`/${locale}/news`}
-            className="inline-flex items-center gap-2 font-semibold text-[var(--color-coral-text)] underline"
+            className="inline-flex items-center gap-2 font-semibold text-[var(--color-red-text)] underline"
           >
             {cta}
           </Link>

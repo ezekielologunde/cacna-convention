@@ -72,7 +72,7 @@ export default async function NewsPage({
             key={event.title}
             className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
           >
-            <p className="text-sm font-semibold tabular-nums text-[var(--color-coral-text)]">
+            <p className="text-sm font-semibold tabular-nums text-[var(--color-red-text)]">
               {dateFormatter.format(new Date(`${event.date}T12:00:00Z`))}
               {event.endDate
                 ? ` – ${dateFormatter.format(new Date(`${event.endDate}T12:00:00Z`))}`
@@ -98,7 +98,7 @@ export default async function NewsPage({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${t("moreInfoCta")}${t("opensInNewTab")}`}
-                className="mt-3 inline-block text-sm font-semibold text-[var(--color-coral-text)] underline"
+                className="mt-3 inline-block text-sm font-semibold text-[var(--color-red-text)] underline"
               >
                 {t("moreInfoCta")}
               </a>
@@ -131,7 +131,7 @@ export default async function NewsPage({
                 key={event.id}
                 className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
               >
-                <p className="text-sm font-semibold tabular-nums text-[var(--color-coral-text)]">
+                <p className="text-sm font-semibold tabular-nums text-[var(--color-red-text)]">
                   {dateFormatter.format(new Date(event.eventDate))}
                   {event.endDate ? ` – ${dateFormatter.format(new Date(event.endDate))}` : null}
                 </p>
@@ -148,7 +148,7 @@ export default async function NewsPage({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${t("moreInfoCta")}${t("opensInNewTab")}`}
-                    className="mt-3 inline-block text-sm font-semibold text-[var(--color-coral-text)] underline"
+                    className="mt-3 inline-block text-sm font-semibold text-[var(--color-red-text)] underline"
                   >
                     {t("moreInfoCta")}
                   </a>
@@ -181,7 +181,7 @@ export default async function NewsPage({
                       />
                     ) : null}
                     <span className="min-w-0">
-                      <Badge tone="coral">{t("cacnaBlogLabel")}</Badge>
+                      <Badge tone="red">{t("cacnaBlogLabel")}</Badge>
                       <span className="mt-1 block font-display text-lg text-[var(--color-fg)]">
                         {post.title}
                       </span>
@@ -189,7 +189,7 @@ export default async function NewsPage({
                         <span className="mt-1 block text-sm text-[var(--color-muted)]">{post.excerpt}</span>
                       ) : null}
                       {post.publishedAt ? (
-                        <span className="mt-1 block text-xs font-semibold tabular-nums text-[var(--color-coral-text)]">
+                        <span className="mt-1 block text-xs font-semibold tabular-nums text-[var(--color-red-text)]">
                           {blogDateFormatter.format(new Date(post.publishedAt))}
                         </span>
                       ) : null}
@@ -225,7 +225,7 @@ export default async function NewsPage({
                       />
                     ) : null}
                     <span className="min-w-0">
-                      <Badge tone="teal">{t("cacWorldLabel")}</Badge>
+                      <Badge tone="blue">{t("cacWorldLabel")}</Badge>
                       <span className="mt-1 block font-display text-lg text-[var(--color-fg)]">
                         {item.title}
                       </span>
@@ -233,7 +233,7 @@ export default async function NewsPage({
                         <span className="mt-1 block text-sm text-[var(--color-muted)]">{item.excerpt}</span>
                       ) : null}
                       {item.publishedAt ? (
-                        <span className="mt-1 block text-xs font-semibold tabular-nums text-[var(--color-teal-text)]">
+                        <span className="mt-1 block text-xs font-semibold tabular-nums text-[var(--color-blue-text)]">
                           {blogDateFormatter.format(new Date(item.publishedAt))}
                         </span>
                       ) : null}

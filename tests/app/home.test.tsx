@@ -242,7 +242,7 @@ describe("HomePage", () => {
     // Primary/secondary variants carry a themed glow-shadow class; outline
     // carries a plain border class instead -- distinct enough to assert on
     // without depending on exact Tailwind color tokens.
-    expect(giveLink.className).toContain("shadow-[var(--shadow-glow-coral)]");
+    expect(giveLink.className).toContain("shadow-[var(--shadow-glow-red)]");
     expect(registerLink.className).toContain("border border-[var(--color-border)]");
   });
 });
