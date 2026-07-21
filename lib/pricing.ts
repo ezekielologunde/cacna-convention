@@ -36,3 +36,24 @@ export function priceForCategory(
   const tier = tiers.find((t) => t.category === category);
   return tier ? tier.price_cents : null;
 }
+
+// The full fee ladder for an edition (every tier, any date), not just
+// whichever one is active today -- used to show the whole early-bird
+// schedule on the Register page rather than only the current price.
+export async function getPricingLadderForEdition(
+  supabase: SupabaseClient<Database>,
+  editionId: string
+): Promise<PricingTier[]> {
+  const { data, error } = await supabase
+    .from("pricing_tiers")
+    .select("*")
+    .eq("edition_id", editionId)
+    .order("category", { ascending: true })
+    .order("sort_order", { ascending: true });
+
+  if (error) {
+    throw error;
+  }
+
+  return data ?? [];
+}

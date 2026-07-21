@@ -209,17 +209,39 @@ export async function POST(request: Request) {
   // checkout line items.
   const payableRegistrants = pricedRegistrants.filter((r) => r.price_cents > 0);
 
+  // Card/debit payments carry a 4% processing surcharge (documented on the
+  // Register page's Payment Options cards) -- Zelle/check payers pay the
+  // base fee, so this is added only to the Stripe checkout total, never to
+  // `total_amount_cents`/`price_cents` stored on the registration/registrant
+  // rows below, which always reflect the actual registration fee itself.
+  const CARD_PROCESSING_FEE_RATE = 0.04;
+  const cardProcessingFeeCents = Math.round(totalAmountCents * CARD_PROCESSING_FEE_RATE);
+
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      line_items: payableRegistrants.map((r) => ({
-        price_data: {
-          currency: "usd",
-          unit_amount: r.price_cents,
-          product_data: { name: `CACNA Convention registration — ${r.full_name} (${r.category})` },
-        },
-        quantity: 1,
-      })),
+      line_items: [
+        ...payableRegistrants.map((r) => ({
+          price_data: {
+            currency: "usd",
+            unit_amount: r.price_cents,
+            product_data: { name: `CACNA Convention registration — ${r.full_name} (${r.category})` },
+          },
+          quantity: 1,
+        })),
+        ...(cardProcessingFeeCents > 0
+          ? [
+              {
+                price_data: {
+                  currency: "usd",
+                  unit_amount: cardProcessingFeeCents,
+                  product_data: { name: "Card Processing Fee (4%)" },
+                },
+                quantity: 1,
+              },
+            ]
+          : []),
+      ],
       customer_email: body.contactEmail,
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/register/confirmation?registration=${registration.id}`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/register`,

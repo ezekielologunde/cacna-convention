@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEdition } from "@/lib/editions";
-import { getActivePricingForEdition, priceForCategory } from "@/lib/pricing";
+import { getActivePricingForEdition, getPricingLadderForEdition, priceForCategory } from "@/lib/pricing";
 import { ConversionHero } from "@/components/ui/ConversionHero";
 import { RegisterPageClient } from "@/components/register/RegisterPageClient";
+import { PricingCards, type PricingCardCategory } from "@/components/register/PricingCards";
+import { Card } from "@/components/ui/Card";
 import { registrationGuidelines } from "@/lib/content/registration-guidelines";
 import { paymentOptions } from "@/lib/content/payment-options";
 import { pageMetadata } from "@/lib/metadata";
@@ -40,6 +42,7 @@ export default async function RegisterPage({
   // behind them the moment an edition row is created for the next year.
   const tiers = edition ? await getActivePricingForEdition(supabase, edition.id) : [];
   const registrationOpen = Boolean(edition) && tiers.length > 0;
+  const ladder = edition ? await getPricingLadderForEdition(supabase, edition.id) : [];
 
   // Scoped to this page rather than widening the shared getActiveEdition()
   // (28+ call sites, most only ever needed id/year) -- theme/dates/venue
@@ -84,6 +87,42 @@ export default async function RegisterPage({
 
   const year = edition?.year ?? new Date().getFullYear();
 
+  // Full fee-ladder cards -- every tier in `ladder`, not just today's
+  // active one, so visitors can see the whole early-bird schedule at a
+  // glance. The last tier per category (highest sort_order) is the
+  // at-the-door rate, shown with a location label instead of a date.
+  const activeTierIds = new Set(tiers.map((tier) => tier.id));
+  const shortDateFormatter = new Intl.DateTimeFormat(locale === "yo" ? "yo-NG" : "en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+  const CATEGORY_ORDER: { category: "adult" | "young_adult" | "child"; labelKey: "pricingAdultLabel" | "pricingYoungAdultLabel" | "pricingChildLabel" }[] = [
+    { category: "adult", labelKey: "pricingAdultLabel" },
+    { category: "young_adult", labelKey: "pricingYoungAdultLabel" },
+    { category: "child", labelKey: "pricingChildLabel" },
+  ];
+  const pricingCategories: PricingCardCategory[] = CATEGORY_ORDER.map(({ category, labelKey }) => {
+    const rows = ladder.filter((tier) => tier.category === category);
+    const maxSortOrder = rows.reduce((max, tier) => Math.max(max, tier.sort_order), 0);
+    return {
+      key: category,
+      label: t(labelKey),
+      tiers: rows.map((tier) => ({
+        id: tier.id,
+        priceLabel: tier.price_cents === 0 ? t("pricingFreeLabel") : `$${(tier.price_cents / 100).toFixed(0)}`,
+        dateLabel:
+          category === "child"
+            ? ""
+            : tier.sort_order === maxSortOrder
+              ? t("pricingAtGroundLabel")
+              : t("pricingThroughLabel", { date: shortDateFormatter.format(new Date(`${tier.ends_on}T12:00:00Z`)) }),
+        isCurrent: activeTierIds.has(tier.id),
+      })),
+    };
+  });
+
   return (
     <div>
       <ConversionHero
@@ -112,6 +151,15 @@ export default async function RegisterPage({
         )}
       </ConversionHero>
 
+      {ladder.length > 0 && (
+        <section className="mx-auto max-w-5xl px-6 pt-16">
+          <h2 className="font-display text-lg text-[var(--color-fg)]">{t("pricingHeading")}</h2>
+          <div className="mt-4">
+            <PricingCards categories={pricingCategories} currentRateLabel={t("pricingCurrentBadge")} />
+          </div>
+        </section>
+      )}
+
       {registrationOpen && <RegisterPageClient />}
 
       <section id="registration-guidelines" className="mx-auto max-w-3xl px-6 pt-16 pb-16">
@@ -131,16 +179,16 @@ export default async function RegisterPage({
         </p>
       </section>
 
-      <section className="mx-auto max-w-3xl px-6 pb-16">
+      <section className="mx-auto max-w-5xl px-6 pb-16">
         <h2 className="font-display text-lg text-[var(--color-fg)]">{t("paymentOptionsHeading")}</h2>
-        <dl className="mt-3 flex flex-col gap-3">
+        <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-3">
           {paymentOptions.methods.map((method) => (
-            <div key={method.name}>
-              <dt className="text-sm font-semibold text-[var(--color-fg)]">{method.name}</dt>
-              <dd className="mt-0.5 text-sm text-[var(--color-muted)]">{method.detail}</dd>
-            </div>
+            <Card key={method.name} padding="lg">
+              <h3 className="font-display text-base text-[var(--color-fg)]">{method.name}</h3>
+              <p className="mt-2 text-sm text-[var(--color-muted)]">{method.detail}</p>
+            </Card>
           ))}
-        </dl>
+        </div>
       </section>
     </div>
   );

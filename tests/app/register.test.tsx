@@ -49,7 +49,13 @@ function mockActiveEditionWithoutPricing() {
   const pricingOrder = vi.fn().mockResolvedValue({ data: [], error: null });
   const pricingGte = vi.fn(() => ({ order: pricingOrder }));
   const pricingLte = vi.fn(() => ({ gte: pricingGte }));
-  const pricingEq = vi.fn(() => ({ lte: pricingLte }));
+  // The page also calls getPricingLadderForEdition() (`.eq().order().order()`,
+  // no date filter) alongside getActivePricingForEdition() (`.eq().lte().gte().order()`)
+  // against this same mocked pricing_tiers table -- one .eq() result needs to
+  // support both chains.
+  const ladderOrder2 = vi.fn().mockResolvedValue({ data: [], error: null });
+  const ladderOrder1 = vi.fn(() => ({ order: ladderOrder2 }));
+  const pricingEq = vi.fn(() => ({ lte: pricingLte, order: ladderOrder1 }));
 
   createClientMock.mockResolvedValue({
     from: (table: string) => {
@@ -97,5 +103,63 @@ describe("RegisterPage", () => {
     // The actual form (individual/group tabs) must not render -- an edition
     // row alone isn't enough to accept real submissions with no pricing.
     expect(screen.queryByRole("tab", { name: "Individual" })).not.toBeInTheDocument();
+  });
+
+  it("renders a fee card per category showing the whole price ladder, not just today's active rate", async () => {
+    const editionMaybeSingle = vi.fn().mockResolvedValue({ data: { id: "e-2027", year: 2027 }, error: null });
+    const editionLimit = vi.fn(() => ({ maybeSingle: editionMaybeSingle }));
+    const editionOrder = vi.fn(() => ({ limit: editionLimit }));
+    const editionIn = vi.fn(() => ({ order: editionOrder }));
+
+    const editionDetailsMaybeSingle = vi.fn().mockResolvedValue({
+      data: { theme: null, starts_on: "2027-07-12", ends_on: "2027-07-17", venue_name: "CAC Village" },
+      error: null,
+    });
+    const editionDetailsEq = vi.fn(() => ({ maybeSingle: editionDetailsMaybeSingle }));
+
+    // getActivePricingForEdition (today's active tier only) returns just the
+    // first adult tier -- exercises the "current rate" badge.
+    const pricingOrder = vi.fn().mockResolvedValue({
+      data: [{ id: "a1", category: "adult", price_cents: 12500, starts_on: "2026-10-01", ends_on: "2027-01-31", sort_order: 0 }],
+      error: null,
+    });
+    const pricingGte = vi.fn(() => ({ order: pricingOrder }));
+    const pricingLte = vi.fn(() => ({ gte: pricingGte }));
+
+    // getPricingLadderForEdition (the full schedule).
+    const ladderOrder2 = vi.fn().mockResolvedValue({
+      data: [
+        { id: "a1", category: "adult", price_cents: 12500, starts_on: "2026-10-01", ends_on: "2027-01-31", sort_order: 0 },
+        { id: "a2", category: "adult", price_cents: 25000, starts_on: "2027-07-11", ends_on: "2027-07-17", sort_order: 3 },
+        { id: "c1", category: "child", price_cents: 0, starts_on: "2026-10-01", ends_on: "2027-07-17", sort_order: 0 },
+      ],
+      error: null,
+    });
+    const ladderOrder1 = vi.fn(() => ({ order: ladderOrder2 }));
+    const pricingEq = vi.fn(() => ({ lte: pricingLte, order: ladderOrder1 }));
+
+    createClientMock.mockResolvedValue({
+      from: (table: string) => {
+        if (table === "convention_editions") {
+          return { select: () => ({ in: editionIn, eq: editionDetailsEq }) };
+        }
+        return { select: () => ({ eq: pricingEq }) };
+      },
+    });
+
+    const { default: RegisterPage } = await import("../../app/(site)/[locale]/register/page");
+    const Page = await RegisterPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("heading", { name: "Registration Fees" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Adult (30+)" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Child (1–19)" })).toBeInTheDocument();
+    expect(screen.getByText("$125")).toBeInTheDocument();
+    expect(screen.getByText("Through Jan 31, 2027")).toBeInTheDocument();
+    expect(screen.getByText("$250")).toBeInTheDocument();
+    expect(screen.getByText("At the Convention Ground")).toBeInTheDocument();
+    expect(screen.getByText("Free")).toBeInTheDocument();
+    expect(screen.getByText("Current Rate")).toBeInTheDocument();
   });
 });

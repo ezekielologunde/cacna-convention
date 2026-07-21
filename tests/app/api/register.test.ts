@@ -124,10 +124,18 @@ describe("POST /api/register", () => {
     expect(body).toEqual({ checkoutUrl: "https://checkout.stripe.com/pay/cs_test_123" });
 
     // The Stripe line item must use the server-looked-up price (12500), not the client's (100).
+    // A second line item carries the 4% card processing fee (12500 * 0.04 = 500).
     const createArgs = checkoutSessionsCreateMock.mock.calls[0][0];
     expect(createArgs.line_items).toEqual([
       expect.objectContaining({
         price_data: expect.objectContaining({ unit_amount: 12500 }),
+        quantity: 1,
+      }),
+      expect.objectContaining({
+        price_data: expect.objectContaining({
+          unit_amount: 500,
+          product_data: expect.objectContaining({ name: "Card Processing Fee (4%)" }),
+        }),
         quantity: 1,
       }),
     ]);
@@ -249,11 +257,23 @@ describe("POST /api/register", () => {
       expect(response.status).toBe(200);
       expect(body).toEqual({ checkoutUrl: "https://checkout.stripe.com/pay/cs_test_mixed" });
 
+      // The free child registrant contributes no Stripe line item, and no
+      // fee is charged on their $0 share -- 2 line items total: the paying
+      // adult, plus the 4% fee computed on just that adult's price.
       const createArgs = checkoutSessionsCreateMock.mock.calls[0][0];
-      expect(createArgs.line_items).toHaveLength(1);
+      expect(createArgs.line_items).toHaveLength(2);
       expect(createArgs.line_items[0]).toEqual(
         expect.objectContaining({
           price_data: expect.objectContaining({ unit_amount: 12500 }),
+          quantity: 1,
+        })
+      );
+      expect(createArgs.line_items[1]).toEqual(
+        expect.objectContaining({
+          price_data: expect.objectContaining({
+            unit_amount: 500,
+            product_data: expect.objectContaining({ name: "Card Processing Fee (4%)" }),
+          }),
           quantity: 1,
         })
       );
@@ -263,6 +283,76 @@ describe("POST /api/register", () => {
         expect.objectContaining({ full_name: "Adult One", category: "adult", price_cents: 12500 }),
         expect.objectContaining({ full_name: "Kid One", category: "child", price_cents: 0 }),
       ]);
+    });
+  });
+
+  describe("card processing fee", () => {
+    it("adds a 4% fee line item matching the Payment Options page's $100 -> $104 example", async () => {
+      getActiveEditionMock.mockResolvedValue({ id: "edition-1", year: 2027 });
+      // A $100.00 category, matching the exact example in
+      // lib/content/payment-options.ts's card-fee copy.
+      getActivePricingMock.mockResolvedValue([{ category: "young_adult", price_cents: 10000 }]);
+      insertRegistrationMock.mockReturnValue({
+        select: () => ({
+          single: () => Promise.resolve({ data: { id: "reg-fee-1" }, error: null }),
+        }),
+      });
+      insertRegistrantsMock.mockResolvedValue({ error: null });
+      checkoutSessionsCreateMock.mockResolvedValue({
+        id: "cs_test_fee",
+        url: "https://checkout.stripe.com/pay/cs_test_fee",
+      });
+
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request(
+        "http://localhost/api/register",
+        validRequestInit({ registrants: [{ fullName: "Jane Doe", category: "young_adult" }] })
+      );
+
+      const response = await POST(request);
+      expect(response.status).toBe(200);
+
+      const createArgs = checkoutSessionsCreateMock.mock.calls[0][0];
+      expect(createArgs.line_items).toHaveLength(2);
+      expect(createArgs.line_items[0].price_data.unit_amount).toBe(10000);
+      // $100.00 fee becomes $104.00 -- the $4.00 difference is this line item.
+      expect(createArgs.line_items[1]).toEqual(
+        expect.objectContaining({
+          price_data: expect.objectContaining({
+            unit_amount: 400,
+            product_data: expect.objectContaining({ name: "Card Processing Fee (4%)" }),
+          }),
+          quantity: 1,
+        })
+      );
+
+      // The stored registration/registrant amounts stay at the base fee --
+      // the surcharge is a Stripe-checkout-only addition, never persisted.
+      const insertedRegistration = insertRegistrationMock.mock.calls[0][0];
+      expect(insertedRegistration.total_amount_cents).toBe(10000);
+      const insertedRegistrants = insertRegistrantsMock.mock.calls[0][0];
+      expect(insertedRegistrants[0].price_cents).toBe(10000);
+    });
+
+    it("charges no fee (and skips Stripe) for a $0 child-only registration", async () => {
+      getActiveEditionMock.mockResolvedValue({ id: "edition-1", year: 2027 });
+      getActivePricingMock.mockResolvedValue([{ category: "adult", price_cents: 12500 }]);
+      insertRegistrationMock.mockReturnValue({
+        select: () => ({
+          single: () => Promise.resolve({ data: { id: "reg-fee-child" }, error: null }),
+        }),
+      });
+      insertRegistrantsMock.mockResolvedValue({ error: null });
+
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request(
+        "http://localhost/api/register",
+        validRequestInit({ registrants: [{ fullName: "Kid One", category: "child" }] })
+      );
+
+      const response = await POST(request);
+      expect(response.status).toBe(200);
+      expect(checkoutSessionsCreateMock).not.toHaveBeenCalled();
     });
   });
 

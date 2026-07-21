@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { getActivePricingForEdition, priceForCategory } from "../../lib/pricing";
+import { getActivePricingForEdition, getPricingLadderForEdition, priceForCategory } from "../../lib/pricing";
 
 describe("getActivePricingForEdition", () => {
   it("queries pricing_tiers filtered by edition and today's date window", async () => {
@@ -56,6 +56,42 @@ describe("getActivePricingForEdition", () => {
     expect(lteMock).toHaveBeenCalledWith("starts_on", "2026-03-01");
     expect(gteMock).toHaveBeenCalledWith("ends_on", "2026-03-01");
     expect(result).toEqual([{ id: "t1", category: "adult", price_cents: 12500 }]);
+  });
+});
+
+describe("getPricingLadderForEdition", () => {
+  it("queries every tier for the edition ordered by category then sort_order, with no date filter", async () => {
+    const orderedRows = [
+      { id: "t1", category: "adult", price_cents: 12500, sort_order: 0 },
+      { id: "t2", category: "adult", price_cents: 15000, sort_order: 1 },
+    ];
+    const orderMock2 = vi.fn().mockResolvedValue({ data: orderedRows, error: null });
+    const orderMock1 = vi.fn(() => ({ order: orderMock2 }));
+    const eqMock = vi.fn(() => ({ order: orderMock1 }));
+    const selectMock = vi.fn(() => ({ eq: eqMock }));
+    const fromMock = vi.fn(() => ({ select: selectMock }));
+    const supabase = { from: fromMock } as never;
+
+    const result = await getPricingLadderForEdition(supabase, "edition-1");
+
+    expect(fromMock).toHaveBeenCalledWith("pricing_tiers");
+    expect(eqMock).toHaveBeenCalledWith("edition_id", "edition-1");
+    expect(orderMock1).toHaveBeenCalledWith("category", { ascending: true });
+    expect(orderMock2).toHaveBeenCalledWith("sort_order", { ascending: true });
+    expect(result).toEqual(orderedRows);
+  });
+
+  it("returns an empty array when the query errors are absent but data is null", async () => {
+    const orderMock2 = vi.fn().mockResolvedValue({ data: null, error: null });
+    const orderMock1 = vi.fn(() => ({ order: orderMock2 }));
+    const eqMock = vi.fn(() => ({ order: orderMock1 }));
+    const selectMock = vi.fn(() => ({ eq: eqMock }));
+    const fromMock = vi.fn(() => ({ select: selectMock }));
+    const supabase = { from: fromMock } as never;
+
+    const result = await getPricingLadderForEdition(supabase, "edition-1");
+
+    expect(result).toEqual([]);
   });
 });
 
