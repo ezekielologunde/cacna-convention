@@ -41,6 +41,12 @@ describe("PrimaryNav", () => {
     expect(screen.getByRole("link", { name: "Give" })).toBeInTheDocument();
   });
 
+  it("renders an Account nav link instead of an inline theme toggle", () => {
+    renderNav();
+    expect(screen.getByRole("link", { name: "Account" })).toHaveAttribute("href", "/en/account");
+    expect(screen.queryByRole("button", { name: /switch to (dark|light) mode/i })).not.toBeInTheDocument();
+  });
+
   it("keeps About/Live/Give reachable on mobile via a menu toggle", () => {
     renderNav();
 
@@ -59,6 +65,7 @@ describe("PrimaryNav", () => {
     expect(within(panel).getByRole("link", { name: "Live" })).toBeInTheDocument();
     expect(within(panel).getByRole("link", { name: "News" })).toBeInTheDocument();
     expect(within(panel).getByRole("link", { name: "Give" })).toBeInTheDocument();
+    expect(within(panel).getByRole("link", { name: "Account" })).toHaveAttribute("href", "/en/account");
 
     fireEvent.click(within(panel).getByRole("link", { name: "About" }));
     expect(screen.getByRole("button", { name: "Open menu" })).toHaveAttribute("aria-expanded", "false");

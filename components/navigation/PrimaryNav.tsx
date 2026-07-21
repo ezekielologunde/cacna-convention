@@ -6,8 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { SearchBar } from "@/components/navigation/SearchBar";
+import { AccountNavLink } from "@/components/navigation/AccountNavLink";
 
 const PRIMARY_ITEMS = [
   { key: "home", href: "" },
@@ -81,7 +81,7 @@ export function PrimaryNav() {
           */}
           <SearchBar />
           <span className="hidden sm:inline-flex">
-            <ThemeToggle />
+            <AccountNavLink />
           </span>
           <span className="hidden sm:inline-flex">
             <Button href={`/${locale}/give`} variant="outline">
@@ -139,9 +139,14 @@ export function PrimaryNav() {
                 {t("give")}
               </Link>
             </li>
-            <li className="flex items-center justify-between px-3 py-3">
-              <span>Theme</span>
-              <ThemeToggle />
+            <li>
+              <Link
+                href={`/${locale}/account`}
+                onClick={() => setMobileOpen(false)}
+                className="block rounded-lg px-3 py-3"
+              >
+                {t("account")}
+              </Link>
             </li>
           </ul>
         </div>

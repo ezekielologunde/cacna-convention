@@ -21,7 +21,14 @@
     "christianEducation": "Christian Education",
     "businessGroup": "Business Group Fellowship",
     "youth": "Youth & Young Ministry",
-    "store": "Store"
+    "store": "Store",
+    "account": "Account"
+  },
+  "Account": {
+    "title": "Account",
+    "subtitle": "Manage how the site looks and, soon, sign in to find a past registration.",
+    "preferencesHeading": "Preferences",
+    "themeLabel": "Theme"
   },
   "Search": {
     "open": "Search",

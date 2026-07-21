@@ -21,7 +21,14 @@
     "christianEducation": "Ẹ̀kọ́ Kristẹ́ni",
     "businessGroup": "Àpéjọ Ẹgbẹ́ Òwò",
     "youth": "Iṣẹ́ Ìránṣẹ́ Àwọn Ọ̀dọ́",
-    "store": "Ilé Ìtajà"
+    "store": "Ilé Ìtajà",
+    "account": "Àkọọ́nti"
+  },
+  "Account": {
+    "title": "Àkọọ́nti",
+    "subtitle": "Ṣàkóso bí ojú-òpó wẹ́ẹ̀bù ṣe rí, kí o sì lè wọlé láìpẹ́ láti wá ìforúkọsílẹ̀ tí o ti ṣe.",
+    "preferencesHeading": "Àṣàyàn",
+    "themeLabel": "Àwọ̀"
   },
   "Search": {
     "open": "Wá",
