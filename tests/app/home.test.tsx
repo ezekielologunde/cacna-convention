@@ -4,6 +4,9 @@ import { NextIntlClientProvider } from "next-intl";
 import messages from "../../messages/en.json";
 import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
 import { welcomeMessage } from "../../lib/content/welcome";
+import { history } from "../../lib/content/history";
+import { leadership } from "../../lib/content/leadership";
+import { committee } from "../../lib/content/committee";
 
 // `next-intl/server`'s real (react-server) implementation of
 // `getTranslations`/`setRequestLocale` needs an actual Next.js RSC request
@@ -159,5 +162,35 @@ describe("HomePage", () => {
     render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
 
     expect(screen.getByRole("link", { name: "See News & Events" })).toHaveAttribute("href", "/en/news");
+  });
+
+  it("renders the hero stat strip with real founding/leadership/committee counts", async () => {
+    mockEditionQueries();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByText(String(history.foundingYear))).toBeInTheDocument();
+    expect(screen.getByText("Founded")).toBeInTheDocument();
+    expect(screen.getByText(String(leadership.length))).toBeInTheDocument();
+    expect(screen.getByText("Regional Leaders")).toBeInTheDocument();
+    expect(screen.getByText(String(committee.length))).toBeInTheDocument();
+    expect(screen.getByText("Committee Members")).toBeInTheDocument();
+  });
+
+  it("breaks the daily rhythm into a 4-item grid", async () => {
+    mockEditionQueries();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("heading", { name: "Prayer & Worship" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Ministers' Sessions" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Break-Outs" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Revival Nights" })).toBeInTheDocument();
   });
 });

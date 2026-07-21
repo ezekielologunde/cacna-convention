@@ -7,11 +7,36 @@ import { getActivePricingForEdition } from "@/lib/pricing";
 import { PromoBanner } from "@/components/register/PromoBanner";
 import { welcomeMessage } from "@/lib/content/welcome";
 import { history } from "@/lib/content/history";
+import { leadership } from "@/lib/content/leadership";
+import { committee } from "@/lib/content/committee";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { UpcomingPrograms } from "@/components/home/UpcomingPrograms";
+
+const RHYTHM_ICONS = {
+  prayer: (
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  ),
+  ministers: (
+    <>
+      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+    </>
+  ),
+  breakouts: (
+    <>
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </>
+  ),
+  revival: (
+    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
+  ),
+};
 
 export default async function Home({
   params,
@@ -56,6 +81,21 @@ export default async function Home({
   // negative-offset timezone reading this at render time can't roll the
   // date back a day -- same reasoning as Archive/ScheduleDay's date labels.
   const formatDate = (dateStr: string) => dateFormatter.format(new Date(`${dateStr}T12:00:00Z`));
+
+  // Real, already-published counts (same source About's Heritage stats use)
+  // -- gives the hero more substance without inventing numbers.
+  const stats = [
+    { value: String(history.foundingYear), label: t("statFoundedLabel") },
+    { value: String(leadership.length), label: t("statLeadersLabel") },
+    { value: String(committee.length), label: t("statCommitteeLabel") },
+  ];
+
+  const rhythmItems = [
+    { key: "prayer", title: t("rhythmPrayerTitle"), desc: t("rhythmPrayerDesc") },
+    { key: "ministers", title: t("rhythmMinistersTitle"), desc: t("rhythmMinistersDesc") },
+    { key: "breakouts", title: t("rhythmBreakoutsTitle"), desc: t("rhythmBreakoutsDesc") },
+    { key: "revival", title: t("rhythmRevivalTitle"), desc: t("rhythmRevivalDesc") },
+  ] as const;
 
   return (
     <div className="flex flex-1 flex-col">
@@ -102,9 +142,19 @@ export default async function Home({
               <div className="mt-8 flex justify-center lg:justify-start">
                 <Badge tone="coral">{t("establishedBadge", { year: history.foundingYear })}</Badge>
               </div>
+              <div className="mx-auto mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-[var(--color-border)] pt-8 lg:mx-0">
+                {stats.map((stat) => (
+                  <div key={stat.label} className="text-center lg:text-left">
+                    <div className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">{stat.value}</div>
+                    <div className="mt-1 text-[10px] font-bold tracking-wide text-[var(--color-muted)] uppercase sm:text-xs">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="relative flex-1">
-              <div className="relative mx-auto aspect-[4/5] w-full max-w-sm lg:max-w-md">
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-md lg:max-w-lg">
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute -top-8 -right-8 h-56 w-56 rounded-full opacity-50 blur-3xl"
@@ -121,7 +171,7 @@ export default async function Home({
                     alt=""
                     fill
                     priority
-                    sizes="(min-width: 1024px) 28rem, 90vw"
+                    sizes="(min-width: 1024px) 32rem, 90vw"
                     className="object-cover"
                   />
                 </div>
@@ -202,27 +252,65 @@ export default async function Home({
         </div>
       </section>
 
+      {/* What a CACNA week looks like — the daily rhythm, broken into a 4-up grid */}
+      <Reveal>
+        <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
+          <div className="mx-auto max-w-5xl">
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("missionHeading")}</h2>
+              <p className="mt-4 text-[var(--color-muted)]">{t("missionBody")}</p>
+            </div>
+            <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {rhythmItems.map((item, i) => (
+                <Reveal key={item.key} delay={i * 80}>
+                  <Card padding="lg" className="h-full text-center">
+                    <span
+                      aria-hidden="true"
+                      className="mx-auto flex h-12 w-12 items-center justify-center rounded-full text-white"
+                      style={{ background: i % 2 === 0 ? "var(--gradient-cta)" : "var(--color-teal-deep)" }}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        {RHYTHM_ICONS[item.key]}
+                      </svg>
+                    </span>
+                    <h3 className="mt-4 font-display text-base text-[var(--color-fg)]">{item.title}</h3>
+                    <p className="mt-2 text-sm text-[var(--color-muted)]">{item.desc}</p>
+                  </Card>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      </Reveal>
+
       {/* Upcoming Programs — real, dated events */}
       <UpcomingPrograms heading={t("upcomingHeading")} cta={t("upcomingCta")} locale={locale} />
 
-      {/* Mission + News + Gallery — consolidated 3-up card grid */}
+      {/* News + Gallery — a proper 2-up feature pair */}
       <Reveal>
         <section className="px-6 py-16">
-          <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-3">
-            <Card padding="lg" className="flex flex-col text-center">
-              <h2 className="font-display text-lg text-[var(--color-fg)]">{t("missionHeading")}</h2>
-              <p className="mt-3 flex-1 text-sm text-[var(--color-muted)]">{t("missionBody")}</p>
-            </Card>
-            <Card padding="lg" className="flex flex-col text-center">
-              <h2 className="font-display text-lg text-[var(--color-fg)]">{t("newsHeading")}</h2>
-              <p className="mt-3 flex-1 text-sm text-[var(--color-muted)]">{t("newsBody")}</p>
-              <Link href={`/${locale}/news`} className="mt-4 font-semibold text-[var(--color-coral-text)] underline">
+          <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2">
+            <Card padding="lg" hoverable className="flex h-full flex-col text-center sm:text-left">
+              <Badge tone="coral" className="mx-auto sm:mx-0">
+                {t("newsHeading")}
+              </Badge>
+              <p className="mt-4 flex-1 text-[var(--color-muted)]">{t("newsBody")}</p>
+              <Link
+                href={`/${locale}/news`}
+                className="mt-5 inline-flex items-center gap-1 self-center font-semibold text-[var(--color-coral-text)] underline sm:self-start"
+              >
                 {t("newsCta")}
               </Link>
             </Card>
-            <Card padding="lg" className="flex flex-col text-center">
-              <h2 className="font-display text-lg text-[var(--color-fg)]">{t("galleryHeading")}</h2>
-              <Link href={`/${locale}/gallery`} className="mt-auto pt-4 font-semibold text-[var(--color-coral-text)] underline">
+            <Card padding="lg" hoverable className="flex h-full flex-col text-center sm:text-left">
+              <Badge tone="teal" className="mx-auto sm:mx-0">
+                {t("galleryHeading")}
+              </Badge>
+              <p className="mt-4 flex-1 text-[var(--color-muted)]">{t("galleryBody")}</p>
+              <Link
+                href={`/${locale}/gallery`}
+                className="mt-5 inline-flex items-center gap-1 self-center font-semibold text-[var(--color-teal-text)] underline sm:self-start"
+              >
                 {t("galleryCta")}
               </Link>
             </Card>
@@ -230,37 +318,31 @@ export default async function Home({
         </section>
       </Reveal>
 
-      {/* Registration */}
+      {/* Registration + Give — one closing band, two columns */}
       <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
-        <div className="mx-auto max-w-3xl rounded-3xl border border-[var(--color-border)] bg-white p-8 text-center shadow-[var(--shadow-card)] sm:p-10">
-          <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">
-            {t("registrationHeading")}
-          </h2>
-          {!registrationOpen && (
-            <p className="mx-auto mt-3 max-w-[48ch] text-[var(--color-muted)]">
-              {t("registrationComingSoon")}
-            </p>
-          )}
-          <div className="mt-6 flex justify-center">
-            <Button href={`/${locale}/register`} variant="primary">
-              {t("registrationCta")}
-            </Button>
+        <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.3fr_1fr]">
+          <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-bg)] p-8 text-center shadow-[var(--shadow-card)] sm:p-10 lg:text-left">
+            <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">{t("registrationHeading")}</h2>
+            {!registrationOpen && (
+              <p className="mx-auto mt-3 max-w-[48ch] text-[var(--color-muted)] lg:mx-0">
+                {t("registrationComingSoon")}
+              </p>
+            )}
+            <div className="mt-6 flex justify-center lg:justify-start">
+              <Button href={`/${locale}/register`} variant="primary">
+                {t("registrationCta")}
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Give */}
-      <section className="px-6 py-16">
-        <div
-          className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-6 rounded-3xl border border-[var(--color-border)] p-8 text-center shadow-[var(--shadow-card)] sm:flex-row sm:text-left"
-        >
-          <div>
+          <div className="flex flex-col justify-center rounded-3xl border border-[var(--color-border)] bg-[var(--color-bg)] p-8 text-center shadow-[var(--shadow-card)] sm:p-10 lg:text-left">
             <h3 className="font-display text-xl text-[var(--color-fg)]">{t("giveHeading")}</h3>
-            <p className="mt-2 max-w-[44ch] text-[var(--color-muted)]">{t("giveBody")}</p>
+            <p className="mt-2 text-[var(--color-muted)]">{t("giveBody")}</p>
+            <div className="mt-6 flex justify-center lg:justify-start">
+              <Button href={`/${locale}/give`} variant="secondary">
+                {t("giveCta")}
+              </Button>
+            </div>
           </div>
-          <Button href={`/${locale}/give`} variant="secondary" className="flex-none">
-            {t("giveCta")}
-          </Button>
         </div>
       </section>
     </div>
