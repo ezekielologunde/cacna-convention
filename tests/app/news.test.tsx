@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import messages from "../../messages/en.json";
-import { newsEvents } from "../../lib/content/news-events";
+import { newsEvents, upcomingConventionDates } from "../../lib/content/news-events";
 import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
 
 // See tests/app/archive.test.tsx for why next-intl/server is mocked here.
@@ -35,8 +35,10 @@ describe("NewsPage", () => {
     ).toBeInTheDocument();
     // `location` is optional on NewsEvent (some events, like the retreat
     // below, don't have one) -- this specific event does, so a non-null
-    // assertion here is accurate rather than a type-check workaround.
-    expect(screen.getByText(newsEvents[0].location!)).toBeInTheDocument();
+    // assertion here is accurate rather than a type-check workaround. Now
+    // shared verbatim with the Convention Chairman transition event below,
+    // so assert at least one match rather than exactly one.
+    expect(screen.getAllByText(newsEvents[0].location!).length).toBeGreaterThan(0);
     expect(screen.getByText("October 10, 2026")).toBeInTheDocument();
   });
 
@@ -60,6 +62,30 @@ describe("NewsPage", () => {
     // asserting there's exactly one such link on the page.
     const detailLinks = screen.getAllByRole("link", { name: /^See details/ });
     expect(detailLinks.some((link) => link.getAttribute("href") === retreat.moreInfoUrl)).toBe(true);
+  });
+
+  it("renders the Convention Chairman transition announcement", async () => {
+    const { default: NewsPage } = await import("../../app/(site)/[locale]/news/page");
+    const Page = await NewsPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    const transition = newsEvents.find((event) => event.title === "Convention Chairman Concludes Two-Decade Tenure")!;
+    expect(screen.getByRole("heading", { name: transition.title })).toBeInTheDocument();
+    expect(screen.getByText(transition.description)).toBeInTheDocument();
+  });
+
+  it("renders the Save the Date table of upcoming convention years", async () => {
+    const { default: NewsPage } = await import("../../app/(site)/[locale]/news/page");
+    const Page = await NewsPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("heading", { name: "Save the Date" })).toBeInTheDocument();
+    for (const entry of upcomingConventionDates) {
+      expect(screen.getByText(String(entry.year))).toBeInTheDocument();
+      expect(screen.getByText(entry.dateRange)).toBeInTheDocument();
+    }
   });
 
   it("does not render the CAC World or CACNA Blog sections when there's no data", async () => {

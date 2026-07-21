@@ -13,6 +13,11 @@ export const goodWomenConference = {
   title: "CAC Latunde Region Good Women Association 2026 Conference",
   leader: "Evang. Mrs. Bolanle Mustapha",
   leaderTitle: "CACNAGWA Leader",
+  // From the Convention Chairman's Welcome Address in the 2026 printed
+  // convention program (found 2026-07-20 re-crawl, verified directly
+  // against the source PDF).
+  donationHighlight:
+    "Leading the department's signature free-food initiative, the Good Women gave $40,000 in 2025 and $50,000 in 2026 toward food for all convention attendees.",
 };
 
 // Executive Committee (EXCO), cross-confirmed against this year's own

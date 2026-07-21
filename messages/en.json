@@ -191,6 +191,7 @@
   "BusinessGroup": {
     "dateLabel": "Date",
     "moderatorsLabel": "Moderators",
+    "foundingHeading": "Our Founding",
     "orderHeading": "Order of Program",
     "timeLabel": "Time",
     "programLabel": "Program",
@@ -264,6 +265,7 @@
     "intro": "Announcements and upcoming events from CACNA.",
     "moreInfoCta": "See details",
     "opensInNewTab": " (opens in a new tab)",
+    "saveTheDateHeading": "Save the Date",
     "fromEventsHeading": "More Events from cacnorthamerica.com",
     "fromBlogHeading": "From the CACNA Blog",
     "cacnaBlogLabel": "CACNA Blog",

@@ -34,7 +34,9 @@ export default async function GoodWomenPage({
         subtitle={`${t("leaderLabel")}: ${goodWomenConference.leader} — ${goodWomenConference.leaderTitle}`}
       />
       <div className="mx-auto max-w-3xl px-6 py-12">
-        <section>
+        <p className="text-sm font-semibold text-[var(--color-coral-text)]">{goodWomenConference.donationHighlight}</p>
+
+        <section className="mt-10">
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("executivesHeading")}</h2>
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
             {goodWomenExecutives.map((member) => (

@@ -25,6 +25,9 @@ describe("BusinessGroupPage", () => {
       expect(screen.getByText(moderator, { exact: false })).toBeInTheDocument();
     }
 
+    expect(screen.getByRole("heading", { name: "Our Founding" })).toBeInTheDocument();
+    expect(screen.getByText(businessGroupFellowship.founding)).toBeInTheDocument();
+
     expect(screen.getByRole("heading", { name: "Order of Program" })).toBeInTheDocument();
     for (const item of businessGroupAgenda) {
       expect(screen.getAllByText(item.time!).length).toBeGreaterThan(0);

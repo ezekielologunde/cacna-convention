@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
-import { newsEvents } from "@/lib/content/news-events";
+import { newsEvents, upcomingConventionDates } from "@/lib/content/news-events";
 import { getCacWorldNews, getCacnorthBlogPosts, getCacnorthEvents } from "@/lib/cacnorth-content";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -105,6 +105,21 @@ export default async function NewsPage({
           </li>
         ))}
       </ul>
+
+      <section className="mt-12">
+        <h2 className="font-display text-2xl text-[var(--color-fg)]">{t("saveTheDateHeading")}</h2>
+        <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {upcomingConventionDates.map((entry) => (
+            <li
+              key={entry.year}
+              className="rounded-2xl border border-[var(--color-border)] p-4 text-center shadow-[var(--shadow-card)]"
+            >
+              <p className="font-display text-xl text-[var(--color-fg)]">{entry.year}</p>
+              <p className="mt-1 text-sm text-[var(--color-muted)]">{entry.dateRange}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       {cacnorthEvents.length > 0 ? (
         <section className="mt-12">

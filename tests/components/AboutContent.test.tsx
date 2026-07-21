@@ -16,7 +16,7 @@ const { committee } = await import("../../lib/content/committee");
 const { history } = await import("../../lib/content/history");
 const { aboutConvention } = await import("../../lib/content/about-convention");
 const { externalResources } = await import("../../lib/content/external-resources");
-const { worldwideLeadership } = await import("../../lib/content/worldwide-leadership");
+const { worldwideLeadership, worldwideHistory } = await import("../../lib/content/worldwide-leadership");
 
 describe("AboutContent", () => {
   it("renders every section's real content", async () => {
@@ -64,9 +64,13 @@ describe("AboutContent", () => {
 
     // Worldwide Leadership
     expect(screen.getByRole("heading", { name: "CAC Nigeria & Overseas — Worldwide Leadership" })).toBeInTheDocument();
+    expect(screen.getByText(worldwideHistory)).toBeInTheDocument();
     for (const leader of worldwideLeadership) {
       expect(screen.getByText(leader.name)).toBeInTheDocument();
       expect(screen.getByText(leader.title)).toBeInTheDocument();
+      if (leader.bio) {
+        expect(screen.getByText(leader.bio)).toBeInTheDocument();
+      }
     }
 
     // Superintendents trim + link-out (unchanged from the prior tab UI)

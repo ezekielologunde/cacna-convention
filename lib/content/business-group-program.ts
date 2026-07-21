@@ -6,6 +6,11 @@ export const businessGroupFellowship = {
   title: "CACNA Business Group Fellowship",
   date: "Thursday, July 16, 2026",
   moderators: ["Evangelist (Dr.) Efuntoye", "Evangelist Oyarombi"],
+  // Excerpted verbatim from the 2026 program's President's Message (found
+  // 2026-07-20 re-crawl, verified directly against the source PDF) -- trimmed
+  // one tangential thank-you sentence, wording otherwise unchanged.
+  founding:
+    "The CAC Business Group Fellowship (CACBGF) was formally inaugurated by the Authority of the Church on Monday 4th of May, 2026 at Ikeji-Arakeji, Osun State. The CAC Business Group Fellowship was formed to support projects and programs of the Church as well as serve as a platform for interaction, mentorship and support of members of our Church who are business-inclined. It is not a policy-making body, pressure group or Authority in the Church.",
 };
 
 export const businessGroupAgenda: AgendaItem[] = [

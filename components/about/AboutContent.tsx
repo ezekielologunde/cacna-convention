@@ -10,7 +10,7 @@ import type { LeadershipMember } from "@/lib/content/leadership";
 import type { CommitteeMember } from "@/lib/content/committee";
 import type { AboutConvention } from "@/lib/content/about-convention";
 import type { history as History } from "@/lib/content/history";
-import { worldwideLeadership } from "@/lib/content/worldwide-leadership";
+import { worldwideLeadership, worldwideHistory } from "@/lib/content/worldwide-leadership";
 
 /**
  * A single continuous, sectioned page (rebuilt to match the depth and
@@ -188,6 +188,7 @@ export async function AboutContent({
           <Reveal className="text-center">
             <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("worldwideLeadershipHeading")}</h2>
             <p className="mx-auto mt-3 max-w-2xl text-[var(--color-muted)]">{t("worldwideLeadershipBlurb")}</p>
+            <p className="mx-auto mt-3 max-w-2xl text-sm text-[var(--color-muted)]">{worldwideHistory}</p>
           </Reveal>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {worldwideLeadership.map((leader, i) => (
@@ -205,6 +206,9 @@ export async function AboutContent({
                   <div className="min-w-0">
                     <p className="font-semibold text-[var(--color-fg)]">{leader.name}</p>
                     <p className="mt-1 text-sm text-[var(--color-muted)]">{leader.title}</p>
+                    {leader.bio ? (
+                      <p className="mt-2 text-sm text-[var(--color-muted)]">{leader.bio}</p>
+                    ) : null}
                   </div>
                 </Card>
               </Reveal>

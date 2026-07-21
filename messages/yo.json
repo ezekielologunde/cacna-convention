@@ -191,6 +191,7 @@
   "BusinessGroup": {
     "dateLabel": "Ọjọ́",
     "moderatorsLabel": "Àwọn Alámòjútó",
+    "foundingHeading": "Ìpilẹ̀ṣẹ̀ Wa",
     "orderHeading": "Ìtòlẹ́sẹ̀ Ètò",
     "timeLabel": "Àkókò",
     "programLabel": "Ètò",
@@ -264,6 +265,7 @@
     "intro": "Ìkéde àti àwọn ìṣẹ̀lẹ̀ tí ń bọ̀ láti ọ̀dọ̀ CACNA.",
     "moreInfoCta": "Wo àwọn kúlẹ̀kúlẹ̀",
     "opensInNewTab": " (yóò ṣí ní táàbù tuntun)",
+    "saveTheDateHeading": "Kọ Ọjọ́ Sílẹ̀",
     "fromEventsHeading": "Àwọn Ìṣẹ̀lẹ̀ Mìíràn láti cacnorthamerica.com",
     "fromBlogHeading": "Láti Bulọ́ọ̀gì CACNA",
     "cacnaBlogLabel": "Bulọ́ọ̀gì CACNA",

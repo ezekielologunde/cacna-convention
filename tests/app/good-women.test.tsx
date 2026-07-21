@@ -22,6 +22,8 @@ describe("GoodWomenPage", () => {
       screen.getByText(`${goodWomenConference.leader} — ${goodWomenConference.leaderTitle}`, { exact: false })
     ).toBeInTheDocument();
 
+    expect(screen.getByText(goodWomenConference.donationHighlight)).toBeInTheDocument();
+
     expect(screen.getByRole("heading", { name: "Executive Committee" })).toBeInTheDocument();
     for (const member of goodWomenExecutives) {
       expect(screen.getAllByText(member.name).length).toBeGreaterThan(0);

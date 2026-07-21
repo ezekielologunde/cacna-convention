@@ -42,6 +42,11 @@ export default async function BusinessGroupPage({
       />
       <div className="mx-auto max-w-3xl px-6 py-12">
         <section>
+          <h2 className="font-display text-lg text-[var(--color-fg)]">{t("foundingHeading")}</h2>
+          <p className="mt-3 text-sm text-[var(--color-muted)]">{businessGroupFellowship.founding}</p>
+        </section>
+
+        <section className="mt-10">
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("orderHeading")}</h2>
           <div className="mt-4">
             <AgendaTable

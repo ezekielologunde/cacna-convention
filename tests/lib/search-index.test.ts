@@ -16,12 +16,16 @@ describe("searchSite", () => {
     // "Adenodi" matches multiple real people across categories (e.g.
     // Pastor David Adenodi appears in both leadership.ts and contacts.ts,
     // since he's both a regional leader and a listed contact) -- assert on
-    // the match itself, not a single expected category/href.
+    // the match itself, not a single expected category/href. His name also
+    // now appears in a news-events.ts excerpt (the Convention Chairman
+    // transition announcement), which matches by excerpt rather than title.
     const results = searchSite("Adenodi");
     expect(results.length).toBeGreaterThan(0);
     for (const result of results) {
-      expect(result.title.toLowerCase()).toContain("adenodi");
-      expect(["/about", "/contact"]).toContain(result.href);
+      const matchesTitle = result.title.toLowerCase().includes("adenodi");
+      const matchesExcerpt = result.excerpt?.toLowerCase().includes("adenodi") ?? false;
+      expect(matchesTitle || matchesExcerpt).toBe(true);
+      expect(["/about", "/contact", "/news"]).toContain(result.href);
     }
     expect(results.some((r) => r.href === "/about")).toBe(true);
   });
