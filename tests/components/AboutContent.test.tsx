@@ -16,6 +16,7 @@ const { committee } = await import("../../lib/content/committee");
 const { history } = await import("../../lib/content/history");
 const { aboutConvention } = await import("../../lib/content/about-convention");
 const { externalResources } = await import("../../lib/content/external-resources");
+const { worldwideLeadership } = await import("../../lib/content/worldwide-leadership");
 
 describe("AboutContent", () => {
   it("renders every section's real content", async () => {
@@ -51,6 +52,22 @@ describe("AboutContent", () => {
     // Leadership + Committee
     expect(screen.getByText(leadership[0].name)).toBeInTheDocument();
     expect(screen.getByText(committee[0].name)).toBeInTheDocument();
+
+    // Leadership bios (Agbeja + Oluwatimilehin only, per the scope decision
+    // to enrich existing Leadership members rather than duplicate the
+    // full superintendent directory)
+    for (const member of leadership) {
+      if (member.bio) {
+        expect(screen.getByText(member.bio)).toBeInTheDocument();
+      }
+    }
+
+    // Worldwide Leadership
+    expect(screen.getByRole("heading", { name: "CAC Nigeria & Overseas — Worldwide Leadership" })).toBeInTheDocument();
+    for (const leader of worldwideLeadership) {
+      expect(screen.getByText(leader.name)).toBeInTheDocument();
+      expect(screen.getByText(leader.title)).toBeInTheDocument();
+    }
 
     // Superintendents trim + link-out (unchanged from the prior tab UI)
     expect(

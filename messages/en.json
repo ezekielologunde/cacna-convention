@@ -111,6 +111,8 @@
     "subtitle": "The story, mission, and people behind the CACNA Annual Convention.",
     "ourStory": "Our Story",
     "leadership": "Leadership",
+    "worldwideLeadershipHeading": "CAC Nigeria & Overseas — Worldwide Leadership",
+    "worldwideLeadershipBlurb": "CACNA is one region within Christ Apostolic Church Nigeria & Overseas, guided by its worldwide executive leadership.",
     "committee": "Committee",
     "superintendents": "Superintendents",
     "missionHeading": "Our Mission",
@@ -199,6 +201,7 @@
   "Youth": {
     "themeLabel": "Theme",
     "coordinatorLabel": "Regional Youth Coordinator",
+    "historyHeading": "Our History",
     "timeLabel": "Time",
     "programLabel": "Program",
     "speakerLabel": "Speaker"
@@ -281,6 +284,7 @@
   "Register": {
     "title": "Register",
     "guidelinesHeading": "Registration Guidelines",
+    "paymentOptionsHeading": "Payment Options",
     "individualTab": "Individual",
     "groupTab": "Church / Group",
     "churchName": "Church name",

@@ -6,6 +6,9 @@ export const youthProgram = {
   title: "CAC North America Youth and Young Ministry",
   theme: "Did God Really Say...? Knowing God's Word for Yourself",
   regionalCoordinator: "Pastor Adekunmi Browne",
+  // Sourced from cacnorthamerica.com/youth-young-adult/ (found 2026-07-20).
+  history:
+    "Christ Apostolic Church allowed the togetherness or fellowship of her elites or youths right from her early days. As extra-constitutional organizations formed by young men and women with godly zeal, they operated within the Church under the strict supervision and control of the Church Authority then.",
 };
 
 // Speakers for youth sessions are embedded in the `event` text itself

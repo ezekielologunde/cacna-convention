@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import messages from "../../messages/en.json";
 import { registrationGuidelines } from "../../lib/content/registration-guidelines";
+import { paymentOptions } from "../../lib/content/payment-options";
 import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
 
 const createClientMock = vi.fn();
@@ -63,6 +64,12 @@ describe("RegisterPage", () => {
     expect(screen.getByRole("heading", { name: "Registration Guidelines" })).toBeInTheDocument();
     expect(screen.getByText(registrationGuidelines.items[0])).toBeInTheDocument();
     expect(screen.getByText(registrationGuidelines.freeFoodNote)).toBeInTheDocument();
+
+    expect(screen.getByRole("heading", { name: "Payment Options" })).toBeInTheDocument();
+    for (const method of paymentOptions.methods) {
+      expect(screen.getByText(method.name)).toBeInTheDocument();
+      expect(screen.getByText(method.detail)).toBeInTheDocument();
+    }
   });
 
   it("shows the not-open message when an edition exists but has no pricing yet", async () => {

@@ -34,6 +34,10 @@ export default async function YouthPage({
         subtitle={`${t("coordinatorLabel")}: ${youthProgram.regionalCoordinator}`}
       />
       <div className="mx-auto max-w-3xl px-6 py-12">
+        <section className="pb-10">
+          <h2 className="font-display text-lg text-[var(--color-fg)]">{t("historyHeading")}</h2>
+          <p className="mt-3 text-sm text-[var(--color-muted)]">{youthProgram.history}</p>
+        </section>
         <section className="flex flex-col gap-8">
           {youthSchedule.map((day) => (
             <div key={day.dayLabel}>

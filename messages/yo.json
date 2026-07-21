@@ -111,6 +111,8 @@
     "subtitle": "Ìtàn, Ète, àti àwọn ènìyàn tí ó wà lẹ́yìn Àpéjọ Ọdọọdún CACNA.",
     "ourStory": "Ìtàn Wa",
     "leadership": "Aṣíwájú",
+    "worldwideLeadershipHeading": "CAC Nigeria & Overseas — Aṣíwájú Kárí Ayé",
+    "worldwideLeadershipBlurb": "CACNA jẹ́ agbègbè kan nínú Ìjọ Aposteli Kristi Nàìjíríà àti Òkèèrè, tí àwọn aṣíwájú kárí ayé rẹ̀ ń darí.",
     "committee": "Ìgbìmọ̀",
     "superintendents": "Àwọn Alábòójútó",
     "missionHeading": "Ète Wa",
@@ -199,6 +201,7 @@
   "Youth": {
     "themeLabel": "Àkòrí",
     "coordinatorLabel": "Alámòjútó Àwọn Ọ̀dọ́ Ẹkùn",
+    "historyHeading": "Ìtàn Wa",
     "timeLabel": "Àkókò",
     "programLabel": "Ètò",
     "speakerLabel": "Oníṣe"
@@ -281,6 +284,7 @@
   "Register": {
     "title": "Forúkọsílẹ̀",
     "guidelinesHeading": "Àwọn Ìtọ́nisọ́nà Ìforúkọsílẹ̀",
+    "paymentOptionsHeading": "Àwọn Ọ̀nà Sísanwó",
     "individualTab": "Ẹnìkọ̀ọ̀kan",
     "groupTab": "Ìjọ / Ẹgbẹ́",
     "churchName": "Orúkọ Ìjọ",

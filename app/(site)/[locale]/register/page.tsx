@@ -5,6 +5,7 @@ import { getActiveEdition } from "@/lib/editions";
 import { getActivePricingForEdition } from "@/lib/pricing";
 import { RegisterPageClient } from "@/components/register/RegisterPageClient";
 import { registrationGuidelines } from "@/lib/content/registration-guidelines";
+import { paymentOptions } from "@/lib/content/payment-options";
 import { pageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
@@ -65,6 +66,18 @@ export default async function RegisterPage({
         <p className="mt-3 text-sm font-semibold text-[var(--color-coral-text)]">
           {registrationGuidelines.freeFoodNote}
         </p>
+      </section>
+
+      <section className="mx-auto max-w-3xl px-6 pb-16">
+        <h2 className="font-display text-lg text-[var(--color-fg)]">{t("paymentOptionsHeading")}</h2>
+        <dl className="mt-3 flex flex-col gap-3">
+          {paymentOptions.methods.map((method) => (
+            <div key={method.name}>
+              <dt className="text-sm font-semibold text-[var(--color-fg)]">{method.name}</dt>
+              <dd className="mt-0.5 text-sm text-[var(--color-muted)]">{method.detail}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
     </div>
   );
