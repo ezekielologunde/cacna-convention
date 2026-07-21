@@ -35,6 +35,10 @@ export function RegistrationForm({
   const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [contactPhone, setContactPhone] = useState("");
+  // Announced via the aria-live region below -- adding/removing a row changes
+  // the form's structure with no page navigation or visible dialog, so screen
+  // reader users get no other signal that it happened.
+  const [liveAnnouncement, setLiveAnnouncement] = useState("");
 
   function updateRegistrant(index: number, patch: Partial<RegistrantRow>) {
     setRegistrants((current) =>
@@ -44,10 +48,12 @@ export function RegistrationForm({
 
   function addRegistrant() {
     setRegistrants((current) => [...current, { fullName: "", category: "adult" }]);
+    setLiveAnnouncement(t("registrantAddedAnnouncement"));
   }
 
   function removeRegistrant(index: number) {
     setRegistrants((current) => current.filter((_, i) => i !== index));
+    setLiveAnnouncement(t("registrantRemovedAnnouncement"));
   }
 
   function handleSubmit(event: FormEvent) {
@@ -68,6 +74,7 @@ export function RegistrationForm({
 
   return (
     <form onSubmit={handleSubmit} className="flex max-w-md flex-col gap-5">
+      <span aria-live="polite" className="sr-only">{liveAnnouncement}</span>
       {mode === "group" ? (
         <label className={labelClass}>
           {t("churchName")}

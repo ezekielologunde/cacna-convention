@@ -11,8 +11,16 @@ export function SearchBar() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   const results = searchSite(query);
+
+  function close() {
+    setOpen(false);
+    // Return focus to the trigger so keyboard users don't lose their place.
+    triggerRef.current?.focus();
+  }
 
   useEffect(() => {
     if (open) {
@@ -25,7 +33,27 @@ export function SearchBar() {
   useEffect(() => {
     if (!open) return;
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        close();
+        return;
+      }
+      // Trap Tab/Shift+Tab within the dialog -- role="dialog" aria-modal="true"
+      // implies focus can't leave it, but the browser doesn't enforce that on
+      // its own.
+      if (event.key !== "Tab" || !dialogRef.current) return;
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
@@ -34,6 +62,7 @@ export function SearchBar() {
   return (
     <>
       <button
+        ref={triggerRef}
         type="button"
         aria-label={t("open")}
         onClick={() => setOpen(true)}
@@ -51,9 +80,10 @@ export function SearchBar() {
           aria-modal="true"
           aria-label={t("title")}
           className="fixed inset-0 z-50 flex items-start justify-center bg-black/40 px-4 pt-24"
-          onClick={() => setOpen(false)}
+          onClick={close}
         >
           <div
+            ref={dialogRef}
             className="w-full max-w-lg rounded-2xl bg-[var(--color-bg)] p-4 shadow-2xl"
             onClick={(event) => event.stopPropagation()}
           >
@@ -73,7 +103,7 @@ export function SearchBar() {
               <button
                 type="button"
                 aria-label={t("close")}
-                onClick={() => setOpen(false)}
+                onClick={close}
                 className="flex-none text-[var(--color-muted)] hover:text-[var(--color-fg)]"
               >
                 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

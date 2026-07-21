@@ -111,7 +111,7 @@ export async function AboutContent({
             </h2>
           </Reveal>
           <Reveal delay={100}>
-            <p className="mx-auto mt-6 max-w-xl text-white/85">{t("familyBody")}</p>
+            <p className="mx-auto mt-6 max-w-xl text-white">{t("familyBody")}</p>
           </Reveal>
           <Reveal delay={160}>
             <div className="mt-8 flex justify-center">
@@ -138,7 +138,7 @@ export async function AboutContent({
             <h2 className="mt-4 font-display text-3xl leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl">
               {t("heritageHeading", { year: history.foundingYear })}
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-white/85">{history.summary}</p>
+            <p className="mx-auto mt-4 max-w-xl text-white">{history.summary}</p>
           </Reveal>
           <Reveal delay={100}>
             <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3">
@@ -155,7 +155,7 @@ export async function AboutContent({
             </div>
           </Reveal>
           <Reveal delay={160}>
-            <p className="mt-8 text-white/80">
+            <p className="mt-8 text-white">
               {t("readFullStory")}{" "}
               <a
                 href="https://cacnorthamerica.com/about"
