@@ -8,6 +8,17 @@ import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
 // See tests/app/archive.test.tsx for why next-intl/server is mocked here.
 vi.mock("next-intl/server", () => createNextIntlServerMock(messages));
 
+// getCacWorldNews/getCacnorthBlogPosts hit a real, separate Supabase
+// project (lib/cacnorth-supabase.ts) over the network -- mocked per-test so
+// the suite never depends on external network access, matching the
+// no-live-calls-in-tests convention used everywhere else in this project.
+const getCacWorldNewsMock = vi.fn().mockResolvedValue([]);
+const getCacnorthBlogPostsMock = vi.fn().mockResolvedValue([]);
+vi.mock("@/lib/cacnorth-content", () => ({
+  getCacWorldNews: () => getCacWorldNewsMock(),
+  getCacnorthBlogPosts: () => getCacnorthBlogPostsMock(),
+}));
+
 describe("NewsPage", () => {
   it("renders the 50th anniversary celebration", async () => {
     const { default: NewsPage } = await import("../../app/(site)/[locale]/news/page");
@@ -46,5 +57,60 @@ describe("NewsPage", () => {
     // asserting there's exactly one such link on the page.
     const detailLinks = screen.getAllByRole("link", { name: /^See details/ });
     expect(detailLinks.some((link) => link.getAttribute("href") === retreat.moreInfoUrl)).toBe(true);
+  });
+
+  it("does not render the CAC World or CACNA Blog sections when there's no data", async () => {
+    const { default: NewsPage } = await import("../../app/(site)/[locale]/news/page");
+    const Page = await NewsPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.queryByRole("heading", { name: "From CAC World" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "From the CACNA Blog" })).not.toBeInTheDocument();
+  });
+
+  it("renders CAC World News items linking out to their real source", async () => {
+    getCacWorldNewsMock.mockResolvedValueOnce([
+      {
+        id: "1",
+        title: "CAC Mokola DCC charges church workers",
+        excerpt: "A call to uphold biblical standards.",
+        sourceUrl: "https://www.cacworldnews.com/2026/07/example.html",
+        imageUrl: null,
+        publishedAt: "2026-07-17T18:15:25.492Z",
+      },
+    ]);
+
+    const { default: NewsPage } = await import("../../app/(site)/[locale]/news/page");
+    const Page = await NewsPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("heading", { name: "From CAC World" })).toBeInTheDocument();
+    const link = screen.getByRole("link", { name: /CAC Mokola DCC charges church workers/ });
+    expect(link).toHaveAttribute("href", "https://www.cacworldnews.com/2026/07/example.html");
+    expect(screen.getByText("A call to uphold biblical standards.")).toBeInTheDocument();
+  });
+
+  it("renders CACNA Blog posts linking to cacnorthamerica.com once blog_posts has rows", async () => {
+    getCacnorthBlogPostsMock.mockResolvedValueOnce([
+      {
+        id: "1",
+        title: "A real blog post",
+        slug: "a-real-blog-post",
+        excerpt: "An excerpt.",
+        imageUrl: null,
+        publishedAt: "2026-07-01T00:00:00.000Z",
+      },
+    ]);
+
+    const { default: NewsPage } = await import("../../app/(site)/[locale]/news/page");
+    const Page = await NewsPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("heading", { name: "From the CACNA Blog" })).toBeInTheDocument();
+    const link = screen.getByRole("link", { name: /A real blog post/ });
+    expect(link).toHaveAttribute("href", "https://cacnorthamerica.com/blog/a-real-blog-post");
   });
 });

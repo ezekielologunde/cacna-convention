@@ -218,7 +218,12 @@
     "title": "News & Events",
     "intro": "Announcements and upcoming events from CACNA.",
     "moreInfoCta": "See details",
-    "opensInNewTab": " (opens in a new tab)"
+    "opensInNewTab": " (opens in a new tab)",
+    "fromBlogHeading": "From the CACNA Blog",
+    "cacnaBlogLabel": "CACNA Blog",
+    "fromCacWorldHeading": "From CAC World",
+    "fromCacWorldIntro": "News from Christ Apostolic Church Worldwide, headquartered in Nigeria.",
+    "cacWorldLabel": "CAC World"
   },
   "Live": {
     "title": "Live",

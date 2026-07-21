@@ -218,7 +218,12 @@
     "title": "Ìròyìn àti Ìṣẹ̀lẹ̀",
     "intro": "Ìkéde àti àwọn ìṣẹ̀lẹ̀ tí ń bọ̀ láti ọ̀dọ̀ CACNA.",
     "moreInfoCta": "Wo àwọn kúlẹ̀kúlẹ̀",
-    "opensInNewTab": " (yóò ṣí ní táàbù tuntun)"
+    "opensInNewTab": " (yóò ṣí ní táàbù tuntun)",
+    "fromBlogHeading": "Láti Bulọ́ọ̀gì CACNA",
+    "cacnaBlogLabel": "Bulọ́ọ̀gì CACNA",
+    "fromCacWorldHeading": "Láti CAC World",
+    "fromCacWorldIntro": "Ìròyìn láti Ìjọ Aposteli Kristi Kárí Ayé, tí ọ́fíìsì rẹ̀ àkọ́kọ́ wà ní Nàìjíríà.",
+    "cacWorldLabel": "CAC World"
   },
   "Live": {
     "title": "Ìtànkálẹ̀ Ààyè",
