@@ -19,7 +19,7 @@ export function ChatShortcut() {
       href={`/${locale}/contact`}
       aria-label={t("openLabel")}
       title={t("openLabel")}
-      className="fixed right-5 bottom-5 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full text-white shadow-[var(--shadow-glow-coral)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+      className="bottom-safe fixed right-5 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full text-white shadow-[var(--shadow-glow-coral)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
       style={{ background: "var(--gradient-cta)" }}
     >
       <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

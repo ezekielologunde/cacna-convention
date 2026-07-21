@@ -34,7 +34,7 @@ export function PrimaryNav() {
       aria-label="Primary"
       className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/95 backdrop-blur"
     >
-      <div className="flex items-center gap-6 px-6 py-3.5">
+      <div className="flex items-center gap-6 px-6 pt-safe pb-3.5">
         <Link href={`/${locale}`} className="flex min-w-0 flex-1 items-center gap-2.5 sm:flex-none">
           <Image
             src="/brand/icon.png"

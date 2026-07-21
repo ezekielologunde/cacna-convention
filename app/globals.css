@@ -111,6 +111,22 @@ h3 {
   letter-spacing: -0.01em;
 }
 
+/*
+ * Safe-area helpers for standalone/PWA launches (notches, home indicators).
+ * Defined as their own properties -- never combined with a Tailwind utility
+ * that also sets padding-top/bottom, since two classes writing the same CSS
+ * property at equal specificity lets stylesheet generation order (not JSX
+ * class order) silently decide the winner (see PrimaryNav.tsx's comment on
+ * the same class of bug for `hidden sm:inline-flex`).
+ */
+.pt-safe {
+  padding-top: max(0.875rem, env(safe-area-inset-top));
+}
+
+.bottom-safe {
+  bottom: max(1.25rem, calc(env(safe-area-inset-bottom) + 0.75rem));
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
