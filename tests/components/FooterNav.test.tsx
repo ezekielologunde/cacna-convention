@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import messages from "../../messages/en.json";
 import { externalResources } from "../../lib/content/external-resources";
+import { anniversary } from "../../lib/content/anniversary";
 import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
 
 // FooterNav is now a Server Component (only FooterLink, its client leaf,
@@ -68,5 +69,12 @@ describe("FooterNav", () => {
     expect(screen.getByRole("link", { name: "Contact" })).not.toHaveAttribute("aria-current");
 
     mockPathname = "/en";
+  });
+
+  it("renders the permanent 50th anniversary badge linking to the celebration page", async () => {
+    await renderFooter();
+    expect(
+      screen.getByRole("link", { name: /50th Anniversary/ })
+    ).toHaveAttribute("href", anniversary.moreInfoUrl);
   });
 });

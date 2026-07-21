@@ -207,3 +207,21 @@ h3 {
 .scroll-indicator-line {
   animation: scroll-indicator-line 1.8s ease-in-out infinite;
 }
+
+/* Decorative confetti dots on the homepage AnniversarySection -- subtle
+ * vertical drift + opacity pulse, looping. The global reduced-motion block
+ * above already zeroes this out. */
+@keyframes sparkle-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--sparkle-rotate, 0deg));
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-10px) rotate(var(--sparkle-rotate, 0deg));
+    opacity: 1;
+  }
+}
+.sparkle-float {
+  animation: sparkle-float 4.5s ease-in-out infinite;
+}

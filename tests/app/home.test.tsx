@@ -317,4 +317,30 @@ describe("HomePage", () => {
     expect(document.querySelector('a[href="/en/plan-your-visit"]')).not.toBeNull();
     expect(document.querySelector('a[href="/en/schedule"]')).not.toBeNull();
   });
+
+  it("upgrades the hero established badge to reference the 50th anniversary", async () => {
+    mockEditionQueries();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByText("Celebrating 50 Years · Est. 1976")).toBeInTheDocument();
+  });
+
+  it("renders the AnniversarySection with its heading and an external CTA to the celebration page", async () => {
+    mockEditionQueries();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("heading", { name: "50 years of CAC North America." })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /See the celebration/ })).toHaveAttribute(
+      "href",
+      "https://cacnorthamerica.com/events/cacna-50th-anniversary-2026"
+    );
+  });
 });

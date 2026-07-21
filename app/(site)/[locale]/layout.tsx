@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import { PrimaryNav } from "@/components/navigation/PrimaryNav";
 import { FooterNav } from "@/components/navigation/FooterNav";
 import { ChatShortcut } from "@/components/ui/ChatShortcut";
+import { AnniversaryBanner } from "@/components/ui/AnniversaryBanner";
 import { displayFont, bodyFont } from "@/lib/fonts";
 import { SITE, SITE_URL, organizationJsonLd } from "@/lib/site";
 import "../../globals.css";
@@ -100,6 +101,7 @@ export default async function LocaleRootLayout({
           >
             {t("skipToContent")}
           </a>
+          <AnniversaryBanner />
           <PrimaryNav />
           <main id="main-content" className="flex flex-1 flex-col">
             {children}

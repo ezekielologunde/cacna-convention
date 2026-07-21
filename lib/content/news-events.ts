@@ -5,6 +5,8 @@
 // own founding data (lib/content/history.ts: founded 1976), but the
 // specific October 10 date isn't independently published anywhere yet.
 
+import { anniversary } from "@/lib/content/anniversary";
+
 export type NewsEvent = {
   title: string;
   date: string; // ISO date (start date for multi-day events)
@@ -29,15 +31,14 @@ export const upcomingConventionDates = [
 
 export const newsEvents: NewsEvent[] = [
   {
+    // title stays page-specific framing (not a shared fact); every other
+    // field is pulled from the single anniversary.ts source of truth so
+    // there's one place to update if a detail ever changes.
     title: "CAC North America 50th Anniversary Celebration",
-    date: "2026-10-10",
-    location: "CAC Village, USA",
-    description:
-      "Christ Apostolic Church North America celebrates 50 years since its founding in 1976, at CAC Village — the same grounds that host the annual convention.",
-    // A real dedicated page for this now exists on cacnorthamerica.com
-    // (built and verified 2026-07-19) — link there directly instead of
-    // the generic homepage.
-    moreInfoUrl: "https://cacnorthamerica.com/events/cacna-50th-anniversary-2026",
+    date: anniversary.date,
+    location: anniversary.location,
+    description: anniversary.description,
+    moreInfoUrl: anniversary.moreInfoUrl,
   },
   {
     // Transcribed from the 2027 Ministers Retreat flyer (2026-07-17). No

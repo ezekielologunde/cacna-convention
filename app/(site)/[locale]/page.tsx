@@ -19,6 +19,7 @@ import { NextSteps } from "@/components/home/NextSteps";
 import { ConventionTimeline } from "@/components/home/ConventionTimeline";
 import { WatchSection } from "@/components/home/WatchSection";
 import { PhotoMarquee } from "@/components/home/PhotoMarquee";
+import { AnniversarySection } from "@/components/home/AnniversarySection";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { Parallax } from "@/components/ui/Parallax";
 import { CountUp } from "@/components/ui/CountUp";
@@ -174,7 +175,7 @@ export default async function Home({
                 </Button>
               </div>
               <div className="mt-8 flex justify-center lg:justify-start">
-                <Badge tone="red">{t("establishedBadge", { year: history.foundingYear })}</Badge>
+                <Badge tone="gold">{t("establishedBadge", { year: history.foundingYear })}</Badge>
               </div>
               <div className="mx-auto mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-[var(--color-border)] pt-8 lg:mx-0">
                 {stats.map((stat) => (
@@ -219,6 +220,13 @@ export default async function Home({
           </span>
         </a>
       </section>
+
+      <AnniversarySection
+        locale={locale}
+        heading={t("anniversaryHeading")}
+        cta={t("anniversaryCta")}
+        opensInNewTabLabel={t("opensInNewTab")}
+      />
 
       {/* Welcome — two-column on desktop: gradient panel + message card */}
       <section

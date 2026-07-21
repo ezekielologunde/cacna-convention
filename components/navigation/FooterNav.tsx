@@ -5,6 +5,7 @@ import { CalendarDays, Compass, Globe, Mail, Phone, PlayCircle, Rss, ArrowUp, Us
 import { FooterLink } from "@/components/navigation/FooterLink";
 import { externalResources } from "@/lib/content/external-resources";
 import { contacts } from "@/lib/content/contacts";
+import { anniversary } from "@/lib/content/anniversary";
 
 // Split from a single 11-item "Attend" list (which forced the whole footer
 // row to stretch to an 11-line-tall column) into this shorter list plus its
@@ -74,6 +75,19 @@ export async function FooterNav({ locale }: { locale: string }) {
                 <span className="mt-1 truncate font-display text-xl text-white">Convention</span>
               </span>
             </div>
+
+            {/* Permanent (no dismiss) -- unlike AnniversaryBanner, this is a
+                small always-visible pill, not an interruptive announcement. */}
+            <a
+              href={anniversary.moreInfoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${tFooter("anniversaryBadge")}${tFooter("opensInNewTab")}`}
+              className="mt-4 inline-flex min-h-8 items-center gap-1.5 rounded-full border border-[var(--color-gold)]/50 px-3 py-1 text-xs font-bold text-[var(--color-gold)] transition-colors hover:border-[var(--color-gold)]"
+            >
+              {tFooter("anniversaryBadge")}
+            </a>
+
             <p className="mt-3 max-w-[32ch] text-sm text-white/75">{tFooter("blurb")}</p>
 
             <div className="mt-5 flex flex-wrap items-center gap-3">

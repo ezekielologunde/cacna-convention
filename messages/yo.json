@@ -75,6 +75,7 @@
     "attendHeading": "Kópa",
     "connectHeading": "Darapọ̀",
     "cacFamilyHeading": "Ìdílé CAC",
+    "anniversaryBadge": "Ayẹyẹ Ọdún 50 · 1976–2026",
     "contactHeading": "Kàn Sí Wa",
     "copyright": "© {year} Àpéjọ CACNA",
     "watchOnYoutube": "Wo lórí YouTube",
@@ -93,7 +94,10 @@
     "scrollCta": "Yíjú",
     "upcomingHeading": "Àkókò àti Ìṣẹ̀lẹ̀ Àpéjọ",
     "upcomingCta": "Wo Gbogbo Àwọn Ìṣẹ̀lẹ̀ Tí Ń Bọ̀",
-    "establishedBadge": "Ìdásílẹ̀ {year}",
+    "establishedBadge": "Ń Ṣe Ayẹyẹ Ọdún 50 · Ìdásílẹ̀ {year}",
+    "anniversaryHeading": "Ọdún 50 ti Ìjọ Aposteli Kristi Àríwá Amẹ́ríkà.",
+    "anniversaryCta": "Wo Ayẹyẹ Náà",
+    "opensInNewTab": " (yóò ṣí ní táàbù tuntun)",
     "registrationOpensBadge": "Ìforúkọsílẹ̀ Yóò Ṣí ní Oṣù October 2026",
     "justConcludedKicker": "Tí Ó Ṣẹ̀ṣẹ̀ Parí",
     "justConcludedCta": "Wo Àwòrán",
@@ -310,6 +314,13 @@
     "otherAirportsHeading": "Àwọn pápá ọkọ̀ òfurufú mìíràn nítòsí",
     "drivingHeading": "Wíwakọ̀ láti BWI",
     "budgetLodging": "Ibùgbé olówó kékeré"
+  },
+  "Anniversary": {
+    "bannerLabel": "Ọdún 50!",
+    "bannerText": "Ń ṣe ayẹyẹ ọdún 50 ti Ìjọ Aposteli Kristi Àríwá Amẹ́ríkà — dara pọ̀ mọ́ wa ní Oṣù Kẹwàá 10, 2026 ní Abúlé CAC.",
+    "bannerCta": "Kọ́ Ẹ̀kọ́ Síi",
+    "dismissLabel": "Paá Kúrò",
+    "opensInNewTab": " (yóò ṣí ní táàbù tuntun)"
   },
   "Archive": {
     "title": "Àwọn Àpéjọ Àtijọ́",

@@ -75,6 +75,7 @@
     "attendHeading": "Attend",
     "connectHeading": "Connect",
     "cacFamilyHeading": "CAC Family",
+    "anniversaryBadge": "50th Anniversary · 1976–2026",
     "contactHeading": "Contact",
     "copyright": "© {year} CACNA Convention",
     "watchOnYoutube": "Watch on YouTube",
@@ -93,7 +94,10 @@
     "scrollCta": "Scroll",
     "upcomingHeading": "The Convention Timeline",
     "upcomingCta": "See All Upcoming Programs",
-    "establishedBadge": "Est. {year}",
+    "establishedBadge": "Celebrating 50 Years · Est. {year}",
+    "anniversaryHeading": "50 years of CAC North America.",
+    "anniversaryCta": "See the celebration",
+    "opensInNewTab": " (opens in a new tab)",
     "registrationOpensBadge": "Registration Opens October 2026",
     "justConcludedKicker": "Just Concluded",
     "justConcludedCta": "View Photos",
@@ -310,6 +314,13 @@
     "otherAirportsHeading": "Other nearby airports",
     "drivingHeading": "Driving from BWI",
     "budgetLodging": "Budget lodging"
+  },
+  "Anniversary": {
+    "bannerLabel": "50 Years!",
+    "bannerText": "Celebrating 50 years of CAC North America — join us October 10, 2026 at CAC Village.",
+    "bannerCta": "Learn more",
+    "dismissLabel": "Dismiss",
+    "opensInNewTab": " (opens in a new tab)"
   },
   "Archive": {
     "title": "Past Conventions",
