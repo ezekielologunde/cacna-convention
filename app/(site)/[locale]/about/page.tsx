@@ -2,7 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEdition } from "@/lib/editions";
 import { getActivePricingForEdition } from "@/lib/pricing";
-import { AboutTabs } from "@/components/about/AboutTabs";
+import { AboutContent } from "@/components/about/AboutContent";
 import { PromoBanner } from "@/components/register/PromoBanner";
 import { PageHero } from "@/components/ui/PageHero";
 import { leadership } from "@/lib/content/leadership";
@@ -38,7 +38,8 @@ export default async function AboutPage({
     <>
       <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
       <PageHero eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} tone="teal" />
-      <AboutTabs
+      <AboutContent
+        locale={locale}
         leadership={leadership}
         committee={committee}
         aboutConvention={aboutConvention}
