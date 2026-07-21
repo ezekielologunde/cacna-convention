@@ -105,7 +105,7 @@ export function PrimaryNav() {
             alt=""
             width={44}
             height={44}
-            className="h-11 w-11 flex-none rounded-xl object-cover"
+            className="h-11 w-11 flex-none rounded-full object-cover"
             priority
           />
           <span className="flex min-w-0 flex-col leading-none">
@@ -214,7 +214,12 @@ export function PrimaryNav() {
               {t("give")}
             </Button>
           </span>
-          <Button href={`/${locale}/register`} variant="primary" aria-label={t("registerCta")}>
+          <Button
+            href={`/${locale}/register`}
+            variant="primary"
+            aria-label={t("registerCta")}
+            style={{ background: "var(--gradient-cta-gold)", color: "#16121a" }}
+          >
             <span aria-hidden="true" className="sm:hidden">{t("register")}</span>
             <span aria-hidden="true" className="hidden sm:inline">{t("registerCta")}</span>
           </Button>

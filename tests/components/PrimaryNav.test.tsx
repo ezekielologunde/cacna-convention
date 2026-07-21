@@ -51,12 +51,12 @@ describe("PrimaryNav", () => {
     // distinct from the bare "Register" text link this nav used to also
     // render alongside it.
     expect(screen.queryByRole("link", { name: "Register" })).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Register Now" })).toHaveAttribute("href", "/en/register");
+    expect(screen.getByRole("link", { name: "Register Now →" })).toHaveAttribute("href", "/en/register");
   });
 
   it("renders a dominant Register Now CTA and a secondary Give button", () => {
     renderNav();
-    expect(screen.getByRole("link", { name: "Register Now" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Register Now →" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Give" })).toBeInTheDocument();
   });
 

@@ -61,6 +61,12 @@
    * theme-invariant. Same token names as the sibling CACNA site.
    */
   --gradient-cta: linear-gradient(100deg, #a81430 0%, #c81e3a 50%, #7a1128 100%); /* min white 5.67:1 */
+  /* Red-to-gold, matching cacnorthamerica.vercel.app's own CTA pill --
+   * pairs with dark (#16121a) text, not white, since the gold end fails
+   * white-text contrast (~1.5:1) per the --color-gold comment below. Used
+   * only for the nav's Register button, not Button's shared `primary`
+   * variant (which stays on the all-red --gradient-cta everywhere else). */
+  --gradient-cta-gold: linear-gradient(100deg, #c81e3a 0%, #fdc841 100%);
   --gradient-hero: linear-gradient(150deg, #c81e3a 0%, #8f1530 55%, #4a0c1c 100%); /* min white 5.67:1, min mist 5.04:1 */
   --gradient-hero-alt: linear-gradient(150deg, #2d42c9 0%, #1f2f96 55%, #121a52 100%); /* min white 7.68:1, min mist 6.82:1 */
   --gradient-band: linear-gradient(135deg, #16121a 0%, #241f2e 55%, #0a080c 100%); /* dark ink band, e.g. Watch section */

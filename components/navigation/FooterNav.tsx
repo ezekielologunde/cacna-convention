@@ -66,7 +66,7 @@ export async function FooterNav({ locale }: { locale: string }) {
                 alt=""
                 width={40}
                 height={40}
-                className="h-10 w-10 flex-none rounded-lg object-cover"
+                className="h-10 w-10 flex-none rounded-full object-cover"
               />
               <span className="flex min-w-0 flex-col leading-none">
                 <span className="truncate text-[9px] font-bold tracking-[0.15em] text-[var(--color-mist)] uppercase">
