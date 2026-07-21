@@ -1,25 +1,24 @@
-import { Unbounded, Hanken_Grotesk } from "next/font/google";
+import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
 
 // Shared across both root layouts (app/(site)/[locale]/layout.tsx and
 // app/(admin)/layout.tsx) so the font loader calls aren't duplicated
 // verbatim between the two multiple-root-layouts trees.
 //
-// Bold, geometric display face (Unbounded) paired with Hanken Grotesk's
-// clean, neutral body face -- Hanken Grotesk replaced Manrope
-// (2026-07-21) as a quieter workhorse that lets Unbounded carry the
-// page's personality. The Yoruba orthography this site renders needs
-// precomposed dot-below vowels (ẹ, ọ -- U+1EB9, U+1ECD) and combining
-// tone-mark accents (grave/acute/tilde, U+0300-0304) -- both fonts
-// confirmed to include the "vietnamese" subset (Google Fonts buckets this
-// diacritic coverage there, not under "latin-ext"), verified via each
-// font's Google Fonts metadata endpoint (fonts.google.com/metadata/fonts/
-// <family>) before picking Hanken Grotesk over Figtree, which lacks it.
-export const displayFont = Unbounded({
+// Matches the sibling cacnorthamerica.vercel.app rebuild's own font stack
+// exactly (confirmed via getComputedStyle on its live site, 2026-07-21):
+// Bricolage Grotesque for headings, Plus Jakarta Sans for body. Both
+// fonts' glyph sets were checked directly on fonts.google.com/specimen/.../glyphs
+// and confirmed to include the precomposed Yoruba dot-below vowels (ẹ, ọ --
+// U+1EB9, U+1ECD) this site's Yoruba content needs, plus the broader
+// combining-diacritic coverage Vietnamese's tone-mark system exercises
+// (which is why the "vietnamese" subset is what carries this coverage in
+// Google Fonts' bucketing, not "latin-ext").
+export const displayFont = Bricolage_Grotesque({
   variable: "--font-heading",
   subsets: ["latin", "vietnamese"],
 });
 
-export const bodyFont = Hanken_Grotesk({
+export const bodyFont = Plus_Jakarta_Sans({
   variable: "--font-body",
   subsets: ["latin", "vietnamese"],
 });
