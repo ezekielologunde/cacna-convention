@@ -4,12 +4,13 @@ import { render, screen } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import messages from "../../messages/en.json";
 import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
-import {
-  christianEducationMaterials,
-  conventionApparelDemo,
-  goodWomenApparelDemo,
-  youthApparelDemo,
-} from "../../lib/content/store-items";
+import { christianEducationMaterials } from "../../lib/content/store-items";
+
+const STORE_PRODUCTS = [
+  { id: "p1", slug: "convention-tshirt-2026", category: "convention", name: "2026 Convention T-Shirt", price_cents: 2000, sizes: ["S", "M", "L"], active: true, sort_order: 1, created_at: "" },
+  { id: "p2", slug: "good-women-tee", category: "good_women", name: "Good Women Association Tee", price_cents: 2200, sizes: ["S", "M", "L"], active: true, sort_order: 1, created_at: "" },
+  { id: "p3", slug: "youth-tee", category: "youth", name: "Youth & Young Adult Tee", price_cents: 1800, sizes: ["S", "M", "L"], active: true, sort_order: 1, created_at: "" },
+];
 
 const createClientMock = vi.fn();
 vi.mock("@/lib/supabase/server", () => ({
@@ -20,12 +21,20 @@ vi.mock("@/lib/supabase/server", () => ({
 // edition" -- RegisterCta (now rendered at the bottom of this page) calls
 // createClient()/getActiveEdition() unconditionally on every render.
 function mockNoActiveEdition() {
+  // Editions chain: .select().in().order().limit().maybeSingle()
   const maybeSingleMock = vi.fn().mockResolvedValue({ data: null, error: null });
   const limitMock = vi.fn(() => ({ maybeSingle: maybeSingleMock }));
-  const orderMock = vi.fn(() => ({ limit: limitMock }));
-  const inMock = vi.fn(() => ({ order: orderMock }));
+  const editionOrderMock = vi.fn(() => ({ limit: limitMock }));
+  const inMock = vi.fn(() => ({ order: editionOrderMock }));
+
+  // store_products chain: .select().eq().order().order() resolves directly
+  const secondOrderMock = vi.fn().mockResolvedValue({ data: STORE_PRODUCTS, error: null });
+  const firstOrderMock = vi.fn(() => ({ order: secondOrderMock }));
+  const eqMock = vi.fn(() => ({ order: firstOrderMock }));
+
   createClientMock.mockResolvedValue({
-    from: () => ({ select: () => ({ in: inMock }) }),
+    from: (table: string) =>
+      table === "store_products" ? { select: () => ({ eq: eqMock }) } : { select: () => ({ in: inMock }) },
   });
 }
 
@@ -103,7 +112,7 @@ describe("StorePage", () => {
     ).toHaveAttribute("href", "https://www.cacnachristianeducation.com/shop");
   });
 
-  it("renders each apparel category's demo items, all clearly labeled Demo", async () => {
+  it("renders each apparel category's real products from store_products, with add-to-cart controls", async () => {
     mockNoActiveEdition();
 
     const { default: StorePage } = await import("../../app/(site)/[locale]/store/page");
@@ -118,14 +127,14 @@ describe("StorePage", () => {
     ).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Youth & Young Adult Tees" })).toBeInTheDocument();
 
-    const allDemoItems = [...conventionApparelDemo, ...goodWomenApparelDemo, ...youthApparelDemo];
-    for (const item of allDemoItems) {
-      expect(screen.getByText(item.name)).toBeInTheDocument();
+    for (const product of STORE_PRODUCTS) {
+      expect(screen.getByText(product.name)).toBeInTheDocument();
     }
 
-    // One "Demo" badge per demo item -- never presented as real, purchasable
-    // inventory (no Shopify connection is authorized yet).
-    expect(screen.getAllByText("Demo")).toHaveLength(allDemoItems.length);
+    // Real, purchasable inventory now -- an "Add" button per product, no
+    // "Demo" badge.
+    expect(screen.getAllByRole("button", { name: "Add" })).toHaveLength(STORE_PRODUCTS.length);
+    expect(screen.queryByText("Demo")).not.toBeInTheDocument();
   });
 
   it("renders the RegisterCta band since registration isn't open yet", async () => {

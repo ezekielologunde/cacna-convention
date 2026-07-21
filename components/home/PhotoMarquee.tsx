@@ -24,10 +24,7 @@ export async function PhotoMarquee() {
   return (
     <section className="overflow-hidden py-12 sm:py-16" style={{ background: "var(--color-bg)" }}>
       <div className="mb-8 px-6 text-center">
-        <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-red-text)] uppercase">
-          {t("marqueeKicker")}
-        </span>
-        <h2 className="mt-2 font-display text-2xl tracking-tight text-[var(--color-fg)] sm:text-3xl">
+        <h2 className="font-display text-2xl tracking-tight text-[var(--color-fg)] sm:text-3xl">
           {t("marqueeHeading")}
         </h2>
       </div>

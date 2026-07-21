@@ -64,7 +64,7 @@ export default async function PlanYourVisitPage({
   return (
     <div>
       <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
-      <PageHero title={t("title")} />
+      <PageHero title={t("title")} photoSrc="/photos/gallery/IMG-20250719-WA0047.jpg" />
       <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <section>
           <h2 className="font-display text-xl text-[var(--color-fg)]">{t("travelHeading")}</h2>

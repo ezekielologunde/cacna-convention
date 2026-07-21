@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { HeartHandshake } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
+import { PhotoStrip } from "@/components/ui/PhotoStrip";
 import { RegisterCta } from "@/components/register/RegisterCta";
-import { AgendaTable } from "@/components/schedule/AgendaTable";
+import { AgendaTimeline } from "@/components/schedule/AgendaTimeline";
+import { PersonCard } from "@/components/ui/PersonCard";
 import { ministersWivesConference, ministersWivesSchedule } from "@/lib/content/ministers-wives-conference";
+import { mainGalleryPhotos } from "@/lib/content/gallery";
 import { pageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
@@ -30,21 +34,18 @@ export default async function MinistersWivesPage({
 
   return (
     <>
-      <PageHero title={t("title")} />
+      {/* tone="red": Ministers' Wives is a family/nurture ministry, grouped
+          with Children and Good Women -- blue is reserved for the
+          structured/institutional ministries (CACMA, Business Group,
+          Youth, Christian Education). */}
+      <PageHero title={t("title")} tone="red" icon={HeartHandshake} photoSrc="/photos/gallery/IMG-20250719-WA0048.jpg" />
+      <PhotoStrip photos={mainGalleryPhotos.slice(12, 15)} caption="From the 2025 convention" />
       <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <section>
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("executiveHeading")}</h2>
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
             {ministersWivesConference.executiveMembers.map((member) => (
-              <li
-                key={member.name}
-                className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
-              >
-                <p className="font-semibold text-[var(--color-fg)]">{member.name}</p>
-                {member.role && (
-                  <p className="mt-1 text-sm text-[var(--color-muted)]">{member.role}</p>
-                )}
-              </li>
+              <PersonCard key={member.name} name={member.name} role={member.role} tone="red" />
             ))}
           </ul>
         </section>
@@ -56,11 +57,12 @@ export default async function MinistersWivesPage({
                 {session.dayLabel} · {session.timeRange}
               </h2>
               <div className="mt-3">
-                <AgendaTable
+                <AgendaTimeline
                   items={session.agenda}
                   timeLabel={t("timeLabel")}
                   programLabel={t("eventLabel")}
                   speakerLabel={t("speakerLabel")}
+                  tone="red"
                 />
               </div>
             </div>

@@ -35,8 +35,17 @@ const createServiceClientMock = vi.fn(() => ({
     throw new Error(`unexpected table ${table}`);
   },
 }));
+// The route also checks for a signed-in attendee session (to link the
+// registration to their account) via a second, independent client — mocked
+// here as always-signed-out so every existing anonymous-registration test
+// keeps its prior behavior unchanged.
+const createAttendeeClientMock = vi.fn(async () => ({
+  auth: { getUser: vi.fn().mockResolvedValue({ data: { user: null } }) },
+}));
+
 vi.mock("@/lib/supabase/server", () => ({
   createServiceClient: createServiceClientMock,
+  createAttendeeClient: createAttendeeClientMock,
 }));
 
 const checkoutSessionsCreateMock = vi.fn();

@@ -32,9 +32,21 @@
     "themeLabel": "Àwọ̀",
     "signedInHeading": "O ti wọlé",
     "signOutCta": "Jáde",
+    "signingOutCta": "Ń jáde…",
     "signInHeading": "Wá ìforúkọsílẹ̀ rẹ",
     "signInPrompt": "Wọlé láti wá ìforúkọsílẹ̀ tí o ti ṣe, láìsí àìní ọ̀nà ìjẹ́rìísí rẹ.",
-    "signInCta": "Wọlé"
+    "signInCta": "Wọlé",
+    "profileHeading": "Àkọsílẹ̀ Rẹ",
+    "fullNameLabel": "Orúkọ Kíkún",
+    "saveCta": "Fi Pamọ́",
+    "savingCta": "Ń fi pamọ́…",
+    "saveSuccess": "A ti fi pamọ́",
+    "saveError": "Àṣìṣe kan ṣẹlẹ̀. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i.",
+    "registrationsHeading": "Àwọn Ìforúkọsílẹ̀ Mi",
+    "noRegistrations": "O kò tíì ní ìforúkọsílẹ̀ kankan.",
+    "ordersHeading": "Àwọn Ìbẹ̀wò Ilé Ìtajà Mi",
+    "noOrders": "O kò tíì ní ìbẹ̀wò ilé ìtajà kankan.",
+    "viewCta": "Wò ó"
   },
   "AccountLogin": {
     "title": "Wọlé",
@@ -43,7 +55,8 @@
     "submitting": "Ń firánṣẹ́…",
     "errorMessage": "Àṣìṣe ṣẹlẹ̀ nígbà fífi ìjápọ̀ ránṣẹ́. Jọ̀wọ́ tún gbìyànjú.",
     "checkEmailTitle": "Ṣàyẹ̀wò í-meèlì rẹ",
-    "checkEmailBody": "Bí í-meèlì yẹn bá wà lára àkọsílẹ̀ wa, a ti fi ìjápọ̀ kan ránṣẹ́ fún ọ láti wọlé — ó lè gba ìṣẹ́jú kan láti dé. O lè ti táàbù yìí."
+    "checkEmailBody": "Bí í-meèlì yẹn bá wà lára àkọsílẹ̀ wa, a ti fi ìjápọ̀ kan ránṣẹ́ fún ọ láti wọlé — ó lè gba ìṣẹ́jú kan láti dé. O lè ti táàbù yìí.",
+    "captchaPending": "Parí ìmúdájú tí ó wà lókè láti tẹ̀síwájú."
   },
   "Search": {
     "open": "Wá",
@@ -62,7 +75,9 @@
     "attendHeading": "Kópa",
     "connectHeading": "Darapọ̀",
     "contactHeading": "Kàn Sí Wa",
-    "copyright": "© {year} Àpéjọ CACNA"
+    "copyright": "© {year} Àpéjọ CACNA",
+    "watchOnYoutube": "Wo lórí YouTube",
+    "backToTop": "Padà sí Òkè"
   },
   "Home": {
     "title": "Àpéjọ CACNA",
@@ -73,6 +88,7 @@
     "contactLinkText": "kàn sí wa",
     "learnMore": "Kọ́ Ẹ̀kọ́ Síi",
     "viewSchedule": "Wo Ìtòlẹ́sẹ̀",
+    "scrollCta": "Yíjú",
     "upcomingHeading": "Àkókò àti Ìṣẹ̀lẹ̀ Àpéjọ",
     "upcomingCta": "Wo Gbogbo Àwọn Ìṣẹ̀lẹ̀ Tí Ń Bọ̀",
     "establishedBadge": "Ìdásílẹ̀ {year}",
@@ -111,6 +127,42 @@
     "watchMoreHeading": "Àwọn fídíò tuntun síi",
     "marqueeKicker": "Ìgbésí Ayé Kárí CACNA",
     "marqueeHeading": "Àwọn àkókò láti ọ̀sẹ̀ àpéjọ."
+  },
+  "NextSteps": {
+    "registerLabel": "Forúkọsílẹ̀",
+    "registerDesc": "Bẹ̀rẹ̀ ìwé ìbéèrè rẹ",
+    "planVisitLabel": "Ṣètò Ìbẹ̀wò Rẹ",
+    "planVisitDesc": "Àwọn hotẹ́lì, ìrìnàjò àti òfin",
+    "giveLabel": "Fi Ẹ̀bùn",
+    "giveDesc": "Ràn Abúlé CAC lọ́wọ́",
+    "programsLabel": "Ìtòlẹ́sẹ̀ Kíkún",
+    "programsDesc": "Gbogbo ìpàdé, ní gbogbo ọjọ́"
+  },
+  "ProgramGrid": {
+    "sectionLabel": "Àwọn Ìpàdé Méje",
+    "heading": "Wá ètò rẹ.",
+    "intro": "Olùkópa kọ̀ọ̀kan ní ilé fún ọ̀sẹ̀ náà — àwọn ìpàdé pàtàkì, olùkọ́, àti ìdàpọ̀ fún gbogbo ọjọ́-orí àti ìpè.",
+    "cta": "Wo gbogbo ìtòlẹ́sẹ̀",
+    "cardCta": "Ṣàwárí"
+  },
+  "FindYourPath": {
+    "heading": "Wá ọ̀nà rẹ.",
+    "intro": "Ibikíbi tí o ti ń bẹ̀rẹ̀, èyí nìkan ni ohun tí o gbọ́dọ̀ ṣe tẹ̀lé.",
+    "firstTimeLabel": "Ẹni tí ó Kọ́kọ́ Wá",
+    "firstTimeBody": "Ṣé o jẹ́ tuntun sí CACNA? Èyí ni ohun tí o gbọ́dọ̀ ṣe kí o tó dé — kò sí ìrírí àpéjọ tí a nílò tẹ́lẹ̀.",
+    "returningLabel": "Ọmọ Ẹgbẹ́ Tí Ó Ń Padà Wá",
+    "returningBody": "Ṣé o mọ ìlànà rẹ̀ tẹ́lẹ̀? Èyí ni ohun tuntun fún ọdún yìí àti bí a ṣe ń forúkọsílẹ̀.",
+    "groupLeaderLabel": "Aṣíwájú Ìjọ tàbí Ẹgbẹ́",
+    "groupLeaderBody": "Ṣé o ń mú ìjọ, iṣẹ́-ìsìn, tàbí ẹbí rẹ wá? Fi orúkọ sílẹ̀ papọ̀ kí o sì ṣètò ìrìnàjò náà.",
+    "ministerLabel": "Wòlíì tàbí Àlejò Oníwàásù",
+    "ministerBody": "Ṣé o ń ṣiṣẹ́ ìsìn tàbí ìránṣẹ́ ní ọdún yìí? Wá ìtòlẹ́sẹ̀ kí o sì jẹ́ kí a mọ̀ pé o ń bọ̀.",
+    "linkRegister": "Forúkọsílẹ̀ nísisìyí",
+    "linkPlanVisit": "Ṣètò ìbẹ̀wò rẹ",
+    "linkSchedule": "Wo ìtòlẹ́sẹ̀",
+    "linkNews": "Wo ohun tuntun",
+    "linkGive": "Fi ẹ̀bùn",
+    "linkContact": "Kàn sí wa",
+    "linkAbout": "Nípa CACNA"
   },
   "About": {
     "eyebrow": "Nípa",
@@ -218,16 +270,28 @@
   "Store": {
     "title": "Ilé Ìtajà",
     "intro": "Àwọn ohun èlò ilé ẹ̀kọ́ ọjọ́ ìsimi àti ìwé àdúrà láti Ẹ̀ka Ẹ̀kọ́ Kristẹ́ni CACNA, pẹ̀lú aṣọ àpéjọ.",
+    "shopHeroCta": "Ra aṣọ àpéjọ",
     "materialsHeading": "Àwọn Ohun Èlò Ẹ̀kọ́ Kristẹ́ni",
     "materialsIntro": "Àwọn ohun èlò tí ó wà nísisìyí láti ọ̀dọ̀ Ilé Ìtẹ̀wé Ẹ̀kọ́ Kristẹ́ni CACNA, pẹ̀lú owó gẹ́gẹ́ bí ó ti wà ní ilé ìtajà wọn.",
     "shopCta": "Ra gbogbo ohun èlò",
     "opensInNewTab": " (yóò ṣí ní táàbù tuntun)",
     "apparelHeading": "Aṣọ àti Ọjà",
-    "apparelIntro": "A ń so ilé ìtajà Shopify gidi pọ̀ fún aṣọ àpéjọ, Ẹgbẹ́ Àwọn Ìyá Rere, àti ti àwọn Ọ̀dọ́. Àwọn nǹkan tí ó wà nísàlẹ̀ jẹ́ àwòrán àpẹẹrẹ nìkan, a kò tíì lè rà wọ́n.",
+    "apparelIntro": "Aṣọ àpéjọ, ti Ẹgbẹ́ Àwọn Ìyá Rere, àti ti àwọn Ọ̀dọ́ — fi wọ́n sí kẹ̀kẹ́ rẹ kí o sì sanwó pẹ̀lú Stripe.",
     "conventionApparel": "Aṣọ Àpéjọ",
     "goodWomenApparel": "Aṣọ Ẹgbẹ́ Àwọn Ìyá Rere",
     "youthApparel": "Aṣọ T àwọn Ọ̀dọ́",
-    "demoLabel": "Àpẹẹrẹ"
+    "addCta": "Fi kún",
+    "sizeLabel": "Ìwọ̀n",
+    "cartHeading": "Kẹ̀kẹ́ Rẹ",
+    "emptyCart": "Kẹ̀kẹ́ rẹ ṣófo.",
+    "emptyCartHint": "Fi ohun kan kún un lókè láti bẹ̀rẹ̀.",
+    "removeCta": "Yọ kúrò",
+    "totalLabel": "Àpapọ̀",
+    "nameLabel": "Orúkọ Kíkún",
+    "emailLabel": "Àdírẹ́sì Ímeèlì",
+    "checkoutCta": "Sanwó",
+    "checkingOutCta": "Ń tọ́ka sí ìsanwó…",
+    "checkoutError": "Àṣìṣe kan ṣẹlẹ̀ nígbà ìbẹ̀rẹ̀ ìsanwó. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i."
   },
   "PlanYourVisit": {
     "title": "Ṣe Ètò Ìbẹ̀wò Rẹ",
@@ -248,7 +312,12 @@
   "Archive": {
     "title": "Àwọn Àpéjọ Àtijọ́",
     "sessionCount": "Ìpàdé {count}",
-    "empty": "Kò tíì sí àpéjọ àtijọ́ kankan."
+    "empty": "Kò tíì sí àpéjọ àtijọ́ kankan.",
+    "feesHeading": "Iye Owó Tí Ó Náwó",
+    "feeAdult": "Àgbà",
+    "feeYoungAdult": "Ọ̀dọ́mọdé Àgbà",
+    "feeChild": "Ọmọdé",
+    "free": "Ọ̀fẹ́"
   },
   "Contact": {
     "title": "Kàn Sí Wa",
@@ -264,15 +333,29 @@
   },
   "Give": {
     "title": "Ẹ̀bùn",
-    "intro": "Ẹ̀bùn fún àwọn iṣẹ́-ìsìn CACNA, Àpéjọ Ọdọọdún, àti Iṣẹ́ Ilé Ẹ̀wádún CAC ni a ń ṣe ní ojú-òpó wẹ́ẹ̀bù àkọ́kọ́ wa.",
+    "intro": "Gbogbo àpéjọ ni a ń ṣe ní Abúlé CAC — gbogbo ẹ̀bùn tí o fi fún un sì ń ràn wá lọ́wọ́ láti san gbèsè ilẹ̀ tí o óò dúró lé.",
     "cta": "Fi ẹ̀bùn sí cacnorthamerica.com",
-    "opensInNewTab": " (yóò ṣí ní táàbù tuntun)"
+    "opensInNewTab": " (yóò ṣí ní táàbù tuntun)",
+    "villageEyebrow": "Abúlé CAC",
+    "villageHeading": "Ràn wá lọ́wọ́ láti san gbèsè Abúlé CAC",
+    "villageBody": "Ràn wá lọ́wọ́ láti san gbèsè (mortgage) Abúlé CAC, tí ó wà ní Blue Ridge Summit, PA — ilé Àpéjọ Ọdọọdún wa, lọ́dọọdún. Jọ̀wọ́ fi ẹ̀bùn rẹ ránṣẹ́ sí àkọọ́lẹ̀ tí ó wà nísàlẹ̀.",
+    "chaseLabel": "Chase Bank",
+    "chaseValue": "Ac# 823986275",
+    "zelleLabel": "Zelle",
+    "zelleValue": "cacna@hotmail.com",
+    "moreWaysHeading": "Àwọn ọ̀nà mìíràn láti fi ẹ̀bùn",
+    "moreWaysBody": "Àwọn iṣẹ́ mìíràn ti CACNA — Iṣẹ́ Ilé Ẹ̀wádún CAC àti Iṣẹ́ Ìrètí Fún Gbogbo Ènìyàn — ń bẹ ní ojú-òpó wẹ́ẹ̀bù àkọ́kọ́ wa, pẹ̀lú àwọn ọ̀nà fóònù àti ímeèlì bí ẹ̀bùn oníayélujára kò bá ṣiṣẹ́ fún báńkì rẹ.",
+    "moreWaysCta": "Wo gbogbo àwọn ọ̀nà ẹ̀bùn",
+    "registerTieHeading": "Fi ẹ̀bùn, kí o sì wá.",
+    "registerTieBody": "Gbogbo ẹ̀bùn sí Abúlé CAC ń ràn wá lọ́wọ́ láti gbàlejò àpéjọ tí o ń gbèrò láti lọ. Bí o kò bá tí forúkọsílẹ̀, dá àyè rẹ sílẹ̀ ní abúlé tí o ń ràn wá lọ́wọ́ láti san gbèsè rẹ̀.",
+    "registerTieCta": "Forúkọsílẹ̀ fún Àpéjọ"
   },
   "News": {
     "title": "Ìròyìn àti Ìṣẹ̀lẹ̀",
     "intro": "Ìkéde àti àwọn ìṣẹ̀lẹ̀ tí ń bọ̀ láti ọ̀dọ̀ CACNA.",
     "moreInfoCta": "Wo àwọn kúlẹ̀kúlẹ̀",
     "opensInNewTab": " (yóò ṣí ní táàbù tuntun)",
+    "upcomingHeading": "Ń bọ̀",
     "saveTheDateHeading": "Kọ Ọjọ́ Sílẹ̀",
     "fromEventsHeading": "Àwọn Ìṣẹ̀lẹ̀ Mìíràn láti cacnorthamerica.com",
     "fromBlogHeading": "Láti Bulọ́ọ̀gì CACNA",
@@ -293,6 +376,14 @@
   },
   "Register": {
     "title": "Forúkọsílẹ̀",
+    "heroBadge": "{dateRange} · {venue}",
+    "heroHeading": "Forúkọsílẹ̀ fún CACNA {year}",
+    "heroThemeLabel": "Kókó Ọ̀rọ̀ Ọdún Yìí",
+    "heroBodyOpen": "Ìforúkọsílẹ̀ ẹnìkọ̀ọ̀kan àti ti ẹgbẹ́ ti ṣí nísisìyí — dá àyè rẹ sílẹ̀ ní Abúlé CAC kí owó tó lọ sókè.",
+    "heroBodyComingSoon": "Ìforúkọsílẹ̀ fún {dateRange} yóò ṣí ní oṣù October 2026. Fi ojú-ìwé yìí pamọ́ — owó àti àwọn ìtọ́nisọ́nà tí ó wà nísàlẹ̀ yóò ṣíṣẹ́ ní àsìkò kan náà tí ó bá ṣí.",
+    "heroUrgency": "Owó Àgbà jẹ́ ${price} títí di {date} — forúkọsílẹ̀ nísisìyí kí ó tó lọ sókè.",
+    "heroCtaOpen": "Forúkọsílẹ̀ nísisìyí",
+    "heroCtaComingSoon": "Jẹ́ kí n mọ̀ nígbà tí ó bá ṣí",
     "guidelinesHeading": "Àwọn Ìtọ́nisọ́nà Ìforúkọsílẹ̀",
     "paymentOptionsHeading": "Àwọn Ọ̀nà Sísanwó",
     "individualTab": "Ẹnìkọ̀ọ̀kan",
@@ -328,6 +419,22 @@
   },
   "RegisterConfirmation": {
     "title": "A dúpẹ́ pé o ti forúkọsílẹ̀!",
-    "body": "A ti gba ìforúkọsílẹ̀ rẹ. Ímeèlì ìjẹ́rìísí ń bọ̀ wá."
+    "body": "A ti gba ìforúkọsílẹ̀ rẹ. Ímeèlì ìjẹ́rìísí ń bọ̀ wá.",
+    "notFoundTitle": "A kò rí ìforúkọsílẹ̀ yẹn",
+    "notFoundBody": "Ìjápọ̀ yìí lè ti gbó, tàbí kí ìforúkọsílẹ̀ náà má sí mọ́. Bí o bá ṣẹ̀ṣẹ̀ parí ìsanwó, ṣàyẹ̀wò í-meèlì rẹ fún ìjẹ́rìísí — bí bẹ́ẹ̀ kọ́, kàn sí wa kí a ṣèrànwọ́.",
+    "statusPending": "Ń dúró",
+    "statusPaid": "A ti sanwó",
+    "statusFailed": "Kò yege",
+    "statusRefunded": "A ti dá owó padà"
+  },
+  "StoreConfirmation": {
+    "title": "A dúpẹ́ fún ìbẹ̀wò rẹ!",
+    "body": "A ti gba ìbẹ̀wò rẹ. Ímeèlì ìjẹ́rìísí ń bọ̀ wá.",
+    "notFoundTitle": "A kò rí ìbẹ̀wò yẹn",
+    "notFoundBody": "Ìjápọ̀ yìí lè ti gbó, tàbí kí ìbẹ̀wò náà má sí mọ́. Bí o bá ṣẹ̀ṣẹ̀ parí ìsanwó, ṣàyẹ̀wò í-meèlì rẹ fún ìjẹ́rìísí — bí bẹ́ẹ̀ kọ́, kàn sí wa kí a ṣèrànwọ́.",
+    "statusPending": "Ń dúró",
+    "statusPaid": "A ti sanwó",
+    "statusFailed": "Kò yege",
+    "statusRefunded": "A ti dá owó padà"
   }
 }

@@ -44,10 +44,7 @@ export async function AboutContent({
       <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
         <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
           <Reveal className="text-center">
-            <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-red-text)] uppercase">
-              {t("foundationKicker")}
-            </span>
-            <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">
+            <h2 className="mx-auto max-w-2xl font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">
               {t("missionHeading")}
             </h2>
           </Reveal>
@@ -103,10 +100,7 @@ export async function AboutContent({
         />
         <div className="relative mx-auto max-w-2xl text-center">
           <Reveal>
-            <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-mist)] uppercase">
-              {t("familyKicker")}
-            </span>
-            <h2 className="mt-4 font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h2 className="font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
               {t("familyHeading")}
             </h2>
           </Reveal>
@@ -115,7 +109,16 @@ export async function AboutContent({
           </Reveal>
           <Reveal delay={160}>
             <div className="mt-8 flex justify-center">
-              <Button href={`/${locale}/schedule`} variant="primary" className="bg-white text-[var(--color-red-text)] shadow-none hover:bg-white/90" style={{ background: "#fff" }}>
+              {/* Explicit `style` overrides Button's own primary-variant gradient (inline
+                  styles always win over the `variantStyle` it applies) -- this button must
+                  render white regardless of theme since it sits on a dark gradient hero,
+                  same theme-invariant reasoning as the site's other white-on-gradient CTAs. */}
+              <Button
+                href={`/${locale}/schedule`}
+                variant="primary"
+                className="text-[var(--color-red-text)] shadow-none hover:bg-white/90"
+                style={{ background: "#fff" }}
+              >
                 {t("familyCta")}
               </Button>
             </div>
@@ -140,20 +143,10 @@ export async function AboutContent({
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white">{history.summary}</p>
           </Reveal>
-          <Reveal delay={100}>
-            <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3">
-              {[
-                { value: String(history.foundingYear), label: t("statFoundedLabel") },
-                { value: String(leadership.length), label: t("statLeadersLabel") },
-                { value: String(committee.length), label: t("statCommitteeLabel") },
-              ].map((stat) => (
-                <div key={stat.label} className="rounded-2xl bg-white/10 px-6 py-6 backdrop-blur-sm">
-                  <div className="font-display text-3xl text-white">{stat.value}</div>
-                  <div className="mt-1 text-xs font-bold tracking-wide text-[var(--color-mist)] uppercase">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
+          {/* The founded-year/leaders/committee stat trio already appears in the
+              homepage hero — repeating the identical three numbers here, directly
+              above the real leadership and committee rosters this same page
+              renders below, was pure redundancy rather than new information. */}
           <Reveal delay={160}>
             <p className="mt-8 text-white">
               {t("readFullStory")}{" "}
@@ -289,10 +282,7 @@ export async function AboutContent({
       <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
         <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
           <Reveal className="text-center">
-            <span className="text-xs font-bold tracking-[0.2em] text-[var(--color-blue-text)] uppercase">
-              {t("exploreKicker")}
-            </span>
-            <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">
+            <h2 className="mx-auto max-w-2xl font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">
               {t("exploreHeading")}
             </h2>
           </Reveal>

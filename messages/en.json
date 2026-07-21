@@ -32,9 +32,21 @@
     "themeLabel": "Theme",
     "signedInHeading": "Signed in",
     "signOutCta": "Sign out",
+    "signingOutCta": "Signing out…",
     "signInHeading": "Find a registration",
     "signInPrompt": "Sign in to look up a registration you already submitted, without needing your confirmation link.",
-    "signInCta": "Sign in"
+    "signInCta": "Sign in",
+    "profileHeading": "Profile",
+    "fullNameLabel": "Full name",
+    "saveCta": "Save",
+    "savingCta": "Saving…",
+    "saveSuccess": "Saved",
+    "saveError": "Something went wrong. Please try again.",
+    "registrationsHeading": "My registrations",
+    "noRegistrations": "You don't have any registrations yet.",
+    "ordersHeading": "My store orders",
+    "noOrders": "You don't have any store orders yet.",
+    "viewCta": "View"
   },
   "AccountLogin": {
     "title": "Sign in",
@@ -43,7 +55,8 @@
     "submitting": "Sending…",
     "errorMessage": "Something went wrong sending the link. Please try again.",
     "checkEmailTitle": "Check your email",
-    "checkEmailBody": "If that email is on file, we've sent a link to sign in — it may take a minute to arrive. You can close this tab."
+    "checkEmailBody": "If that email is on file, we've sent a link to sign in — it may take a minute to arrive. You can close this tab.",
+    "captchaPending": "Complete the verification above to continue."
   },
   "Search": {
     "open": "Search",
@@ -62,7 +75,9 @@
     "attendHeading": "Attend",
     "connectHeading": "Connect",
     "contactHeading": "Contact",
-    "copyright": "© {year} CACNA Convention"
+    "copyright": "© {year} CACNA Convention",
+    "watchOnYoutube": "Watch on YouTube",
+    "backToTop": "Back to top"
   },
   "Home": {
     "title": "CACNA Convention",
@@ -73,6 +88,7 @@
     "contactLinkText": "contact us",
     "learnMore": "Learn More",
     "viewSchedule": "View Schedule",
+    "scrollCta": "Scroll",
     "upcomingHeading": "The Convention Timeline",
     "upcomingCta": "See All Upcoming Programs",
     "establishedBadge": "Est. {year}",
@@ -111,6 +127,42 @@
     "watchMoreHeading": "More recent uploads",
     "marqueeKicker": "Life Across CACNA",
     "marqueeHeading": "Moments from convention week."
+  },
+  "NextSteps": {
+    "registerLabel": "Register",
+    "registerDesc": "Start your application",
+    "planVisitLabel": "Plan Your Visit",
+    "planVisitDesc": "Hotels, travel & rules",
+    "giveLabel": "Give",
+    "giveDesc": "Support CAC Village",
+    "programsLabel": "Full Schedule",
+    "programsDesc": "Every session, every day"
+  },
+  "ProgramGrid": {
+    "sectionLabel": "Seven Sub-Conferences",
+    "heading": "Find your program.",
+    "intro": "Every attendee has a home base for the week — dedicated sessions, teachers, and fellowship for every age and calling.",
+    "cta": "View full schedule",
+    "cardCta": "Explore"
+  },
+  "FindYourPath": {
+    "heading": "Find your path.",
+    "intro": "Wherever you're starting from, here's exactly what to do next.",
+    "firstTimeLabel": "First-Time Attendee",
+    "firstTimeBody": "New to CACNA? Here's what to do before you arrive — no prior convention experience needed.",
+    "returningLabel": "Returning Member",
+    "returningBody": "Know the rhythm already? Here's what's new for this year and how to get registered.",
+    "groupLeaderLabel": "Group or Church Leader",
+    "groupLeaderBody": "Bringing your church, ministry, or family group? Register together and plan the trip.",
+    "ministerLabel": "Minister or Guest Speaker",
+    "ministerBody": "Ministering or serving this year? Find the schedule and let us know you're coming.",
+    "linkRegister": "Register now",
+    "linkPlanVisit": "Plan your visit",
+    "linkSchedule": "View schedule",
+    "linkNews": "See what's new",
+    "linkGive": "Give",
+    "linkContact": "Contact us",
+    "linkAbout": "About CACNA"
   },
   "About": {
     "eyebrow": "About",
@@ -218,16 +270,28 @@
   "Store": {
     "title": "Store",
     "intro": "Sunday school materials and devotionals from CACNA's Christian Education Department, plus convention merchandise.",
+    "shopHeroCta": "Shop convention apparel",
     "materialsHeading": "Christian Education Materials",
     "materialsIntro": "Current items from the CACNA Christian Education Printing Press, with prices as listed on their shop.",
     "shopCta": "Shop all materials",
     "opensInNewTab": " (opens in a new tab)",
     "apparelHeading": "Apparel & Merchandise",
-    "apparelIntro": "A live Shopify store is being connected for convention, Good Women, and Youth & Young Adult apparel. The items below are a design preview, not available for purchase yet.",
+    "apparelIntro": "Convention, Good Women, and Youth & Young Adult apparel — add items to your cart and check out securely with Stripe.",
     "conventionApparel": "Convention Apparel",
     "goodWomenApparel": "Good Women Association Apparel",
     "youthApparel": "Youth & Young Adult Tees",
-    "demoLabel": "Demo"
+    "addCta": "Add",
+    "sizeLabel": "Size",
+    "cartHeading": "Your cart",
+    "emptyCart": "Your cart is empty.",
+    "emptyCartHint": "Add an item above to get started.",
+    "removeCta": "Remove",
+    "totalLabel": "Total",
+    "nameLabel": "Full name",
+    "emailLabel": "Email address",
+    "checkoutCta": "Checkout",
+    "checkingOutCta": "Redirecting…",
+    "checkoutError": "Something went wrong starting checkout. Please try again."
   },
   "PlanYourVisit": {
     "title": "Plan Your Visit",
@@ -248,7 +312,12 @@
   "Archive": {
     "title": "Past Conventions",
     "sessionCount": "{count} sessions",
-    "empty": "No past conventions yet."
+    "empty": "No past conventions yet.",
+    "feesHeading": "What it cost",
+    "feeAdult": "Adults",
+    "feeYoungAdult": "Young Adults",
+    "feeChild": "Children",
+    "free": "Free"
   },
   "Contact": {
     "title": "Contact",
@@ -264,15 +333,29 @@
   },
   "Give": {
     "title": "Give",
-    "intro": "Giving for CACNA's ministries, the Annual Convention, and the CAC Centenary Building Project is handled on our main site.",
+    "intro": "Every convention happens at CAC Village — and every gift toward it helps pay down the very ground you'll be standing on.",
     "cta": "Give on cacnorthamerica.com",
-    "opensInNewTab": " (opens in a new tab)"
+    "opensInNewTab": " (opens in a new tab)",
+    "villageEyebrow": "CAC Village",
+    "villageHeading": "Help pay off CAC Village",
+    "villageBody": "Help pay down the mortgage on CAC Village, Blue Ridge Summit, PA — the home of our Annual Convention, every year. Kindly send your donation to the account below.",
+    "chaseLabel": "Chase Bank",
+    "chaseValue": "Ac# 823986275",
+    "zelleLabel": "Zelle",
+    "zelleValue": "cacna@hotmail.com",
+    "moreWaysHeading": "More ways to give",
+    "moreWaysBody": "CACNA's other campaigns — the CAC Centenary Building Project and the Hope For All Initiative — are on our main site, along with phone and email options if online giving isn't set up for your bank.",
+    "moreWaysCta": "See all giving options",
+    "registerTieHeading": "Give, and come.",
+    "registerTieBody": "Every gift toward CAC Village helps host the very convention you're planning to attend. If you haven't registered yet, secure your spot at the village you're helping pay for.",
+    "registerTieCta": "Register for the Convention"
   },
   "News": {
     "title": "News & Events",
     "intro": "Announcements and upcoming events from CACNA.",
     "moreInfoCta": "See details",
     "opensInNewTab": " (opens in a new tab)",
+    "upcomingHeading": "Upcoming",
     "saveTheDateHeading": "Save the Date",
     "fromEventsHeading": "More Events from cacnorthamerica.com",
     "fromBlogHeading": "From the CACNA Blog",
@@ -293,6 +376,14 @@
   },
   "Register": {
     "title": "Register",
+    "heroBadge": "{dateRange} · {venue}",
+    "heroHeading": "Register for CACNA {year}",
+    "heroThemeLabel": "This year's theme",
+    "heroBodyOpen": "Individual and group registration is open now — secure your spot at CAC Village before rates rise.",
+    "heroBodyComingSoon": "Registration for {dateRange} opens in October 2026. Bookmark this page — pricing and the guidelines below will go live the moment it does.",
+    "heroUrgency": "Adult rate is ${price} through {date} — register now before it goes up.",
+    "heroCtaOpen": "Register now",
+    "heroCtaComingSoon": "Get notified when it opens",
     "guidelinesHeading": "Registration Guidelines",
     "paymentOptionsHeading": "Payment Options",
     "individualTab": "Individual",
@@ -328,6 +419,22 @@
   },
   "RegisterConfirmation": {
     "title": "Thank you for registering!",
-    "body": "We've received your registration. A confirmation email is on its way."
+    "body": "We've received your registration. A confirmation email is on its way.",
+    "notFoundTitle": "We couldn't find that registration",
+    "notFoundBody": "This link may be out of date, or the registration may no longer exist. If you just completed checkout, check your email for a confirmation — otherwise, contact us and we'll help sort it out.",
+    "statusPending": "Pending",
+    "statusPaid": "Paid",
+    "statusFailed": "Failed",
+    "statusRefunded": "Refunded"
+  },
+  "StoreConfirmation": {
+    "title": "Thank you for your order!",
+    "body": "We've received your order. A confirmation email is on its way.",
+    "notFoundTitle": "We couldn't find that order",
+    "notFoundBody": "This link may be out of date, or the order may no longer exist. If you just completed checkout, check your email for a confirmation — otherwise, contact us and we'll help sort it out.",
+    "statusPending": "Pending",
+    "statusPaid": "Paid",
+    "statusFailed": "Failed",
+    "statusRefunded": "Refunded"
   }
 }

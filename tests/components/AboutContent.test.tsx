@@ -52,11 +52,15 @@ describe("AboutContent", () => {
     // The Family
     expect(screen.getByRole("heading", { name: "More than an event. It's family." })).toBeInTheDocument();
 
-    // Heritage
+    // Heritage — the founded-year/leaders/committee stat trio was removed
+    // from this section (it duplicated the homepage hero's identical
+    // numbers directly above the real leadership/committee rosters this
+    // page renders below); the founding year still appears in the
+    // Heritage heading itself.
     expect(screen.getByText(history.summary)).toBeInTheDocument();
-    expect(screen.getByText(String(history.foundingYear))).toBeInTheDocument();
-    expect(screen.getByText(String(leadership.length))).toBeInTheDocument();
-    expect(screen.getByText(String(committee.length))).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: new RegExp(String(history.foundingYear)) })
+    ).toBeInTheDocument();
 
     // Leadership + Committee
     expect(screen.getByText(leadership[0].name)).toBeInTheDocument();

@@ -88,8 +88,20 @@ describe("ArchivePage", () => {
     const activeOrderMock = vi.fn(() => ({ limit: activeLimitMock }));
     const inMock = vi.fn(() => ({ order: activeOrderMock }));
 
+    // The page's own pricing_tiers lookup is a separate `.from("pricing_tiers")`
+    // call that chains `.select().in("edition_id", [...])` straight to a
+    // resolved value (no further chaining), unlike RegisterCta's
+    // `.in("status", [...])` above -- discriminated by table name here so
+    // both resolve correctly. Resolves empty so this test's single edition
+    // renders without a fee block; fee-rendering itself is covered by the
+    // second test below.
+    const tiersInMock = vi.fn().mockResolvedValue({ data: [], error: null });
+
     createClientMock.mockResolvedValue({
-      from: () => ({ select: () => ({ eq: eqMock, in: inMock }) }),
+      from: (table: string) =>
+        table === "pricing_tiers"
+          ? { select: () => ({ in: tiersInMock }) }
+          : { select: () => ({ eq: eqMock, in: inMock }) },
     });
 
     const { default: ArchivePage } = await import("../../app/(site)/[locale]/archive/page");
@@ -139,5 +151,49 @@ describe("ArchivePage", () => {
       "href",
       "/en/register"
     );
+  });
+
+  it("shows a fee summary for editions with pricing_tiers data", async () => {
+    const orderMock = vi.fn().mockResolvedValue({
+      data: [{ id: "e1", year: 2026, theme: "The Bible: God's Message to Man", starts_on: "2026-07-13", ends_on: "2026-07-18" }],
+      error: null,
+    });
+    const eqMock = vi.fn(() => ({ order: orderMock }));
+
+    const activeMaybeSingleMock = vi.fn().mockResolvedValue({ data: null, error: null });
+    const activeLimitMock = vi.fn(() => ({ maybeSingle: activeMaybeSingleMock }));
+    const activeOrderMock = vi.fn(() => ({ limit: activeLimitMock }));
+    const inMock = vi.fn(() => ({ order: activeOrderMock }));
+
+    // Mirrors the real 2026 tiers seeded in
+    // supabase/migrations/0008_seed_pricing_tiers_2026.sql: adult
+    // $125-$250, young_adult $100-$150, child free throughout.
+    const tiersInMock = vi.fn().mockResolvedValue({
+      data: [
+        { edition_id: "e1", category: "adult", price_cents: 12500 },
+        { edition_id: "e1", category: "adult", price_cents: 25000 },
+        { edition_id: "e1", category: "young_adult", price_cents: 10000 },
+        { edition_id: "e1", category: "young_adult", price_cents: 15000 },
+        { edition_id: "e1", category: "child", price_cents: 0 },
+      ],
+      error: null,
+    });
+
+    createClientMock.mockResolvedValue({
+      from: (table: string) =>
+        table === "pricing_tiers"
+          ? { select: () => ({ in: tiersInMock }) }
+          : { select: () => ({ eq: eqMock, in: inMock }) },
+    });
+
+    const { default: ArchivePage } = await import("../../app/(site)/[locale]/archive/page");
+    const Page = await resolveRegisterCta(await ArchivePage({ params: Promise.resolve({ locale: "en" }) }));
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByText("What it cost")).toBeInTheDocument();
+    expect(screen.getByText("$125–$250")).toBeInTheDocument();
+    expect(screen.getByText("$100–$150")).toBeInTheDocument();
+    expect(screen.getByText("Free")).toBeInTheDocument();
   });
 });

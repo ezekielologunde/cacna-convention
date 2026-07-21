@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/ui/PageHero";
+import { ImageLightbox } from "@/components/ui/ImageLightbox";
 import { RegisterCta } from "@/components/register/RegisterCta";
 import { mainGalleryPhotos, childrenGalleryPhotos } from "@/lib/content/gallery";
 import { pageMetadata } from "@/lib/metadata";
@@ -27,48 +27,33 @@ export default async function GalleryPage({
 
   return (
     <>
-      <PageHero title={t("title")} subtitle={t("intro")} />
+      <PageHero title={t("title")} subtitle={t("intro")} photoSrc="/photos/gallery/IMG-20250719-WA0050.jpg" />
       <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-6xl">
       <section>
         <h2 className="font-display text-xl text-[var(--color-fg)]">{t("conventionHeading")}</h2>
-        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-          {mainGalleryPhotos.map((src, i) => (
-            <div
-              key={src}
-              className="relative aspect-square overflow-hidden rounded-xl bg-[var(--color-surface)]"
-            >
-              <Image
-                src={src}
-                // No per-photo captions exist to migrate from the source
-                // gallery (see lib/content/gallery.ts) -- an honest, generic
-                // contextual label beats a fabricated specific one or silence.
-                alt={`Photo ${i + 1} of ${mainGalleryPhotos.length} from the 2025 CACNA Convention`}
-                fill
-                sizes="(min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
-                className="object-cover"
-              />
-            </div>
-          ))}
+        <div className="mt-4">
+          {/* No per-photo captions exist to migrate from the source gallery
+              (see lib/content/gallery.ts) -- an honest, generic contextual
+              label beats a fabricated specific one or silence. Alt text is
+              precomputed here (not a function prop) since ImageLightbox is
+              a Client Component -- functions can't cross that boundary. */}
+          <ImageLightbox
+            photos={mainGalleryPhotos}
+            alts={mainGalleryPhotos.map((_, i) => `Photo ${i + 1} of ${mainGalleryPhotos.length} from the 2025 CACNA Convention`)}
+          />
         </div>
       </section>
 
       <section className="mt-12">
         <h2 className="font-display text-xl text-[var(--color-fg)]">{t("childrenHeading")}</h2>
-        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-          {childrenGalleryPhotos.map((src, i) => (
-            <div
-              key={src}
-              className="relative aspect-square overflow-hidden rounded-xl bg-[var(--color-surface)]"
-            >
-              <Image
-                src={src}
-                alt={`Photo ${i + 1} of ${childrenGalleryPhotos.length} from the 2025 CACNA Convention Children's Department`}
-                fill
-                sizes="(min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
-                className="object-cover"
-              />
-            </div>
-          ))}
+        <div className="mt-4">
+          <ImageLightbox
+            photos={childrenGalleryPhotos}
+            alts={childrenGalleryPhotos.map(
+              (_, i) =>
+                `Photo ${i + 1} of ${childrenGalleryPhotos.length} from the 2025 CACNA Convention Children's Department`
+            )}
+          />
         </div>
       </section>
       </div>

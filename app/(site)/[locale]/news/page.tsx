@@ -64,48 +64,51 @@ export default async function NewsPage({
 
   return (
     <>
-      <PageHero title={t("title")} subtitle={t("intro")} />
+      <PageHero title={t("title")} subtitle={t("intro")} photoSrc="/photos/gallery/IMG-20250719-WA0053.jpg" />
       <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
-      <ul className="flex flex-col gap-4">
-        {newsEvents.map((event) => (
-          <li
-            key={event.title}
-            className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
-          >
-            <p className="text-sm font-semibold tabular-nums text-[var(--color-red-text)]">
-              {dateFormatter.format(new Date(`${event.date}T12:00:00Z`))}
-              {event.endDate
-                ? ` – ${dateFormatter.format(new Date(`${event.endDate}T12:00:00Z`))}`
-                : null}
-            </p>
-            <h2 className="mt-1 font-display text-xl text-[var(--color-fg)]">{event.title}</h2>
-            {event.location ? (
-              <p className="mt-1 text-sm text-[var(--color-muted)]">{event.location}</p>
-            ) : null}
-            <p className="mt-2 text-[var(--color-muted)]">{event.description}</p>
-            {event.highlights ? (
-              <ul className="mt-2 flex flex-col gap-1">
-                {event.highlights.map((highlight) => (
-                  <li key={highlight} className="text-sm text-[var(--color-muted)]">
-                    {highlight}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-            {event.moreInfoUrl ? (
-              <a
-                href={event.moreInfoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${t("moreInfoCta")}${t("opensInNewTab")}`}
-                className="mt-3 inline-block text-sm font-semibold text-[var(--color-red-text)] underline"
-              >
-                {t("moreInfoCta")}
-              </a>
-            ) : null}
-          </li>
-        ))}
-      </ul>
+      <section>
+        <h2 className="font-display text-2xl text-[var(--color-fg)]">{t("upcomingHeading")}</h2>
+        <ul className="mt-4 flex flex-col gap-4">
+          {newsEvents.map((event) => (
+            <li
+              key={event.title}
+              className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
+            >
+              <p className="text-sm font-semibold tabular-nums text-[var(--color-red-text)]">
+                {dateFormatter.format(new Date(`${event.date}T12:00:00Z`))}
+                {event.endDate
+                  ? ` – ${dateFormatter.format(new Date(`${event.endDate}T12:00:00Z`))}`
+                  : null}
+              </p>
+              <h3 className="mt-1 font-display text-xl text-[var(--color-fg)]">{event.title}</h3>
+              {event.location ? (
+                <p className="mt-1 text-sm text-[var(--color-muted)]">{event.location}</p>
+              ) : null}
+              <p className="mt-2 text-[var(--color-muted)]">{event.description}</p>
+              {event.highlights ? (
+                <ul className="mt-2 flex flex-col gap-1">
+                  {event.highlights.map((highlight) => (
+                    <li key={highlight} className="text-sm text-[var(--color-muted)]">
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              {event.moreInfoUrl ? (
+                <a
+                  href={event.moreInfoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${t("moreInfoCta")}${t("opensInNewTab")}`}
+                  className="mt-3 inline-block text-sm font-semibold text-[var(--color-red-text)] underline"
+                >
+                  {t("moreInfoCta")}
+                </a>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section className="mt-12">
         <h2 className="font-display text-2xl text-[var(--color-fg)]">{t("saveTheDateHeading")}</h2>
@@ -176,7 +179,7 @@ export default async function NewsPage({
                     {post.imageUrl ? (
                       <img
                         src={post.imageUrl}
-                        alt=""
+                        alt={post.title}
                         className="h-20 w-20 flex-none rounded-xl object-cover"
                       />
                     ) : null}
@@ -220,7 +223,7 @@ export default async function NewsPage({
                     {item.imageUrl ? (
                       <img
                         src={item.imageUrl}
-                        alt=""
+                        alt={item.title}
                         className="h-20 w-20 flex-none rounded-xl object-cover"
                       />
                     ) : null}

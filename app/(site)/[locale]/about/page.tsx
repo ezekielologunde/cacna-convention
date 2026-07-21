@@ -49,7 +49,13 @@ export default async function AboutPage({
   return (
     <>
       <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
-      <PageHero eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} tone="blue" />
+      <PageHero
+        eyebrow={t("eyebrow")}
+        title={t("title")}
+        subtitle={t("subtitle")}
+        tone="blue"
+        photoSrc="/photos/gallery/IMG-20250719-WA0038.jpg"
+      />
       <AboutContent
         locale={locale}
         leadership={leadership}

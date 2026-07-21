@@ -8,6 +8,15 @@ import { Button } from "@/components/ui/Button";
 // to /register -- reuses the same open/coming-soon copy and button-variant
 // logic as the homepage's Registration band (see app/(site)/[locale]/page.tsx)
 // so the messaging stays consistent no matter which page a visitor lands on.
+//
+// Tried wrapping this in next/cache's unstable_cache (2026-07-21) to
+// collapse the DB round-trip across the 7+ pages this renders on --
+// reverted immediately: unstable_cache requires Next's request-scoped
+// incremental-cache runtime, which doesn't exist under Vitest and threw
+// "Invariant: incrementalCache missing" on every test that renders this
+// component (37 failures). Not worth it for this component's actual
+// query cost; revisit with a test-environment-safe cache primitive if this
+// becomes a real bottleneck.
 export async function RegisterCta({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: "RegisterCta" });
 

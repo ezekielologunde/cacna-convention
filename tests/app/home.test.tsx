@@ -252,12 +252,69 @@ describe("HomePage", () => {
 
     render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
 
-    const giveLink = screen.getByRole("link", { name: "Give" });
+    // "Give" also appears as a plain text link inside the Find Your Path
+    // section's Returning Member card -- the actual closing-band CTA is the
+    // last "Give" link on the page (Find Your Path renders well above the
+    // closing Registration + Give band).
+    const giveLinks = screen.getAllByRole("link", { name: "Give" });
+    const giveLink = giveLinks[giveLinks.length - 1];
     const registerLink = screen.getByRole("link", { name: "Get notified — view registration" });
     // Primary/secondary variants carry a themed glow-shadow class; outline
     // carries a plain border class instead -- distinct enough to assert on
     // without depending on exact Tailwind color tokens.
     expect(giveLink.className).toContain("shadow-[var(--shadow-glow-red)]");
     expect(registerLink.className).toContain("border border-[var(--color-border)]");
+  });
+
+  it("renders the Find Your Path persona section with links for each persona", async () => {
+    mockEditionQueries();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("heading", { name: "Find your path." })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "First-Time Attendee" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Returning Member" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Group or Church Leader" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Minister or Guest Speaker" })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: "Register now" })[0]).toHaveAttribute("href", "/en/register");
+  });
+
+  it("renders the Find Your Program grid linking to all 7 sub-conference pages", async () => {
+    mockEditionQueries();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("heading", { name: "Find your program." })).toBeInTheDocument();
+    const programHrefs = [
+      "/en/youth",
+      "/en/children",
+      "/en/good-women",
+      "/en/ministers-wives",
+      "/en/cacma",
+      "/en/christian-education",
+      "/en/business-group",
+    ];
+    for (const href of programHrefs) {
+      expect(document.querySelector(`a[href="${href}"]`)).not.toBeNull();
+    }
+  });
+
+  it("renders the Next Steps grid linking to register, plan-your-visit, give, and schedule", async () => {
+    mockEditionQueries();
+
+    const { default: HomePage } = await import("../../app/(site)/[locale]/page");
+    const Page = await HomePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByText("Full Schedule")).toBeInTheDocument();
+    expect(document.querySelector('a[href="/en/plan-your-visit"]')).not.toBeNull();
+    expect(document.querySelector('a[href="/en/schedule"]')).not.toBeNull();
   });
 });

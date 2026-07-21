@@ -8,8 +8,22 @@ import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
 vi.mock("next-intl/server", () => createNextIntlServerMock(messages));
 
 const getUserMock = vi.fn();
+
+// Supports the three queries AccountPage issues when signed in:
+// attendee_profiles.select().eq().maybeSingle(), and
+// registrations/store_orders.select().eq().order() — both resolve empty by
+// default so the signed-out and empty-state tests don't need to know about
+// this shape at all.
+function makeFromMock() {
+  const maybeSingleMock = vi.fn().mockResolvedValue({ data: null, error: null });
+  const orderMock = vi.fn().mockResolvedValue({ data: [], error: null });
+  const eqMock = vi.fn(() => ({ maybeSingle: maybeSingleMock, order: orderMock }));
+  return vi.fn(() => ({ select: () => ({ eq: eqMock }) }));
+}
+
 const createAttendeeClientMock = vi.fn(async () => ({
   auth: { getUser: getUserMock },
+  from: makeFromMock(),
 }));
 vi.mock("@/lib/supabase/server", () => ({
   createAttendeeClient: createAttendeeClientMock,

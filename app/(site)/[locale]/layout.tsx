@@ -103,7 +103,7 @@ export default async function LocaleRootLayout({
           <main id="main-content" className="flex flex-1 flex-col">
             {children}
           </main>
-          <FooterNav />
+          <FooterNav locale={locale} />
           <ChatShortcut />
         </NextIntlClientProvider>
       </body>

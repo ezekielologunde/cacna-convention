@@ -6,6 +6,7 @@ describe("registrations/registrants schema types", () => {
     const row: Database["public"]["Tables"]["registrations"]["Row"] = {
       id: "r1",
       edition_id: "e1",
+      attendee_id: null,
       registration_type: "individual",
       church_name: null,
       contact_name: "Jane Doe",

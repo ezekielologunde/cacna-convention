@@ -87,9 +87,10 @@ describe("GalleryPage", () => {
 
     // No per-photo captions exist on the source site to migrate, so each
     // image gets an honest, generic positional alt text instead of a
-    // fabricated specific one or an empty string.
+    // fabricated specific one or an empty string. +1 accounts for
+    // PageHero's own background photo (Ken Burns hero, added 2026-07-21).
     const images = container.querySelectorAll("img");
-    expect(images).toHaveLength(mainGalleryPhotos.length + childrenGalleryPhotos.length);
+    expect(images).toHaveLength(mainGalleryPhotos.length + childrenGalleryPhotos.length + 1);
     expect(screen.getByAltText(`Photo 1 of ${mainGalleryPhotos.length} from the 2025 CACNA Convention`)).toBeInTheDocument();
     expect(
       screen.getByAltText(`Photo 1 of ${childrenGalleryPhotos.length} from the 2025 CACNA Convention Children's Department`)

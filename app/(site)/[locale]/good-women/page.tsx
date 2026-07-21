@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Sparkles } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
+import { PhotoStrip } from "@/components/ui/PhotoStrip";
 import { RegisterCta } from "@/components/register/RegisterCta";
-import { AgendaTable } from "@/components/schedule/AgendaTable";
+import { AgendaTimeline } from "@/components/schedule/AgendaTimeline";
+import { PersonCard } from "@/components/ui/PersonCard";
 import { goodWomenConference, goodWomenSchedule, goodWomenExecutives } from "@/lib/content/good-women-conference";
+import { mainGalleryPhotos } from "@/lib/content/gallery";
 import { pageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
@@ -30,10 +34,17 @@ export default async function GoodWomenPage({
 
   return (
     <>
+      {/* tone (default "red"): Good Women is a family/nurture ministry,
+          grouped with Children and Ministers' Wives -- blue is reserved
+          for the structured/institutional ministries (CACMA, Business
+          Group, Youth, Christian Education). */}
       <PageHero
         title={t("title")}
         subtitle={`${t("leaderLabel")}: ${goodWomenConference.leader} — ${goodWomenConference.leaderTitle}`}
+        icon={Sparkles}
+        photoSrc="/photos/gallery/IMG-20250719-WA0046.jpg"
       />
+      <PhotoStrip photos={mainGalleryPhotos.slice(9, 12)} caption="From the 2025 convention" />
       <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <p className="text-sm font-semibold text-[var(--color-red-text)]">{goodWomenConference.donationHighlight}</p>
 
@@ -41,15 +52,7 @@ export default async function GoodWomenPage({
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("executivesHeading")}</h2>
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
             {goodWomenExecutives.map((member) => (
-              <li
-                key={member.name}
-                className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
-              >
-                <p className="font-semibold text-[var(--color-fg)]">{member.name}</p>
-                {member.role && (
-                  <p className="mt-1 text-sm text-[var(--color-muted)]">{member.role}</p>
-                )}
-              </li>
+              <PersonCard key={member.name} name={member.name} role={member.role} />
             ))}
           </ul>
         </section>
@@ -61,7 +64,7 @@ export default async function GoodWomenPage({
                 {session.dayLabel} · {session.timeRange}
               </h2>
               <div className="mt-3">
-                <AgendaTable
+                <AgendaTimeline
                   items={session.agenda}
                   timeLabel={t("timeLabel")}
                   programLabel={t("programLabel")}

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ShieldCheck } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
+import { PhotoStrip } from "@/components/ui/PhotoStrip";
 import { RegisterCta } from "@/components/register/RegisterCta";
-import { AgendaTable } from "@/components/schedule/AgendaTable";
+import { AgendaTimeline } from "@/components/schedule/AgendaTimeline";
 import { cacmaSchedule } from "@/lib/content/cacma-program";
+import { mainGalleryPhotos } from "@/lib/content/gallery";
 import { pageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
@@ -30,7 +33,13 @@ export default async function CacmaPage({
 
   return (
     <>
-      <PageHero title={t("title")} />
+      {/* tone="blue": CACMA is a structured/institutional ministry (men's
+          fellowship & administration), grouped with Business Group, Youth,
+          and Christian Education -- red is reserved for the family/nurture
+          ministries (Children, Good Women, Ministers' Wives). See the same
+          comment on those pages for the full rule. */}
+      <PageHero title={t("title")} tone="blue" icon={ShieldCheck} photoSrc="/photos/gallery/IMG-20250719-WA0043.jpg" />
+      <PhotoStrip photos={mainGalleryPhotos.slice(3, 6)} caption="From the 2025 convention" />
       <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <section className="flex flex-col gap-8">
           {cacmaSchedule.map((session, i) => (
@@ -39,11 +48,12 @@ export default async function CacmaPage({
                 {session.dayLabel} · {session.timeRange}
               </h2>
               <div className="mt-3">
-                <AgendaTable
+                <AgendaTimeline
                   items={session.agenda}
                   timeLabel={t("timeLabel")}
                   programLabel={t("programLabel")}
                   speakerLabel={t("speakerLabel")}
+                  tone="blue"
                 />
               </div>
             </div>

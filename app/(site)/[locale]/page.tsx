@@ -13,6 +13,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
+import { FindYourPath } from "@/components/home/FindYourPath";
+import { ProgramGrid } from "@/components/home/ProgramGrid";
+import { NextSteps } from "@/components/home/NextSteps";
 import { ConventionTimeline } from "@/components/home/ConventionTimeline";
 import { WatchSection } from "@/components/home/WatchSection";
 import { PhotoMarquee } from "@/components/home/PhotoMarquee";
@@ -57,6 +60,10 @@ export default async function Home({
   setRequestLocale(locale);
 
   const t = await getTranslations("Home");
+  const tPath = await getTranslations("FindYourPath");
+  const tPrograms = await getTranslations("ProgramGrid");
+  const tSteps = await getTranslations("NextSteps");
+  const tNav = await getTranslations("Nav");
 
   const supabase = await createClient();
   const edition = await getActiveEdition(supabase);
@@ -177,17 +184,34 @@ export default async function Home({
                     fill
                     priority
                     sizes="(min-width: 1024px) 32rem, 90vw"
-                    className="object-cover"
+                    className="hero-kenburns object-cover"
                   />
                 </div>
               </div>
             </div>
           </div>
         </Reveal>
+
+        <a
+          href="#welcome-section"
+          aria-label={t("scrollCta")}
+          className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 sm:flex"
+        >
+          <span className="text-[10px] font-bold tracking-[0.2em] text-[var(--color-muted)] uppercase">
+            {t("scrollCta")}
+          </span>
+          <span aria-hidden="true" className="h-8 w-px bg-[var(--color-border)]">
+            <span className="scroll-indicator-line block h-full w-full origin-top bg-[var(--color-red-text)]" />
+          </span>
+        </a>
       </section>
 
       {/* Welcome — two-column on desktop: gradient panel + message card */}
-      <section className="relative overflow-hidden px-6 py-16 sm:py-20" style={{ background: "var(--gradient-hero)" }}>
+      <section
+        id="welcome-section"
+        className="relative overflow-hidden px-6 py-16 sm:py-20"
+        style={{ background: "var(--gradient-hero)" }}
+      >
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full opacity-30 blur-3xl"
@@ -199,10 +223,7 @@ export default async function Home({
         />
         <div className="relative mx-auto grid max-w-5xl gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-center 2xl:max-w-6xl">
           <Reveal>
-            <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-mist)] uppercase">
-              {t("welcomeKicker")}
-            </span>
-            <h2 className="mt-4 font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h2 className="font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
               {t("welcomeHeading")}
             </h2>
           </Reveal>
@@ -253,6 +274,51 @@ export default async function Home({
           </div>
         </div>
       </section>
+
+      <FindYourPath
+        locale={locale}
+        heading={tPath("heading")}
+        intro={tPath("intro")}
+        personaLabels={{
+          firstTime: tPath("firstTimeLabel"),
+          returning: tPath("returningLabel"),
+          groupLeader: tPath("groupLeaderLabel"),
+          minister: tPath("ministerLabel"),
+        }}
+        personaBodies={{
+          firstTime: tPath("firstTimeBody"),
+          returning: tPath("returningBody"),
+          groupLeader: tPath("groupLeaderBody"),
+          minister: tPath("ministerBody"),
+        }}
+        linkLabels={{
+          register: tPath("linkRegister"),
+          planVisit: tPath("linkPlanVisit"),
+          schedule: tPath("linkSchedule"),
+          news: tPath("linkNews"),
+          give: tPath("linkGive"),
+          contact: tPath("linkContact"),
+          about: tPath("linkAbout"),
+        }}
+      />
+
+      <ProgramGrid
+        locale={locale}
+        sectionLabel={tPrograms("sectionLabel")}
+        heading={tPrograms("heading")}
+        intro={tPrograms("intro")}
+        cta={tPrograms("cta")}
+        cardCta={tPrograms("cardCta")}
+        labels={{
+          youth: tNav("youth"),
+          children: tNav("children"),
+          goodWomen: tNav("goodWomen"),
+          ministersWives: tNav("ministersWives"),
+          cacma: tNav("cacma"),
+          christianEducation: tNav("christianEducation"),
+          businessGroup: tNav("businessGroup"),
+        }}
+      />
 
       {/* Convention Timeline — Just Concluded + genuinely future-dated
           programs, combined into one section instead of two separate bands */}
@@ -312,6 +378,22 @@ export default async function Home({
       </Reveal>
 
       {photoMarquee}
+
+      <NextSteps
+        locale={locale}
+        labels={{
+          register: tSteps("registerLabel"),
+          planVisit: tSteps("planVisitLabel"),
+          give: tSteps("giveLabel"),
+          programs: tSteps("programsLabel"),
+        }}
+        descriptions={{
+          register: tSteps("registerDesc"),
+          planVisit: tSteps("planVisitDesc"),
+          give: tSteps("giveDesc"),
+          programs: tSteps("programsDesc"),
+        }}
+      />
 
       {/* Registration + Give — one closing band, two columns */}
       <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>

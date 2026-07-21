@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createServiceClient } from "@/lib/supabase/server";
+import { createServiceClient, createAttendeeClient } from "@/lib/supabase/server";
 import { getActiveEdition } from "@/lib/editions";
 import { getActivePricingForEdition, priceForCategory, type RegistrantCategory } from "@/lib/pricing";
 import { getStripeClient } from "@/lib/stripe";
@@ -106,6 +106,14 @@ export async function POST(request: Request) {
   const body = rawBody as RegisterRequestBody;
   const supabase = createServiceClient();
 
+  // Best-effort: if the caller has a signed-in attendee session, link the
+  // registration to it so it shows up on their /account page. Registration
+  // itself stays anonymous-capable — this never blocks on auth.
+  const attendeeSupabase = await createAttendeeClient();
+  const {
+    data: { user: attendee },
+  } = await attendeeSupabase.auth.getUser();
+
   const edition = await getActiveEdition(supabase);
 
   if (!edition) {
@@ -159,6 +167,7 @@ export async function POST(request: Request) {
       contact_email: body.contactEmail,
       contact_phone: body.contactPhone || null,
       total_amount_cents: totalAmountCents,
+      attendee_id: attendee?.id ?? null,
     })
     .select()
     .single();

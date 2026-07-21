@@ -27,7 +27,10 @@ function mockNoActiveEdition() {
 // Models an edition row existing (e.g. 2027, status "upcoming") but with no
 // pricing_tiers rows yet -- the real state of the live database today
 // (registration for 2027 opens in October 2026). Distinct queries against
-// two different tables, branched by table name.
+// two different tables, branched by table name. convention_editions gets
+// two different query shapes: getActiveEdition()'s .in().order().limit()
+// chain, and the register page's own .eq() detail lookup (theme/dates/venue
+// for the hero) -- both need to resolve off the same mocked table.
 function mockActiveEditionWithoutPricing() {
   const editionMaybeSingle = vi.fn().mockResolvedValue({
     data: { id: "e-2027", year: 2027 },
@@ -37,6 +40,12 @@ function mockActiveEditionWithoutPricing() {
   const editionOrder = vi.fn(() => ({ limit: editionLimit }));
   const editionIn = vi.fn(() => ({ order: editionOrder }));
 
+  const editionDetailsMaybeSingle = vi.fn().mockResolvedValue({
+    data: { theme: "The Bible: God's Message to Man", starts_on: "2027-07-12", ends_on: "2027-07-17", venue_name: "CAC Village" },
+    error: null,
+  });
+  const editionDetailsEq = vi.fn(() => ({ maybeSingle: editionDetailsMaybeSingle }));
+
   const pricingOrder = vi.fn().mockResolvedValue({ data: [], error: null });
   const pricingGte = vi.fn(() => ({ order: pricingOrder }));
   const pricingLte = vi.fn(() => ({ gte: pricingGte }));
@@ -45,7 +54,7 @@ function mockActiveEditionWithoutPricing() {
   createClientMock.mockResolvedValue({
     from: (table: string) => {
       if (table === "convention_editions") {
-        return { select: () => ({ in: editionIn }) };
+        return { select: () => ({ in: editionIn, eq: editionDetailsEq }) };
       }
       return { select: () => ({ eq: pricingEq }) };
     },
@@ -72,7 +81,7 @@ describe("RegisterPage", () => {
     }
   });
 
-  it("shows the not-open message when an edition exists but has no pricing yet", async () => {
+  it("shows the not-open hero message when an edition exists but has no pricing yet", async () => {
     mockActiveEditionWithoutPricing();
 
     const { default: RegisterPage } = await import("../../app/(site)/[locale]/register/page");
@@ -81,7 +90,9 @@ describe("RegisterPage", () => {
     render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
 
     expect(
-      screen.getByText("Registration for the July 12–17, 2027 convention opens in October 2026 — check back then.")
+      screen.getByText(
+        "Registration for July 12–17, 2027 opens in October 2026. Bookmark this page — pricing and the guidelines below will go live the moment it does."
+      )
     ).toBeInTheDocument();
     // The actual form (individual/group tabs) must not render -- an edition
     // row alone isn't enough to accept real submissions with no pricing.

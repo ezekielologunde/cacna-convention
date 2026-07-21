@@ -78,7 +78,7 @@ export default async function SchedulePage({
   return (
     <div>
       <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
-      <PageHero title={t("title")} />
+      <PageHero title={t("title")} photoSrc="/photos/gallery/IMG-20250719-WA0041.jpg" />
       <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <div className="flex flex-col gap-6">
           {orderedDays.map(([dayDate, daySessions]) => (

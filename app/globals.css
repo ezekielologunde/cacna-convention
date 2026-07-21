@@ -171,3 +171,39 @@ h3 {
     scroll-behavior: auto !important;
   }
 }
+
+/* Slow hero photo drift -- the global reduced-motion block above already
+ * zeroes this out (0.01ms duration reads as motionless), so no separate
+ * override is needed here. */
+@keyframes hero-kenburns {
+  0% {
+    transform: scale(1.08) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.18) translate(-1.5%, -1.5%);
+  }
+}
+.hero-kenburns {
+  animation: hero-kenburns 18s ease-in-out infinite alternate;
+}
+
+@keyframes scroll-indicator-line {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 1;
+  }
+  60% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+    opacity: 0;
+  }
+}
+.scroll-indicator-line {
+  animation: scroll-indicator-line 1.8s ease-in-out infinite;
+}

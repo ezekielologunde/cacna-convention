@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
+import { RequiredMark } from "@/components/ui/RequiredMark";
 
 export type RegistrantCategory = "adult" | "young_adult" | "child";
 
@@ -77,7 +78,10 @@ export function RegistrationForm({
       <span aria-live="polite" className="sr-only">{liveAnnouncement}</span>
       {mode === "group" ? (
         <label className={labelClass}>
-          {t("churchName")}
+          <span>
+            {t("churchName")}
+            <RequiredMark />
+          </span>
           <input
             value={churchName}
             onChange={(e) => setChurchName(e.target.value)}
@@ -94,7 +98,10 @@ export function RegistrationForm({
           className="flex flex-col gap-3 rounded-2xl border border-[var(--color-border)] p-4 shadow-[var(--shadow-card)]"
         >
           <label className={labelClass}>
-            {t("fullName")}
+            <span>
+              {t("fullName")}
+              <RequiredMark />
+            </span>
             <input
               value={registrant.fullName}
               onChange={(e) => updateRegistrant(index, { fullName: e.target.value })}
@@ -140,7 +147,10 @@ export function RegistrationForm({
       ) : null}
 
       <label className={labelClass}>
-        {t("contactName")}
+        <span>
+          {t("contactName")}
+          <RequiredMark />
+        </span>
         <input
           value={contactName}
           onChange={(e) => setContactName(e.target.value)}
@@ -150,7 +160,10 @@ export function RegistrationForm({
         />
       </label>
       <label className={labelClass}>
-        {t("contactEmail")}
+        <span>
+          {t("contactEmail")}
+          <RequiredMark />
+        </span>
         <input
           type="email"
           value={contactEmail}

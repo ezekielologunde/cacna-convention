@@ -34,7 +34,12 @@ export function RegisterPageClient() {
       });
 
       if (!response.ok) {
-        setErrorMessage(t("submitError"));
+        // Surface the server's specific validation/pricing message (e.g. "No
+        // active price for category child") when present, rather than
+        // always falling back to a generic string that can't tell the user
+        // what to actually fix.
+        const body = await response.json().catch(() => null);
+        setErrorMessage(typeof body?.error === "string" ? body.error : t("submitError"));
         setIsSubmitting(false);
         return;
       }
@@ -58,8 +63,7 @@ export function RegisterPageClient() {
 
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
-      <h1 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl">{t("title")}</h1>
-      <div role="tablist" className="mt-6 flex gap-2 border-b border-[var(--color-border)]" onKeyDown={onTabsKeyDown}>
+      <div role="tablist" className="flex gap-2 border-b border-[var(--color-border)]" onKeyDown={onTabsKeyDown}>
         <button
           ref={individualTabRef}
           id="register-tab-individual"

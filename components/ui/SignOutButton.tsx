@@ -15,10 +15,15 @@ export function SignOutButton({
   scope,
   redirectTo,
   children,
+  signingOutLabel,
 }: {
   scope: "site" | "admin";
   redirectTo: string;
   children: ReactNode;
+  /** Shown in place of `children` while the sign-out request is in
+   *  flight. Optional (falls back to `children`) so existing callers
+   *  that don't need the distinction keep working unchanged. */
+  signingOutLabel?: ReactNode;
 }) {
   const router = useRouter();
   const [pending, setPending] = useState(false);
@@ -32,8 +37,8 @@ export function SignOutButton({
   }
 
   return (
-    <Button type="button" variant="outline" onClick={handleSignOut} disabled={pending}>
-      {children}
+    <Button type="button" variant="outline" onClick={handleSignOut} disabled={pending} aria-busy={pending}>
+      {pending ? (signingOutLabel ?? children) : children}
     </Button>
   );
 }

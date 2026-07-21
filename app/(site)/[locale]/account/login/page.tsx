@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { PageHero } from "@/components/ui/PageHero";
 import { TurnstileWidget } from "@/components/ui/TurnstileWidget";
+import { RequiredMark } from "@/components/ui/RequiredMark";
 import { createAttendeeClient } from "@/lib/supabase/client";
 
 type Status = "idle" | "submitting" | "sent" | "error";
@@ -69,6 +70,7 @@ export default function AccountLoginPage() {
             <div>
               <label htmlFor="email" className="block text-sm font-semibold text-[var(--color-fg)]">
                 {t("emailLabel")}
+                <RequiredMark />
               </label>
               <input
                 id="email"
@@ -82,6 +84,9 @@ export default function AccountLoginPage() {
               />
             </div>
             <TurnstileWidget onVerify={setCaptchaToken} />
+            {!captchaToken && status !== "submitting" ? (
+              <p className="text-xs text-[var(--color-muted)]">{t("captchaPending")}</p>
+            ) : null}
             {status === "error" ? (
               <p role="alert" className="text-sm text-[var(--color-red-text)]">
                 {t("errorMessage")}

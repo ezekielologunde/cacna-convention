@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Briefcase } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
+import { PhotoStrip } from "@/components/ui/PhotoStrip";
 import { RegisterCta } from "@/components/register/RegisterCta";
-import { AgendaTable } from "@/components/schedule/AgendaTable";
+import { AgendaTimeline } from "@/components/schedule/AgendaTimeline";
+import { PersonCard } from "@/components/ui/PersonCard";
 import {
   businessGroupFellowship,
   businessGroupAgenda,
   businessGroupExecutives,
   kingdomEconomicsMessage,
 } from "@/lib/content/business-group-program";
+import { mainGalleryPhotos } from "@/lib/content/gallery";
 import { pageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
@@ -34,13 +38,21 @@ export default async function BusinessGroupPage({
 
   return (
     <>
+      {/* tone="blue": Business Group is a structured/institutional
+          ministry, grouped with CACMA, Youth, and Christian Education --
+          red is reserved for the family/nurture ministries (Children,
+          Good Women, Ministers' Wives). */}
       <PageHero
         eyebrow={t("moderatorsLabel")}
         title={businessGroupFellowship.title}
         subtitle={businessGroupFellowship.moderators.join(", ")}
         variant="split"
+        photoSrc="/photos/gallery/IMG-20250719-WA0045.jpg"
         stat={{ label: t("dateLabel"), value: businessGroupFellowship.date }}
+        tone="blue"
+        icon={Briefcase}
       />
+      <PhotoStrip photos={mainGalleryPhotos.slice(6, 9)} caption="From the 2025 convention" />
       <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <section>
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("foundingHeading")}</h2>
@@ -50,11 +62,12 @@ export default async function BusinessGroupPage({
         <section className="mt-10">
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("orderHeading")}</h2>
           <div className="mt-4">
-            <AgendaTable
+            <AgendaTimeline
               items={businessGroupAgenda}
               timeLabel={t("timeLabel")}
               programLabel={t("programLabel")}
               speakerLabel={t("speakerLabel")}
+              tone="blue"
             />
           </div>
         </section>
@@ -63,15 +76,7 @@ export default async function BusinessGroupPage({
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("executivesHeading")}</h2>
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
             {businessGroupExecutives.map((member) => (
-              <li
-                key={member.name}
-                className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
-              >
-                <p className="font-semibold text-[var(--color-fg)]">{member.name}</p>
-                {member.role && (
-                  <p className="mt-1 text-sm text-[var(--color-muted)]">{member.role}</p>
-                )}
-              </li>
+              <PersonCard key={member.name} name={member.name} role={member.role} tone="blue" />
             ))}
           </ul>
         </section>
