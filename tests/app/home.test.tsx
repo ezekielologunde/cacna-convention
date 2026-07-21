@@ -34,6 +34,14 @@ vi.mock("@/lib/supabase/server", () => ({
   createClient: createClientMock,
 }));
 
+// WatchSection fetches real videos via lib/videos.ts's RSS call -- mock it
+// so the test suite doesn't make a real network request every run.
+vi.mock("@/lib/videos", () => ({
+  getRecentVideos: vi.fn().mockResolvedValue([
+    { id: "abc123", title: "Sunday Service", published: "2026-01-01T00:00:00Z" },
+  ]),
+}));
+
 function mockEditionQueries({
   pastEdition = null,
 }: {
@@ -173,13 +181,20 @@ describe("HomePage", () => {
 
     render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
 
-    expect(screen.getByText(String(history.foundingYear))).toBeInTheDocument();
+    // CountUp animates its number over ~1.2s via requestAnimationFrame even
+    // once the (stubbed) IntersectionObserver fires immediately -- findByText's
+    // default 1s timeout isn't quite enough to outlast that, so it's raised
+    // here rather than asserting on a mid-animation value. Three sequential
+    // findByText calls can each take up to that long, so the test's own
+    // timeout (last arg below) is raised to comfortably outlast all three.
+    const findOpts = { timeout: 3000 };
+    expect(await screen.findByText(String(history.foundingYear), {}, findOpts)).toBeInTheDocument();
     expect(screen.getByText("Founded")).toBeInTheDocument();
-    expect(screen.getByText(String(leadership.length))).toBeInTheDocument();
+    expect(await screen.findByText(String(leadership.length), {}, findOpts)).toBeInTheDocument();
     expect(screen.getByText("Regional Leaders")).toBeInTheDocument();
-    expect(screen.getByText(String(committee.length))).toBeInTheDocument();
+    expect(await screen.findByText(String(committee.length), {}, findOpts)).toBeInTheDocument();
     expect(screen.getByText("Committee Members")).toBeInTheDocument();
-  });
+  }, 12000);
 
   it("breaks the daily rhythm into a 4-item grid", async () => {
     mockEditionQueries();

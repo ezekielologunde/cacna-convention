@@ -14,6 +14,11 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { ConventionTimeline } from "@/components/home/ConventionTimeline";
+import { WatchSection } from "@/components/home/WatchSection";
+import { PhotoMarquee } from "@/components/home/PhotoMarquee";
+import { Magnetic } from "@/components/ui/Magnetic";
+import { Parallax } from "@/components/ui/Parallax";
+import { CountUp } from "@/components/ui/CountUp";
 import { mainGalleryPhotos } from "@/lib/content/gallery";
 
 // The gallery teaser card's photo strip -- same first 3 photos the Gallery
@@ -90,9 +95,9 @@ export default async function Home({
   // Real, already-published counts (same source About's Heritage stats use)
   // -- gives the hero more substance without inventing numbers.
   const stats = [
-    { value: String(history.foundingYear), label: t("statFoundedLabel") },
-    { value: String(leadership.length), label: t("statLeadersLabel") },
-    { value: String(committee.length), label: t("statCommitteeLabel") },
+    { value: history.foundingYear, label: t("statFoundedLabel") },
+    { value: leadership.length, label: t("statLeadersLabel") },
+    { value: committee.length, label: t("statCommitteeLabel") },
   ];
 
   const rhythmItems = [
@@ -102,22 +107,23 @@ export default async function Home({
     { key: "revival", title: t("rhythmRevivalTitle"), desc: t("rhythmRevivalDesc") },
   ] as const;
 
+  // Resolved ahead of JSX (rather than rendered as `<WatchSection />` /
+  // `<PhotoMarquee />` directly) so this stays the single async boundary --
+  // nesting a second/third async Server Component inside the returned tree
+  // breaks tests/app/home.test.tsx's manual `await HomePage(...)` render
+  // pattern (React's client tree can't resolve a nested async component on
+  // its own; only the outermost `await` here handles that).
+  const watchSection = await WatchSection({ locale });
+  const photoMarquee = await PhotoMarquee();
+
   return (
     <div className="flex flex-1 flex-col">
       {edition && <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />}
 
       {/* Hero — asymmetric split: headline left, photo right (photo-above-headline on mobile) */}
       <section className="relative overflow-hidden px-6 pt-14 pb-20 sm:pt-20 sm:pb-28">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-32 -left-24 h-96 w-96 rounded-full opacity-30 blur-3xl"
-          style={{ background: "var(--color-red)" }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute top-1/2 -right-32 h-80 w-80 rounded-full opacity-20 blur-3xl"
-          style={{ background: "var(--color-blue)" }}
-        />
+        <Parallax aria-hidden distance={30} className="pointer-events-none absolute -top-32 -left-24 h-96 w-96 rounded-full opacity-30 blur-3xl" style={{ background: "var(--color-red)" }} />
+        <Parallax aria-hidden distance={45} className="pointer-events-none absolute top-1/2 -right-32 h-80 w-80 rounded-full opacity-20 blur-3xl" style={{ background: "var(--color-blue)" }} />
         <Reveal className="relative mx-auto max-w-6xl 2xl:max-w-7xl">
           <div className="flex flex-col-reverse items-center gap-10 lg:flex-row lg:items-center lg:gap-16">
             <div className="flex-1 text-center lg:text-left">
@@ -137,9 +143,11 @@ export default async function Home({
               </h1>
               <p className="mx-auto mt-5 max-w-[48ch] text-lg text-[var(--color-muted)] lg:mx-0">{t("subtitle")}</p>
               <div className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
-                <Button href={`/${locale}/about`} variant="primary">
-                  {t("learnMore")}
-                </Button>
+                <Magnetic strength={0.3}>
+                  <Button href={`/${locale}/about`} variant="primary">
+                    {t("learnMore")}
+                  </Button>
+                </Magnetic>
                 <Button href={`/${locale}/schedule`} variant="outline">
                   {t("viewSchedule")}
                 </Button>
@@ -150,7 +158,7 @@ export default async function Home({
               <div className="mx-auto mt-10 grid max-w-md grid-cols-3 gap-4 border-t border-[var(--color-border)] pt-8 lg:mx-0">
                 {stats.map((stat) => (
                   <div key={stat.label} className="text-center lg:text-left">
-                    <div className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">{stat.value}</div>
+                    <CountUp value={stat.value} className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl" />
                     <div className="mt-1 text-[10px] font-bold tracking-wide text-[var(--color-muted)] uppercase sm:text-xs">
                       {stat.label}
                     </div>
@@ -160,16 +168,8 @@ export default async function Home({
             </div>
             <div className="relative flex-1">
               <div className="relative mx-auto aspect-[4/5] w-full max-w-md lg:max-w-lg 2xl:max-w-xl">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -top-8 -right-8 h-56 w-56 rounded-full opacity-50 blur-3xl"
-                  style={{ background: "var(--color-red)" }}
-                />
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full opacity-40 blur-3xl"
-                  style={{ background: "var(--color-blue)" }}
-                />
+                <Parallax aria-hidden distance={20} className="pointer-events-none absolute -top-8 -right-8 h-56 w-56 rounded-full opacity-50 blur-3xl" style={{ background: "var(--color-red)" }} />
+                <Parallax aria-hidden distance={20} className="pointer-events-none absolute -bottom-10 -left-10 h-56 w-56 rounded-full opacity-40 blur-3xl" style={{ background: "var(--color-blue)" }} />
                 <div className="relative h-full w-full rotate-2 overflow-hidden rounded-[2rem] shadow-2xl">
                   <Image
                     src="/photos/hero-convention.jpg"
@@ -267,6 +267,8 @@ export default async function Home({
         pastConventionsCta={t("pastConventionsCta")}
       />
 
+      {watchSection}
+
       {/* News + Gallery — a proper 2-up feature pair */}
       <Reveal>
         <section className="px-6 py-16">
@@ -309,9 +311,11 @@ export default async function Home({
         </section>
       </Reveal>
 
+      {photoMarquee}
+
       {/* Registration + Give — one closing band, two columns */}
       <section className="px-6 py-16" style={{ background: "var(--color-surface)" }}>
-        <div className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.3fr_1fr] 2xl:max-w-6xl">
+        <Reveal className="mx-auto grid max-w-5xl gap-6 lg:grid-cols-[1.3fr_1fr] 2xl:max-w-6xl">
           <div className="rounded-3xl border border-[var(--color-border)] bg-[var(--color-bg)] p-8 text-center shadow-[var(--shadow-card)] sm:p-10 lg:text-left">
             <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">{t("registrationHeading")}</h2>
             {!registrationOpen && (
@@ -323,9 +327,11 @@ export default async function Home({
               {/* Registration isn't open yet, so its own button shouldn't
                   outrank the one CTA a visitor can actually complete today
                   -- primary styling swaps to Give below until it opens. */}
-              <Button href={`/${locale}/register`} variant={registrationOpen ? "primary" : "outline"}>
-                {t("registrationCta")}
-              </Button>
+              <Magnetic strength={0.3}>
+                <Button href={`/${locale}/register`} variant={registrationOpen ? "primary" : "outline"}>
+                  {t("registrationCta")}
+                </Button>
+              </Magnetic>
             </div>
           </div>
           <div className="flex flex-col justify-center rounded-3xl border border-[var(--color-border)] bg-[var(--color-bg)] p-8 text-center shadow-[var(--shadow-card)] sm:p-10 lg:text-left">
@@ -337,7 +343,7 @@ export default async function Home({
               </Button>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
     </div>
   );

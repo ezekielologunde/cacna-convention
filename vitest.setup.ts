@@ -2,11 +2,20 @@ import "@testing-library/jest-dom/vitest";
 import { afterEach } from "vitest";
 import { cleanup } from "@testing-library/react";
 
-// jsdom has no IntersectionObserver -- components/ui/Reveal.tsx uses one for
-// scroll-entrance animation. A no-op stub is enough since these tests only
-// assert on rendered content, not scroll-triggered visibility.
+// jsdom has no IntersectionObserver -- components/ui/Reveal.tsx and
+// components/ui/CountUp.tsx both use one for scroll-triggered entrance/
+// count animation. Firing the callback synchronously as "intersecting" as
+// soon as something observes treats every such element as already visible,
+// which is the useful default for tests asserting on final rendered
+// content (e.g. CountUp's target number) rather than scroll timing.
 class IntersectionObserverStub {
-  observe() {}
+  callback: IntersectionObserverCallback;
+  constructor(callback: IntersectionObserverCallback) {
+    this.callback = callback;
+  }
+  observe(target: Element) {
+    this.callback([{ isIntersecting: true, target } as IntersectionObserverEntry], this as unknown as IntersectionObserver);
+  }
   unobserve() {}
   disconnect() {}
 }

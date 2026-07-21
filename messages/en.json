@@ -103,7 +103,14 @@
     "registrationCta": "Get notified — view registration",
     "giveHeading": "Support the convention",
     "giveBody": "Every gift keeps food free for all ages throughout the week and helps with travel support for the churches that need it most.",
-    "giveCta": "Give"
+    "giveCta": "Give",
+    "watchKicker": "Watch",
+    "watchHeading": "Worship with us online.",
+    "watchBody": "Real sessions from CACNA's own YouTube channel — sermons, revival nights, and convention worship.",
+    "watchCta": "Watch on the Live page",
+    "watchMoreHeading": "More recent uploads",
+    "marqueeKicker": "Life Across CACNA",
+    "marqueeHeading": "Moments from convention week."
   },
   "About": {
     "eyebrow": "About",

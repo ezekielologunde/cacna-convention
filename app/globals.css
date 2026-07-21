@@ -138,6 +138,29 @@ h3 {
   bottom: max(1.25rem, calc(env(safe-area-inset-bottom) + 0.75rem));
 }
 
+/* Auto-scrolling photo strip -- same keyframe name/behavior as the sibling
+ * cacnorthamerica.com site's PhotoMarquee. */
+@keyframes marquee-run {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.photo-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-run 42s linear infinite;
+}
+.photo-marquee-outer:hover .photo-marquee-track,
+.photo-marquee-outer:focus-within .photo-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .photo-marquee-track {
+    animation: none;
+    overflow-x: auto;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
