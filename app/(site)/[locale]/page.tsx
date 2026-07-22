@@ -6,14 +6,19 @@ import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
 import { HeroSection } from "@/components/home/HeroSection";
 import { AnniversarySection } from "@/components/home/AnniversarySection";
+import { createClient } from "@/lib/supabase/server";
+import { getActiveEdition } from "@/lib/editions";
+import { getActivePricingForEdition } from "@/lib/pricing";
 import { pageMetadata } from "@/lib/metadata";
 
 // A deliberately simple, welcome-focused homepage -- the site owner
 // reversed the earlier homepage↔Register merge (2026-07-22): Register is
-// its own focused page again (app/(site)/[locale]/register/page.tsx), and
-// this is a lighter front door instead. No live Supabase data here on
-// purpose (no edition/pricing fetch) -- that detail already lives on
-// /register, and a purely static page keeps this one genuinely simple.
+// its own focused page again (app/(site)/[locale]/register/page.tsx). One
+// small Supabase read lives here despite that (registrationOpen, same
+// signal RegisterCta.tsx already uses) -- registration for 2027 doesn't
+// open until October 2026, and shipping this page with an unconditional
+// "Register Now" the whole time between now and then would read as if
+// registering actually works today.
 export async function generateMetadata({
   params,
 }: {
@@ -36,8 +41,18 @@ export default async function Home({
   setRequestLocale(locale);
   const t = await getTranslations("Home");
 
+  const supabase = await createClient();
+  const edition = await getActiveEdition(supabase);
+  const tiers = edition ? await getActivePricingForEdition(supabase, edition.id) : [];
+  const registrationOpen = Boolean(edition) && tiers.length > 0;
+
   const quickLinks = [
-    { href: `/${locale}/register`, title: t("quickLinkRegisterTitle"), desc: t("quickLinkRegisterDesc"), Icon: Ticket },
+    {
+      href: `/${locale}/register`,
+      title: t("quickLinkRegisterTitle"),
+      desc: registrationOpen ? t("quickLinkRegisterDesc") : t("quickLinkRegisterDescComingSoon"),
+      Icon: Ticket,
+    },
     { href: `/${locale}/schedule`, title: t("quickLinkScheduleTitle"), desc: t("quickLinkScheduleDesc"), Icon: CalendarDays },
     { href: `/${locale}/store`, title: t("quickLinkStoreTitle"), desc: t("quickLinkStoreDesc"), Icon: ShoppingBag },
     { href: `/${locale}/give`, title: t("quickLinkGiveTitle"), desc: t("quickLinkGiveDesc"), Icon: HandHeart },
@@ -53,6 +68,7 @@ export default async function Home({
         registerCta={t("heroRegisterCta")}
         scheduleHref={`/${locale}/schedule`}
         scheduleCta={t("heroScheduleCta")}
+        comingSoonNote={registrationOpen ? undefined : t("heroComingSoonNote")}
       />
 
       {/* 50th Anniversary -- kept prominent on the homepage, the site's

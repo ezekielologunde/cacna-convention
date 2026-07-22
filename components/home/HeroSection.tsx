@@ -32,6 +32,7 @@ export function HeroSection({
   registerCta,
   scheduleHref,
   scheduleCta,
+  comingSoonNote,
 }: {
   kicker: string;
   heading: string;
@@ -40,6 +41,10 @@ export function HeroSection({
   registerCta: string;
   scheduleHref: string;
   scheduleCta: string;
+  /** Set only when registration isn't open yet (see the homepage's own
+   *  registrationOpen check) -- e.g. "Registration for Convention 2027
+   *  opens in October 2026." Omitted entirely once registration opens. */
+  comingSoonNote?: string;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -153,6 +158,13 @@ export function HeroSection({
             </Magnetic>
           </div>
         </Reveal>
+        {comingSoonNote && (
+          <Reveal delay={330}>
+            <p className="mx-auto mt-6 max-w-md rounded-2xl bg-white/12 px-5 py-3 text-sm font-bold text-white backdrop-blur-sm">
+              {comingSoonNote}
+            </p>
+          </Reveal>
+        )}
       </div>
 
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center">
