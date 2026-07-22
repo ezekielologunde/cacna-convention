@@ -142,14 +142,30 @@ export function HeroSection({
           </span>
         </Reveal>
         <Reveal delay={90}>
-          <h1 className="mt-3 text-balance font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="mt-3 text-balance font-display text-5xl leading-[1.02] tracking-tight text-white sm:text-7xl lg:text-8xl">
             {heading}
           </h1>
         </Reveal>
         <Reveal delay={180}>
-          <p className="mx-auto mt-5 max-w-[52ch] text-white/90">{body}</p>
+          <p className="mx-auto mt-5 max-w-[52ch] text-lg text-white/90">{body}</p>
         </Reveal>
-        <Reveal delay={270}>
+        {/* Ahead of the CTA row, not after -- telling a visitor registration
+            isn't open yet, then immediately handing them a "Register Now"
+            button, read backwards (see the homepage's own registrationOpen
+            comment for why the button still links to /register regardless:
+            that page explains the wait in full). This ordering also keeps
+            the CTA row -- narrower and centered -- as the last hero element
+            before the scroll cue, rather than this wider pill, which was
+            landing directly under the fixed chat launcher on short mobile
+            viewports. */}
+        {comingSoonNote && (
+          <Reveal delay={270}>
+            <p className="mx-auto mt-6 max-w-md rounded-2xl bg-white/12 px-5 py-3 text-sm font-bold text-white backdrop-blur-sm">
+              {comingSoonNote}
+            </p>
+          </Reveal>
+        )}
+        <Reveal delay={360}>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Magnetic strength={0.25}>
               <Button
@@ -172,13 +188,6 @@ export function HeroSection({
             </Magnetic>
           </div>
         </Reveal>
-        {comingSoonNote && (
-          <Reveal delay={330}>
-            <p className="mx-auto mt-6 max-w-md rounded-2xl bg-white/12 px-5 py-3 text-sm font-bold text-white backdrop-blur-sm">
-              {comingSoonNote}
-            </p>
-          </Reveal>
-        )}
       </div>
 
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center">

@@ -83,7 +83,7 @@ export function ChatShortcut() {
           ref={panelRef}
           role="dialog"
           aria-label={t("heading")}
-          className="fixed right-5 bottom-[5.5rem] z-40 w-[min(22rem,calc(100vw-2.5rem))] rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-5 shadow-[var(--shadow-card)]"
+          className="fixed right-5 bottom-[5.5rem] z-30 w-[min(22rem,calc(100vw-2.5rem))] rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-5 shadow-[var(--shadow-card)]"
         >
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("heading")}</h2>
           <p className="mt-1 text-sm text-[var(--color-muted)]">{t("intro")}</p>
@@ -173,7 +173,7 @@ export function ChatShortcut() {
         aria-label={t("openLabel")}
         title={t("openLabel")}
         onClick={() => setOpen((v) => !v)}
-        className="bottom-safe fixed right-5 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full text-white shadow-[var(--shadow-glow-red)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
+        className="bottom-safe fixed right-5 z-30 inline-flex h-14 w-14 items-center justify-center rounded-full text-white shadow-[var(--shadow-glow-red)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95"
         style={{ background: "var(--gradient-cta)" }}
       >
         <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

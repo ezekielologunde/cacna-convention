@@ -23,7 +23,14 @@ describe("AnniversaryBanner", () => {
   it("renders the anniversary message with a link to the celebration page", () => {
     renderBanner();
 
-    expect(screen.getByText(/Celebrating 50 years of CAC North America/)).toBeInTheDocument();
+    // Two variants render simultaneously (a short one for mobile, hidden via
+    // `sm:hidden`/`hidden sm:inline` -- jsdom has no real layout engine, so
+    // both are present in the DOM regardless of viewport); assert on the
+    // full-length one specifically rather than a substring both share.
+    expect(
+      screen.getByText("Celebrating 50 years of CAC North America — join us October 10, 2026 at CAC Village.")
+    ).toBeInTheDocument();
+    expect(screen.getByText("Celebrating 50 years of CAC North America.")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Learn more/ })).toHaveAttribute("href", anniversary.moreInfoUrl);
   });
 

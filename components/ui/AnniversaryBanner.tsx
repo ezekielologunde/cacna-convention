@@ -31,7 +31,8 @@ export function AnniversaryBanner() {
     >
       <p>
         <span className="font-bold text-[var(--color-gold)]">{t("bannerLabel")}</span>{" "}
-        {t("bannerText")}{" "}
+        <span className="sm:hidden">{t("bannerTextShort")}</span>
+        <span className="hidden sm:inline">{t("bannerText")}</span>{" "}
         <a
           href={anniversary.moreInfoUrl}
           target="_blank"
@@ -49,7 +50,7 @@ export function AnniversaryBanner() {
           sessionStorage.setItem(DISMISSED_KEY, "1");
           setDismissed(true);
         }}
-        className="inline-flex h-8 w-8 flex-none items-center justify-center rounded-full text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+        className="inline-flex h-11 w-11 flex-none items-center justify-center rounded-full text-white/60 transition-colors hover:bg-white/10 hover:text-white"
       >
         <X size={16} strokeWidth={2.25} aria-hidden="true" />
       </button>

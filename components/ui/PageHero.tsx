@@ -75,11 +75,11 @@ export function PageHero({
                 {eyebrow}
               </span>
             )}
-            <h1 className="mt-3 font-display text-4xl text-white sm:text-5xl lg:text-6xl">{title}</h1>
+            <h1 className="mt-3 font-display text-4xl text-white sm:text-6xl lg:text-7xl">{title}</h1>
             {/* Full-opacity white -- text-white/85 measured ~4.2:1 at the gradient's
                 lightest stop, below the 4.5:1 AA minimum for body text (the token
                 file's 5.17-5.29:1 ratios were verified at 100% opacity only). */}
-            {subtitle && <p className="mt-3 max-w-[52ch] text-white">{subtitle}</p>}
+            {subtitle && <p className="mt-3 max-w-[52ch] text-lg text-white">{subtitle}</p>}
           </div>
           <div className="rounded-2xl bg-white/10 px-6 py-4 text-right backdrop-blur-sm">
             <div className="text-xs font-bold tracking-wide text-[var(--color-mist)] uppercase">
@@ -100,8 +100,8 @@ export function PageHero({
               {eyebrow}
             </span>
           )}
-          <h1 className="mt-3 font-display text-4xl text-white sm:text-5xl lg:text-6xl">{title}</h1>
-          {subtitle && <p className="mx-auto mt-3 max-w-[56ch] text-white">{subtitle}</p>}
+          <h1 className="mt-3 text-balance font-display text-5xl text-white sm:text-7xl lg:text-8xl">{title}</h1>
+          {subtitle && <p className="mx-auto mt-3 max-w-[56ch] text-lg text-white">{subtitle}</p>}
         </div>
       )}
     </section>

@@ -392,6 +392,7 @@
   "Anniversary": {
     "bannerLabel": "50 Years!",
     "bannerText": "Celebrating 50 years of CAC North America — join us October 10, 2026 at CAC Village.",
+    "bannerTextShort": "Celebrating 50 years of CAC North America.",
     "bannerCta": "Learn more",
     "dismissLabel": "Dismiss",
     "opensInNewTab": " (opens in a new tab)"
