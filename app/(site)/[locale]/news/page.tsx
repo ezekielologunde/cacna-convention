@@ -65,7 +65,7 @@ export default async function NewsPage({
   return (
     <>
       <PageHero title={t("title")} subtitle={t("intro")} photoSrc="/photos/gallery/IMG-20250719-WA0053.jpg" />
-      <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-5xl">
+      <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-7xl">
       <section>
         <h2 className="font-display text-2xl text-[var(--color-fg)]">{t("upcomingHeading")}</h2>
         <ul className="mt-4 flex flex-col gap-4">

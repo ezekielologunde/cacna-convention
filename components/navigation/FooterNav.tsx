@@ -58,7 +58,7 @@ export async function FooterNav({ locale }: { locale: string }) {
       <div aria-hidden="true" className="h-[3px] w-full" style={{ background: "var(--gradient-cta)" }} />
 
       <div className="px-6 py-14">
-        <div className="mx-auto grid max-w-6xl gap-10 sm:grid-cols-2 lg:grid-cols-[1.1fr_repeat(4,1fr)] 2xl:max-w-7xl">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.1fr_repeat(4,1fr)]">
           <div>
             <div className="flex min-w-0 items-center gap-2.5">
               <Image
@@ -198,7 +198,7 @@ export async function FooterNav({ locale }: { locale: string }) {
           </div>
         </div>
 
-        <div className="mx-auto mt-10 max-w-6xl rounded-3xl border border-[var(--color-gold)]/25 bg-white/5 p-6 sm:flex sm:items-center sm:justify-between sm:gap-6 sm:p-8 2xl:max-w-7xl">
+        <div className="mt-10 rounded-3xl border border-[var(--color-gold)]/25 bg-white/5 p-6 sm:flex sm:items-center sm:justify-between sm:gap-6 sm:p-8">
           <div>
             <h4 className="font-display text-xl text-[var(--color-gold)]">{tFooter("newsletterHeading")}</h4>
             <p className="mt-1 max-w-[42ch] text-sm text-white/70">{tFooter("newsletterBody")}</p>
@@ -216,7 +216,7 @@ export async function FooterNav({ locale }: { locale: string }) {
             height. A horizontal wrap costs at most 2 short lines regardless
             of item count, and reads correctly as "external," since these
             are a different kind of link from the site's own pages above. */}
-        <div className="mx-auto mt-10 flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 border-t border-white/15 pt-6 2xl:max-w-7xl">
+        <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-white/15 pt-6">
           <h4 className="flex items-center gap-2 text-xs font-bold tracking-wider text-white/55 uppercase">
             <Globe size={14} strokeWidth={2.25} aria-hidden="true" />
             {tFooter("cacFamilyHeading")}
@@ -235,7 +235,7 @@ export async function FooterNav({ locale }: { locale: string }) {
           ))}
         </div>
 
-        <div className="mx-auto mt-6 flex max-w-6xl flex-wrap items-center justify-between gap-4 border-t border-white/15 pt-6 text-sm text-white/70 2xl:max-w-7xl">
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-white/15 pt-6 text-sm text-white/70">
           <div>
             <p>{tFooter("tagline")}</p>
             <p className="mt-1">{tFooter("copyright", { year: new Date().getFullYear() })}</p>

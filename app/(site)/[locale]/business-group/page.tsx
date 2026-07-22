@@ -53,7 +53,7 @@ export default async function BusinessGroupPage({
         icon={Briefcase}
       />
       <PhotoStrip photos={mainGalleryPhotos.slice(6, 9)} caption="From the 2025 convention" />
-      <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-5xl">
+      <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-7xl">
         <section>
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("foundingHeading")}</h2>
           <p className="mt-3 text-sm text-[var(--color-muted)]">{businessGroupFellowship.founding}</p>

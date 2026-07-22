@@ -46,7 +46,7 @@ export function ConversionHero({
       </div>
 
       <div className="relative px-6 py-20 sm:py-28">
-        <Reveal className="mx-auto max-w-3xl text-center 2xl:max-w-4xl">
+        <Reveal className="mx-auto max-w-5xl text-center 2xl:max-w-7xl">
           {badge && (
             <span className="inline-flex items-center gap-2 rounded-full bg-white/12 px-4 py-1.5 text-xs font-bold tracking-[0.15em] text-white uppercase backdrop-blur-sm">
               {badge}

@@ -62,7 +62,7 @@ export function RegisterPageClient() {
     }`;
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-5xl">
+    <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-7xl">
       <div role="tablist" className="flex gap-2 border-b border-[var(--color-border)]" onKeyDown={onTabsKeyDown}>
         <button
           ref={individualTabRef}

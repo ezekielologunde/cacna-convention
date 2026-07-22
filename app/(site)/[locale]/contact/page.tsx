@@ -30,7 +30,7 @@ export default async function ContactPage({
   return (
     <>
       <PageHero title={t("title")} tone="blue" photoSrc="/photos/gallery/IMG-20250719-WA0057.jpg" />
-      <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-5xl">
+      <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-7xl">
       <ul className="flex flex-col gap-4">
         {contacts.map((contact) => (
           <li key={contact.email} className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]">

@@ -46,7 +46,7 @@ export default async function CacmaPage({
         photoSrc="/photos/gallery/IMG-20250719-WA0043.jpg"
       />
       <PhotoStrip photos={mainGalleryPhotos.slice(3, 6)} caption="From the 2025 convention" />
-      <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-5xl">
+      <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-7xl">
         <section className="flex flex-col gap-8">
           {cacmaSchedule.map((session, i) => (
             <div key={`${session.dayLabel}-${i}`}>

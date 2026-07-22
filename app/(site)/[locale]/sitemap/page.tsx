@@ -74,7 +74,7 @@ export default async function SitemapPage({
   return (
     <div>
       <PageHero title={t("title")} subtitle={t("subtitle")} />
-      <div className="mx-auto w-full max-w-3xl px-6 py-12">
+      <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-7xl">
         <Link
           href={`/${locale}`}
           className="mb-8 inline-flex items-center font-semibold text-[var(--color-red-text)] hover:underline"
