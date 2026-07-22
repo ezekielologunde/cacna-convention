@@ -352,6 +352,7 @@ export type Database = {
           contact_email: string
           contact_name: string
           created_at: string
+          edition_id: string | null
           id: string
           status: string
           stripe_checkout_session_id: string | null
@@ -364,6 +365,7 @@ export type Database = {
           contact_email: string
           contact_name: string
           created_at?: string
+          edition_id?: string | null
           id?: string
           status?: string
           stripe_checkout_session_id?: string | null
@@ -376,6 +378,7 @@ export type Database = {
           contact_email?: string
           contact_name?: string
           created_at?: string
+          edition_id?: string | null
           id?: string
           status?: string
           stripe_checkout_session_id?: string | null
@@ -383,7 +386,15 @@ export type Database = {
           total_amount_cents?: number
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "store_orders_edition_id_fkey"
+            columns: ["edition_id"]
+            isOneToOne: false
+            referencedRelation: "convention_editions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       store_products: {
         Row: {

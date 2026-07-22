@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createServiceClient, createAttendeeClient } from "@/lib/supabase/server";
 import { getStripeClient } from "@/lib/stripe";
+import { getActiveEdition } from "@/lib/editions";
 
 type CheckoutRequestBody = {
   contactName: string;
@@ -95,12 +96,20 @@ export async function POST(request: Request) {
 
   const totalAmountCents = lines.reduce((sum, l) => sum + l.unitPriceCents * l.quantity, 0);
 
+  // Merchandise isn't tied to a specific edition the way a registration is,
+  // but stamping whatever edition is active at purchase time lets the admin
+  // per-year view (app/(admin)/admin/registrations/page.tsx) group orders
+  // by convention year -- null when no edition is active/upcoming rather
+  // than blocking checkout over it.
+  const activeEdition = await getActiveEdition(supabase);
+
   const { data: order, error: orderError } = await supabase
     .from("store_orders")
     .insert({
       contact_name: body.contactName,
       contact_email: body.contactEmail,
       attendee_id: attendee?.id ?? null,
+      edition_id: activeEdition?.id ?? null,
       total_amount_cents: totalAmountCents,
     })
     .select()
