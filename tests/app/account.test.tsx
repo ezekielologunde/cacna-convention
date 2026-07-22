@@ -21,6 +21,19 @@ function makeFromMock() {
   return vi.fn(() => ({ select: () => ({ eq: eqMock }) }));
 }
 
+// ProfileForm, ChangeEmailForm, and SetPasswordForm all mutate directly via
+// the browser client (see ProfileForm.tsx's own comment on this convention),
+// not the server client mocked below -- these tests only render the cards
+// and check their fields are present, not the client-side submit behavior,
+// which is covered in isolation by ChangeEmailForm.test.tsx and
+// SetPasswordForm.test.tsx.
+vi.mock("@/lib/supabase/client", () => ({
+  createAttendeeClient: () => ({
+    from: () => ({ update: () => ({ eq: vi.fn().mockResolvedValue({ error: null }) }) }),
+    auth: { updateUser: vi.fn().mockResolvedValue({ error: null }) },
+  }),
+}));
+
 // `from`'s return type is intentionally loosened to `(table: string) => any`
 // -- individual tests below override the default `makeFromMock()` with a
 // plain per-table-branching function, which doesn't structurally match a
@@ -103,6 +116,60 @@ describe("AccountPage", () => {
     expect(screen.getByText("person@example.com")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: messages.Account.signOutCta })).toBeInTheDocument();
     expect(screen.queryByRole("link", { name: messages.Account.signInCta })).not.toBeInTheDocument();
+  });
+
+  it("renders the phone field on Profile, prefilled from attendee_profiles", async () => {
+    getUserMock.mockResolvedValue({ data: { user: { id: "user-1", email: "person@example.com" } } });
+    createAttendeeClientMock.mockImplementationOnce(async () => ({
+      auth: { getUser: getUserMock },
+      from: (table: string) => {
+        if (table === "attendee_profiles") {
+          return {
+            select: () => ({
+              eq: () => ({ maybeSingle: vi.fn().mockResolvedValue({ data: { full_name: "Jane Doe", phone: "555-0100" }, error: null }) }),
+            }),
+          };
+        }
+        return {
+          select: () => ({
+            eq: () => ({
+              maybeSingle: vi.fn().mockResolvedValue({ data: null, error: null }),
+              order: vi.fn().mockResolvedValue({ data: [], error: null }),
+            }),
+          }),
+        };
+      },
+    }));
+
+    const { default: AccountPage } = await import("../../app/(site)/[locale]/account/page");
+    const Page = await AccountPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByLabelText(messages.Account.phoneLabel)).toHaveValue("555-0100");
+  });
+
+  it("renders the Security card with Change Email and Set Password forms", async () => {
+    getUserMock.mockResolvedValue({ data: { user: { id: "user-1", email: "person@example.com" } } });
+
+    const { default: AccountPage } = await import("../../app/(site)/[locale]/account/page");
+    const Page = await AccountPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByText(messages.Account.securityHeading)).toBeInTheDocument();
+    expect(screen.getByLabelText(messages.Account.newEmailLabel)).toBeInTheDocument();
+    expect(screen.getByLabelText(messages.Account.newPasswordLabel)).toBeInTheDocument();
+    expect(screen.getByLabelText(messages.Account.confirmPasswordLabel)).toBeInTheDocument();
+  });
+
+  it("does not render the Security card when signed out", async () => {
+    const { default: AccountPage } = await import("../../app/(site)/[locale]/account/page");
+    const Page = await AccountPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.queryByText(messages.Account.securityHeading)).not.toBeInTheDocument();
   });
 
   it("renders the Notifications card unsubscribed by default, and subscribes on click", async () => {

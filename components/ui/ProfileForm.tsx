@@ -8,7 +8,9 @@ import { createAttendeeClient } from "@/lib/supabase/client";
 export function ProfileForm({
   userId,
   initialFullName,
+  initialPhone,
   nameLabel,
+  phoneLabel,
   saveCta,
   savingCta,
   savedMessage,
@@ -16,7 +18,9 @@ export function ProfileForm({
 }: {
   userId: string;
   initialFullName: string;
+  initialPhone: string;
   nameLabel: string;
+  phoneLabel: string;
   saveCta: string;
   savingCta: string;
   savedMessage: string;
@@ -24,6 +28,7 @@ export function ProfileForm({
 }) {
   const router = useRouter();
   const [fullName, setFullName] = useState(initialFullName);
+  const [phone, setPhone] = useState(initialPhone);
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -32,7 +37,7 @@ export function ProfileForm({
     const supabase = createAttendeeClient();
     const { error } = await supabase
       .from("attendee_profiles")
-      .update({ full_name: fullName.trim() || null })
+      .update({ full_name: fullName.trim() || null, phone: phone.trim() || null })
       .eq("id", userId);
 
     if (error) {
@@ -44,21 +49,38 @@ export function ProfileForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row sm:items-end">
-      <label className="flex-1">
-        <span className="text-xs font-bold tracking-wide text-[var(--color-muted)] uppercase">
-          {nameLabel}
-        </span>
-        <input
-          type="text"
-          value={fullName}
-          onChange={(event) => {
-            setFullName(event.target.value);
-            setStatus("idle");
-          }}
-          className="mt-1.5 w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-2.5 text-sm text-[var(--color-fg)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-red-text)]"
-        />
-      </label>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <label>
+          <span className="text-xs font-bold tracking-wide text-[var(--color-muted)] uppercase">
+            {nameLabel}
+          </span>
+          <input
+            type="text"
+            value={fullName}
+            onChange={(event) => {
+              setFullName(event.target.value);
+              setStatus("idle");
+            }}
+            className="mt-1.5 w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-2.5 text-sm text-[var(--color-fg)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-red-text)]"
+          />
+        </label>
+        <label>
+          <span className="text-xs font-bold tracking-wide text-[var(--color-muted)] uppercase">
+            {phoneLabel}
+          </span>
+          <input
+            type="tel"
+            autoComplete="tel"
+            value={phone}
+            onChange={(event) => {
+              setPhone(event.target.value);
+              setStatus("idle");
+            }}
+            className="mt-1.5 w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-4 py-2.5 text-sm text-[var(--color-fg)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-red-text)]"
+          />
+        </label>
+      </div>
       <div className="flex items-center gap-3">
         <Button type="submit" variant="outline" disabled={status === "saving"}>
           {status === "saving" ? savingCta : saveCta}

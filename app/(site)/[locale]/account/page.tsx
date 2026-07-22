@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/Button";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { SignOutButton } from "@/components/ui/SignOutButton";
 import { ProfileForm } from "@/components/ui/ProfileForm";
+import { ChangeEmailForm } from "@/components/ui/ChangeEmailForm";
+import { SetPasswordForm } from "@/components/ui/SetPasswordForm";
 import { NotificationsToggle } from "@/components/ui/NotificationsToggle";
 import { SupportTicketForm } from "@/components/ui/SupportTicketForm";
 import { QrCode } from "@/components/ui/QrCode";
@@ -41,6 +43,7 @@ export default async function AccountPage({
   } = await supabase.auth.getUser();
 
   let fullName = "";
+  let phone = "";
   let registrations: { id: string; church_name: string | null; contact_name: string; status: string; total_amount_cents: number; created_at: string }[] = [];
   let storeOrders: { id: string; status: string; total_amount_cents: number; created_at: string }[] = [];
   let tickets: { id: string; subject: string; status: string; created_at: string }[] = [];
@@ -48,7 +51,7 @@ export default async function AccountPage({
 
   if (user) {
     const [{ data: profile }, { data: regs }, { data: orders }, { data: supportTickets }, { data: subscription }] = await Promise.all([
-      supabase.from("attendee_profiles").select("full_name").eq("id", user.id).maybeSingle(),
+      supabase.from("attendee_profiles").select("full_name, phone").eq("id", user.id).maybeSingle(),
       supabase
         .from("registrations")
         .select("id, church_name, contact_name, status, total_amount_cents, created_at")
@@ -74,6 +77,7 @@ export default async function AccountPage({
         : Promise.resolve({ data: null }),
     ]);
     fullName = profile?.full_name ?? "";
+    phone = profile?.phone ?? "";
     registrations = regs ?? [];
     storeOrders = orders ?? [];
     tickets = supportTickets ?? [];
@@ -128,12 +132,53 @@ export default async function AccountPage({
                 <ProfileForm
                   userId={user.id}
                   initialFullName={fullName}
+                  initialPhone={phone}
                   nameLabel={t("fullNameLabel")}
+                  phoneLabel={t("phoneLabel")}
                   saveCta={t("saveCta")}
                   savingCta={t("savingCta")}
                   savedMessage={t("saveSuccess")}
                   errorMessage={t("saveError")}
                 />
+              </div>
+            </Card>
+
+            <Card padding="lg">
+              <h2 className="font-display text-lg text-[var(--color-fg)]">{t("securityHeading")}</h2>
+              <div className="mt-4 flex flex-col gap-6 border-t border-[var(--color-border)] pt-4">
+                <div>
+                  <h3 className="text-sm font-bold tracking-wide text-[var(--color-muted)] uppercase">
+                    {t("changeEmailHeading")}
+                  </h3>
+                  <p className="mt-1 text-sm text-[var(--color-muted)]">{t("changeEmailIntro", { email: user.email ?? "" })}</p>
+                  <div className="mt-3">
+                    <ChangeEmailForm
+                      newEmailLabel={t("newEmailLabel")}
+                      saveCta={t("saveCta")}
+                      savingCta={t("savingCta")}
+                      successMessage={t("changeEmailSuccess")}
+                      errorMessage={t("changeEmailError")}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold tracking-wide text-[var(--color-muted)] uppercase">
+                    {t("setPasswordHeading")}
+                  </h3>
+                  <p className="mt-1 text-sm text-[var(--color-muted)]">{t("setPasswordIntro")}</p>
+                  <div className="mt-3">
+                    <SetPasswordForm
+                      passwordLabel={t("newPasswordLabel")}
+                      confirmLabel={t("confirmPasswordLabel")}
+                      saveCta={t("saveCta")}
+                      savingCta={t("savingCta")}
+                      successMessage={t("setPasswordSuccess")}
+                      errorMessage={t("setPasswordError")}
+                      mismatchError={t("setPasswordMismatch")}
+                      tooShortError={t("setPasswordTooShort")}
+                    />
+                  </div>
+                </div>
               </div>
             </Card>
 

@@ -12,8 +12,16 @@ vi.mock("@/components/ui/TurnstileWidget", () => ({
 }));
 
 const signInWithOtpMock = vi.fn();
+const signInWithPasswordMock = vi.fn();
 vi.mock("@/lib/supabase/client", () => ({
-  createAttendeeClient: () => ({ auth: { signInWithOtp: signInWithOtpMock } }),
+  createAttendeeClient: () => ({
+    auth: { signInWithOtp: signInWithOtpMock, signInWithPassword: signInWithPasswordMock },
+  }),
+}));
+
+const routerPushMock = vi.fn();
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: routerPushMock }),
 }));
 
 async function renderLoginPage() {
@@ -29,6 +37,9 @@ beforeEach(() => {
   capturedOnVerify = undefined;
   signInWithOtpMock.mockReset();
   signInWithOtpMock.mockResolvedValue({ error: null });
+  signInWithPasswordMock.mockReset();
+  signInWithPasswordMock.mockResolvedValue({ error: null });
+  routerPushMock.mockReset();
 });
 
 describe("AccountLoginPage", () => {
@@ -71,5 +82,61 @@ describe("AccountLoginPage", () => {
       "Something went wrong sending the link. Please try again."
     );
     expect(screen.queryByRole("heading", { name: "Check your email" })).not.toBeInTheDocument();
+  });
+
+  describe("Password tab", () => {
+    it("switches to the password form, revealing a password field", async () => {
+      await renderLoginPage();
+
+      expect(screen.queryByLabelText("Password", { selector: "input" })).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByRole("tab", { name: "Password" }));
+
+      expect(screen.getByRole("tab", { name: "Password" })).toHaveAttribute("aria-selected", "true");
+      expect(screen.getByLabelText("Password", { selector: "input" })).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "Sign in" })).toBeInTheDocument();
+    });
+
+    it("signs in with email+password and redirects to Account on success", async () => {
+      await renderLoginPage();
+      fireEvent.click(screen.getByRole("tab", { name: "Password" }));
+      act(() => capturedOnVerify?.("captcha-token"));
+
+      fireEvent.change(screen.getByLabelText("Email address"), {
+        target: { value: "person@example.com" },
+      });
+      fireEvent.change(screen.getByLabelText("Password", { selector: "input" }), {
+        target: { value: "hunter2" },
+      });
+      fireEvent.click(screen.getByRole("button", { name: "Sign in" }));
+
+      await waitFor(() => expect(signInWithPasswordMock).toHaveBeenCalled());
+      expect(signInWithPasswordMock).toHaveBeenCalledWith({
+        email: "person@example.com",
+        password: "hunter2",
+        options: expect.objectContaining({ captchaToken: "captcha-token" }),
+      });
+      expect(routerPushMock).toHaveBeenCalledWith("/en/account");
+    });
+
+    it("shows a password-specific error on failure, without redirecting", async () => {
+      signInWithPasswordMock.mockResolvedValue({ error: { message: "Invalid login credentials" } });
+      await renderLoginPage();
+      fireEvent.click(screen.getByRole("tab", { name: "Password" }));
+      act(() => capturedOnVerify?.("captcha-token"));
+
+      fireEvent.change(screen.getByLabelText("Email address"), {
+        target: { value: "person@example.com" },
+      });
+      fireEvent.change(screen.getByLabelText("Password", { selector: "input" }), {
+        target: { value: "wrong" },
+      });
+      fireEvent.click(screen.getByRole("button", { name: "Sign in" }));
+
+      expect(await screen.findByRole("alert")).toHaveTextContent(
+        "Incorrect email or password. If you haven't set a password yet, use the email link instead."
+      );
+      expect(routerPushMock).not.toHaveBeenCalled();
+    });
   });
 });
