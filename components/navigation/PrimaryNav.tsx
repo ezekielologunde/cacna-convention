@@ -194,7 +194,7 @@ export function PrimaryNav() {
             </span>
           </span>
         </Link>
-        <ul className="hidden items-center gap-7 text-sm font-semibold tracking-wide text-[var(--color-muted)] uppercase md:flex">
+        <ul className="hidden items-center gap-7 text-sm font-semibold tracking-wide text-[var(--color-muted)] md:flex">
           {BEFORE_PROGRAMS_ITEMS.map((item) => {
             const active = isActive(item.href);
             return (
