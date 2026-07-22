@@ -13,7 +13,7 @@ import { anniversary } from "@/lib/content/anniversary";
 // own "Programs" column below, mirroring the split PrimaryNav's dropdown
 // already makes between core pages and the 7 sub-conference pages.
 const ATTEND_ITEMS = [
-  { key: "register", href: "" },
+  { key: "register", href: "/register" },
   { key: "about", href: "/about" },
   { key: "schedule", href: "/schedule" },
   { key: "planYourVisit", href: "/plan-your-visit" },
@@ -100,7 +100,7 @@ export async function FooterNav({ locale }: { locale: string }) {
 
             <div className="mt-5 flex flex-wrap items-center gap-3">
               <Link
-                href={`/${locale}`}
+                href={`/${locale}/register`}
                 className="inline-flex min-h-11 items-center gap-1.5 rounded-full px-5 text-sm font-bold text-[#16121a]"
                 style={{ background: "var(--color-gold)" }}
               >
@@ -240,13 +240,18 @@ export async function FooterNav({ locale }: { locale: string }) {
             <p>{tFooter("tagline")}</p>
             <p className="mt-1">{tFooter("copyright", { year: new Date().getFullYear() })}</p>
           </div>
-          <a
-            href="#main-content"
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-white/15 px-4 text-xs font-bold tracking-wide text-white/70 uppercase transition-colors hover:border-white/35 hover:text-white"
-          >
-            <ArrowUp size={13} strokeWidth={2.5} aria-hidden="true" />
-            {tFooter("backToTop")}
-          </a>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link href={`/${locale}/sitemap`} className="underline underline-offset-2 hover:text-white">
+              {tFooter("sitemapLink")}
+            </Link>
+            <a
+              href="#main-content"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-white/15 px-4 text-xs font-bold tracking-wide text-white/70 uppercase transition-colors hover:border-white/35 hover:text-white"
+            >
+              <ArrowUp size={13} strokeWidth={2.5} aria-hidden="true" />
+              {tFooter("backToTop")}
+            </a>
+          </div>
         </div>
       </div>
     </footer>

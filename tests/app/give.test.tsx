@@ -43,7 +43,7 @@ describe("GivePage", () => {
     expect(screen.getByRole("heading", { name: messages.Give.registerTieHeading })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: messages.Give.registerTieCta })).toHaveAttribute(
       "href",
-      "/en"
+      "/en/register"
     );
   });
 });

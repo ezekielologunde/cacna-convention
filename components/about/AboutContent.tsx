@@ -390,7 +390,7 @@ export async function AboutContent({
               </Link>
             </Reveal>
             <Reveal delay={40}>
-              <Link href={`/${locale}`} className="block h-full">
+              <Link href={`/${locale}/register`} className="block h-full">
                 <Card hoverable className="h-full">
                   <p className="font-display text-lg text-[var(--color-fg)]">{t("exploreRegisterTitle")}</p>
                   <p className="mt-2 text-sm text-[var(--color-muted)]">{t("exploreRegisterDesc")}</p>

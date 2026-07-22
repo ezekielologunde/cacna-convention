@@ -22,8 +22,6 @@ const BEFORE_PROGRAMS_ITEMS = [
 
 const AFTER_PROGRAMS_ITEMS = [
   { key: "schedule", href: "/schedule" },
-  { key: "news", href: "/news" },
-  { key: "live", href: "/live" },
 ] as const;
 
 // The convention's actual department/ministry pages -- previously reachable
@@ -37,6 +35,20 @@ const PROGRAM_ITEMS = [
   { key: "cacma", href: "/cacma" },
   { key: "christianEducation", href: "/christian-education" },
   { key: "businessGroup", href: "/business-group" },
+] as const;
+
+// Every other real page on the site that isn't already a top-level link, a
+// Program, or one of the two priority CTA buttons (Register/Store) -- News
+// and Live used to be flat top-level links, and Plan Your Visit/Archive/
+// Contact had no path into them from this nav at all (only the footer).
+// Grouping them here means the primary nav alone -- not just nav+footer
+// combined -- reaches every page on the site.
+const EXPLORE_ITEMS = [
+  { key: "planYourVisit", href: "/plan-your-visit" },
+  { key: "news", href: "/news" },
+  { key: "live", href: "/live" },
+  { key: "archive", href: "/archive" },
+  { key: "contact", href: "/contact" },
 ] as const;
 
 // Shared underline-indicator treatment for every top-level text link --
@@ -57,15 +69,19 @@ export function PrimaryNav() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [programsOpen, setProgramsOpen] = useState(false);
+  const [exploreOpen, setExploreOpen] = useState(false);
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false);
   const programsTriggerRef = useRef<HTMLButtonElement>(null);
   const programsPanelRef = useRef<HTMLDivElement>(null);
+  const exploreTriggerRef = useRef<HTMLButtonElement>(null);
+  const explorePanelRef = useRef<HTMLDivElement>(null);
 
   const isActive = (href: string) => {
     const target = `/${locale}${href}`;
     return href === "" ? pathname === target : pathname.startsWith(target);
   };
   const isProgramActive = PROGRAM_ITEMS.some((item) => isActive(item.href));
+  const isExploreActive = EXPLORE_ITEMS.some((item) => isActive(item.href));
 
   // Closes the dropdown on Escape (returning focus to its trigger, so
   // keyboard users don't lose their place) or on a click outside it --
@@ -95,6 +111,35 @@ export function PrimaryNav() {
       document.removeEventListener("mousedown", onClickOutside);
     };
   }, [programsOpen]);
+
+  // Same open/close behavior as the Programs dropdown above, duplicated
+  // rather than shared -- two short, independent effects read more clearly
+  // here than a parameterized abstraction over just this one call site.
+  useEffect(() => {
+    if (!exploreOpen) return;
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setExploreOpen(false);
+        exploreTriggerRef.current?.focus();
+      }
+    }
+    function onClickOutside(event: MouseEvent) {
+      const target = event.target as Node;
+      if (
+        explorePanelRef.current?.contains(target) ||
+        exploreTriggerRef.current?.contains(target)
+      ) {
+        return;
+      }
+      setExploreOpen(false);
+    }
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("mousedown", onClickOutside);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("mousedown", onClickOutside);
+    };
+  }, [exploreOpen]);
 
   // Closing the mobile menu should also collapse its nested Programs
   // section, so reopening the menu doesn't surprise with stale state.
@@ -229,6 +274,57 @@ export function PrimaryNav() {
               </li>
             );
           })}
+          <li className="relative">
+            <button
+              ref={exploreTriggerRef}
+              type="button"
+              aria-expanded={exploreOpen}
+              aria-controls="explore-menu"
+              onClick={() => setExploreOpen((open) => !open)}
+              className={`${linkClass(isExploreActive)} gap-1 ${exploreOpen ? "text-[var(--color-red-text)]" : ""}`}
+            >
+              {t("explore")}
+              <svg
+                aria-hidden="true"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={`transition-transform ${exploreOpen ? "rotate-180" : ""}`}
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+              <span
+                aria-hidden="true"
+                className={`${UNDERLINE_BASE} bg-[var(--color-red-text)] ${isExploreActive || exploreOpen ? "scale-x-100" : ""}`}
+              />
+            </button>
+            {exploreOpen ? (
+              <div
+                id="explore-menu"
+                ref={explorePanelRef}
+                className="absolute top-full left-0 mt-3 w-56 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-2 normal-case shadow-[var(--shadow-card)]"
+              >
+                {EXPLORE_ITEMS.map((item) => (
+                  <Link
+                    key={item.key}
+                    href={`/${locale}${item.href}`}
+                    onClick={() => setExploreOpen(false)}
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                    className={`block rounded-lg px-3 py-2.5 text-sm font-semibold tracking-normal text-[var(--color-fg)] hover:bg-[var(--color-surface)] hover:text-[var(--color-red-text)] ${
+                      isActive(item.href) ? "text-[var(--color-red-text)]" : ""
+                    }`}
+                  >
+                    {t(item.key)}
+                  </Link>
+                ))}
+              </div>
+            ) : null}
+          </li>
         </ul>
         <div className="ml-auto flex items-center gap-3">
           {/*
@@ -264,7 +360,7 @@ export function PrimaryNav() {
             </Button>
           </span>
           <Button
-            href={`/${locale}`}
+            href={`/${locale}/register`}
             variant="primary"
             aria-label={t("registerCta")}
             style={{ background: "var(--gradient-cta-gold)", color: "#16121a" }}
@@ -364,6 +460,20 @@ export function PrimaryNav() {
               ) : null}
             </li>
             {AFTER_PROGRAMS_ITEMS.map((item) => (
+              <li key={item.key}>
+                <Link
+                  href={`/${locale}${item.href}`}
+                  onClick={() => setMobileOpen(false)}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  className={`block rounded-lg px-3 py-3.5 ${
+                    isActive(item.href) ? "text-[var(--color-red-text)]" : ""
+                  }`}
+                >
+                  {t(item.key)}
+                </Link>
+              </li>
+            ))}
+            {EXPLORE_ITEMS.map((item) => (
               <li key={item.key}>
                 <Link
                   href={`/${locale}${item.href}`}

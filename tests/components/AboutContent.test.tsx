@@ -34,9 +34,9 @@ describe("AboutContent", () => {
 
     render(<NextIntlClientProvider locale="en" messages={messages}>{element}</NextIntlClientProvider>);
 
-    // Welcome -- moved here from the old homepage hero (now the Register
-    // flow): the verbatim welcome message, the founding/leaders/committee
-    // stat trio, and the week's rhythm grid.
+    // Welcome -- moved here from the (now-simplified) homepage hero: the
+    // verbatim welcome message, the founding/leaders/committee stat trio,
+    // and the week's rhythm grid.
     expect(screen.getByRole("heading", { name: "One Fold, Gathered Once a Year" })).toBeInTheDocument();
     expect(screen.getByText(welcomeMessage.paragraphs[0])).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "contact us" })).toHaveAttribute("href", "/en/contact");
@@ -113,7 +113,7 @@ describe("AboutContent", () => {
     // the same <a>), so match on the leading title text, same as the
     // external-resource links below.
     expect(screen.getByRole("link", { name: /^Full Schedule/ })).toHaveAttribute("href", "/en/schedule");
-    expect(screen.getByRole("link", { name: /^Register/ })).toHaveAttribute("href", "/en");
+    expect(screen.getByRole("link", { name: /^Register/ })).toHaveAttribute("href", "/en/register");
     for (const resource of externalResources) {
       expect(
         screen.getByRole("link", { name: new RegExp(`^${resource.label}`) })

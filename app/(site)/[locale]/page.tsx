@@ -1,31 +1,27 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { createClient } from "@/lib/supabase/server";
-import { getActiveEdition } from "@/lib/editions";
-import { getActivePricingForEdition, getPricingLadderForEdition, priceForCategory } from "@/lib/pricing";
-import { ConversionHero } from "@/components/ui/ConversionHero";
-import { RegisterPageClient } from "@/components/register/RegisterPageClient";
-import { PricingCards, type PricingCardCategory } from "@/components/register/PricingCards";
-import { AnniversarySection } from "@/components/home/AnniversarySection";
+import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { registrationGuidelines } from "@/lib/content/registration-guidelines";
-import { paymentOptions } from "@/lib/content/payment-options";
+import { AnniversarySection } from "@/components/home/AnniversarySection";
 import { pageMetadata } from "@/lib/metadata";
 
-// The homepage IS the registration flow -- the site's front door leads
-// straight to "register for this year's convention," per the site owner's
-// explicit call that Register and Store are the site's two most important
-// destinations. /register itself now just redirects here (see that route).
+// A deliberately simple, welcome-focused homepage -- the site owner
+// reversed the earlier homepage↔Register merge (2026-07-22): Register is
+// its own focused page again (app/(site)/[locale]/register/page.tsx), and
+// this is a lighter front door instead. No live Supabase data here on
+// purpose (no edition/pricing fetch) -- that detail already lives on
+// /register, and a purely static page keeps this one genuinely simple.
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "Register" });
+  const t = await getTranslations({ locale, namespace: "Home" });
   return pageMetadata({
     locale, path: "/", title: t("title"),
-    description: "Register for the CACNA Annual Convention — individual or church/group registration, with pricing by category.",
+    description: t("subtitle"),
   });
 }
 
@@ -36,176 +32,97 @@ export default async function Home({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations("Register");
-  const tHome = await getTranslations("Home");
+  const t = await getTranslations("Home");
 
-  const supabase = await createClient();
-  const edition = await getActiveEdition(supabase);
-  // An edition row existing (status upcoming/current) doesn't mean
-  // registration is actually open -- pricing_tiers is the real signal
-  // (empty for 2027 as of this writing; it opens in October 2026). Without
-  // this check, the form renders and accepts submissions with no pricing
-  // behind them the moment an edition row is created for the next year.
-  const tiers = edition ? await getActivePricingForEdition(supabase, edition.id) : [];
-  const registrationOpen = Boolean(edition) && tiers.length > 0;
-  const ladder = edition ? await getPricingLadderForEdition(supabase, edition.id) : [];
-
-  // Scoped to this page rather than widening the shared getActiveEdition()
-  // (28+ call sites, most only ever needed id/year) -- theme/dates/venue
-  // are only needed for the hero below.
-  let theme: string | null = null;
-  let dateRange = "";
-  let venueName = "";
-  let urgency: string | null = null;
-
-  if (edition) {
-    const { data: details } = await supabase
-      .from("convention_editions")
-      .select("theme, starts_on, ends_on, venue_name")
-      .eq("id", edition.id)
-      .maybeSingle();
-
-    if (details) {
-      theme = details.theme;
-      venueName = details.venue_name;
-      const intlLocale = locale === "yo" ? "yo-NG" : "en-US";
-      const monthDayFormatter = new Intl.DateTimeFormat(intlLocale, { month: "long", day: "numeric", timeZone: "UTC" });
-      const dayFormatter = new Intl.DateTimeFormat(intlLocale, { day: "numeric", timeZone: "UTC" });
-      const monthFormatter = new Intl.DateTimeFormat(intlLocale, { month: "long", timeZone: "UTC" });
-      const yearFormatter = new Intl.DateTimeFormat(intlLocale, { year: "numeric", timeZone: "UTC" });
-      const start = new Date(`${details.starts_on}T12:00:00Z`);
-      const end = new Date(`${details.ends_on}T12:00:00Z`);
-      // "July 12–17, 2027" for the common same-month case, rather than
-      // repeating the month name twice; falls back to the fully-qualified
-      // form only when the range actually crosses a month boundary.
-      dateRange = start.getUTCMonth() === end.getUTCMonth()
-        ? `${monthFormatter.format(start)} ${dayFormatter.format(start)}–${dayFormatter.format(end)}, ${yearFormatter.format(end)}`
-        : `${monthDayFormatter.format(start)}–${monthDayFormatter.format(end)}, ${yearFormatter.format(end)}`;
-    }
-
-    const adultTier = priceForCategory(tiers, "adult") !== null
-      ? tiers.find((tier) => tier.category === "adult")
-      : undefined;
-    if (adultTier) {
-      urgency = t("heroUrgency", { price: (adultTier.price_cents / 100).toFixed(0), date: adultTier.ends_on });
-    }
-  }
-
-  const year = edition?.year ?? new Date().getFullYear();
-
-  // Full fee-ladder cards -- every tier in `ladder`, not just today's
-  // active one, so visitors can see the whole early-bird schedule at a
-  // glance. The last tier per category (highest sort_order) is the
-  // at-the-door rate, shown with a location label instead of a date.
-  const activeTierIds = new Set(tiers.map((tier) => tier.id));
-  const shortDateFormatter = new Intl.DateTimeFormat(locale === "yo" ? "yo-NG" : "en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-  const CATEGORY_ORDER: { category: "adult" | "young_adult" | "child"; labelKey: "pricingAdultLabel" | "pricingYoungAdultLabel" | "pricingChildLabel" }[] = [
-    { category: "adult", labelKey: "pricingAdultLabel" },
-    { category: "young_adult", labelKey: "pricingYoungAdultLabel" },
-    { category: "child", labelKey: "pricingChildLabel" },
+  const quickLinks = [
+    { href: `/${locale}/register`, title: t("quickLinkRegisterTitle"), desc: t("quickLinkRegisterDesc") },
+    { href: `/${locale}/schedule`, title: t("quickLinkScheduleTitle"), desc: t("quickLinkScheduleDesc") },
+    { href: `/${locale}/store`, title: t("quickLinkStoreTitle"), desc: t("quickLinkStoreDesc") },
+    { href: `/${locale}/give`, title: t("quickLinkGiveTitle"), desc: t("quickLinkGiveDesc") },
   ];
-  const pricingCategories: PricingCardCategory[] = CATEGORY_ORDER.map(({ category, labelKey }) => {
-    const rows = ladder.filter((tier) => tier.category === category);
-    const maxSortOrder = rows.reduce((max, tier) => Math.max(max, tier.sort_order), 0);
-    return {
-      key: category,
-      label: t(labelKey),
-      tiers: rows.map((tier) => ({
-        id: tier.id,
-        priceLabel: tier.price_cents === 0 ? t("pricingFreeLabel") : `$${(tier.price_cents / 100).toFixed(0)}`,
-        dateLabel:
-          category === "child"
-            ? ""
-            : tier.sort_order === maxSortOrder
-              ? t("pricingAtGroundLabel")
-              : t("pricingThroughLabel", { date: shortDateFormatter.format(new Date(`${tier.ends_on}T12:00:00Z`)) }),
-        isCurrent: activeTierIds.has(tier.id),
-      })),
-    };
-  });
 
   return (
     <div>
-      <ConversionHero
-        photoSrc="/photos/gallery/IMG-20250719-WA0033.jpg"
-        badge={venueName ? t("heroBadge", { dateRange, venue: venueName }) : undefined}
-        heading={t("heroHeading", { year })}
-        body={registrationOpen ? t("heroBodyOpen") : t("heroBodyComingSoon", { dateRange })}
-        cta={
-          registrationOpen
-            ? { label: t("heroCtaOpen"), href: "#register-panel" }
-            : { label: t("heroCtaComingSoon"), href: "#registration-guidelines" }
-        }
+      <section
+        className="relative overflow-hidden px-6 py-20 sm:py-28"
+        style={{ background: "var(--gradient-hero)" }}
       >
-        {theme && (
-          <p className="mx-auto mt-6 max-w-xl">
-            <span className="block text-xs font-bold tracking-[0.15em] text-[var(--color-mist)] uppercase">
-              {t("heroThemeLabel")}
-            </span>
-            <span className="mt-2 block font-display text-xl text-white sm:text-2xl">&ldquo;{theme}&rdquo;</span>
-          </p>
-        )}
-        {urgency && (
-          <p className="mx-auto mt-5 max-w-md rounded-2xl bg-white/12 px-5 py-3 text-sm font-bold text-white backdrop-blur-sm">
-            {urgency}
-          </p>
-        )}
-      </ConversionHero>
-
-      {/* 50th Anniversary -- kept front-and-center on the new homepage
-          (not folded away just because the front door is now registration),
-          same bold "ad" treatment as the Register/Store/Give conversion
-          pages. */}
-      <AnniversarySection
-        locale={locale}
-        badge={tHome("anniversaryBadge")}
-        heading={tHome("anniversaryHeading")}
-        cta={tHome("anniversaryCta")}
-        opensInNewTabLabel={tHome("opensInNewTab")}
-      />
-
-      {ladder.length > 0 && (
-        <section className="mx-auto max-w-5xl px-6 pt-16">
-          <h2 className="font-display text-lg text-[var(--color-fg)]">{t("pricingHeading")}</h2>
-          <div className="mt-4">
-            <PricingCards categories={pricingCategories} currentRateLabel={t("pricingCurrentBadge")} />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full opacity-30 blur-3xl"
+          style={{ background: "var(--color-red)" }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-white/10 blur-3xl"
+        />
+        <div className="relative mx-auto max-w-2xl text-center">
+          <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-mist)] uppercase">
+            {t("heroKicker")}
+          </span>
+          <h1 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            {t("heroHeading")}
+          </h1>
+          <p className="mx-auto mt-5 max-w-[52ch] text-white/90">{t("heroBody")}</p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Button
+              href={`/${locale}/register`}
+              variant="primary"
+              style={{ background: "var(--gradient-cta-gold)", color: "#16121a" }}
+            >
+              {t("heroRegisterCta")}
+            </Button>
+            <Button
+              href={`/${locale}/schedule`}
+              variant="primary"
+              className="shadow-none"
+              style={{ background: "rgba(255,255,255,0.12)" }}
+            >
+              {t("heroScheduleCta")}
+            </Button>
           </div>
-        </section>
-      )}
-
-      {registrationOpen && <RegisterPageClient />}
-
-      <section id="registration-guidelines" className="mx-auto max-w-3xl px-6 pt-16 pb-16">
-        <h2 className="font-display text-lg text-[var(--color-fg)]">{t("guidelinesHeading")}</h2>
-        <ol className="mt-3 flex flex-col gap-2 text-sm text-[var(--color-muted)]">
-          {registrationGuidelines.items.map((item, index) => (
-            <li key={item} className="flex gap-2.5">
-              <span aria-hidden="true" className="font-semibold text-[var(--color-red-text)] tabular-nums">
-                {index + 1}.
-              </span>
-              {item}
-            </li>
-          ))}
-        </ol>
-        <p className="mt-3 text-sm font-semibold text-[var(--color-red-text)]">
-          {registrationGuidelines.freeFoodNote}
-        </p>
+        </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-6 pb-16">
-        <h2 className="font-display text-lg text-[var(--color-fg)]">{t("paymentOptionsHeading")}</h2>
-        <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-3">
-          {paymentOptions.methods.map((method) => (
-            <Card key={method.name} padding="lg">
-              <h3 className="font-display text-base text-[var(--color-fg)]">{method.name}</h3>
-              <p className="mt-2 text-sm text-[var(--color-muted)]">{method.detail}</p>
-            </Card>
-          ))}
+      {/* 50th Anniversary -- kept prominent on the homepage, the site's
+          actual front door, per the site owner's standing call that this
+          "ad" placement shouldn't get folded away. */}
+      <AnniversarySection
+        locale={locale}
+        badge={t("anniversaryBadge")}
+        heading={t("anniversaryHeading")}
+        cta={t("anniversaryCta")}
+        opensInNewTabLabel={t("opensInNewTab")}
+      />
+
+      <section className="px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">{t("missionHeading")}</h2>
+          <p className="mx-auto mt-4 max-w-[60ch] text-[var(--color-muted)]">{t("missionBody")}</p>
+          <Link
+            href={`/${locale}/about`}
+            className="mt-5 inline-flex items-center font-semibold text-[var(--color-red-text)] hover:underline"
+          >
+            {t("missionCta")}
+          </Link>
+        </div>
+      </section>
+
+      <section className="px-6 pb-20" style={{ background: "var(--color-surface)" }}>
+        <div className="mx-auto max-w-5xl pt-16">
+          <h2 className="text-center font-display text-2xl text-[var(--color-fg)] sm:text-3xl">
+            {t("quickLinksHeading")}
+          </h2>
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {quickLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="block h-full">
+                <Card hoverable className="h-full">
+                  <p className="font-display text-lg text-[var(--color-fg)]">{link.title}</p>
+                  <p className="mt-2 text-sm text-[var(--color-muted)]">{link.desc}</p>
+                </Card>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </div>

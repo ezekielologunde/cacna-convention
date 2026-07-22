@@ -37,24 +37,26 @@ function renderNav() {
 describe("PrimaryNav", () => {
   it("renders the primary nav items plus a Programs dropdown trigger", () => {
     renderNav();
-    // No plain "Home" link -- the homepage is now the Register flow, and
-    // the logo (already linking to "/") covers that, so a second, redundant
-    // text link to the same place was removed.
+    // No plain "Home" link -- the logo (already linking to "/") covers
+    // that, so a second, redundant text link to the same place isn't
+    // needed.
     expect(screen.queryByRole("link", { name: "Home" })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "About" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Programs" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Schedule" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Live" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "News" })).toHaveAttribute("href", "/en/news");
+    // News/Live/Plan Your Visit/Archive/Contact live in the Explore
+    // dropdown, not as flat top-level links -- see the "Explore dropdown"
+    // describe block below.
+    expect(screen.getByRole("button", { name: "Explore" })).toBeInTheDocument();
   });
 
   it("no longer renders a plain 'Register' text link -- the primary CTA button is the only path to registration", () => {
     renderNav();
     // The CTA button's accessible name is "Register Now" (its aria-label),
     // distinct from the bare "Register" text link this nav used to also
-    // render alongside it. Registration lives at the homepage itself now.
+    // render alongside it.
     expect(screen.queryByRole("link", { name: "Register" })).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Register Now →" })).toHaveAttribute("href", "/en");
+    expect(screen.getByRole("link", { name: "Register Now →" })).toHaveAttribute("href", "/en/register");
   });
 
   it("renders a dominant Register Now CTA plus Store and Give as secondary buttons -- the site's other most-important destination", () => {
@@ -87,6 +89,11 @@ describe("PrimaryNav", () => {
     expect(within(panel).getByRole("link", { name: "About" })).toBeInTheDocument();
     expect(within(panel).getByRole("link", { name: "Live" })).toBeInTheDocument();
     expect(within(panel).getByRole("link", { name: "News" })).toBeInTheDocument();
+    // Plan Your Visit/Archive/Contact used to be reachable only from the
+    // footer -- confirms the mobile menu alone now reaches them too.
+    expect(within(panel).getByRole("link", { name: "Plan Your Visit" })).toBeInTheDocument();
+    expect(within(panel).getByRole("link", { name: "Archive" })).toBeInTheDocument();
+    expect(within(panel).getByRole("link", { name: "Contact" })).toBeInTheDocument();
     expect(within(panel).getByRole("link", { name: "Store" })).toHaveAttribute("href", "/en/store");
     expect(within(panel).getByRole("link", { name: "Give" })).toBeInTheDocument();
     expect(within(panel).getByRole("link", { name: "Account" })).toHaveAttribute("href", "/en/account");
@@ -165,6 +172,57 @@ describe("PrimaryNav", () => {
       fireEvent.mouseDown(document.body);
 
       expect(document.getElementById("programs-menu")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("Explore dropdown (desktop)", () => {
+    it("is closed by default and opens to reveal Plan Your Visit, News, Live, Archive, and Contact", () => {
+      renderNav();
+
+      expect(document.getElementById("explore-menu")).not.toBeInTheDocument();
+      const trigger = screen.getByRole("button", { name: "Explore" });
+      expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+      fireEvent.click(trigger);
+
+      expect(trigger).toHaveAttribute("aria-expanded", "true");
+      const panel = document.getElementById("explore-menu")!;
+      for (const name of ["Plan Your Visit", "News", "Live", "Archive", "Contact"]) {
+        expect(within(panel).getByRole("link", { name })).toBeInTheDocument();
+      }
+      expect(within(panel).getByRole("link", { name: "News" })).toHaveAttribute("href", "/en/news");
+    });
+
+    it("closes when a link is clicked", () => {
+      renderNav();
+      fireEvent.click(screen.getByRole("button", { name: "Explore" }));
+      const panel = document.getElementById("explore-menu")!;
+
+      fireEvent.click(within(panel).getByRole("link", { name: "News" }));
+
+      expect(document.getElementById("explore-menu")).not.toBeInTheDocument();
+    });
+
+    it("closes on Escape and returns focus to the trigger", () => {
+      renderNav();
+      const trigger = screen.getByRole("button", { name: "Explore" });
+      fireEvent.click(trigger);
+      expect(document.getElementById("explore-menu")).toBeInTheDocument();
+
+      fireEvent.keyDown(document, { key: "Escape" });
+
+      expect(document.getElementById("explore-menu")).not.toBeInTheDocument();
+      expect(trigger).toHaveFocus();
+    });
+
+    it("closes on a click outside the dropdown", () => {
+      renderNav();
+      fireEvent.click(screen.getByRole("button", { name: "Explore" }));
+      expect(document.getElementById("explore-menu")).toBeInTheDocument();
+
+      fireEvent.mouseDown(document.body);
+
+      expect(document.getElementById("explore-menu")).not.toBeInTheDocument();
     });
   });
 

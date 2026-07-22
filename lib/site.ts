@@ -13,13 +13,14 @@ export const SITE = {
 
 /**
  * Public, indexable routes (locale-agnostic paths). Excludes /account and
- * /account/login (personal, not content), /register/confirmation (a
- * post-transaction receipt page, not meant to be discovered/indexed), and
- * /register itself (now just a redirect to "/", which already carries the
- * top sitemap priority -- listing both would be duplicate-content noise).
+ * /account/login (personal, not content) and /register/confirmation (a
+ * post-transaction receipt page, not meant to be discovered/indexed).
+ * /register is its own page again (the owner reversed the earlier
+ * homepage↔Register merge, 2026-07-22) and is listed in its own right.
  */
 export const ROUTES: { path: string; priority: number }[] = [
   { path: "/", priority: 1 },
+  { path: "/register", priority: 0.9 },
   { path: "/about", priority: 0.8 },
   { path: "/schedule", priority: 0.8 },
   { path: "/plan-your-visit", priority: 0.6 },
@@ -36,6 +37,7 @@ export const ROUTES: { path: string; priority: number }[] = [
   { path: "/good-women", priority: 0.5 },
   { path: "/ministers-wives", priority: 0.5 },
   { path: "/youth", priority: 0.5 },
+  { path: "/sitemap", priority: 0.3 },
 ];
 
 /** schema.org Organization graph for the Convention site — a sub-entity of

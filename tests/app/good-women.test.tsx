@@ -123,7 +123,7 @@ describe("GoodWomenPage", () => {
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Get notified — view registration" })).toHaveAttribute(
       "href",
-      "/en"
+      "/en/register"
     );
   });
 });

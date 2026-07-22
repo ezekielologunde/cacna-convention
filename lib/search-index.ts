@@ -24,7 +24,8 @@ export type SearchEntry = {
 };
 
 const pages: SearchEntry[] = [
-  { title: "Register", href: "", category: "Page", excerpt: "Convention registration — the site's homepage" },
+  { title: "Home", href: "", category: "Page", excerpt: "Welcome to the CACNA Annual Convention" },
+  { title: "Register", href: "/register", category: "Page", excerpt: "Convention registration — individual or group" },
   { title: "About", href: "/about", category: "Page", excerpt: "Our story, mission, leadership, and committee" },
   { title: "Schedule", href: "/schedule", category: "Page", excerpt: "Full convention schedule" },
   { title: "Live", href: "/live", category: "Page", excerpt: "Watch convention services live" },
@@ -41,6 +42,7 @@ const pages: SearchEntry[] = [
   { title: "Christian Education", href: "/christian-education", category: "Page" },
   { title: "Business Group Fellowship", href: "/business-group", category: "Page" },
   { title: "Youth & Young Ministry", href: "/youth", category: "Page" },
+  { title: "Site Map", href: "/sitemap", category: "Page", excerpt: "Every page on this site, in one place" },
 ];
 
 const leadershipEntries: SearchEntry[] = leadership.map((person) => ({

@@ -84,4 +84,9 @@ describe("FooterNav", () => {
     ).toHaveAttribute("href", "/en/contact");
     expect(screen.getByPlaceholderText("Your email address")).toBeInTheDocument();
   });
+
+  it("renders a Site map link as the definitive catch-all for every page", async () => {
+    await renderFooter();
+    expect(screen.getByRole("link", { name: "Site map" })).toHaveAttribute("href", "/en/sitemap");
+  });
 });
