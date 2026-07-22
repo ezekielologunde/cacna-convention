@@ -2,6 +2,8 @@
 
 import { useTranslations } from "next-intl";
 
+export type Audience = "all" | "youth" | "adult" | "children";
+
 type SessionSummary = {
   id: string;
   starts_at: string;
@@ -9,6 +11,7 @@ type SessionSummary = {
   title: string;
   minister_name: string | null;
   minister_title: string | null;
+  audience: Audience[];
 };
 
 export function ScheduleDay({
@@ -19,6 +22,12 @@ export function ScheduleDay({
   sessions: SessionSummary[];
 }) {
   const t = useTranslations("Schedule");
+  const audienceLabels: Record<Audience, string> = {
+    all: t("filterAll"),
+    youth: t("filterYouth"),
+    adult: t("filterAdult"),
+    children: t("filterChildren"),
+  };
 
   // Parsed with a noon UTC anchor (not `new Date(dayDate)` at midnight) so a
   // negative-offset timezone reading this at render time can't roll the
@@ -38,9 +47,23 @@ export function ScheduleDay({
       <ul className="mt-4 flex flex-col gap-4">
         {sessions.map((session) => (
           <li key={session.id} className="border-b border-[var(--color-border)] pb-4 last:border-b-0 last:pb-0">
-            <p className="text-sm font-semibold text-[var(--color-red-text)] tabular-nums">
-              {session.starts_at.slice(0, 5)}–{session.ends_at.slice(0, 5)}
-            </p>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+              <p className="text-sm font-semibold text-[var(--color-red-text)] tabular-nums">
+                {session.starts_at.slice(0, 5)}–{session.ends_at.slice(0, 5)}
+              </p>
+              {!session.audience.includes("all") && (
+                <div className="flex flex-wrap gap-1.5">
+                  {session.audience.map((audience) => (
+                    <span
+                      key={audience}
+                      className="rounded-full border border-[var(--color-border)] px-2 py-0.5 text-[10px] font-bold tracking-wide text-[var(--color-muted)] uppercase"
+                    >
+                      {audienceLabels[audience]}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
             <p className="mt-0.5 font-semibold text-[var(--color-fg)]">{session.title}</p>
             <p className="mt-0.5 text-sm text-[var(--color-muted)]">
               <span>{session.minister_name ?? t("guestMinister")}</span>

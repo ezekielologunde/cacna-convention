@@ -233,7 +233,12 @@
   "Schedule": {
     "title": "Schedule",
     "guestMinister": "Guest Minister",
-    "noEdition": "Schedule details will be posted closer to the convention."
+    "noEdition": "Schedule details will be posted closer to the convention.",
+    "filterGroupLabel": "Filter the schedule by age group",
+    "filterAll": "All",
+    "filterYouth": "Youth",
+    "filterAdult": "Adult",
+    "filterChildren": "Children"
   },
   "Children": {
     "title": "Children's Convention Program",

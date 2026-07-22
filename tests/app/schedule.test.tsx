@@ -122,6 +122,7 @@ describe("SchedulePage", () => {
         minister_name: null,
         minister_title: null,
         track: "main",
+        audience: ["all"],
         sort_order: 1,
         created_at: "2026-01-01T00:00:00Z",
       },
@@ -135,6 +136,7 @@ describe("SchedulePage", () => {
         minister_name: null,
         minister_title: null,
         track: "main",
+        audience: ["all"],
         sort_order: 1,
         created_at: "2026-01-01T00:00:00Z",
       },
@@ -158,5 +160,38 @@ describe("SchedulePage", () => {
       expect.anything(),
       "edition-1"
     );
+  });
+
+  it("renders the age-group filter pills above the day list", async () => {
+    mockEditionQuery({ data: { id: "edition-1" }, error: null });
+    getScheduleForEditionMock.mockResolvedValue([
+      {
+        id: "s-13",
+        edition_id: "edition-1",
+        day_date: "2026-07-13",
+        starts_at: "09:00:00",
+        ends_at: "10:00:00",
+        title: "Opening Session",
+        minister_name: null,
+        minister_title: null,
+        track: "general",
+        audience: ["all"],
+        sort_order: 1,
+        created_at: "2026-01-01T00:00:00Z",
+      },
+    ]);
+
+    const { default: SchedulePage } = await import(
+      "../../app/(site)/[locale]/schedule/page"
+    );
+    const Page = await SchedulePage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("group", { name: "Filter the schedule by age group" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "All" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("button", { name: "Youth" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Adult" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Children" })).toBeInTheDocument();
   });
 });

@@ -4,7 +4,8 @@ import { createClient } from "@/lib/supabase/server";
 import { getScheduleForEdition } from "@/lib/schedule";
 import { getActiveEdition } from "@/lib/editions";
 import { getActivePricingForEdition } from "@/lib/pricing";
-import { ScheduleDay } from "@/components/schedule/ScheduleDay";
+import { ScheduleView } from "@/components/schedule/ScheduleView";
+import type { Audience } from "@/components/schedule/ScheduleDay";
 import { PromoBanner } from "@/components/register/PromoBanner";
 import { PageHero } from "@/components/ui/PageHero";
 import { pageMetadata } from "@/lib/metadata";
@@ -71,20 +72,26 @@ export default async function SchedulePage({
   // own `ORDER BY day_date` clause. Sort explicitly here so the page's own
   // grouping logic guarantees day order rather than silently depending on
   // the query never changing.
-  const orderedDays = Array.from(byDay.entries()).sort(([a], [b]) =>
-    a.localeCompare(b)
-  );
+  const orderedDays = Array.from(byDay.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([dayDate, daySessions]) => ({
+      dayDate,
+      // `audience` is stored as a plain Postgres text[] -- the DB-level check
+      // constraint (see supabase/migrations/0011_schedule_sessions_audience.sql)
+      // guarantees the narrower Audience union at runtime, TypeScript just
+      // can't see that from the generated column type.
+      sessions: daySessions.map((session) => ({
+        ...session,
+        audience: session.audience as Audience[],
+      })),
+    }));
 
   return (
     <div>
       <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
       <PageHero title={t("title")} photoSrc="/photos/gallery/IMG-20250719-WA0041.jpg" />
       <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
-        <div className="flex flex-col gap-6">
-          {orderedDays.map(([dayDate, daySessions]) => (
-            <ScheduleDay key={dayDate} dayDate={dayDate} sessions={daySessions} />
-          ))}
-        </div>
+        <ScheduleView days={orderedDays} />
       </div>
     </div>
   );

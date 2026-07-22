@@ -233,7 +233,12 @@
   "Schedule": {
     "title": "Iṣètò",
     "guestMinister": "Aṣíwájú Àlejò",
-    "noEdition": "A óò fi ìtòlẹ́sẹ̀ payẹ̀wò síta nígbà tí àpéjọ bá súnmọ́."
+    "noEdition": "A óò fi ìtòlẹ́sẹ̀ payẹ̀wò síta nígbà tí àpéjọ bá súnmọ́.",
+    "filterGroupLabel": "Ṣe àyẹ̀wò ìtòlẹ́sẹ̀ nípa ẹgbẹ́ ọjọ́orí",
+    "filterAll": "Gbogbo",
+    "filterYouth": "Ọ̀dọ́",
+    "filterAdult": "Àgbàlagbà",
+    "filterChildren": "Ọmọdé"
   },
   "Children": {
     "title": "Ètò Àpéjọ Àwọn Ọmọdé",

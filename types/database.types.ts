@@ -247,6 +247,7 @@ export type Database = {
       }
       schedule_sessions: {
         Row: {
+          audience: string[]
           created_at: string
           day_date: string
           edition_id: string
@@ -260,6 +261,7 @@ export type Database = {
           track: string
         }
         Insert: {
+          audience?: string[]
           created_at?: string
           day_date: string
           edition_id: string
@@ -273,6 +275,7 @@ export type Database = {
           track?: string
         }
         Update: {
+          audience?: string[]
           created_at?: string
           day_date?: string
           edition_id?: string
@@ -436,7 +439,7 @@ export type Database = {
 
 type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
 
-type DefaultSchema = DatabaseWithoutInternals["public"]
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
 
 export type Tables<
   DefaultSchemaTableNameOrOptions extends
