@@ -114,7 +114,17 @@
     "noResults": "Kò sí èsì kankan"
   },
   "Chat": {
-    "openLabel": "Bá Wa Sọ̀rọ̀"
+    "openLabel": "Bá Wa Sọ̀rọ̀",
+    "heading": "Bá Wa Sọ̀rọ̀",
+    "intro": "Fi ọ̀rọ̀ ránṣẹ́ sí wa, a óò sì dá ọ lóhùn nípasẹ̀ í-meèlì — èyí kì í ṣe ìjíròrò tààrà síbẹ̀ síbẹ̀.",
+    "nameLabel": "Orúkọ",
+    "emailLabel": "Àdírẹ́ẹ̀sì Í-meèlì",
+    "subjectLabel": "Kókó Ọ̀rọ̀",
+    "messageLabel": "Ọ̀rọ̀",
+    "submitCta": "Fi Ọ̀rọ̀ Ránṣẹ́",
+    "submittingCta": "Ń Fi Ránṣẹ́…",
+    "successMessage": "A dúpẹ́ — a ti gba ọ̀rọ̀ rẹ, a óò sì dáhùn nípasẹ̀ í-meèlì.",
+    "errorMessage": "Ohun kan ṣẹlẹ̀ nígbà tí à ń fi ọ̀rọ̀ rẹ ránṣẹ́. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan síi."
   },
   "Footer": {
     "blurb": "Ìjọ Aposteli Kristi ní Àríwá Amẹ́ríkà — agbo kan, tí a kójọ láti agbègbè kọ̀ọ̀kan, lẹ́ẹ̀kan lọ́dún.",

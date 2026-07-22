@@ -114,7 +114,17 @@
     "noResults": "No results found"
   },
   "Chat": {
-    "openLabel": "Chat with us"
+    "openLabel": "Chat with us",
+    "heading": "Chat with us",
+    "intro": "Send us a message and we'll get back to you by email — this isn't a live conversation yet.",
+    "nameLabel": "Name",
+    "emailLabel": "Email address",
+    "subjectLabel": "Subject",
+    "messageLabel": "Message",
+    "submitCta": "Send message",
+    "submittingCta": "Sending…",
+    "successMessage": "Thanks — we've got your message and will reply by email.",
+    "errorMessage": "Something went wrong sending your message. Please try again."
   },
   "Footer": {
     "blurb": "Christ Apostolic Church North America — one fold, gathered from every region, once a year.",

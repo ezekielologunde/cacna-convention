@@ -437,28 +437,34 @@ export type Database = {
       }
       support_tickets: {
         Row: {
-          attendee_id: string
+          attendee_id: string | null
           created_at: string
+          email: string | null
           id: string
           message: string
+          name: string | null
           status: string
           subject: string
           updated_at: string
         }
         Insert: {
-          attendee_id: string
+          attendee_id?: string | null
           created_at?: string
+          email?: string | null
           id?: string
           message: string
+          name?: string | null
           status?: string
           subject: string
           updated_at?: string
         }
         Update: {
-          attendee_id?: string
+          attendee_id?: string | null
           created_at?: string
+          email?: string | null
           id?: string
           message?: string
+          name?: string | null
           status?: string
           subject?: string
           updated_at?: string
