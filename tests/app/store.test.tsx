@@ -1,6 +1,6 @@
 import * as React from "react";
 import { describe, it, expect, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { NextIntlClientProvider } from "next-intl";
 import messages from "../../messages/en.json";
 import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
@@ -101,6 +101,11 @@ describe("StorePage", () => {
     for (const item of christianEducationMaterials) {
       expect(screen.getByText(item.name)).toBeInTheDocument();
     }
+    // Every material has its own cover image (not shared placeholder art).
+    const materialsList = screen.getByRole("heading", { name: "Christian Education Materials" })
+      .closest("section")!;
+    expect(within(materialsList).getAllByRole("img")).toHaveLength(christianEducationMaterials.length);
+
     // Prices repeat across items ($16.00/$18.00/$20.00 are shared), so use
     // getAllByText rather than getByText for the price column.
     expect(screen.getAllByText("$16.00").length).toBeGreaterThan(0);

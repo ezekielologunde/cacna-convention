@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ConversionHero } from "@/components/ui/ConversionHero";
 import { RegisterCta } from "@/components/register/RegisterCta";
@@ -52,10 +53,21 @@ export default async function StorePage({
             {christianEducationMaterials.map((item) => (
               <li
                 key={item.name}
-                className="flex flex-col justify-between rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]"
+                className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[var(--color-border)] shadow-[var(--shadow-card)]"
               >
-                <p className="font-semibold text-[var(--color-fg)]">{item.name}</p>
-                <p className="mt-3 font-display text-lg text-[var(--color-red-text)]">{item.price}</p>
+                <div className="relative aspect-[4/5] w-full bg-[var(--color-surface)]">
+                  <Image
+                    src={item.imageSrc}
+                    alt={item.name}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex flex-col justify-between p-5">
+                  <p className="font-semibold text-[var(--color-fg)]">{item.name}</p>
+                  <p className="mt-3 font-display text-lg text-[var(--color-red-text)]">{item.price}</p>
+                </div>
               </li>
             ))}
           </ul>
