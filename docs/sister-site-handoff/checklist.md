@@ -16,6 +16,9 @@ Flat, grouped by what kind of work it is rather than by page — the goal is to 
 - [ ] Publish the Convention Chairman tenure-conclusion announcement — [`04-gallery-and-news.md`](04-gallery-and-news.md#news)
 - [ ] Build 6 of 7 department identity pages (theme/leader/executives/history) — [`02-department-pages.md`](02-department-pages.md)
 - [ ] Author CACMA's missing identity content from scratch — no theme, leader, or executive list exists anywhere today, for either site — [`02-department-pages.md`](02-department-pages.md#5-cacma-cac-latunde-region-men-association)
+- [ ] Publish Worldwide Leadership (history paragraph + 6-person roster/bio table) — decided 2026-07-21, also now removed from this site's own `/about` — [`01-about-org-content.md`](01-about-org-content.md#worldwide-leadership--ready-to-copy-owner-decided-2026-07-21-goes-to-cacnorthamericacom)
+- [ ] Re-transcribe the 23-person Latunde Region Superintendents list (page 16 of the printed 2026 program) and build it on the sister site — decided 2026-07-21 — [`01-about-org-content.md`](01-about-org-content.md#superintendents--needs-re-transcription-then-hand-to-sister-site-owner-decided-2026-07-21)
+- [ ] Build a gallery/event-recap page with the 61 photos (copy the files, don't move the originals) — decided 2026-07-21, also now removed from this site's nav/footer/routes — [`04-gallery-and-news.md`](04-gallery-and-news.md#gallery--ready-to-copy-owner-decided-2026-07-21-move-to-sister-site-with-a-non-negotiable-asset-safety-rule)
 
 ## Fix known sister-site bugs
 
@@ -25,9 +28,7 @@ Flat, grouped by what kind of work it is rather than by page — the goal is to 
 
 ## Owner decisions needed
 
-- [ ] Where does Worldwide Leadership (CAC Nigeria & Overseas executives) actually belong — cacnorthamerica.com, or somewhere else? — [`01-about-org-content.md`](01-about-org-content.md#worldwide-leadership--needs-owner-decision)
-- [ ] Superintendents: re-transcribe the 23-person Latunde Region list from the original printed program (the prior transcription was deleted from this repo during a refactor) and decide where it goes — [`01-about-org-content.md`](01-about-org-content.md#superintendents--needs-owner-decision)
-- [ ] Gallery: should the 2025 convention photos become sister-site content? (Image files stay in this repo's `public/photos/` either way — see the asset-safety warning) — [`04-gallery-and-news.md`](04-gallery-and-news.md#gallery--needs-owner-decision-with-a-non-negotiable-asset-safety-rule)
+None open as of 2026-07-21 — Worldwide Leadership, Superintendents, and Gallery (above) were the three open questions and all have been decided.
 
 ## Not a gap — stays on this site
 

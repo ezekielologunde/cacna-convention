@@ -25,7 +25,6 @@ This site is bilingual — English (`/en`) and Yorùbá (`/yo`).
 - [About CACNA Convention](https://cacna-convention.vercel.app/en/about): Mission, foundation, leadership, and committee.
 - [News & Events](https://cacna-convention.vercel.app/en/news)
 - [Live](https://cacna-convention.vercel.app/en/live): Watch Convention services live.
-- [Gallery](https://cacna-convention.vercel.app/en/gallery)
 - [Past Conventions](https://cacna-convention.vercel.app/en/archive)
 - [Give](https://cacna-convention.vercel.app/en/give)
 - [Contact](https://cacna-convention.vercel.app/en/contact)

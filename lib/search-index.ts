@@ -32,7 +32,6 @@ const pages: SearchEntry[] = [
   { title: "Give", href: "/give", category: "Page" },
   { title: "Store", href: "/store", category: "Page", excerpt: "Christian Education materials and apparel" },
   { title: "Plan Your Visit", href: "/plan-your-visit", category: "Page", excerpt: "Hotels, travel, rules & etiquette" },
-  { title: "Gallery", href: "/gallery", category: "Page" },
   { title: "Archive", href: "/archive", category: "Page", excerpt: "Past conventions" },
   { title: "Contact", href: "/contact", category: "Page" },
   { title: "Children's Program", href: "/children", category: "Page" },

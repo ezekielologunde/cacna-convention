@@ -35,7 +35,6 @@ const CONNECT_ITEMS = [
   { key: "live", href: "/live" },
   { key: "news", href: "/news" },
   { key: "archive", href: "/archive" },
-  { key: "gallery", href: "/gallery" },
 ] as const;
 
 // Same channel lib/videos.ts pulls the /live feed from (CAC North America,

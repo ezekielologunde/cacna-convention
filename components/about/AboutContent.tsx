@@ -13,7 +13,6 @@ import type { LeadershipMember } from "@/lib/content/leadership";
 import type { CommitteeMember } from "@/lib/content/committee";
 import type { AboutConvention } from "@/lib/content/about-convention";
 import type { history as History } from "@/lib/content/history";
-import { worldwideLeadership, worldwideHistory } from "@/lib/content/worldwide-leadership";
 import { statementOfFaith } from "@/lib/content/statement-of-faith";
 
 // Moved here from the old homepage (now the Register flow) verbatim --
@@ -318,43 +317,6 @@ export async function AboutContent({
                     <p className="mt-1 text-sm text-[var(--color-muted)]">{member.title}</p>
                     {member.bio ? (
                       <p className="mt-2 text-sm text-[var(--color-muted)]">{member.bio}</p>
-                    ) : null}
-                  </div>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Worldwide Leadership — CAC Nigeria & Overseas' executive leadership,
-          evergreen organizational context (distinct from CACNA's own regional
-          leadership above) */}
-      <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
-        <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
-          <Reveal className="text-center">
-            <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">{t("worldwideLeadershipHeading")}</h2>
-            <p className="mx-auto mt-3 max-w-2xl text-[var(--color-muted)]">{t("worldwideLeadershipBlurb")}</p>
-            <p className="mx-auto mt-3 max-w-2xl text-sm text-[var(--color-muted)]">{worldwideHistory}</p>
-          </Reveal>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {worldwideLeadership.map((leader, i) => (
-              <Reveal key={leader.name} delay={i * 60}>
-                <Card hoverable className="flex h-full items-center gap-4">
-                  {leader.photo ? (
-                    <Image
-                      src={leader.photo}
-                      alt=""
-                      width={64}
-                      height={64}
-                      className="h-16 w-16 flex-none rounded-full object-cover"
-                    />
-                  ) : null}
-                  <div className="min-w-0">
-                    <p className="font-semibold text-[var(--color-fg)]">{leader.name}</p>
-                    <p className="mt-1 text-sm text-[var(--color-muted)]">{leader.title}</p>
-                    {leader.bio ? (
-                      <p className="mt-2 text-sm text-[var(--color-muted)]">{leader.bio}</p>
                     ) : null}
                   </div>
                 </Card>

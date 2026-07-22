@@ -1,17 +1,17 @@
 # Gallery and News
 
-## Gallery — **NEEDS OWNER DECISION**, with a non-negotiable asset-safety rule
+## Gallery — **READY TO COPY** (owner decided 2026-07-21: move to sister site), with a non-negotiable asset-safety rule
 
 Source: `lib/content/gallery.ts`. 61 photos total, sourced from cacnaconvention.org's 2025 Convention Gallery and 2025 Children's Department albums:
 
 - `mainGalleryPhotos` — 41 photos, `public/photos/gallery/`
 - `childrenGalleryPhotos` — 20 photos, `public/photos/gallery-children/`
 
-No captions or categories exist for any of them anywhere — the filenames are raw WhatsApp-export names, and the Gallery page's alt text ("Photo 3 of 41 from the 2025 CACNA Convention") is generated generically at render time, not stored per photo.
+No captions or categories exist for any of them anywhere — the filenames are raw WhatsApp-export names, and the removed Gallery page's alt text ("Photo 3 of 41 from the 2025 CACNA Convention") was generated generically at render time, not stored per photo.
 
-**The decision:** whether these photos, as *content* (a 2025 convention photo recap), should be published on a sister-site gallery/event-recap page. Nothing here dictates that either way — it's the owner's call.
+**Action:** build a gallery/event-recap page on cacnorthamerica.com using these 61 photos (copy the files there — see the warning below). This Convention site's own `/gallery` page and nav/footer links to it have been removed as of 2026-07-21 (the browsable-gallery *feature*, not the image files — see below).
 
-> ⚠️ **Whatever's decided above, the image files themselves must never be deleted from this repo.** `mainGalleryPhotos` isn't just Gallery-page content — it's imported and reused as hero/strip background imagery on roughly 20 other pages sitewide, including all 7 department pages, `about`, `store`, `live`, `give`, `news`, `schedule`, `archive`, `contact`, `plan-your-visit`, `register`, and the homepage's Anniversary section. **"Remove the Gallery page from navigation" must never become "delete the photo files"** — doing so would break hero images across most of the site. If gallery content does move to the sister site, *copy* the files there; don't move/delete the originals here.
+> ⚠️ **The image files themselves must never be deleted from this repo, regardless of the above.** `mainGalleryPhotos` isn't just former-Gallery-page content — it's imported and reused as hero/strip background imagery on roughly 20 other pages sitewide, including all 7 department pages, `about`, `store`, `live`, `give`, `news`, `schedule`, `archive`, `contact`, `plan-your-visit`, `register`, and the homepage's Anniversary section. Removing the Gallery *page* did not touch `public/photos/gallery/`, `public/photos/gallery-children/`, or `lib/content/gallery.ts` — only `app/(site)/[locale]/gallery/page.tsx` and links pointing at it. If you're continuing this handoff, *copy* the files to the sister site; don't move/delete the originals here.
 
 ## News
 

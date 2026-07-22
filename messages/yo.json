@@ -12,7 +12,6 @@
     "skipToContent": "Fò lọ sí àkóónú àkọ́kọ́",
     "give": "Ẹ̀bùn",
     "planYourVisit": "Ṣe Ètò Ìbẹ̀wò Rẹ",
-    "gallery": "Àwòrán",
     "archive": "Àkójọpọ̀ Àtijọ́",
     "contact": "Kàn Sí Wa",
     "children": "Ètò Àwọn Ọmọdé",
@@ -202,8 +201,6 @@
     "subtitle": "Ìtàn, Ète, àti àwọn ènìyàn tí ó wà lẹ́yìn Àpéjọ Ọdọọdún CACNA.",
     "ourStory": "Ìtàn Wa",
     "leadership": "Aṣíwájú",
-    "worldwideLeadershipHeading": "CAC Nigeria & Overseas — Aṣíwájú Kárí Ayé",
-    "worldwideLeadershipBlurb": "CACNA jẹ́ agbègbè kan nínú Ìjọ Aposteli Kristi Nàìjíríà àti Òkèèrè, tí àwọn aṣíwájú kárí ayé rẹ̀ ń darí.",
     "committee": "Ìgbìmọ̀",
     "superintendents": "Àwọn Alábòójútó",
     "missionHeading": "Ète Wa",
@@ -380,12 +377,6 @@
     "chairman": "Alága Àpéjọ",
     "secretary": "Akọ̀wé Àpéjọ",
     "generalInquiries": "Ìbéèrè gbogbogbò"
-  },
-  "Gallery": {
-    "title": "Àwòrán",
-    "intro": "Àwòrán láti àpéjọ ọdún 2025.",
-    "conventionHeading": "Àpéjọ 2025",
-    "childrenHeading": "Ẹ̀ka Àwọn Ọmọdé"
   },
   "Give": {
     "title": "Ẹ̀bùn",

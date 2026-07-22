@@ -34,4 +34,4 @@ Of everything catalogued, one item is a real, live gap on **both** sites today: 
 
 ## Not covered here
 
-Restructuring *this* site (nav reorder, homepage↔register swap, redesigning the Schedule page around the daily-by-track agenda, removing the 7 department pages and the Gallery/News pages from navigation) was discussed separately and isn't part of this handoff. This handoff only prepares the content those later changes will orphan, so nothing gets lost.
+Restructuring *this* site was discussed separately and isn't part of this handoff document itself — this handoff only prepares the content those changes orphan, so nothing gets lost. Since this was originally written, several of those changes have actually landed: the homepage↔register swap, nav reorder, the Schedule page's daily age-group breakdown, and (2026-07-21) the Worldwide Leadership section and the Gallery page have both been removed from this site per the owner's decisions recorded in `01-about-org-content.md` and `04-gallery-and-news.md`. The 7 department pages are still live here as of this writing.

@@ -12,7 +12,6 @@
     "skipToContent": "Skip to main content",
     "give": "Give",
     "planYourVisit": "Plan Your Visit",
-    "gallery": "Gallery",
     "archive": "Archive",
     "contact": "Contact",
     "children": "Children's Program",
@@ -202,8 +201,6 @@
     "subtitle": "The story, mission, and people behind the CACNA Annual Convention.",
     "ourStory": "Our Story",
     "leadership": "Leadership",
-    "worldwideLeadershipHeading": "CAC Nigeria & Overseas — Worldwide Leadership",
-    "worldwideLeadershipBlurb": "CACNA is one region within Christ Apostolic Church Nigeria & Overseas, guided by its worldwide executive leadership.",
     "committee": "Committee",
     "superintendents": "Superintendents",
     "missionHeading": "Our Mission",
@@ -380,12 +377,6 @@
     "chairman": "Convention Chairman",
     "secretary": "Convention Secretary",
     "generalInquiries": "General inquiries"
-  },
-  "Gallery": {
-    "title": "Gallery",
-    "intro": "Photos from the 2025 convention.",
-    "conventionHeading": "2025 Convention",
-    "childrenHeading": "Children's Department"
   },
   "Give": {
     "title": "Give",

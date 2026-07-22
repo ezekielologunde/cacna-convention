@@ -16,7 +16,6 @@ const { committee } = await import("../../lib/content/committee");
 const { history } = await import("../../lib/content/history");
 const { aboutConvention } = await import("../../lib/content/about-convention");
 const { externalResources } = await import("../../lib/content/external-resources");
-const { worldwideLeadership, worldwideHistory } = await import("../../lib/content/worldwide-leadership");
 const { statementOfFaith } = await import("../../lib/content/statement-of-faith");
 const { welcomeMessage } = await import("../../lib/content/welcome");
 
@@ -98,17 +97,6 @@ describe("AboutContent", () => {
     for (const member of leadership) {
       if (member.bio) {
         expect(screen.getByText(member.bio)).toBeInTheDocument();
-      }
-    }
-
-    // Worldwide Leadership
-    expect(screen.getByRole("heading", { name: "CAC Nigeria & Overseas — Worldwide Leadership" })).toBeInTheDocument();
-    expect(screen.getByText(worldwideHistory)).toBeInTheDocument();
-    for (const leader of worldwideLeadership) {
-      expect(screen.getByText(leader.name)).toBeInTheDocument();
-      expect(screen.getByText(leader.title)).toBeInTheDocument();
-      if (leader.bio) {
-        expect(screen.getByText(leader.bio)).toBeInTheDocument();
       }
     }
 

@@ -78,7 +78,7 @@ Two have bios (sourced from `cacnorthamerica.com/pastor-agbeja` and `cacnorthame
 
 **Action:** just confirm the roster still matches. The other 3 members' missing bios are a sister-site content bug (see the known-issues file), not something to author from scratch here.
 
-## Worldwide Leadership — **NEEDS OWNER DECISION**
+## Worldwide Leadership — **READY TO COPY** (owner decided 2026-07-21: goes to cacnorthamerica.com)
 
 Source: `lib/content/worldwide-leadership.ts`.
 
@@ -93,16 +93,18 @@ Source: `lib/content/worldwide-leadership.ts`.
 | Pastor J. F. Omitinde | Finance Director, CAC Nigeria & Overseas | Born in Ile-Ife, Nigeria, he worked eight years with the Oyo State School Board before joining CAC as Treasurer in 1992 and becoming Finance Director in 2007. |
 | Pastor C. S. Fasuyi | Missions Director, CAC Nigeria & Overseas | *(none — see known issues)* |
 
-**Why this needs a decision, not just an action:** these are **CAC Nigeria & Overseas** (worldwide) executives — a level above CACNA (the North America region). It isn't obvious cacnorthamerica.com, a regional site, is even the right home for worldwide-level leadership, as opposed to a separate worldwide-denomination site. Decide where this belongs before publishing it anywhere.
+These are **CAC Nigeria & Overseas** (worldwide) executives — a level above CACNA (the North America region) — so it wasn't obvious cacnorthamerica.com, a regional site, was the right home rather than a separate worldwide-denomination site. The owner confirmed 2026-07-21 that it goes to cacnorthamerica.com regardless. It has also been **removed from this Convention site's own `/about` page** as of that date (`components/about/AboutContent.tsx`) — this file's full roster/bio table above is the only place this content now lives; use it directly.
+
+**Action:** publish the history paragraph and the 6-person roster/bio table above on cacnorthamerica.com. Nothing currently replaces it there, and it no longer exists on this site either.
 
 ## Committee — **STAYS HERE / DOESN'T MOVE**
 
 Source: `lib/content/committee.ts` — the 2026 Convention & Conference Committee, 30 people. This is the *convention's own one-year committee*, not standing organizational structure, so it doesn't belong on an org-wide site any more than a single event's program booklet would. It stays on this site (or whatever replaces this site's About page) as convention-specific content. No handoff action needed for this one — listed here only so it isn't mistaken for a gap.
 
-## Superintendents — **NEEDS OWNER DECISION**
+## Superintendents — **NEEDS RE-TRANSCRIPTION, then hand to sister site** (owner decided 2026-07-21)
 
 This one has a real history worth knowing: on 2026-07-17, the 23-person Latunde Region superintendent list (name, DCC/Zone, additional roles) was transcribed in full from page 16 of the printed 2026 convention program and added to this repo as `lib/content/superintendents.ts`, wired in as a 4th tab on the About page. It was later **removed** during a subsequent About-page rebuild (the page moved from a tab-switcher to a continuous scroll, and this section was intentionally trimmed to just a short blurb + two outbound links — "Find your Zone" / "Find your DCC" — per `components/about/AboutContent.tsx`'s own code comments, called out there as a deliberate "Phase 15" decision).
 
-**The actual transcribed 23-name list no longer exists anywhere in this repo** — only this note about its prior existence survives in `docs/source-content/2026-cacnaconvention-org-content.md`. If this content is wanted anywhere (this site or the sister site), it needs to be **re-transcribed from the original source** (page 16 of the printed 2026 convention program, "CAC Latunde Region Superintendents," a single composite flyer image — no individual headshots exist for these 23 people).
+**The actual transcribed 23-name list no longer exists anywhere in this repo** — only this note about its prior existence survives in `docs/source-content/2026-cacnaconvention-org-content.md`. The owner confirmed this belongs on the sister site, not here — it does **not** need building on this Convention site at all.
 
-**Decide:** re-transcribe and build a page here, hand the (re-)transcription to the sister site instead, or leave it dropped.
+**Action:** re-transcribe from the original source (page 16 of the printed 2026 convention program, "CAC Latunde Region Superintendents," a single composite flyer image — no individual headshots exist for these 23 people), then build the page on cacnorthamerica.com. This Convention site keeps only its existing short blurb + "Find your Zone"/"Find your DCC" outbound links.

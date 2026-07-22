@@ -33,10 +33,9 @@ async function renderFooter() {
 }
 
 describe("FooterNav", () => {
-  it("renders the four secondary nav links", async () => {
+  it("renders the secondary nav links", async () => {
     await renderFooter();
     expect(screen.getByRole("link", { name: "Plan Your Visit" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Gallery" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Archive" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Contact" })).toBeInTheDocument();
   });
@@ -61,11 +60,11 @@ describe("FooterNav", () => {
   });
 
   it("marks the current page's footer link with aria-current, and no other", async () => {
-    mockPathname = "/en/gallery";
+    mockPathname = "/en/archive";
     await renderFooter();
 
-    expect(screen.getByRole("link", { name: "Gallery" })).toHaveAttribute("aria-current", "page");
-    expect(screen.getByRole("link", { name: "Archive" })).not.toHaveAttribute("aria-current");
+    expect(screen.getByRole("link", { name: "Archive" })).toHaveAttribute("aria-current", "page");
+    expect(screen.getByRole("link", { name: "News" })).not.toHaveAttribute("aria-current");
     expect(screen.getByRole("link", { name: "Contact" })).not.toHaveAttribute("aria-current");
 
     mockPathname = "/en";
