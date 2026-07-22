@@ -47,7 +47,7 @@ export default async function ChristianEducationPage({
         icon={BookOpen}
       />
       <PhotoStrip photos={mainGalleryPhotos.slice(15, 18)} caption="From the 2025 convention" />
-      <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-7xl">
+      <div className="mx-auto w-full max-w-[clamp(20rem,90vw,60rem)] px-6 py-12">
         <section>
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("orderHeading")}</h2>
           <div className="mt-4">

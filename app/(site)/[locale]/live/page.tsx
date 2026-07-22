@@ -48,7 +48,7 @@ export default async function LivePage({
   return (
     <>
       <PageHero title={t("title")} subtitle={t("intro")} photoSrc="/photos/gallery/IMG-20250719-WA0044.jpg" />
-      <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-7xl">
+      <div className="mx-auto w-full max-w-[clamp(20rem,90vw,60rem)] px-6 py-12">
       <a
         href={YOUTUBE_LIVE_URL}
         target="_blank"

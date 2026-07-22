@@ -90,7 +90,7 @@ export default async function SchedulePage({
     <div>
       <PromoBanner nextDeadline={nextDeadline} priceBeforeIncrease={priceBeforeIncrease} />
       <PageHero title={t("title")} photoSrc="/photos/gallery/IMG-20250719-WA0041.jpg" />
-      <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-7xl">
+      <div className="mx-auto w-full max-w-[clamp(20rem,90vw,60rem)] px-6 py-12">
         <ScheduleView days={orderedDays} />
       </div>
     </div>

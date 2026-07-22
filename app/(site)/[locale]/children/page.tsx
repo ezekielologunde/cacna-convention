@@ -49,7 +49,7 @@ export default async function ChildrenPage({
         photoSrc="/photos/gallery/IMG-20250719-WA0051.jpg"
       />
       <PhotoStrip photos={childrenGalleryPhotos.slice(0, 3)} caption="From the Children's Department, 2025" />
-      <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-7xl">
+      <div className="mx-auto w-full max-w-[clamp(20rem,90vw,60rem)] px-6 py-12">
       <section className="mt-2">
         <h2 className="font-display text-xl text-[var(--color-fg)]">
           {t("dailyStructureHeading")}

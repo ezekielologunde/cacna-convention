@@ -101,7 +101,7 @@ export default async function AccountPage({
   return (
     <>
       <PageHero title={t("title")} subtitle={t("subtitle")} tone="red" />
-      <div className="mx-auto flex max-w-4xl flex-col gap-6 px-6 py-12 2xl:max-w-6xl">
+      <div className="mx-auto flex max-w-[clamp(20rem,90vw,60rem)] flex-col gap-6 px-6 py-12">
         <Card padding="lg">
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("preferencesHeading")}</h2>
           <div className="mt-4 flex items-center justify-between gap-4 border-t border-[var(--color-border)] pt-4">

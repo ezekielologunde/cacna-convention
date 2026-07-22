@@ -45,7 +45,7 @@ export default async function YouthPage({
         photoSrc="/photos/gallery/IMG-20250719-WA0042.jpg"
       />
       <PhotoStrip photos={mainGalleryPhotos.slice(0, 3)} caption="From the 2025 convention" />
-      <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-7xl">
+      <div className="mx-auto w-full max-w-[clamp(20rem,90vw,60rem)] px-6 py-12">
         <section className="pb-10">
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("historyHeading")}</h2>
           <p className="mt-3 text-sm text-[var(--color-muted)]">{youthProgram.history}</p>

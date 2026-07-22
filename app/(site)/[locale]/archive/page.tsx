@@ -84,7 +84,7 @@ export default async function ArchivePage({
   return (
     <>
       <PageHero title={t("title")} tone="blue" photoSrc="/photos/gallery/IMG-20250719-WA0056.jpg" />
-      <div className="mx-auto w-full max-w-5xl px-6 py-12 2xl:max-w-7xl">
+      <div className="mx-auto w-full max-w-[clamp(20rem,90vw,60rem)] px-6 py-12">
       <p className="text-sm text-[var(--color-muted)]">{recurringSpeakerNote}</p>
       {!editions || editions.length === 0 ? (
         <div className="mt-8 rounded-3xl border border-[var(--color-border)] p-8 text-center shadow-[var(--shadow-card)]">

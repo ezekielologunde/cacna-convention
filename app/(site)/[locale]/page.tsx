@@ -83,7 +83,7 @@ export default async function Home({
       />
 
       <section className="px-6 py-16 sm:py-20">
-        <Reveal className="mx-auto max-w-4xl text-center 2xl:max-w-6xl">
+        <Reveal className="mx-auto max-w-[clamp(20rem,88vw,56rem)] text-center">
           <h2 className="font-display text-2xl text-[var(--color-fg)] sm:text-3xl">{t("missionHeading")}</h2>
           <p className="mx-auto mt-4 max-w-[60ch] text-[var(--color-muted)]">{t("missionBody")}</p>
           <Link
@@ -96,7 +96,7 @@ export default async function Home({
       </section>
 
       <section className="px-6 pb-20" style={{ background: "var(--color-surface)" }}>
-        <div className="mx-auto max-w-7xl pt-16 2xl:max-w-[100rem]">
+        <div className="mx-auto max-w-[clamp(20rem,92vw,76rem)] pt-16">
           <Reveal>
             <h2 className="text-center font-display text-2xl text-[var(--color-fg)] sm:text-3xl">
               {t("quickLinksHeading")}

@@ -49,7 +49,7 @@ export default async function GivePage({
           aria-hidden="true"
           className="pointer-events-none absolute -top-24 -right-16 h-72 w-72 rounded-full bg-white/10 blur-3xl"
         />
-        <div className="relative mx-auto max-w-5xl 2xl:max-w-7xl">
+        <div className="relative mx-auto max-w-[clamp(20rem,90vw,60rem)]">
           <span className="inline-flex items-center rounded-full bg-white/12 px-4 py-1.5 text-xs font-bold tracking-[0.15em] text-white uppercase backdrop-blur-sm">
             {t("villageEyebrow")}
           </span>
@@ -77,7 +77,7 @@ export default async function GivePage({
         </div>
       </section>
 
-      <div className="mx-auto max-w-5xl px-6 py-16 2xl:max-w-7xl">
+      <div className="mx-auto max-w-[clamp(20rem,90vw,60rem)] px-6 py-16">
         {/* More ways to give */}
         <Card padding="lg">
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("moreWaysHeading")}</h2>

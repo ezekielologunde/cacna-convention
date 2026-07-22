@@ -45,7 +45,7 @@ export default async function StorePage({
         body={t("intro")}
         cta={{ label: t("shopHeroCta"), href: "#apparel-section" }}
       />
-      <div className="mx-auto w-full max-w-7xl px-6 py-12 2xl:max-w-[100rem]">
+      <div className="mx-auto w-full max-w-[clamp(20rem,92vw,76rem)] px-6 py-12">
         <section>
           <h2 className="font-display text-xl text-[var(--color-fg)]">{t("materialsHeading")}</h2>
           <p className="mt-2 max-w-[65ch] text-sm text-[var(--color-muted)]">{t("materialsIntro")}</p>
