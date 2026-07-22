@@ -4,6 +4,8 @@ import { NextIntlClientProvider } from "next-intl";
 import messages from "../../messages/en.json";
 import { hotels } from "../../lib/content/hotels";
 import { rules } from "../../lib/content/rules";
+import { julyClimate, recommendedAirport, venueAddress } from "../../lib/content/travel";
+import { nearbyEssentials } from "../../lib/content/nearby-essentials";
 import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
 
 // The page now fetches the active edition (to compute the PromoBanner's
@@ -59,5 +61,111 @@ describe("PlanYourVisitPage", () => {
     expect(screen.getByText(rules.remember[0])).toBeInTheDocument();
     expect(screen.getByText(rules.rules[0])).toBeInTheDocument();
     expect(screen.getByText(rules.attribution.name)).toBeInTheDocument();
+  });
+
+  it("renders the Flying/Driving travel tabs, defaulting to the recommended airport", async () => {
+    createClientMock.mockResolvedValue({
+      from: () => ({
+        select: () => ({
+          in: () => ({
+            order: () => ({
+              limit: () => ({
+                maybeSingle: () => Promise.resolve({ data: null, error: null }),
+              }),
+            }),
+          }),
+        }),
+      }),
+    });
+
+    const { default: PlanYourVisitPage } = await import(
+      "../../app/(site)/[locale]/plan-your-visit/page"
+    );
+    const Page = await PlanYourVisitPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("tab", { name: "Flying" })).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByText(recommendedAirport.name)).toBeInTheDocument();
+  });
+
+  it("renders a map embed for the real venue address", async () => {
+    createClientMock.mockResolvedValue({
+      from: () => ({
+        select: () => ({
+          in: () => ({
+            order: () => ({
+              limit: () => ({
+                maybeSingle: () => Promise.resolve({ data: null, error: null }),
+              }),
+            }),
+          }),
+        }),
+      }),
+    });
+
+    const { default: PlanYourVisitPage } = await import(
+      "../../app/(site)/[locale]/plan-your-visit/page"
+    );
+    const Page = await PlanYourVisitPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    const map = screen.getByTitle("Map showing the CAC Village location");
+    expect(map.tagName).toBe("IFRAME");
+    expect(map).toHaveAttribute("src", expect.stringContaining(encodeURIComponent(venueAddress)));
+  });
+
+  it("renders the weather/packing section with real climate figures", async () => {
+    createClientMock.mockResolvedValue({
+      from: () => ({
+        select: () => ({
+          in: () => ({
+            order: () => ({
+              limit: () => ({
+                maybeSingle: () => Promise.resolve({ data: null, error: null }),
+              }),
+            }),
+          }),
+        }),
+      }),
+    });
+
+    const { default: PlanYourVisitPage } = await import(
+      "../../app/(site)/[locale]/plan-your-visit/page"
+    );
+    const Page = await PlanYourVisitPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByText(`${julyClimate.averageHighF}°F`)).toBeInTheDocument();
+    expect(screen.getByText(`${julyClimate.averageLowF}°F`)).toBeInTheDocument();
+    expect(screen.getByText(julyClimate.note)).toBeInTheDocument();
+  });
+
+  it("renders the nearby essentials directory with real named businesses", async () => {
+    createClientMock.mockResolvedValue({
+      from: () => ({
+        select: () => ({
+          in: () => ({
+            order: () => ({
+              limit: () => ({
+                maybeSingle: () => Promise.resolve({ data: null, error: null }),
+              }),
+            }),
+          }),
+        }),
+      }),
+    });
+
+    const { default: PlanYourVisitPage } = await import(
+      "../../app/(site)/[locale]/plan-your-visit/page"
+    );
+    const Page = await PlanYourVisitPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByText(nearbyEssentials[0].name)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Food" })).toBeInTheDocument();
   });
 });

@@ -355,7 +355,22 @@
     "milesAway": "{miles} miles from CAC Village",
     "otherAirportsHeading": "Other nearby airports",
     "drivingHeading": "Driving from BWI",
-    "budgetLodging": "Budget lodging"
+    "budgetLodging": "Budget lodging",
+    "flyingTab": "Flying",
+    "drivingTab": "Driving",
+    "mapTitle": "Map showing the CAC Village location",
+    "weatherHeading": "Weather & packing",
+    "averageHighLabel": "Average high (mid-July)",
+    "averageLowLabel": "Average low (mid-July)",
+    "packingHeading": "Packing checklist",
+    "packingResetCta": "Reset checklist",
+    "nearbyHeading": "Nearby essentials",
+    "nearbyIntro": "CAC Village is in a rural, wooded area — here's what's actually nearby, grouped by the small town it's in.",
+    "nearbyFilterGroupLabel": "Filter nearby essentials by category",
+    "nearbyFilterAll": "All",
+    "nearbyFilterFood": "Food",
+    "nearbyFilterGroceriesPharmacy": "Groceries & Pharmacy",
+    "nearbyFilterGas": "Gas"
   },
   "Anniversary": {
     "bannerLabel": "50 Years!",

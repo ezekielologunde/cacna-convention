@@ -355,7 +355,22 @@
     "milesAway": "kìlómítà {miles} sí Abúlé CAC",
     "otherAirportsHeading": "Àwọn pápá ọkọ̀ òfurufú mìíràn nítòsí",
     "drivingHeading": "Wíwakọ̀ láti BWI",
-    "budgetLodging": "Ibùgbé olówó kékeré"
+    "budgetLodging": "Ibùgbé olówó kékeré",
+    "flyingTab": "Fífò",
+    "drivingTab": "Wíwakọ̀",
+    "mapTitle": "Máàpù tí ó fi ipò Abúlé CAC hàn",
+    "weatherHeading": "Ojú-ọjọ́ àti Ìmúra",
+    "averageHighLabel": "Ìwọ̀n gíga (àárín oṣù Keje)",
+    "averageLowLabel": "Ìwọ̀n kékeré (àárín oṣù Keje)",
+    "packingHeading": "Àtòjọ Ìmúra",
+    "packingResetCta": "Bẹ̀rẹ̀ àtòjọ padà",
+    "nearbyHeading": "Àwọn Ohun Pàtàkì Nítòsí",
+    "nearbyIntro": "Abúlé CAC wà ní agbègbè ìgbèríko, tí igbó yí ká — èyí ni ohun tí ó wà nítòsí gan-an, tí a ṣètò nípasẹ̀ ìlú kékeré tí ó wà nínú rẹ̀.",
+    "nearbyFilterGroupLabel": "Ṣe àyẹ̀wò àwọn ohun pàtàkì nítòsí nípa ẹ̀ka",
+    "nearbyFilterAll": "Gbogbo",
+    "nearbyFilterFood": "Oúnjẹ",
+    "nearbyFilterGroceriesPharmacy": "Ọjà àti Ilé Ìṣègùn",
+    "nearbyFilterGas": "Epo"
   },
   "Anniversary": {
     "bannerLabel": "Ọdún 50!",

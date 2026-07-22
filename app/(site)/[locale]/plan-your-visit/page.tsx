@@ -6,15 +6,25 @@ import { getActivePricingForEdition } from "@/lib/pricing";
 import { PromoBanner } from "@/components/register/PromoBanner";
 import { PageHero } from "@/components/ui/PageHero";
 import { BulletList } from "@/components/ui/BulletList";
+import { TravelTabs } from "@/components/plan-your-visit/TravelTabs";
+import { VenueMap } from "@/components/plan-your-visit/VenueMap";
+import { NearbyEssentials } from "@/components/plan-your-visit/NearbyEssentials";
+import { PackingChecklist } from "@/components/plan-your-visit/PackingChecklist";
 import { hotels, hotelGroupCode } from "@/lib/content/hotels";
 import { rules } from "@/lib/content/rules";
 import {
   recommendedAirport,
   nearbyAirports,
   drivingRoute,
+  drivingRouteAlt,
   budgetLodgingNote,
+  groundTransportNote,
+  julyClimate,
+  remotenessNote,
+  packingChecklist,
   venueAddress,
 } from "@/lib/content/travel";
+import { nearbyEssentials } from "@/lib/content/nearby-essentials";
 import { pageMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
@@ -26,7 +36,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "PlanYourVisit" });
   return pageMetadata({
     locale, path: "/plan-your-visit", title: t("title"),
-    description: "Hotels, travel directions, and rules & etiquette for attending the CACNA Annual Convention at CAC Village.",
+    description: "Hotels, travel directions, weather, nearby essentials, and rules & etiquette for attending the CACNA Annual Convention at CAC Village.",
   });
 }
 
@@ -68,40 +78,26 @@ export default async function PlanYourVisitPage({
       <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <section>
           <h2 className="font-display text-xl text-[var(--color-fg)]">{t("travelHeading")}</h2>
-          <p className="mt-2 text-sm text-[var(--color-muted)]">
-            <span className="font-semibold text-[var(--color-fg)]">{t("venueHeading")}: </span>
-            {venueAddress}
-          </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]">
-              <p className="text-xs font-bold tracking-wide text-[var(--color-red-text)] uppercase">
-                {t("recommendedAirport")}
-              </p>
-              <p className="mt-1.5 font-semibold text-[var(--color-fg)]">{recommendedAirport.name}</p>
-              <p className="mt-0.5 text-sm text-[var(--color-muted)] tabular-nums">
-                {t("milesAway", { miles: recommendedAirport.distanceMiles })}
-              </p>
-            </div>
-            <div className="rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]">
-              <p className="text-xs font-bold tracking-wide text-[var(--color-muted)] uppercase">
-                {t("otherAirportsHeading")}
-              </p>
-              <ul className="mt-2 flex flex-col gap-1 text-sm text-[var(--color-fg)]">
-                {nearbyAirports.map((airport) => (
-                  <li key={airport.name} className="flex justify-between gap-3">
-                    <span>{airport.name}</span>
-                    <span className="text-[var(--color-muted)] tabular-nums">
-                      {airport.distanceMiles} mi
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="mt-4">
+            <TravelTabs
+              flyingLabel={t("flyingTab")}
+              drivingLabel={t("drivingTab")}
+              venueHeading={t("venueHeading")}
+              venueAddress={venueAddress}
+              recommendedAirportLabel={t("recommendedAirport")}
+              recommendedAirport={recommendedAirport}
+              recommendedAirportMilesLabel={t("milesAway", { miles: recommendedAirport.distanceMiles })}
+              otherAirportsHeading={t("otherAirportsHeading")}
+              nearbyAirports={nearbyAirports}
+              groundTransportNote={groundTransportNote}
+              drivingHeading={t("drivingHeading")}
+              drivingRoute={drivingRoute}
+              drivingRouteAlt={drivingRouteAlt}
+            />
           </div>
-          <p className="mt-4 text-sm text-[var(--color-muted)]">
-            <span className="font-semibold text-[var(--color-fg)]">{t("drivingHeading")}: </span>
-            {drivingRoute}
-          </p>
+          <div className="mt-5">
+            <VenueMap address={venueAddress} title={t("mapTitle")} />
+          </div>
         </section>
 
         <section className="mt-10">
@@ -142,6 +138,46 @@ export default async function PlanYourVisitPage({
             <span className="font-semibold text-[var(--color-fg)]">{t("budgetLodging")}: </span>
             {budgetLodgingNote}
           </p>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="font-display text-xl text-[var(--color-fg)]">{t("weatherHeading")}</h2>
+          <div className="mt-4 flex flex-wrap items-baseline gap-x-6 gap-y-2 rounded-2xl border border-[var(--color-border)] p-5 shadow-[var(--shadow-card)]">
+            <div>
+              <p className="text-xs font-bold tracking-wide text-[var(--color-muted)] uppercase">{t("averageHighLabel")}</p>
+              <p className="mt-1 font-display text-2xl text-[var(--color-fg)]">{julyClimate.averageHighF}°F</p>
+            </div>
+            <div>
+              <p className="text-xs font-bold tracking-wide text-[var(--color-muted)] uppercase">{t("averageLowLabel")}</p>
+              <p className="mt-1 font-display text-2xl text-[var(--color-fg)]">{julyClimate.averageLowF}°F</p>
+            </div>
+          </div>
+          <p className="mt-3 text-sm text-[var(--color-muted)]">{julyClimate.note}</p>
+          <p className="mt-2 text-sm text-[var(--color-muted)]">{remotenessNote}</p>
+
+          <h3 className="mt-6 text-sm font-bold tracking-wide text-[var(--color-red-text)] uppercase">
+            {t("packingHeading")}
+          </h3>
+          <div className="mt-3">
+            <PackingChecklist items={packingChecklist} resetCta={t("packingResetCta")} />
+          </div>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="font-display text-xl text-[var(--color-fg)]">{t("nearbyHeading")}</h2>
+          <p className="mt-2 max-w-[62ch] text-sm text-[var(--color-muted)]">{t("nearbyIntro")}</p>
+          <div className="mt-4">
+            <NearbyEssentials
+              items={nearbyEssentials}
+              groupLabel={t("nearbyFilterGroupLabel")}
+              filterLabels={{
+                all: t("nearbyFilterAll"),
+                food: t("nearbyFilterFood"),
+                groceriesPharmacy: t("nearbyFilterGroceriesPharmacy"),
+                gas: t("nearbyFilterGas"),
+              }}
+            />
+          </div>
         </section>
 
         <section className="mt-10">
