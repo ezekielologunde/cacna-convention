@@ -21,12 +21,33 @@ function makeFromMock() {
   return vi.fn(() => ({ select: () => ({ eq: eqMock }) }));
 }
 
-const createAttendeeClientMock = vi.fn(async () => ({
-  auth: { getUser: getUserMock },
-  from: makeFromMock(),
+// `from`'s return type is intentionally loosened to `(table: string) => any`
+// -- individual tests below override the default `makeFromMock()` with a
+// plain per-table-branching function, which doesn't structurally match a
+// `vi.fn()`'s inferred Mock type otherwise.
+const createAttendeeClientMock = vi.fn(
+  async (): Promise<{ auth: { getUser: typeof getUserMock }; from: (table: string) => any }> => ({
+    auth: { getUser: getUserMock },
+    from: makeFromMock(),
+  })
+);
+
+// The Notifications card's subscription check queries
+// newsletter_subscribers via the *service* client (see the account page's
+// own comment on why -- that table has no attendee-facing RLS policy at
+// all). Resolves "not subscribed" by default; individual tests override
+// via createServiceClientMock.mockReturnValueOnce for the opposite case.
+const createServiceClientMock = vi.fn(() => ({
+  from: () => ({
+    select: () => ({
+      eq: () => ({ maybeSingle: vi.fn().mockResolvedValue({ data: null, error: null }) }),
+    }),
+  }),
 }));
+
 vi.mock("@/lib/supabase/server", () => ({
   createAttendeeClient: createAttendeeClientMock,
+  createServiceClient: createServiceClientMock,
 }));
 
 // The signed-in branch renders SignOutButton, which calls next/navigation's
@@ -82,5 +103,107 @@ describe("AccountPage", () => {
     expect(screen.getByText("person@example.com")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: messages.Account.signOutCta })).toBeInTheDocument();
     expect(screen.queryByRole("link", { name: messages.Account.signInCta })).not.toBeInTheDocument();
+  });
+
+  it("renders the Notifications card unsubscribed by default, and subscribes on click", async () => {
+    getUserMock.mockResolvedValue({ data: { user: { id: "user-1", email: "person@example.com" } } });
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ subscribed: true }) });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const { default: AccountPage } = await import("../../app/(site)/[locale]/account/page");
+    const Page = await AccountPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByText(messages.Account.notificationsUnsubscribed)).toBeInTheDocument();
+    const subscribeButton = screen.getByRole("button", { name: messages.Account.notificationsSubscribeCta });
+    fireEvent.click(subscribeButton);
+
+    expect(await screen.findByText(messages.Account.notificationsSubscribed)).toBeInTheDocument();
+    expect(fetchMock).toHaveBeenCalledWith("/api/account/notifications", { method: "POST" });
+
+    vi.unstubAllGlobals();
+  });
+
+  it("shows a check-in QR code only for paid registrations, not pending ones", async () => {
+    getUserMock.mockResolvedValue({ data: { user: { id: "user-1", email: "person@example.com" } } });
+    createAttendeeClientMock.mockImplementationOnce(async () => ({
+      auth: { getUser: getUserMock },
+      from: (table: string) => {
+        if (table === "registrations") {
+          return {
+            select: () => ({
+              eq: () => ({
+                order: vi.fn().mockResolvedValue({
+                  data: [
+                    { id: "paid-reg", church_name: "Paid Church", contact_name: "Paid Person", status: "paid", total_amount_cents: 5000, created_at: "" },
+                    { id: "pending-reg", church_name: null, contact_name: "Pending Person", status: "pending", total_amount_cents: 5000, created_at: "" },
+                  ],
+                  error: null,
+                }),
+              }),
+            }),
+          };
+        }
+        return {
+          select: () => ({
+            eq: () => ({
+              maybeSingle: vi.fn().mockResolvedValue({ data: null, error: null }),
+              order: vi.fn().mockResolvedValue({ data: [], error: null }),
+            }),
+          }),
+        };
+      },
+    }));
+
+    const { default: AccountPage } = await import("../../app/(site)/[locale]/account/page");
+    const Page = await AccountPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    const qrCodes = screen.getAllByRole("img", { name: messages.Account.qrCodeLabel });
+    expect(qrCodes).toHaveLength(1);
+  });
+
+  it("renders the Support card with existing tickets and a submission form", async () => {
+    getUserMock.mockResolvedValue({ data: { user: { id: "user-1", email: "person@example.com" } } });
+    createAttendeeClientMock.mockImplementationOnce(async () => ({
+      auth: { getUser: getUserMock },
+      from: (table: string) => {
+        if (table === "support_tickets") {
+          return {
+            select: () => ({
+              eq: () => ({
+                order: vi.fn().mockResolvedValue({
+                  data: [{ id: "t1", subject: "Can't find my confirmation email", status: "open", created_at: "" }],
+                  error: null,
+                }),
+              }),
+            }),
+          };
+        }
+        return {
+          select: () => ({
+            eq: () => ({
+              maybeSingle: vi.fn().mockResolvedValue({ data: null, error: null }),
+              order: vi.fn().mockResolvedValue({ data: [], error: null }),
+            }),
+          }),
+        };
+      },
+    }));
+
+    const { default: AccountPage } = await import("../../app/(site)/[locale]/account/page");
+    const Page = await AccountPage({ params: Promise.resolve({ locale: "en" }) });
+
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByText("Can't find my confirmation email")).toBeInTheDocument();
+    expect(screen.getByText(messages.Account.ticketStatusOpen)).toBeInTheDocument();
+    expect(screen.getByLabelText(messages.Account.ticketSubjectLabel)).toBeInTheDocument();
+    expect(screen.getByLabelText(messages.Account.ticketMessageLabel)).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: messages.Account.ticketSubmitCta })
+    ).toBeInTheDocument();
   });
 });

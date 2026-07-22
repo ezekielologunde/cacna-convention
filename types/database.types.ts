@@ -421,6 +421,36 @@ export type Database = {
         }
         Relationships: []
       }
+      support_tickets: {
+        Row: {
+          attendee_id: string
+          created_at: string
+          id: string
+          message: string
+          status: string
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          attendee_id: string
+          created_at?: string
+          id?: string
+          message: string
+          status?: string
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          attendee_id?: string
+          created_at?: string
+          id?: string
+          message?: string
+          status?: string
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
