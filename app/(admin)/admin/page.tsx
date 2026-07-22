@@ -10,12 +10,18 @@ export default async function AdminHomePage() {
       <h1 className="text-2xl font-semibold">Admin dashboard</h1>
       <p className="mt-2 text-[var(--color-muted)]">Signed in as {user.email}</p>
 
-      <div className="mt-6">
+      <div className="mt-6 flex flex-wrap gap-3">
         <Link
           href="/admin/registrations"
           className="inline-flex items-center rounded-full border border-[var(--color-border)] px-5 py-2.5 text-sm font-semibold text-[var(--color-fg)] hover:border-[var(--color-red-text)]"
         >
           Registrants & purchases →
+        </Link>
+        <Link
+          href="/admin/schedule"
+          className="inline-flex items-center rounded-full border border-[var(--color-border)] px-5 py-2.5 text-sm font-semibold text-[var(--color-fg)] hover:border-[var(--color-red-text)]"
+        >
+          Schedule →
         </Link>
       </div>
 
