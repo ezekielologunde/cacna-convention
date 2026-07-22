@@ -164,7 +164,7 @@ export function PrimaryNav() {
       // own color instead of a generic gray hairline.
       className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/95 shadow-sm backdrop-blur"
     >
-      <div className="flex items-center gap-6 px-6 pt-safe pb-3.5">
+      <div className="mx-auto flex max-w-[clamp(20rem,94vw,84rem)] items-center gap-6 px-6 pt-safe pb-3.5">
         <Link href={`/${locale}`} className="flex min-w-0 flex-1 items-center gap-3 sm:flex-none">
           <Image
             src="/brand/icon.png"
