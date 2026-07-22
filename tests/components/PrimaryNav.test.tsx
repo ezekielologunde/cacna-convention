@@ -95,6 +95,15 @@ describe("PrimaryNav", () => {
     expect(screen.getByRole("button", { name: "Open menu" })).toHaveAttribute("aria-expanded", "false");
   });
 
+  it("groups the mobile menu into Explore and Account & Giving sections", () => {
+    renderNav();
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+
+    const panel = document.getElementById("primary-mobile-menu")!;
+    expect(within(panel).getByText("Explore")).toBeInTheDocument();
+    expect(within(panel).getByText("Account & Giving")).toBeInTheDocument();
+  });
+
   it("marks the current page's nav link with aria-current, and no other", () => {
     mockPathname = "/en/schedule";
     renderNav();

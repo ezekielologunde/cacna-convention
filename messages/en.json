@@ -22,7 +22,9 @@
     "businessGroup": "Business Group Fellowship",
     "youth": "Youth & Young Ministry",
     "store": "Store",
-    "account": "Account"
+    "account": "Account",
+    "mobileExploreHeading": "Explore",
+    "mobileAccountHeading": "Account & Giving"
   },
   "Account": {
     "title": "Account",

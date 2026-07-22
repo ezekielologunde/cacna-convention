@@ -39,6 +39,18 @@ const PROGRAM_ITEMS = [
   { key: "businessGroup", href: "/business-group" },
 ] as const;
 
+// Shared underline-indicator treatment for every top-level text link --
+// replaces the old filled-pill hover/active background (which read as
+// "app chrome") with a slimmer, more editorial mark: a 2px accent bar that
+// grows in under the label instead of a colored box around it.
+function linkClass(active: boolean) {
+  return `group relative inline-flex items-center rounded-md px-1 py-1.5 transition-colors hover:text-[var(--color-red-text)] ${
+    active ? "text-[var(--color-red-text)]" : ""
+  }`;
+}
+const UNDERLINE_BASE =
+  "pointer-events-none absolute inset-x-0 -bottom-0.5 h-0.5 origin-left scale-x-0 rounded-full transition-transform duration-200 ease-out group-hover:scale-x-100";
+
 export function PrimaryNav() {
   const t = useTranslations("Nav");
   const locale = useLocale();
@@ -93,45 +105,61 @@ export function PrimaryNav() {
   return (
     <nav
       aria-label="Primary"
-      // shadow-sm (in addition to the existing border-b) so the bar reads as
-      // a raised layer sitting above the page rather than a flat line
-      // dividing two areas of the same plane -- reported as feeling
-      // "disconnected" from the content below it.
+      // The flat border-b is now paired with a slim brand-gradient accent
+      // bar (below) rather than replaced by it -- keeps the bar reading as
+      // a raised layer (shadow-sm) while giving it a touch of the site's
+      // own color instead of a generic gray hairline.
       className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/95 shadow-sm backdrop-blur"
     >
       <div className="flex items-center gap-6 px-6 pt-safe pb-3.5">
-        <Link href={`/${locale}`} className="flex min-w-0 flex-1 items-center gap-2.5 sm:flex-none">
+        <Link href={`/${locale}`} className="flex min-w-0 flex-1 items-center gap-3 sm:flex-none">
           <Image
             src="/brand/icon.png"
             alt=""
-            width={44}
-            height={44}
-            className="h-11 w-11 flex-none rounded-full object-cover"
+            width={48}
+            height={48}
+            className="h-12 w-12 flex-none rounded-full object-cover"
             priority
           />
-          <span className="flex min-w-0 flex-col leading-none">
+          {/* The wordmark is hidden entirely below `sm:`, not just
+              truncated smaller -- on a narrow phone viewport this text
+              block is squeezed to near-zero width between the search icon,
+              Register button, and hamburger regardless of font size
+              (confirmed: even "Convention" alone, with the kicker line
+              already dropped, still rendered as literal "C…"). Icon-only
+              branding on the smallest screens is a deliberate
+              simplification, not a fallback -- it structurally can't
+              truncate since there's no text competing for that space. The
+              full kicker + "Convention" lockup returns at `sm:` and up,
+              where the bar actually has room for it. */}
+          <span className="hidden min-w-0 flex-col leading-none sm:flex">
             <span className="truncate text-[10px] font-bold tracking-[0.15em] text-[var(--color-red-text)] uppercase">
               {t("orgKicker")}
             </span>
-            <span className="mt-1 truncate font-display text-xl tracking-tight text-[var(--color-fg)] sm:text-2xl">
+            <span className="mt-1 truncate font-display text-2xl tracking-tight text-[var(--color-fg)]">
               Convention
             </span>
           </span>
         </Link>
-        <ul className="hidden items-center gap-6 text-sm font-semibold tracking-wide text-[var(--color-muted)] uppercase md:flex">
-          {BEFORE_PROGRAMS_ITEMS.map((item) => (
-            <li key={item.key}>
-              <Link
-                href={`/${locale}${item.href}`}
-                aria-current={isActive(item.href) ? "page" : undefined}
-                className={`rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-red-text)] ${
-                  isActive(item.href) ? "bg-[var(--color-surface)] text-[var(--color-red-text)]" : ""
-                }`}
-              >
-                {t(item.key)}
-              </Link>
-            </li>
-          ))}
+        <ul className="hidden items-center gap-7 text-sm font-semibold tracking-wide text-[var(--color-muted)] uppercase md:flex">
+          {BEFORE_PROGRAMS_ITEMS.map((item) => {
+            const active = isActive(item.href);
+            return (
+              <li key={item.key}>
+                <Link
+                  href={`/${locale}${item.href}`}
+                  aria-current={active ? "page" : undefined}
+                  className={linkClass(active)}
+                >
+                  {t(item.key)}
+                  <span
+                    aria-hidden="true"
+                    className={`${UNDERLINE_BASE} bg-[var(--color-red-text)] ${active ? "scale-x-100" : ""}`}
+                  />
+                </Link>
+              </li>
+            );
+          })}
           <li className="relative">
             <button
               ref={programsTriggerRef}
@@ -139,9 +167,7 @@ export function PrimaryNav() {
               aria-expanded={programsOpen}
               aria-controls="programs-menu"
               onClick={() => setProgramsOpen((open) => !open)}
-              className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-red-text)] ${
-                isProgramActive || programsOpen ? "bg-[var(--color-surface)] text-[var(--color-red-text)]" : ""
-              }`}
+              className={`${linkClass(isProgramActive)} gap-1 ${programsOpen ? "text-[var(--color-red-text)]" : ""}`}
             >
               {t("programs")}
               <svg
@@ -158,12 +184,16 @@ export function PrimaryNav() {
               >
                 <path d="m6 9 6 6 6-6" />
               </svg>
+              <span
+                aria-hidden="true"
+                className={`${UNDERLINE_BASE} bg-[var(--color-red-text)] ${isProgramActive || programsOpen ? "scale-x-100" : ""}`}
+              />
             </button>
             {programsOpen ? (
               <div
                 id="programs-menu"
                 ref={programsPanelRef}
-                className="absolute top-full left-0 mt-2 w-64 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-2 normal-case shadow-[var(--shadow-card)]"
+                className="absolute top-full left-0 mt-3 w-64 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg)] p-2 normal-case shadow-[var(--shadow-card)]"
               >
                 {PROGRAM_ITEMS.map((item) => (
                   <Link
@@ -181,19 +211,24 @@ export function PrimaryNav() {
               </div>
             ) : null}
           </li>
-          {AFTER_PROGRAMS_ITEMS.map((item) => (
-            <li key={item.key}>
-              <Link
-                href={`/${locale}${item.href}`}
-                aria-current={isActive(item.href) ? "page" : undefined}
-                className={`rounded-lg px-2.5 py-1.5 transition-colors hover:bg-[var(--color-surface)] hover:text-[var(--color-red-text)] ${
-                  isActive(item.href) ? "bg-[var(--color-surface)] text-[var(--color-red-text)]" : ""
-                }`}
-              >
-                {t(item.key)}
-              </Link>
-            </li>
-          ))}
+          {AFTER_PROGRAMS_ITEMS.map((item) => {
+            const active = isActive(item.href);
+            return (
+              <li key={item.key}>
+                <Link
+                  href={`/${locale}${item.href}`}
+                  aria-current={active ? "page" : undefined}
+                  className={linkClass(active)}
+                >
+                  {t(item.key)}
+                  <span
+                    aria-hidden="true"
+                    className={`${UNDERLINE_BASE} bg-[var(--color-red-text)] ${active ? "scale-x-100" : ""}`}
+                  />
+                </Link>
+              </li>
+            );
+          })}
         </ul>
         <div className="ml-auto flex items-center gap-3">
           {/*
@@ -206,21 +241,26 @@ export function PrimaryNav() {
             fix). A wrapper's display is the only display-related class on
             that element, so there's no such conflict.
           */}
-          <SearchBar />
-          <span className="hidden sm:inline-flex">
+          <div className="hidden items-center gap-1 border-r border-[var(--color-border)] pr-3 sm:flex">
+            <SearchBar />
             <AccountNavLink />
+          </div>
+          <span className="sm:hidden">
+            <SearchBar />
           </span>
-          {/* Store is the site's other most-important destination alongside
-              Register -- elevated to a button next to Give, not left as a
-              buried text link, matching the site owner's explicit call. */}
+          {/* Give is a plain text link, not a button -- Register and Store
+              are this site's two most important destinations (the owner's
+              explicit call), so Give stays reachable but visually quieter
+              rather than competing for the same weight. */}
+          <Link
+            href={`/${locale}/give`}
+            className="hidden text-sm font-semibold text-[var(--color-muted)] transition-colors hover:text-[var(--color-red-text)] sm:inline-flex"
+          >
+            {t("give")}
+          </Link>
           <span className="hidden sm:inline-flex">
             <Button href={`/${locale}/store`} variant="outline">
               {t("store")}
-            </Button>
-          </span>
-          <span className="hidden sm:inline-flex">
-            <Button href={`/${locale}/give`} variant="outline">
-              {t("give")}
             </Button>
           </span>
           <Button
@@ -253,16 +293,24 @@ export function PrimaryNav() {
         </div>
       </div>
 
+      {/* A slim brand-gradient accent bar under the whole nav -- a small
+          touch of the site's own color instead of a generic gray hairline,
+          without going as far as recoloring the entire bar. */}
+      <div aria-hidden="true" className="h-[3px] w-full" style={{ background: "var(--gradient-cta)" }} />
+
       {mobileOpen ? (
-        <div id="primary-mobile-menu" className="border-t border-[var(--color-border)] px-6 py-2 md:hidden">
-          <ul className="flex flex-col text-sm font-semibold tracking-wide text-[var(--color-fg)] uppercase">
+        <div id="primary-mobile-menu" className="border-t border-[var(--color-border)] px-6 py-4 md:hidden">
+          <p className="px-3 text-[11px] font-bold tracking-[0.15em] text-[var(--color-muted)] uppercase">
+            {t("mobileExploreHeading")}
+          </p>
+          <ul className="mt-1 flex flex-col text-base font-semibold text-[var(--color-fg)]">
             {BEFORE_PROGRAMS_ITEMS.map((item) => (
               <li key={item.key}>
                 <Link
                   href={`/${locale}${item.href}`}
                   onClick={() => setMobileOpen(false)}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className={`block rounded-lg px-3 py-3 ${
+                  className={`block rounded-lg px-3 py-3.5 ${
                     isActive(item.href) ? "text-[var(--color-red-text)]" : ""
                   }`}
                 >
@@ -276,7 +324,7 @@ export function PrimaryNav() {
                 aria-expanded={mobileProgramsOpen}
                 aria-controls="mobile-programs-menu"
                 onClick={() => setMobileProgramsOpen((open) => !open)}
-                className={`flex w-full items-center justify-between rounded-lg px-3 py-3 ${
+                className={`flex w-full items-center justify-between rounded-lg px-3 py-3.5 ${
                   isProgramActive ? "text-[var(--color-red-text)]" : ""
                 }`}
               >
@@ -297,14 +345,14 @@ export function PrimaryNav() {
                 </svg>
               </button>
               {mobileProgramsOpen ? (
-                <ul id="mobile-programs-menu" className="flex flex-col pb-2 pl-3">
+                <ul className="flex flex-col pb-2 pl-3" id="mobile-programs-menu">
                   {PROGRAM_ITEMS.map((item) => (
                     <li key={item.key}>
                       <Link
                         href={`/${locale}${item.href}`}
                         onClick={() => setMobileOpen(false)}
                         aria-current={isActive(item.href) ? "page" : undefined}
-                        className={`block rounded-lg px-3 py-2.5 text-xs ${
+                        className={`block rounded-lg px-3 py-2.5 text-sm font-normal text-[var(--color-muted)] ${
                           isActive(item.href) ? "text-[var(--color-red-text)]" : ""
                         }`}
                       >
@@ -321,7 +369,7 @@ export function PrimaryNav() {
                   href={`/${locale}${item.href}`}
                   onClick={() => setMobileOpen(false)}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className={`block rounded-lg px-3 py-3 ${
+                  className={`block rounded-lg px-3 py-3.5 ${
                     isActive(item.href) ? "text-[var(--color-red-text)]" : ""
                   }`}
                 >
@@ -329,11 +377,17 @@ export function PrimaryNav() {
                 </Link>
               </li>
             ))}
+          </ul>
+
+          <p className="mt-4 border-t border-[var(--color-border)] px-3 pt-4 text-[11px] font-bold tracking-[0.15em] text-[var(--color-muted)] uppercase">
+            {t("mobileAccountHeading")}
+          </p>
+          <ul className="mt-1 flex flex-col text-base font-semibold text-[var(--color-fg)]">
             <li>
               <Link
                 href={`/${locale}/store`}
                 onClick={() => setMobileOpen(false)}
-                className="block rounded-lg px-3 py-3"
+                className="block rounded-lg px-3 py-3.5"
               >
                 {t("store")}
               </Link>
@@ -342,7 +396,7 @@ export function PrimaryNav() {
               <Link
                 href={`/${locale}/give`}
                 onClick={() => setMobileOpen(false)}
-                className="block rounded-lg px-3 py-3"
+                className="block rounded-lg px-3 py-3.5"
               >
                 {t("give")}
               </Link>
@@ -351,7 +405,7 @@ export function PrimaryNav() {
               <Link
                 href={`/${locale}/account`}
                 onClick={() => setMobileOpen(false)}
-                className="block rounded-lg px-3 py-3"
+                className="block rounded-lg px-3 py-3.5"
               >
                 {t("account")}
               </Link>
