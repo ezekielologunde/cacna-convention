@@ -17,13 +17,19 @@ describe("PromoBanner", () => {
     expect(screen.getByRole("link", { name: "Register Now" })).toBeInTheDocument();
   });
 
-  it("renders nothing when there is no upcoming price increase", () => {
-    const { container } = render(
+  it("renders a coming-soon message and CTA instead of vanishing when there's no active pricing yet", () => {
+    render(
       <NextIntlClientProvider locale="en" messages={messages}>
         <PromoBanner nextDeadline={null} priceBeforeIncrease={null} />
       </NextIntlClientProvider>
     );
 
-    expect(container).toBeEmptyDOMElement();
+    expect(
+      screen.getByText("Registration for Convention 2027 opens in October 2026.")
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Get notified — view registration" })).toHaveAttribute(
+      "href",
+      "/en/register"
+    );
   });
 });

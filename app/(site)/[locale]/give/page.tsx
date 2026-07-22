@@ -83,7 +83,7 @@ export default async function GivePage({
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("moreWaysHeading")}</h2>
           <p className="mt-2 text-sm text-[var(--color-muted)]">{t("moreWaysBody")}</p>
           <a
-            href="https://cacnorthamerica.com/giving"
+            href="https://cacnorthamerica.vercel.app/giving"
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${t("moreWaysCta")}${t("opensInNewTab")}`}

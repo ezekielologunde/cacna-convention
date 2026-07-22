@@ -23,7 +23,7 @@ describe("GivePage", () => {
     expect(screen.getByText(messages.Give.zelleValue)).toBeInTheDocument();
   });
 
-  it("links out to cacnorthamerica.com for CACNA's other giving campaigns", async () => {
+  it("links out to cacnorthamerica.vercel.app for CACNA's other giving campaigns", async () => {
     const { default: GivePage } = await import("../../app/(site)/[locale]/give/page");
     const Page = await GivePage({ params: Promise.resolve({ locale: "en" }) });
 
@@ -31,7 +31,7 @@ describe("GivePage", () => {
 
     expect(
       screen.getByRole("link", { name: new RegExp(`^${messages.Give.moreWaysCta}`) })
-    ).toHaveAttribute("href", "https://cacnorthamerica.com/giving");
+    ).toHaveAttribute("href", "https://cacnorthamerica.vercel.app/giving");
   });
 
   it("ties giving to registration with a CTA to /register", async () => {

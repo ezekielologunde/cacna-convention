@@ -5,9 +5,9 @@ import { getActivePricingForEdition } from "@/lib/pricing";
 import { Button } from "@/components/ui/Button";
 
 // A closing registration prompt for pages that otherwise have no path back
-// to /register -- reuses the same open/coming-soon copy and button-variant
-// logic as the homepage's Registration band (see app/(site)/[locale]/page.tsx)
-// so the messaging stays consistent no matter which page a visitor lands on.
+// to /register -- same open/coming-soon signal (edition + active pricing
+// tiers) that the homepage's hero and PromoBanner.tsx also check, so the
+// messaging stays consistent no matter which page a visitor lands on.
 //
 // Tried wrapping this in next/cache's unstable_cache (2026-07-21) to
 // collapse the DB round-trip across the 7+ pages this renders on --
