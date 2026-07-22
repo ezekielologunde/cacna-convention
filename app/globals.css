@@ -207,6 +207,25 @@ h3 {
   animation: hero-kenburns 18s ease-in-out infinite alternate;
 }
 
+/* Homepage hero background orbs -- slow ambient breathing so the hero
+ * never sits fully still even before the cursor moves (touch devices,
+ * first paint). Composed with (not fighting) the mouse-parallax transform
+ * HeroSection.tsx sets inline: that lives on an outer wrapper div, this
+ * keyframe animates the inner orb, so the two transforms nest instead of
+ * one overwriting the other. Zeroed by the global reduced-motion block below. */
+@keyframes hero-orb-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(14px, -10px) scale(1.06);
+  }
+}
+.hero-orb-drift {
+  animation: hero-orb-drift 10s ease-in-out infinite;
+}
+
 @keyframes scroll-indicator-line {
   0% {
     transform: scaleY(0);
