@@ -282,7 +282,7 @@ export async function AboutContent({
             <p className="mt-8 text-white">
               {t("readFullStory")}{" "}
               <a
-                href="https://cacnorthamerica.com/about"
+                href="https://cacnorthamerica.vercel.app/about"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${t("readFullStoryCta")}${t("opensInNewTab")}`}
@@ -351,7 +351,7 @@ export async function AboutContent({
           <p className="text-[var(--color-muted)]">{t("superintendentsBlurb")}</p>
           <div className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2">
             <a
-              href="https://cacnorthamerica.com/zones"
+              href="https://cacnorthamerica.vercel.app/zones"
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${t("findYourZone")}${t("opensInNewTab")}`}
@@ -359,8 +359,11 @@ export async function AboutContent({
             >
               {t("findYourZone")}
             </a>
+            {/* CACNA's site has one combined Zones & DCCs directory, not a
+                separate /dccs route (which never existed -- this link
+                404'd before). Both labels now point to that one directory. */}
             <a
-              href="https://cacnorthamerica.com/dccs"
+              href="https://cacnorthamerica.vercel.app/zones"
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${t("findYourDcc")}${t("opensInNewTab")}`}

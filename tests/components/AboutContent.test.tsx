@@ -100,13 +100,15 @@ describe("AboutContent", () => {
       }
     }
 
-    // Superintendents trim + link-out (unchanged from the prior tab UI)
+    // Superintendents trim + link-out (unchanged from the prior tab UI).
+    // Both labels point at the same one combined Zones & DCCs directory --
+    // cacnorthamerica.com never had a separate /dccs route.
     expect(
       screen.getByRole("link", { name: /Find your Zone/i })
-    ).toHaveAttribute("href", "https://cacnorthamerica.com/zones");
+    ).toHaveAttribute("href", "https://cacnorthamerica.vercel.app/zones");
     expect(
       screen.getByRole("link", { name: /Find your DCC/i })
-    ).toHaveAttribute("href", "https://cacnorthamerica.com/dccs");
+    ).toHaveAttribute("href", "https://cacnorthamerica.vercel.app/zones");
 
     // Explore further — internal + every external resource. Each card's
     // accessible name is title + description concatenated (both sit inside

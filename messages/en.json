@@ -15,6 +15,7 @@
     "planYourVisit": "Plan Your Visit",
     "archive": "Archive",
     "contact": "Contact",
+    "cacnaHome": "CAC North America",
     "children": "Children's Program",
     "goodWomen": "Good Women Conference",
     "ministersWives": "Ministers' Wives Conference",
@@ -495,7 +496,9 @@
   },
   "PromoBanner": {
     "beforeIncrease": "Adult rate is ${price} through {date} — register now before it goes up.",
-    "cta": "Register Now"
+    "cta": "Register Now",
+    "comingSoon": "Registration for Convention 2027 opens in October 2026.",
+    "comingSoonCta": "Get notified — view registration"
   },
   "RegisterCta": {
     "heading": "Join Us at the 2027 Convention",

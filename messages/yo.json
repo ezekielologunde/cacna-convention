@@ -15,6 +15,7 @@
     "planYourVisit": "Ṣe Ètò Ìbẹ̀wò Rẹ",
     "archive": "Àkójọpọ̀ Àtijọ́",
     "contact": "Kàn Sí Wa",
+    "cacnaHome": "Ìjọ Aposteli Kristi Àríwá Amẹ́ríkà",
     "children": "Ètò Àwọn Ọmọdé",
     "goodWomen": "Àpéjọ Àwọn Ìyá Rere",
     "ministersWives": "Àpéjọ Àwọn Ìyàwó Ìjọ",
@@ -495,7 +496,9 @@
   },
   "PromoBanner": {
     "beforeIncrease": "Owó Àgbà jẹ́ ${price} títí di {date} — forúkọsílẹ̀ nísisìyí kí ó tó lọ sókè.",
-    "cta": "Forúkọsílẹ̀ Nísisìyí"
+    "cta": "Forúkọsílẹ̀ Nísisìyí",
+    "comingSoon": "Ìforúkọsílẹ̀ fún Àpéjọ 2027 yóò ṣí ní oṣù October 2026.",
+    "comingSoonCta": "Gba ìsọfúnni — wo ìforúkọsílẹ̀"
   },
   "RegisterCta": {
     "heading": "Darapọ̀ Mọ́ Wa ní Àpéjọ 2027",

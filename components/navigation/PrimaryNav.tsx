@@ -51,6 +51,14 @@ const EXPLORE_ITEMS = [
   { key: "contact", href: "/contact" },
 ] as const;
 
+// This site is CACNA's Annual Convention — a sub-site of the main
+// organization, not a standalone entity. The primary nav had no path back
+// to CACNA's own site at all; this is that path. cacnorthamerica.com
+// currently still serves an old WordPress build, not the new one, so this
+// points at the new site's actual live deployment until that domain is
+// repointed.
+const CACNA_HOME_URL = "https://cacnorthamerica.vercel.app";
+
 // Shared underline-indicator treatment for every top-level text link --
 // replaces the old filled-pill hover/active background (which read as
 // "app chrome") with a slimmer, more editorial mark: a 2px accent bar that
@@ -322,6 +330,15 @@ export function PrimaryNav() {
                     {t(item.key)}
                   </Link>
                 ))}
+                <a
+                  href={CACNA_HOME_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setExploreOpen(false)}
+                  className="mt-1 block rounded-lg border-t border-[var(--color-border)] px-3 py-2.5 pt-3.5 text-sm font-semibold tracking-normal text-[var(--color-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-red-text)]"
+                >
+                  {t("cacnaHome")} ↗
+                </a>
               </div>
             ) : null}
           </li>
@@ -487,6 +504,17 @@ export function PrimaryNav() {
                 </Link>
               </li>
             ))}
+            <li>
+              <a
+                href={CACNA_HOME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="block rounded-lg px-3 py-3.5"
+              >
+                {t("cacnaHome")} ↗
+              </a>
+            </li>
           </ul>
 
           <p className="mt-4 border-t border-[var(--color-border)] px-3 pt-4 text-[11px] font-bold tracking-[0.15em] text-[var(--color-muted)] uppercase">

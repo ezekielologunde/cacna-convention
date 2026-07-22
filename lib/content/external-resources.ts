@@ -12,10 +12,16 @@
 // Labels are the organizations' own proper nouns, left untranslated
 // (same treatment as "CACNA" itself, which is never translated).
 
+// NOTE (2026-07-22): cacnorthamerica.com currently still serves CACNA's old
+// WordPress site, not the new Next.js build -- the custom domain hasn't been
+// repointed to the new deployment yet. These links use the new build's
+// actual live URL (cacnorthamerica.vercel.app) instead, so visitors reach
+// the site's real current content. Once cacnorthamerica.com is repointed to
+// the new build, these should switch back to the clean custom domain.
 export const externalResources = [
   {
     label: "CAC North America",
-    url: "https://cacnorthamerica.com/",
+    url: "https://cacnorthamerica.vercel.app/",
     description: "The official site for Christ Apostolic Church North America, the organization behind this convention.",
   },
   {
@@ -25,17 +31,17 @@ export const externalResources = [
   },
   {
     label: "Regional Leadership",
-    url: "https://cacnorthamerica.com/leadership",
+    url: "https://cacnorthamerica.vercel.app/leadership",
     description: "The full CACNA regional and CAC Nigeria & Overseas leadership directory.",
   },
   {
     label: "Zones & DCCs",
-    url: "https://cacnorthamerica.com/zones",
+    url: "https://cacnorthamerica.vercel.app/zones",
     description: "Find your Zone or DCC and its Superintendent across the United States, Canada, and South America.",
   },
   {
     label: "Giving",
-    url: "https://cacnorthamerica.com/giving",
+    url: "https://cacnorthamerica.vercel.app/giving",
     description: "Ways to give to CACNA's ministries, the CAC Centenary Building Project, and more.",
   },
   {
