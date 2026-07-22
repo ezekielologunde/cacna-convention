@@ -7,7 +7,7 @@ import { createNextIntlServerMock } from "../helpers/next-intl-server-mock";
 import { christianEducationMaterials } from "../../lib/content/store-items";
 
 const STORE_PRODUCTS = [
-  { id: "p1", slug: "convention-tshirt-2026", category: "convention", name: "2026 Convention T-Shirt", price_cents: 2000, sizes: ["S", "M", "L"], active: true, sort_order: 1, created_at: "" },
+  { id: "p1", slug: "convention-tshirt-2027", category: "convention", name: "2027 Convention T-Shirt", price_cents: 2000, sizes: ["S", "M", "L"], active: true, sort_order: 1, created_at: "" },
   { id: "p2", slug: "good-women-tee", category: "good_women", name: "Good Women Association Tee", price_cents: 2200, sizes: ["S", "M", "L"], active: true, sort_order: 1, created_at: "" },
   { id: "p3", slug: "youth-tee", category: "youth", name: "Youth & Young Adult Tee", price_cents: 1800, sizes: ["S", "M", "L"], active: true, sort_order: 1, created_at: "" },
 ];
