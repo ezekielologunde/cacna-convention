@@ -1,5 +1,15 @@
 import type { ScheduleSession } from "./types";
 
+// Unlike every other department page, CACMA has no theme or executive
+// committee documented anywhere -- only this schedule. One real, sourced
+// identity fact does exist though: Pastor Amos Dada delivers CACMA's Annual
+// Report below (line 24) and is separately named as CACMA's leader in the
+// 2026 Convention Chairman's welcome address ("CACMA, under Pastor Dr. Amos
+// Dele Dada, for their prayers and support"). Not fabricating a theme or
+// full committee to fill the gap -- just surfacing the one fact that's
+// actually documented.
+export const cacmaLeader = "Pastor Amos Dada";
+
 // Transcribed from the 2026 convention program book's "CAC Latunde Region
 // Men Association" (CACMA) pages.
 export const cacmaSchedule: ScheduleSession[] = [

@@ -299,6 +299,7 @@
   },
   "Cacma": {
     "title": "CAC Latunde Region Men Association (CACMA)",
+    "leaderLabel": "Leader",
     "timeLabel": "Time",
     "programLabel": "Program",
     "speakerLabel": "Speaker"

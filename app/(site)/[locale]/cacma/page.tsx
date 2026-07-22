@@ -5,7 +5,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { PhotoStrip } from "@/components/ui/PhotoStrip";
 import { RegisterCta } from "@/components/register/RegisterCta";
 import { AgendaTimeline } from "@/components/schedule/AgendaTimeline";
-import { cacmaSchedule } from "@/lib/content/cacma-program";
+import { cacmaSchedule, cacmaLeader } from "@/lib/content/cacma-program";
 import { mainGalleryPhotos } from "@/lib/content/gallery";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -38,7 +38,13 @@ export default async function CacmaPage({
           and Christian Education -- red is reserved for the family/nurture
           ministries (Children, Good Women, Ministers' Wives). See the same
           comment on those pages for the full rule. */}
-      <PageHero title={t("title")} tone="blue" icon={ShieldCheck} photoSrc="/photos/gallery/IMG-20250719-WA0043.jpg" />
+      <PageHero
+        title={t("title")}
+        subtitle={`${t("leaderLabel")}: ${cacmaLeader}`}
+        tone="blue"
+        icon={ShieldCheck}
+        photoSrc="/photos/gallery/IMG-20250719-WA0043.jpg"
+      />
       <PhotoStrip photos={mainGalleryPhotos.slice(3, 6)} caption="From the 2025 convention" />
       <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
         <section className="flex flex-col gap-8">

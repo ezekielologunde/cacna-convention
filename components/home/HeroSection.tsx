@@ -1,9 +1,18 @@
 "use client";
 
 import { useRef, useState, type MouseEvent } from "react";
+import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { Button } from "@/components/ui/Button";
+
+// A real photo from the 2025 CACNA Latunde Region General Convention --
+// Bible Institute graduates in worship, hands raised. The homepage hero
+// previously had no photo at all (gradient + orbs only), unlike PageHero's
+// interior-page hero, which already supports one. Same hero-kenburns drift
+// + gradient-overlay treatment as PageHero, layered underneath the existing
+// cursor-parallax orbs and spotlight rather than replacing them.
+const HERO_PHOTO = "/photos/gallery/IMG-20250719-WA0038.jpg";
 
 // Depth multipliers for the three background orbs -- different magnitudes
 // and directions per orb create actual parallax (near/far), not three
@@ -81,6 +90,11 @@ export function HeroSection({
       className="relative overflow-hidden px-6 py-24 sm:py-32"
       style={{ background: "var(--gradient-hero)" }}
     >
+      <div aria-hidden="true" className="absolute inset-0">
+        <Image src={HERO_PHOTO} alt="" fill sizes="100vw" priority className="hero-kenburns object-cover" />
+        <div className="absolute inset-0" style={{ background: "var(--gradient-hero)", opacity: 0.86 }} />
+      </div>
+
       {ORB_DEPTH.map((orb, i) => (
         <div
           key={i}
