@@ -145,7 +145,7 @@ export async function AboutContent({
           </Reveal>
         </div>
 
-        <div className="relative mx-auto mt-16 max-w-5xl 2xl:max-w-6xl">
+        <div className="relative mx-auto mt-16 max-w-5xl 2xl:max-w-7xl">
           <Reveal delay={200}>
             <p className="mx-auto max-w-2xl text-center text-white">{t("missionRhythmLead")}</p>
           </Reveal>
@@ -173,7 +173,7 @@ export async function AboutContent({
 
       {/* Foundation — mission + the two pillars, as three cards */}
       <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
-        <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
+        <div className="mx-auto max-w-5xl 2xl:max-w-7xl">
           <Reveal className="text-center">
             <h2 className="mx-auto max-w-2xl font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">
               {t("missionHeading")}
@@ -264,7 +264,7 @@ export async function AboutContent({
           className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full opacity-30 blur-3xl"
           style={{ background: "var(--color-blue)" }}
         />
-        <div className="relative mx-auto max-w-4xl text-center 2xl:max-w-5xl">
+        <div className="relative mx-auto max-w-4xl text-center 2xl:max-w-6xl">
           <Reveal>
             <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-mist)] uppercase">
               {t("heritageKicker")}
@@ -297,7 +297,7 @@ export async function AboutContent({
 
       {/* Leadership */}
       <section id="leadership" className="px-6 py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
+        <div className="mx-auto max-w-5xl 2xl:max-w-7xl">
           <Reveal className="text-center">
             <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">{t("leadership")}</h2>
           </Reveal>
@@ -328,7 +328,7 @@ export async function AboutContent({
 
       {/* Committee */}
       <section className="px-6 py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
+        <div className="mx-auto max-w-5xl 2xl:max-w-7xl">
           <Reveal className="text-center">
             <h2 className="font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">{t("committee")}</h2>
           </Reveal>
@@ -377,7 +377,7 @@ export async function AboutContent({
 
       {/* Explore further */}
       <section className="px-6 py-16 sm:py-20" style={{ background: "var(--color-surface)" }}>
-        <div className="mx-auto max-w-5xl 2xl:max-w-6xl">
+        <div className="mx-auto max-w-5xl 2xl:max-w-7xl">
           <Reveal className="text-center">
             <h2 className="mx-auto max-w-2xl font-display text-3xl text-[var(--color-fg)] sm:text-4xl lg:text-5xl">
               {t("exploreHeading")}

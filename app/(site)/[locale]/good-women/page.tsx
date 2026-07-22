@@ -45,7 +45,7 @@ export default async function GoodWomenPage({
         photoSrc="/photos/gallery/IMG-20250719-WA0046.jpg"
       />
       <PhotoStrip photos={mainGalleryPhotos.slice(9, 12)} caption="From the 2025 convention" />
-      <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-4xl">
+      <div className="mx-auto w-full max-w-3xl px-6 py-12 2xl:max-w-5xl">
         <p className="text-sm font-semibold text-[var(--color-red-text)]">{goodWomenConference.donationHighlight}</p>
 
         <section className="mt-10">

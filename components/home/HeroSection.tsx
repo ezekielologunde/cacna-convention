@@ -135,7 +135,7 @@ export function HeroSection({
         }}
       />
 
-      <div className="relative mx-auto max-w-2xl text-center">
+      <div className="relative mx-auto max-w-2xl text-center 2xl:max-w-3xl">
         <Reveal>
           <span className="text-xs font-bold tracking-[0.25em] text-[var(--color-mist)] uppercase">
             {kicker}

@@ -63,7 +63,7 @@ export function PageHero({
         style={{ background: "var(--color-blue)" }}
       />
       {variant === "split" && stat ? (
-        <div className="relative mx-auto flex max-w-4xl flex-wrap items-end justify-between gap-8 2xl:max-w-5xl">
+        <div className="relative mx-auto flex max-w-4xl flex-wrap items-end justify-between gap-8 2xl:max-w-6xl">
           <div className="max-w-xl">
             {Icon && (
               <span className="mb-4 inline-grid h-12 w-12 place-items-center rounded-2xl bg-white/12 text-white backdrop-blur-sm">
@@ -89,7 +89,7 @@ export function PageHero({
           </div>
         </div>
       ) : (
-        <div className="relative mx-auto max-w-3xl text-center 2xl:max-w-4xl">
+        <div className="relative mx-auto max-w-3xl text-center 2xl:max-w-5xl">
           {Icon && (
             <span className="mb-4 inline-grid h-12 w-12 place-items-center rounded-2xl bg-white/12 text-white backdrop-blur-sm">
               <Icon aria-hidden={true} size={22} strokeWidth={2} />

@@ -19,7 +19,7 @@ export function PhotoStrip({ photos, caption }: { photos: string[]; caption: str
   if (photos.length === 0) return null;
 
   return (
-    <section className="mx-auto w-full max-w-3xl px-6 pt-10 2xl:max-w-4xl">
+    <section className="mx-auto w-full max-w-3xl px-6 pt-10 2xl:max-w-5xl">
       <div role="group" aria-label={caption} className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {photos.map((src, i) => (
           <div key={src} className="relative aspect-[4/5] overflow-hidden rounded-2xl">

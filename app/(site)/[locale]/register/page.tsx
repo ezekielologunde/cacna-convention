@@ -159,7 +159,7 @@ export default async function RegisterPage({
       </ConversionHero>
 
       {ladder.length > 0 && (
-        <section className="mx-auto max-w-5xl px-6 pt-16">
+        <section className="mx-auto max-w-5xl px-6 pt-16 2xl:max-w-6xl">
           <h2 className="font-display text-lg text-[var(--color-fg)]">{t("pricingHeading")}</h2>
           <div className="mt-4">
             <PricingCards categories={pricingCategories} currentRateLabel={t("pricingCurrentBadge")} />
@@ -169,7 +169,7 @@ export default async function RegisterPage({
 
       {registrationOpen && <RegisterPageClient />}
 
-      <section id="registration-guidelines" className="mx-auto max-w-3xl px-6 pt-16 pb-16">
+      <section id="registration-guidelines" className="mx-auto max-w-3xl px-6 pt-16 pb-16 2xl:max-w-4xl">
         <h2 className="font-display text-lg text-[var(--color-fg)]">{t("guidelinesHeading")}</h2>
         <ol className="mt-3 flex flex-col gap-2 text-sm text-[var(--color-muted)]">
           {registrationGuidelines.items.map((item, index) => (
@@ -186,7 +186,7 @@ export default async function RegisterPage({
         </p>
       </section>
 
-      <section className="mx-auto max-w-5xl px-6 pb-16">
+      <section className="mx-auto max-w-5xl px-6 pb-16 2xl:max-w-6xl">
         <h2 className="font-display text-lg text-[var(--color-fg)]">{t("paymentOptionsHeading")}</h2>
         <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-3">
           {paymentOptions.methods.map((method) => (
