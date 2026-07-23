@@ -59,6 +59,15 @@ export default async function RegisterPage({
   // behind them the moment an edition row is created for the next year.
   const tiers = edition ? await getActivePricingForEdition(supabase, edition.id) : [];
   const registrationOpen = Boolean(edition) && tiers.length > 0;
+  // The 2027 pricing tiers were originally set to activate 2026-10-01 (see
+  // 0010_seed_pricing_tiers_2027_placeholder.sql); the owner then chose to
+  // open registration earlier than that (2026-07-23, see
+  // 0018_open_2027_preregistration.sql). Until the originally-announced
+  // date actually arrives, frame this as "Pre-Register" rather than the
+  // normal "Register" copy -- this flips back to normal automatically once
+  // real time passes PRE_REGISTER_CUTOFF, no manual cleanup required.
+  const PRE_REGISTER_CUTOFF = new Date("2026-10-01T00:00:00Z");
+  const isPreRegister = registrationOpen && new Date() < PRE_REGISTER_CUTOFF;
   const ladder = edition ? await getPricingLadderForEdition(supabase, edition.id) : [];
 
   // Scoped to this page rather than widening the shared getActiveEdition()
@@ -144,13 +153,27 @@ export default async function RegisterPage({
     <div>
       <ConversionHero
         photoSrc="/photos/gallery/IMG-20250719-WA0033.jpg"
-        badge={venueName ? t("heroBadge", { dateRange, venue: venueName }) : undefined}
-        heading={t("heroHeading", { year })}
-        body={registrationOpen ? t("heroBodyOpen") : t("heroBodyComingSoon", { dateRange })}
+        badge={
+          venueName
+            ? isPreRegister
+              ? t("heroBadgePreRegister", { dateRange, venue: venueName })
+              : t("heroBadge", { dateRange, venue: venueName })
+            : undefined
+        }
+        heading={t(isPreRegister ? "heroHeadingPreRegister" : "heroHeading", { year })}
+        body={
+          isPreRegister
+            ? t("heroBodyPreRegister")
+            : registrationOpen
+              ? t("heroBodyOpen")
+              : t("heroBodyComingSoon", { dateRange })
+        }
         cta={
-          registrationOpen
-            ? { label: t("heroCtaOpen"), href: "#register-panel" }
-            : { label: t("heroCtaComingSoon"), href: "#registration-guidelines" }
+          isPreRegister
+            ? { label: t("heroCtaPreRegister"), href: "#register-panel" }
+            : registrationOpen
+              ? { label: t("heroCtaOpen"), href: "#register-panel" }
+              : { label: t("heroCtaComingSoon"), href: "#registration-guidelines" }
         }
       >
         {theme && (

@@ -178,4 +178,81 @@ describe("RegisterPage", () => {
       screen.getByText("Adult rate is $125 through 2027-01-31 — register now before it goes up.")
     ).toBeInTheDocument();
   });
+
+  // Pricing tiers now open 2026-07-23 (see
+  // 0018_open_2027_preregistration.sql), ahead of the originally-announced
+  // 2026-10-01 public opening -- the hero should frame this window as
+  // "Pre-Register" and automatically flip back to normal "Register" copy
+  // once real time passes that date, with no manual toggle. These two
+  // tests pin "now" with fake timers so the assertion doesn't depend on
+  // whichever real calendar date the suite happens to run on.
+  function mockOpenRegistrationWithOneActiveTier() {
+    const editionMaybeSingle = vi.fn().mockResolvedValue({ data: { id: "e-2027", year: 2027 }, error: null });
+    const editionLimit = vi.fn(() => ({ maybeSingle: editionMaybeSingle }));
+    const editionOrder = vi.fn(() => ({ limit: editionLimit }));
+    const editionIn = vi.fn(() => ({ order: editionOrder }));
+
+    const editionDetailsMaybeSingle = vi.fn().mockResolvedValue({
+      data: { theme: null, starts_on: "2027-07-12", ends_on: "2027-07-17", venue_name: "CAC Village" },
+      error: null,
+    });
+    const editionDetailsEq = vi.fn(() => ({ maybeSingle: editionDetailsMaybeSingle }));
+
+    const activeTier = { id: "a1", category: "adult", price_cents: 12500, starts_on: "2026-07-23", ends_on: "2027-01-31", sort_order: 0 };
+    const pricingOrder = vi.fn().mockResolvedValue({ data: [activeTier], error: null });
+    const pricingGte = vi.fn(() => ({ order: pricingOrder }));
+    const pricingLte = vi.fn(() => ({ gte: pricingGte }));
+    const ladderOrder2 = vi.fn().mockResolvedValue({ data: [activeTier], error: null });
+    const ladderOrder1 = vi.fn(() => ({ order: ladderOrder2 }));
+    const pricingEq = vi.fn(() => ({ lte: pricingLte, order: ladderOrder1 }));
+
+    createClientMock.mockResolvedValue({
+      from: (table: string) => {
+        if (table === "convention_editions") {
+          return { select: () => ({ in: editionIn, eq: editionDetailsEq }) };
+        }
+        return { select: () => ({ eq: pricingEq }) };
+      },
+    });
+  }
+
+  it("shows Pre-Register hero framing while open ahead of the official October 2026 opening", async () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-07-23T12:00:00Z"));
+    mockOpenRegistrationWithOneActiveTier();
+
+    const { default: RegisterPage } = await import("../../app/(site)/[locale]/register/page");
+    const Page = await RegisterPage({ params: Promise.resolve({ locale: "en" }) });
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("heading", { name: "Pre-Register for CACNA Convention 2027" })).toBeInTheDocument();
+    expect(screen.getByText("Pre-Registration Open · July 12–17, 2027 · CAC Village")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Pre-registration is open now, ahead of our official October 2026 launch — lock in today's rate and reserve your spot at CAC Village early."
+      )
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Pre-register now" })).toBeInTheDocument();
+
+    vi.useRealTimers();
+  });
+
+  it("reverts to normal Register hero framing once real time passes the October 2026 cutover", async () => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-11-01T12:00:00Z"));
+    mockOpenRegistrationWithOneActiveTier();
+
+    const { default: RegisterPage } = await import("../../app/(site)/[locale]/register/page");
+    const Page = await RegisterPage({ params: Promise.resolve({ locale: "en" }) });
+    render(<NextIntlClientProvider locale="en" messages={messages}>{Page}</NextIntlClientProvider>);
+
+    expect(screen.getByRole("heading", { name: "Register for CACNA Convention 2027" })).toBeInTheDocument();
+    expect(
+      screen.getByText("Individual and group registration is open now — secure your spot at CAC Village before rates rise.")
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Register now" })).toBeInTheDocument();
+    expect(screen.queryByText(/Pre-Registration Open/)).not.toBeInTheDocument();
+
+    vi.useRealTimers();
+  });
 });
