@@ -28,7 +28,7 @@ export default async function RegisterConfirmationPage({
 
   const { registration: registrationId } = await searchParams;
 
-  let registration: { registration_type: string; church_name: string | null; contact_name: string; status: string; total_amount_cents: number } | null = null;
+  let registration: { registration_type: string; church_name: string | null; contact_name: string; status: string; total_amount_cents: number; is_complimentary: boolean } | null = null;
   let registrants: { full_name: string; category: string }[] = [];
   // Distinguishes "no ID was ever supplied" (nothing to show, not an error)
   // from "an ID was supplied but no matching row exists" (a stale/bad link
@@ -40,7 +40,7 @@ export default async function RegisterConfirmationPage({
     const supabase = createServiceClient();
     const { data: reg } = await supabase
       .from("registrations")
-      .select("registration_type, church_name, contact_name, status, total_amount_cents")
+      .select("registration_type, church_name, contact_name, status, total_amount_cents, is_complimentary")
       .eq("id", registrationId)
       .maybeSingle();
 
@@ -107,7 +107,9 @@ export default async function RegisterConfirmationPage({
           </ul>
           <div className="mt-4 flex items-center justify-between border-t border-[var(--color-border)] pt-4">
             <span className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
-              {t(STATUS_KEYS[registration.status as keyof typeof STATUS_KEYS] ?? "statusPending")}
+              {registration.is_complimentary
+                ? t("statusComplimentary")
+                : t(STATUS_KEYS[registration.status as keyof typeof STATUS_KEYS] ?? "statusPending")}
             </span>
             <span className="font-display text-xl text-[var(--color-fg)]">
               ${(registration.total_amount_cents / 100).toFixed(2)}

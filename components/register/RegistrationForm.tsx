@@ -13,17 +13,25 @@ export type RegistrationPayload = {
   contactEmail: string;
   contactPhone: string;
   registrants: { fullName: string; category: RegistrantCategory }[];
+  isComplimentary: boolean;
 };
 
 type RegistrantRow = { fullName: string; category: RegistrantCategory };
 
 export function RegistrationForm({
   mode,
+  isComplimentary = false,
   onSubmit,
   isSubmitting = false,
   errorMessage = null,
 }: {
   mode: "individual" | "group";
+  /** True only for the Register page's "Complimentary" tab -- the API
+   *  route zeroes every registrant's price and skips Stripe entirely when
+   *  this is set, so the button/copy below say so up front rather than
+   *  showing "Continue to Payment" for a submission that never charges
+   *  anything. */
+  isComplimentary?: boolean;
   onSubmit: (payload: RegistrationPayload) => void;
   isSubmitting?: boolean;
   errorMessage?: string | null;
@@ -66,6 +74,7 @@ export function RegistrationForm({
       contactEmail,
       contactPhone,
       registrants,
+      isComplimentary,
     });
   }
 
@@ -183,6 +192,12 @@ export function RegistrationForm({
           className={inputClass}
         />
       </label>
+      {isComplimentary && (
+        <p className="rounded-xl bg-[var(--color-surface)] px-3.5 py-2.5 text-sm text-[var(--color-muted)]">
+          {t("complimentaryNotice")}
+        </p>
+      )}
+
       {errorMessage ? (
         <p role="alert" className="text-sm font-semibold text-[var(--color-red-text)]">
           {errorMessage}
@@ -195,7 +210,11 @@ export function RegistrationForm({
         className="rounded-full px-5 py-3 font-semibold text-white shadow-[var(--shadow-glow-red)] transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95 disabled:opacity-60 disabled:hover:translate-y-0 disabled:active:scale-100"
         style={{ background: "var(--gradient-cta)" }}
       >
-        {isSubmitting ? t("submitting") : t("submit")}
+        {isSubmitting
+          ? t("submitting")
+          : isComplimentary
+            ? t("submitComplimentary")
+            : t("submit")}
       </button>
     </form>
   );

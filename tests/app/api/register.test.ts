@@ -286,6 +286,107 @@ describe("POST /api/register", () => {
     });
   });
 
+  describe("complimentary registrations (the Register page's third tab)", () => {
+    it("zeroes the price, skips Stripe, marks paid, and stores is_complimentary true", async () => {
+      getActiveEditionMock.mockResolvedValue({ id: "edition-1", year: 2027 });
+      getActivePricingMock.mockResolvedValue([{ category: "adult", price_cents: 12500 }]);
+      insertRegistrationMock.mockReturnValue({
+        select: () => ({
+          single: () => Promise.resolve({ data: { id: "reg-comp-1" }, error: null }),
+        }),
+      });
+      insertRegistrantsMock.mockResolvedValue({ error: null });
+
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request(
+        "http://localhost/api/register",
+        validRequestInit({
+          registrants: [{ fullName: "Staff Tester", category: "adult" }],
+          isComplimentary: true,
+        })
+      );
+
+      const response = await POST(request);
+      const body = await response.json();
+
+      expect(response.status).toBe(200);
+      expect(body).toEqual({
+        checkoutUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/register/confirmation?registration=reg-comp-1`,
+      });
+      expect(checkoutSessionsCreateMock).not.toHaveBeenCalled();
+      expect(updateRegistrationMock).toHaveBeenCalledWith({ status: "paid" });
+
+      const insertedRegistration = insertRegistrationMock.mock.calls[0][0];
+      expect(insertedRegistration).toEqual(
+        expect.objectContaining({ is_complimentary: true, total_amount_cents: 0 })
+      );
+      const insertedRegistrants = insertRegistrantsMock.mock.calls[0][0];
+      expect(insertedRegistrants).toEqual([
+        expect.objectContaining({ full_name: "Staff Tester", category: "adult", price_cents: 0 }),
+      ]);
+    });
+
+    it("still works when the category has no active pricing tier at all, unlike a normal (non-complimentary) submission", async () => {
+      getActiveEditionMock.mockResolvedValue({ id: "edition-1", year: 2027 });
+      // No tiers configured for any category -- a normal submission for
+      // "adult" here would 400 with "No active price for category adult".
+      getActivePricingMock.mockResolvedValue([]);
+      insertRegistrationMock.mockReturnValue({
+        select: () => ({
+          single: () => Promise.resolve({ data: { id: "reg-comp-2" }, error: null }),
+        }),
+      });
+      insertRegistrantsMock.mockResolvedValue({ error: null });
+
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request(
+        "http://localhost/api/register",
+        validRequestInit({
+          registrants: [{ fullName: "Staff Tester", category: "adult" }],
+          isComplimentary: true,
+        })
+      );
+
+      const response = await POST(request);
+      expect(response.status).toBe(200);
+    });
+
+    it("stores is_complimentary false for an ordinary paid registration", async () => {
+      getActiveEditionMock.mockResolvedValue({ id: "edition-1", year: 2027 });
+      getActivePricingMock.mockResolvedValue([{ category: "adult", price_cents: 12500 }]);
+      insertRegistrationMock.mockReturnValue({
+        select: () => ({
+          single: () => Promise.resolve({ data: { id: "reg-normal-1" }, error: null }),
+        }),
+      });
+      insertRegistrantsMock.mockResolvedValue({ error: null });
+      checkoutSessionsCreateMock.mockResolvedValue({
+        id: "cs_test_normal",
+        url: "https://checkout.stripe.com/pay/cs_test_normal",
+      });
+
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request("http://localhost/api/register", validRequestInit());
+
+      await POST(request);
+
+      const insertedRegistration = insertRegistrationMock.mock.calls[0][0];
+      expect(insertedRegistration).toEqual(expect.objectContaining({ is_complimentary: false }));
+    });
+
+    it("returns 400 when isComplimentary is present but not a boolean", async () => {
+      const { POST } = await import("../../../app/api/register/route");
+      const request = new Request(
+        "http://localhost/api/register",
+        validRequestInit({ isComplimentary: "yes" })
+      );
+
+      const response = await POST(request);
+      expect(response.status).toBe(400);
+      expect(getActiveEditionMock).not.toHaveBeenCalled();
+    });
+  });
+
   describe("card processing fee", () => {
     it("adds a 4% fee line item matching the Payment Options page's $100 -> $104 example", async () => {
       getActiveEditionMock.mockResolvedValue({ id: "edition-1", year: 2027 });

@@ -11,6 +11,7 @@ type RegisterRequestBody = {
   contactEmail: string;
   contactPhone: string;
   registrants: { fullName: string; category: RegistrantCategory }[];
+  isComplimentary?: boolean;
 };
 
 const VALID_CATEGORIES: RegistrantCategory[] = ["adult", "young_adult", "child"];
@@ -55,6 +56,10 @@ function validateRequestBody(body: unknown): string | null {
     if (typeof r.category !== "string" || !VALID_CATEGORIES.includes(r.category as RegistrantCategory)) {
       return `Invalid registrant category: ${String(r.category)}`;
     }
+  }
+
+  if (b.isComplimentary !== undefined && typeof b.isComplimentary !== "boolean") {
+    return "isComplimentary must be a boolean";
   }
 
   return null;
@@ -122,6 +127,8 @@ export async function POST(request: Request) {
 
   const tiers = await getActivePricingForEdition(supabase, edition.id);
 
+  const isComplimentary = body.isComplimentary === true;
+
   // Re-price every registrant from the server-side tiers looked up above.
   // Any `price_cents` (or similar) the client sent in the request body is
   // read nowhere below and is discarded entirely — the amount charged and
@@ -130,9 +137,15 @@ export async function POST(request: Request) {
   // Child (1–19) is always Free per the design spec's fixed business rule —
   // unlike Adult/Young Adult, it is not admin-configurable via
   // `pricing_tiers`, so it never goes through that lookup at all.
+  //
+  // A Complimentary submission (the Register page's third tab) skips the
+  // price lookup entirely rather than looking a price up and then
+  // discarding it -- so it still works even when a category has no active
+  // tier configured yet (the exact situation a staff member testing the
+  // flow before pricing goes live would hit).
   const pricedRegistrants: { full_name: string; category: RegistrantCategory; price_cents: number }[] = [];
   for (const registrant of body.registrants) {
-    if (registrant.category === "child") {
+    if (isComplimentary || registrant.category === "child") {
       pricedRegistrants.push({
         full_name: registrant.fullName,
         category: registrant.category,
@@ -167,6 +180,7 @@ export async function POST(request: Request) {
       contact_email: body.contactEmail,
       contact_phone: body.contactPhone || null,
       total_amount_cents: totalAmountCents,
+      is_complimentary: isComplimentary,
       attendee_id: attendee?.id ?? null,
     })
     .select()

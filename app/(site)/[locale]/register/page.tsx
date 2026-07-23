@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Zap, Landmark, CreditCard } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { createClient } from "@/lib/supabase/server";
 import { getActiveEdition } from "@/lib/editions";
@@ -10,6 +11,15 @@ import { Card } from "@/components/ui/Card";
 import { registrationGuidelines } from "@/lib/content/registration-guidelines";
 import { paymentOptions } from "@/lib/content/payment-options";
 import { pageMetadata } from "@/lib/metadata";
+
+// One glyph per payment method, matched to lib/content/payment-options.ts's
+// own `accent` color for that method -- Zap for Zelle's instant bank-to-bank
+// transfer, Landmark for a deposit-by-check, CreditCard for the Stripe path.
+const PAYMENT_ICON: Record<string, typeof Zap> = {
+  Zelle: Zap,
+  Check: Landmark,
+  "Credit / Debit Card": CreditCard,
+};
 
 // Register is its own page again -- the site owner reversed the earlier
 // homepage↔Register merge (2026-07-22), wanting the homepage to be a
@@ -189,12 +199,22 @@ export default async function RegisterPage({
       <section className="mx-auto max-w-[clamp(20rem,92vw,76rem)] px-6 pb-16">
         <h2 className="font-display text-lg text-[var(--color-fg)]">{t("paymentOptionsHeading")}</h2>
         <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-3">
-          {paymentOptions.methods.map((method) => (
-            <Card key={method.name} padding="lg">
-              <h3 className="font-display text-base text-[var(--color-fg)]">{method.name}</h3>
-              <p className="mt-2 text-sm text-[var(--color-muted)]">{method.detail}</p>
-            </Card>
-          ))}
+          {paymentOptions.methods.map((method) => {
+            const Icon = PAYMENT_ICON[method.name] ?? CreditCard;
+            return (
+              <Card key={method.name} padding="lg">
+                <span
+                  aria-hidden="true"
+                  className="inline-grid h-11 w-11 place-items-center rounded-xl text-white"
+                  style={{ background: method.accent }}
+                >
+                  <Icon size={20} strokeWidth={2} />
+                </span>
+                <h3 className="mt-4 font-display text-base text-[var(--color-fg)]">{method.name}</h3>
+                <p className="mt-2 text-sm text-[var(--color-muted)]">{method.detail}</p>
+              </Card>
+            );
+          })}
         </div>
       </section>
     </div>

@@ -16,6 +16,7 @@ describe("registrations/registrants schema types", () => {
       stripe_payment_intent_id: null,
       status: "pending",
       total_amount_cents: 12500,
+      is_complimentary: false,
       created_at: "2026-01-01T00:00:00Z",
       updated_at: "2026-01-01T00:00:00Z",
     };

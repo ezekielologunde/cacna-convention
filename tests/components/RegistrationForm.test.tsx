@@ -30,6 +30,7 @@ describe("RegistrationForm (individual mode)", () => {
       contactEmail: "jane@example.com",
       contactPhone: "",
       registrants: [{ fullName: "Jane Doe", category: "adult" }],
+      isComplimentary: false,
     });
   });
 
@@ -87,5 +88,31 @@ describe("RegistrationForm (group mode)", () => {
 
     fireEvent.click(screen.getAllByRole("button", { name: "Remove" })[0]);
     expect(screen.getAllByLabelText("Full name")).toHaveLength(1);
+  });
+});
+
+describe("RegistrationForm (complimentary)", () => {
+  it("shows the no-payment notice and a distinct submit label, and flags the payload isComplimentary", () => {
+    const onSubmit = vi.fn();
+    render(
+      <NextIntlClientProvider locale="en" messages={messages}>
+        <RegistrationForm mode="individual" isComplimentary onSubmit={onSubmit} />
+      </NextIntlClientProvider>
+    );
+
+    expect(
+      screen.getByText(
+        "No payment required — this registration will be marked paid immediately, with no Stripe charge."
+      )
+    ).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText("Full name"), { target: { value: "Jane Doe" } });
+    fireEvent.change(screen.getByLabelText("Contact name"), { target: { value: "Jane Doe" } });
+    fireEvent.change(screen.getByLabelText("Email"), { target: { value: "jane@example.com" } });
+    fireEvent.click(screen.getByRole("button", { name: "Submit Complimentary Registration" }));
+
+    expect(onSubmit).toHaveBeenCalledWith(
+      expect.objectContaining({ isComplimentary: true, registrationType: "individual" })
+    );
   });
 });

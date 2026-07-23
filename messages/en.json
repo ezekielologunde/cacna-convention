@@ -478,6 +478,9 @@
     "paymentOptionsHeading": "Payment Options",
     "individualTab": "Individual",
     "groupTab": "Church / Group",
+    "complimentaryTab": "Complimentary",
+    "complimentaryNotice": "No payment required — this registration will be marked paid immediately, with no Stripe charge.",
+    "submitComplimentary": "Submit Complimentary Registration",
     "churchName": "Church name",
     "addRegistrant": "Add another registrant",
     "removeRegistrant": "Remove",
@@ -517,7 +520,8 @@
     "statusPending": "Pending",
     "statusPaid": "Paid",
     "statusFailed": "Failed",
-    "statusRefunded": "Refunded"
+    "statusRefunded": "Refunded",
+    "statusComplimentary": "Complimentary"
   },
   "StoreConfirmation": {
     "title": "Thank you for your order!",

@@ -61,4 +61,35 @@ describe("RegisterPageClient", () => {
     expect(screen.getByRole("button", { name: "Continue to Payment" })).not.toBeDisabled();
     expect(alertSpy).not.toHaveBeenCalled();
   });
+
+  it("switches to the Complimentary tab, submits with isComplimentary true, and redirects on success", async () => {
+    (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValue({
+      ok: true,
+      json: async () => ({ checkoutUrl: "https://example.com/en/register/confirmation?registration=comp-1" }),
+    });
+    const originalLocation = window.location;
+    // @ts-expect-error -- deleting so it can be replaced with a writable stub
+    delete window.location;
+    (window as unknown as { location: unknown }).location = { ...originalLocation, href: "" };
+
+    renderPage();
+    fireEvent.click(screen.getByRole("tab", { name: "Complimentary" }));
+    expect(screen.getByRole("tab", { name: "Complimentary" })).toHaveAttribute("aria-selected", "true");
+
+    // Complimentary reuses the single-registrant Individual layout -- no
+    // church name field, same fields fillMinimalIndividualForm already fills.
+    fillMinimalIndividualForm();
+    fireEvent.click(screen.getByRole("button", { name: "Submit Complimentary Registration" }));
+
+    await waitFor(() => expect(global.fetch).toHaveBeenCalled());
+    const [, requestInit] = (global.fetch as ReturnType<typeof vi.fn>).mock.calls[0];
+    expect(JSON.parse(requestInit.body)).toEqual(
+      expect.objectContaining({ isComplimentary: true, registrationType: "individual" })
+    );
+    await waitFor(() => expect(window.location.href).toBe(
+      "https://example.com/en/register/confirmation?registration=comp-1"
+    ));
+
+    (window as unknown as { location: unknown }).location = originalLocation;
+  });
 });

@@ -12,6 +12,7 @@ type Registration = {
   registration_type: string;
   status: string;
   total_amount_cents: number;
+  is_complimentary: boolean;
   created_at: string;
 };
 type Registrant = { id: string; registration_id: string; full_name: string; category: string; price_cents: number };
@@ -72,7 +73,7 @@ export default async function AdminRegistrationsPage({
   if (selected) {
     const { data: regs } = await supabase
       .from("registrations")
-      .select("id, church_name, contact_name, contact_email, contact_phone, registration_type, status, total_amount_cents, created_at")
+      .select("id, church_name, contact_name, contact_email, contact_phone, registration_type, status, total_amount_cents, is_complimentary, created_at")
       .eq("edition_id", selected.id)
       .order("created_at", { ascending: false });
     registrations = regs ?? [];
@@ -181,6 +182,7 @@ export default async function AdminRegistrationsPage({
                         </p>
                       </div>
                       <div className="flex items-center gap-3">
+                        {reg.is_complimentary && <Badge tone="gold">Complimentary</Badge>}
                         <StatusBadge status={reg.status} />
                         <span className="font-semibold text-[var(--color-fg)]">{formatCents(reg.total_amount_cents)}</span>
                       </div>

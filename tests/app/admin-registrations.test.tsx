@@ -18,6 +18,7 @@ const REGISTRATIONS_2027 = [
     registration_type: "group",
     status: "paid",
     total_amount_cents: 25000,
+    is_complimentary: false,
     created_at: "2027-01-01T00:00:00Z",
   },
   {
@@ -29,7 +30,20 @@ const REGISTRATIONS_2027 = [
     registration_type: "individual",
     status: "pending",
     total_amount_cents: 12500,
+    is_complimentary: false,
     created_at: "2027-01-02T00:00:00Z",
+  },
+  {
+    id: "r3",
+    church_name: null,
+    contact_name: "Comp Attendee",
+    contact_email: "comp@example.com",
+    contact_phone: null,
+    registration_type: "individual",
+    status: "paid",
+    total_amount_cents: 0,
+    is_complimentary: true,
+    created_at: "2027-01-03T00:00:00Z",
   },
 ];
 
@@ -171,6 +185,20 @@ describe("AdminRegistrationsPage", () => {
 
     expect(screen.getByText("No registrations for 2027 yet.")).toBeInTheDocument();
     expect(screen.getByText("No store purchases for 2027 yet.")).toBeInTheDocument();
+  });
+
+  it("shows a Complimentary badge for is_complimentary registrations, and not for ordinary ones", async () => {
+    requireAdminMock.mockResolvedValue({
+      supabase: makeSupabaseMock({ registrations: REGISTRATIONS_2027, registrants: REGISTRANTS }),
+      user: { email: "admin@example.com" },
+    });
+    const { default: AdminRegistrationsPage } = await import("../../app/(admin)/admin/registrations/page");
+
+    const Page = await AdminRegistrationsPage({ searchParams: Promise.resolve({}) });
+    render(Page);
+
+    expect(screen.getByText("Comp Attendee")).toBeInTheDocument();
+    expect(screen.getAllByText("Complimentary")).toHaveLength(1);
   });
 
   it("computes summary stats: registrant count and paid-only revenue for both registrations and store orders", async () => {

@@ -4,22 +4,35 @@ import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { RegistrationForm, type RegistrationPayload } from "./RegistrationForm";
 
+const TAB_ORDER = ["individual", "group", "complimentary"] as const;
+type Mode = (typeof TAB_ORDER)[number];
+
 export function RegisterPageClient() {
   const t = useTranslations("Register");
-  const [mode, setMode] = useState<"individual" | "group">("individual");
+  const [mode, setMode] = useState<Mode>("individual");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const individualTabRef = useRef<HTMLButtonElement>(null);
   const groupTabRef = useRef<HTMLButtonElement>(null);
+  const complimentaryTabRef = useRef<HTMLButtonElement>(null);
+  const tabRefs = {
+    individual: individualTabRef,
+    group: groupTabRef,
+    complimentary: complimentaryTabRef,
+  } as const;
 
   // WAI-ARIA APG Tabs pattern: Left/Right moves focus AND selection between
   // tabs (roving tabindex below keeps only the active tab in the Tab order).
+  // Wraps around a 3-item order rather than a plain toggle, now that there
+  // are three tabs instead of two.
   function onTabsKeyDown(event: React.KeyboardEvent) {
     if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
     event.preventDefault();
-    const next = mode === "individual" ? "group" : "individual";
+    const currentIndex = TAB_ORDER.indexOf(mode);
+    const delta = event.key === "ArrowRight" ? 1 : -1;
+    const next = TAB_ORDER[(currentIndex + delta + TAB_ORDER.length) % TAB_ORDER.length];
     setMode(next);
-    (next === "individual" ? individualTabRef : groupTabRef).current?.focus();
+    tabRefs[next].current?.focus();
   }
 
   async function handleSubmit(payload: RegistrationPayload) {
@@ -88,15 +101,31 @@ export function RegisterPageClient() {
         >
           {t("groupTab")}
         </button>
+        <button
+          ref={complimentaryTabRef}
+          id="register-tab-complimentary"
+          role="tab"
+          aria-selected={mode === "complimentary"}
+          aria-controls="register-panel"
+          tabIndex={mode === "complimentary" ? 0 : -1}
+          onClick={() => setMode("complimentary")}
+          className={tabClass(mode === "complimentary")}
+        >
+          {t("complimentaryTab")}
+        </button>
       </div>
       <div
         id="register-panel"
         role="tabpanel"
-        aria-labelledby={mode === "individual" ? "register-tab-individual" : "register-tab-group"}
+        aria-labelledby={`register-tab-${mode}`}
         className="mt-8"
       >
         <RegistrationForm
-          mode={mode}
+          // The Complimentary tab reuses the single-registrant Individual
+          // layout (no church name, no add-another-registrant) -- it's a
+          // one-off comp/staff-test registration, not a group booking.
+          mode={mode === "complimentary" ? "individual" : mode}
+          isComplimentary={mode === "complimentary"}
           onSubmit={handleSubmit}
           isSubmitting={isSubmitting}
           errorMessage={errorMessage}

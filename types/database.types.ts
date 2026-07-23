@@ -199,6 +199,7 @@ export type Database = {
           created_at: string
           edition_id: string
           id: string
+          is_complimentary: boolean
           registration_type: string
           status: string
           stripe_checkout_session_id: string | null
@@ -215,6 +216,7 @@ export type Database = {
           created_at?: string
           edition_id: string
           id?: string
+          is_complimentary?: boolean
           registration_type: string
           status?: string
           stripe_checkout_session_id?: string | null
@@ -231,6 +233,7 @@ export type Database = {
           created_at?: string
           edition_id?: string
           id?: string
+          is_complimentary?: boolean
           registration_type?: string
           status?: string
           stripe_checkout_session_id?: string | null

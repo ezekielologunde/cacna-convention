@@ -478,6 +478,9 @@
     "paymentOptionsHeading": "Àwọn Ọ̀nà Sísanwó",
     "individualTab": "Ẹnìkọ̀ọ̀kan",
     "groupTab": "Ìjọ / Ẹgbẹ́",
+    "complimentaryTab": "Ọ̀fẹ́",
+    "complimentaryNotice": "Kò nílò sísanwó — ìforúkọsílẹ̀ yìí yóò jẹ́ àmì sí gẹ́gẹ́ bí owó tí a ti sanwó lẹ́sẹ̀kẹsẹ̀, láìsí owó tí a gbà nípasẹ̀ Stripe.",
+    "submitComplimentary": "Fi Ìforúkọsílẹ̀ Ọ̀fẹ́ Ránṣẹ́",
     "churchName": "Orúkọ Ìjọ",
     "addRegistrant": "Ṣafikun Olùforúkọsílẹ̀ mìíràn",
     "removeRegistrant": "Yọ Kúrò",
@@ -517,7 +520,8 @@
     "statusPending": "Ń dúró",
     "statusPaid": "A ti sanwó",
     "statusFailed": "Kò yege",
-    "statusRefunded": "A ti dá owó padà"
+    "statusRefunded": "A ti dá owó padà",
+    "statusComplimentary": "Ọ̀fẹ́"
   },
   "StoreConfirmation": {
     "title": "A dúpẹ́ fún ìbẹ̀wò rẹ!",
